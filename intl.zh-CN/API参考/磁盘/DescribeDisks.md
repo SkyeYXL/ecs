@@ -98,6 +98,10 @@
  默认值：10。 |
 |DiskName|String|否|testDiskName|云盘或本地盘名称。 |
 |AutoSnapshotPolicyId|String|否|sp-m5e2w2jutw8bv31\*\*\*\*|根据自动快照策略ID查询云盘。 |
+|EnableAutoSnapshot|Boolean|否|false|查询已经创建了自动快照策略，是否应用的云盘。
+
+ -   true：应用
+-   false：未应用 |
 |EnableAutomatedSnapshotPolicy|Boolean|否|false|是否查询开启了自动快照策略的云盘。
 
  默认值：false |
@@ -128,9 +132,7 @@
 |Encrypted|Boolean|否|false|是否只筛选出加密云盘。
 
  默认值：false |
-|AdditionalAttributes.N|RepeatList|否|null|其他属性值。
-
- **说明：** 该参数即将停止使用，为提高代码兼容性，建议您尽量不要使用该参数。 |
+|AdditionalAttributes.N|RepeatList|否|IOPS|其他属性值。目前仅支持传入值为IOPS，表示查询当前磁盘的IOPS上限。 |
 |DryRun|Boolean|否|false|是否只预检此次请求。取值范围：
 
  -   true：发送检查请求，不会查询资源状况。检查项包括AccessKey是否有效、RAM用户的授权情况和是否填写了必需参数。如果检查不通过，则返回对应错误。如果检查通过，会返回错误码`DryRunOperation`。
@@ -186,9 +188,7 @@
 -   PostPaid：按量付费 |
 |DiskId|String|d-bp18um4r4f2fve24\*\*\*\*|云盘或本地盘ID。 |
 |DiskName|String|testDiskName|云盘或本地盘名称。 |
-|EnableAutoSnapshot|Boolean|false|如果您已经创建了自动快照策略，是否应用于该云盘。
-
- **说明：** 该参数即将停止使用，为提高代码兼容性，建议您尽量不要使用该参数。 |
+|EnableAutoSnapshot|Boolean|false|如果您已经创建了自动快照策略，是否应用于该云盘。 |
 |EnableAutomatedSnapshotPolicy|Boolean|false|云盘是否执行自动快照策略。 |
 |Encrypted|Boolean|false|是否为加密云盘。 |
 |ExpiredTime|String|2018-01-10T01:01:22Z|包年包月云盘的过期时间。 |
