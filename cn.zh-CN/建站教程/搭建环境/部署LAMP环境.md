@@ -67,11 +67,9 @@
 
             **说明：** 这只是暂时关闭SELinux，下次重启Linux后，SELinux还会开启。
 
-        -   如果您想永久关闭SELinux，运行命令vi /etc/selinux/config编辑SELinux配置文件。回车后，把光标移动到`SELINUX=enforcing`这一行，按i键，将其修改为`SELINUX=disabled`， 按Esc键，然后输入:wq并回车以保存并关闭SELinux配置文件。
+        -   如果您想永久关闭SELinux，运行命令vi /etc/selinux/config编辑SELinux配置文件。回车后，把光标移动到`SELINUX=enforcing`这一行，按i键，将其修改为`SELINUX=disabled`， 按Esc键，然后输入:wq并回车以保存并关闭SELinux配置文件。 最后重启系统使设置生效。
 
             **说明：** 如果您想重新开启SELinux，请参见[SELinux的官方文档](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/deployment_guide/ch-selinux#s1-SELinux-resources)。
-
-            重启系统使设置生效。
 
 
 ## 步骤二：安装Apache
