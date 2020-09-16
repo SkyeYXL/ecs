@@ -118,7 +118,7 @@ keyword: [分区, 分区格式化, 大于2 TiB, 数据盘, parted, GPT]
 
 ## 分区格式化Linux数据盘
 
-此章节以Aliyun Linux 2.1903 LTS 64位操作系统为例，说明如何在Linux实例上使用parted工具和e2fsprogs工具分区并格式化一个大容量数据盘。假设需要处理的数据盘是一个新建的3 TiB的空盘，设备名为/dev/vdb。
+此章节以Alibaba Cloud Linux 2.1903 LTS 64位操作系统为例，说明如何在Linux实例上使用parted工具和e2fsprogs工具分区并格式化一个大容量数据盘。假设需要处理的数据盘是一个新建的3 TiB的空盘，设备名为/dev/vdb。
 
 前提条件：请确认您的Linux实例上已经安装了parted工具和e2fsprogs工具。
 
