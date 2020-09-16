@@ -34,6 +34,8 @@ Nginx是一款小巧而高效的Web服务器软件，可帮您在Linux系统下�
 
 
 
+
+
 ## 步骤一：准备编译环境
 
 1.  远程连接Linux实例。
@@ -70,11 +72,9 @@ Nginx是一款小巧而高效的Web服务器软件，可帮您在Linux系统下�
 
             **说明：** 这只是暂时关闭SELinux，下次重启Linux后，SELinux还会开启。
 
-        -   如果您想永久关闭SELinux，运行命令vim /etc/selinux/config编辑SELinux配置文件。回车后，把光标移动到`SELINUX=enforcing`这一行，按i键进入编辑模式，修改为`SELINUX=disabled`，按Esc键，然后输入:wq并按Enter键以保存并关闭SELinux配置文件。
+        -   如果您想永久关闭SELinux，运行命令vim /etc/selinux/config编辑SELinux配置文件。回车后，把光标移动到`SELINUX=enforcing`这一行，按i键进入编辑模式，修改为`SELINUX=disabled`，按Esc键，然后输入:wq并按Enter键以保存并关闭SELinux配置文件。 最后重启系统使设置生效。
 
             **说明：** 如果您想重新开启SELinux，请参见[开启或关闭SELinux](/cn.zh-CN/最佳实践/安全/开启或关闭SELinux.md)。
-
-            重启系统使设置生效。
 
 
 ## 步骤二：安装Nginx
