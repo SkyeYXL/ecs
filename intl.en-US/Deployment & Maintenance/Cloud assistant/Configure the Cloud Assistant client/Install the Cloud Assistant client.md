@@ -65,7 +65,7 @@ This topic describes three installation methods:
                 systemctl restart aliyun.service
                 ```
 
-        4.  If the instance is in the classic network, create a file named region-id in the installation directory. Do not add extensions to the file, such as .txt or .conf. Enter the region ID of the instance in the region-id file, such as cn-hangzhou. For more information about region IDs, see [Regions and zones](https://www.alibabacloud.com/help/doc-detail/40654.htm)..
+        4.  If the instance is in the classic network, create a file named region-id in the installation directory. Do not add extensions to the file, such as .txt or .conf. Enter the region ID of the instance in the region-id file, such as cn-hangzhou. For more information about region IDs, see [Regions and zones](https://www.alibabacloud.com/help/doc-detail/40654.htm).
     -   Install the client by using a Debian package. This method is applicable to operating systems such as Debian and Ubuntu.
         1.  Download the Debian package of the Cloud Assistant client.
 
@@ -85,7 +85,7 @@ This topic describes three installation methods:
             dpkg -i aliyun_assist_latest.deb
             ```
 
-        4.  If the instance is in the classic network, create a file named region-id in the installation directory. Do not add extensions to the file, such as .txt or .conf. Enter the region ID of the instance in the region-id file, such as cn-hangzhou. For more information about region IDs, see [Regions and zones](https://www.alibabacloud.com/help/doc-detail/40654.htm)..
+        4.  If the instance is in the classic network, create a file named region-id in the installation directory. Do not add extensions to the file, such as .txt or .conf. Enter the region ID of the instance in the region-id file, such as cn-hangzhou. For more information about region IDs, see [Regions and zones](https://www.alibabacloud.com/help/doc-detail/40654.htm).
     -   Install the client by compiling the source code.
         1.  Download the source code of the Cloud Assistant client.
 
@@ -99,7 +99,7 @@ This topic describes three installation methods:
             **Note:** If the `CMAKE_MINIMUM_REQUIRED` error is reported during compilation, go to the [official CMake website](https://cmake.org/download/) to update the CMake service to V3.1 or later.
 
         4.  Run the `make` command to start compiling.
-        5.  If the instance is in the classic network, create a file named region-id in the installation directory. Do not add extensions to the file, such as .txt or .conf. Enter the region ID of the instance in the region-id file, such as cn-hangzhou. For more information about region IDs, see [Regions and zones](https://www.alibabacloud.com/help/doc-detail/40654.htm)..
+        5.  If the instance is in the classic network, create a file named region-id in the installation directory. Do not add extensions to the file, such as .txt or .conf. Enter the region ID of the instance in the region-id file, such as cn-hangzhou. For more information about region IDs, see [Regions and zones](https://www.alibabacloud.com/help/doc-detail/40654.htm).
         6.  Run the `aliyun-service -d` command to install the Cloud Assistant client.
     The following list shows the default installation paths for Linux instances:
 
