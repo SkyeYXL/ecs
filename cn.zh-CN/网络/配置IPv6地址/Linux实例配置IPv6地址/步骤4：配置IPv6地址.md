@@ -86,9 +86,9 @@ fi
 "$install_path"
 ```
 
-## 手动配置IPv6地址（Aliyun Linux 2操作系统）
+## 手动配置IPv6地址（Alibaba Cloud Linux 2操作系统）
 
-Aliyun Linux 2镜像在`aliyun_2_1903_64_20G_alibase_20190829.vhd`及之前的版本未开启IPv6，从`aliyun_2_1903_x64_20G_alibase_20200221.vhd`版本开始默认开启了IPv6。
+Alibaba Cloud Linux 2镜像在`aliyun_2_1903_64_20G_alibase_20190829.vhd`及之前的版本未开启IPv6，从`aliyun_2_1903_x64_20G_alibase_20200221.vhd`版本开始默认开启了IPv6。
 
 请先检查实例是否已开启IPv6服务。
 
