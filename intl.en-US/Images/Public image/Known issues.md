@@ -1,37 +1,145 @@
-# Known issues {#concept_e3m_ktl_jgb .concept}
+---
+keyword: [Aliyun Linux, Windows Server, CentOS, Ubuntu, Debian, CoreOS, Red Hat, OpenSUSE]
+---
 
-This topic describes the known issues of Alibaba Cloud images on different platforms, the scope of these issues, and the corresponding solution.
+# Known issues
 
-## Debian 9.6: Classic network configuration {#section_zyc_kxl_jgb .section}
+This topic describes known issues of Alibaba Cloud images for different operating systems, the scope of these issues, and their corresponding solutions.
 
--   **Issue**: Classic network instances created by using Debian 9 public images fail to be pinged.
--   **Cause**: Classic network instances cannot obtain IP addresses automatically through the Dynamic Host Configuration Protocol \(DHCP\) because Debian 9 disables the systemd-networkd service by default.
--   **Image**: debian\_9\_06\_64\_20G\_alibase\_20181212.vhd
--   **Solution**: Run the following command:
+## SUSE Linux Enterprise Server 12 SP5: Kernel updates may lead to startup hangs
+
+-   Problem description: After an earlier kernel version is updated to SUSE Linux Enterprise Server \(SLES\) 12 SP5, or after an internal kernel version of SLES 12 SP5 is updated, instances may have the issue of startup hangs for some CPU types. These known CPU types are `Intel®Xeon®CPU E5-2682 v4 @ 2.50GHz` and `Intel®Xeon®CPU E7-8880 v4 @ 2.20GHz`. The following code describes the debugging result of the corresponding calltrace:
+
+    ```
+    [    0.901281] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+    [    0.901281] CR2: ffffc90000d68000 CR3: 000000000200a001 CR4: 00000000003606e0
+    [    0.901281] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+    [    0.901281] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+    [    0.901281] Call Trace:
+    [    0.901281]  cpuidle_enter_state+0x6f/0x2e0
+    [    0.901281]  do_idle+0x183/0x1e0
+    [    0.901281]  cpu_startup_entry+0x5d/0x60
+    [    0.901281]  start_secondary+0x1b0/0x200
+    [    0.901281]  secondary_startup_64+0xa5/0xb0
+    [    0.901281] Code: 6c 01 00 0f ae 38 0f ae f0 0f 1f 84 00 00 00 00 00 0f 1f 84 00 00 00 00 00 90 31 d2 65 48 8b 34 25 40 6c 01 00 48 89 d1 48 89 f0 <0f> 01 c8 0f 1f 84 00 00 00 00 00 0f 1f 84 00 00 00 00 00 ** **
+    ```
+
+-   Cause: The new kernel version is incompatible with the CPU microcode.
+-   Solution: In the `/boot/grub2/grub.cfg` file, add the `idle` kernel parameter to the row that begins with `linux` and set this parameter to nomwait. The following example shows how to modify the file:
+
+    ```
+    menuentry 'SLES 12-SP5'  --class sles --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-fd7bda55-42d3-4fe9-a2b0-45efdced****' {
+            load_video
+            set gfxpayload=keep
+            insmod gzio
+            insmod part_msdos
+            insmod ext2
+            set root='hd0,msdos1'
+            if [ x$feature_platform_search_hint = xy ]; then
+              search --no-floppy --fs-uuid --set=root --hint='hd0,msdos1'  fd7bda55-42d3-4fe9-a2b0-45efdced****
+            else
+              search --no-floppy --fs-uuid --set=root fd7bda55-42d3-4fe9-a2b0-45efdced****
+            fi
+            echo    'Loading Linux 4.12.14-122.26-default ...'
+            linux   /boot/vmlinuz-4.12.14-122.26-default root=UUID=fd7bda55-42d3-4fe9-a2b0-45efdced****  net.ifnames=0 console=tty0 console=ttyS0,115200n8 mitigations=auto splash=silent quiet showopts idle=nomwait
+            echo    'Loading initial ramdisk ...'
+            initrd  /boot/initrd-4.12.14-122.26-default
+    }
+    ```
+
+
+## openSUSE 15: Kernel updates may lead to startup hangs
+
+-   Problem description: After openSUSE kernel versions are updated to `4.12.14-lp151.28.52-default`, instances may have the issue of startup hangs for some CPU types. These known CPU type is `Intel®Xeon®CPU E5-2682 v4 @ 2.50GHz`. The following code describes the debugging result of the corresponding calltrace:
+
+    ```
+    [    0.901281] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+    [    0.901281] CR2: ffffc90000d68000 CR3: 000000000200a001 CR4: 00000000003606e0
+    [    0.901281] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+    [    0.901281] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+    [    0.901281] Call Trace:
+    [    0.901281]  cpuidle_enter_state+0x6f/0x2e0
+    [    0.901281]  do_idle+0x183/0x1e0
+    [    0.901281]  cpu_startup_entry+0x5d/0x60
+    [    0.901281]  start_secondary+0x1b0/0x200
+    [    0.901281]  secondary_startup_64+0xa5/0xb0
+    [    0.901281] Code: 6c 01 00 0f ae 38 0f ae f0 0f 1f 84 00 00 00 00 00 0f 1f 84 00 00 00 00 00 90 31 d2 65 48 8b 34 25 40 6c 01 00 48 89 d1 48 89 f0 <0f> 01 c8 0f 1f 84 00 00 00 00 00 0f 1f 84 00 00 00 00 00 ** **
+    ```
+
+-   Cause: The new kernel version is incompatible with the CPU microcode. For more information, visit [Issues of startup hangs](https://bugzilla.opensuse.org/show_bug.cgi?id=1172886#c1).
+-   Involved image: opensuse\_15\_1\_x64\_20G\_alibase\_20200520.vhd
+-   Solution: In the /boot/grub2/grub.cfg file, add the `idle` kernel parameter to the row that begins with `linux` and set this parameter to nomwait. The following example shows how to modify the file:
+
+    ```
+    menuentry 'openSUSE Leap 15.1'  --class opensuse --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-20f5f35a-fbab-4c9c-8532-bb6c66ce****' {
+            load_video
+            set gfxpayload=keep
+            insmod gzio
+            insmod part_msdos
+            insmod ext2
+            set root='hd0,msdos1'
+            if [ x$feature_platform_search_hint = xy ]; then
+              search --no-floppy --fs-uuid --set=root --hint='hd0,msdos1'  20f5f35a-fbab-4c9c-8532-bb6c66ce****
+            else
+              search --no-floppy --fs-uuid --set=root 20f5f35a-fbab-4c9c-8532-bb6c66ce****
+            fi
+            echo    'Loading Linux 4.12.14-lp151.28.52-default ...'
+            linux   /boot/vmlinuz-4.12.14-lp151.28.52-default root=UUID=20f5f35a-fbab-4c9c-8532-bb6c66ce****  net.ifnames=0 console=tty0 console=ttyS0,115200n8 splash=silent mitigations=auto quiet idle=nomwait
+            echo    'Loading initial ramdisk ...'
+            initrd  /boot/initrd-4.12.14-lp151.28.52-default
+    }
+    ```
+
+
+## CentOS 8.0: The version update of the image in the public image list leads to the change of public image version number of created instances
+
+-   Problem description: After you connect to an instance created from the centos\_8\_0\_x64\_20G\_alibase\_20200218.vhd public image, you check the system version of the instance, and find that the system version is CentOS 8.1.
+
+    ```
+    root@ecshost:~$ lsb\_release -a
+    LSB Version:    :core-4.1-amd64:core-4.1-noarch
+    Distributor ID:    CentOS
+    Description:    CentOS Linux release 8.1.1911 (Core)
+    Release:    8.1.1911
+    Codename:    Core
+    ```
+
+-   Cause: The centos\_8\_0\_x64\_20G\_alibase\_20200218.vhd public image is in the public image list and was updated with the latest community update package. The image was upgraded and the actual system version is CentOS 8.1.
+
+    ![centos_8_0_x64_20G_alibase_20200218.vhd](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/5763559951/p94918.png)
+
+-   Involved image: centos\_8\_0\_x64\_20G\_alibase\_20200218.vhd.
+-   Solution: You can call operations such as [RunInstances](/intl.en-US/API Reference/Instances/RunInstances.md) with `ImageId set to centos_8_0_x64_20G_alibase_20191225.vhd` to create an instance whose system version is CentOS 8.0.
+
+## Debian 9.6: Classic network-type instances have network configuration issues
+
+-   Problem description: Classic network-type instances created from Debian 9 public images cannot be pinged.
+-   Cause: Classic network-type instances created from Debian 9 public images cannot be automatically assigned IP addresses through the Dynamic Host Configuration Protocol \(DHCP\) because the systemd-networkd service is disabled by default in Debian 9.
+-   Involved image: debian\_9\_06\_64\_20G\_alibase\_20181212.vhd.
+-   Solution: Run the following commands:
 
     ```
     systemctl enable systemd-networkd 
+    ```
+
+    ```
     systemctl start systemd-networkd
     ```
 
 
-## CentOS 6.8: An instance installed with the NFS Client fails to respond {#section_bwm_1hc_dhb .section}
+## CentOS 6.8: An instance installed with the NFS client fails to respond
 
--   **Issue**: An instance that is running CentOS 6.8 and has NFS Client installed fails repeatedly to respond and must be restarted.
--   **Cause**: When you use the NFS service, the NFS Client attempts to end the TCP connection if a glitch occurs due to communication latency. Specifically, if the NFS Server is delayed in sending a response to the NFS Client, the connection initiated by the NFS Client may be stalled in the FIN\_WAIT2 state. Normally, the FIN\_WAIT2 connection expires and closes after one minute and the NFS Client initiates another connection. However, a kernel of version 2.6.32-696 to 2.6.32-696.10 has a defect in TCP connection establishment. As a result, the FIN\_WAIT2 connection will remain indefinitely, which means the NFS Client cannot end the TCP connection and then initiate a new TCP connection.
--   **Image**: centos\_6\_08\_32\_40G\_alibase\_20170710.vhd and centos\_6\_08\_64\_20G\_alibase\_20170824.vhd
--   **Solution**: Run the following command to upgrade the kernel to v2.6.32-696.11 or a later version.
+-   Problem description: A CentOS 6.8 instance installed with the NFS client fails to respond and must be restarted.
+-   Cause: When you use the NFS service on instances whose operating system kernel versions are 2.6.32-696 to 2.6.32-696.10, the NFS client will attempt to end a TCP connection if a glitch occurs due to communication latency. Specifically, if the NFS server is delayed in sending a response to the NFS client, the connection initiated by the NFS client may be stalled in the FIN\_WAIT2 state. Typically, the connection will expire and close a minute after the connection enters the FIN\_WAIT2 state and the NFS client will initiate another connection. However, kernel versions 2.6.32-696 to 2.6.32-696.10 have issues with establishing TCP connections. As a result, the connection will remain in the FIN\_WAIT2 state, the NFS client will be unable to recover the TCP connection, and a new TCP connection cannot be initiated. The requests will hang, and the only way to fix the issue is to restart the instance.
+-   Involved images: centos\_6\_08\_32\_40G\_alibase\_20170710.vhd and centos\_6\_08\_64\_20G\_alibase\_20170824.vhd.
+-   Solution: Run the yum update command to update the kernel to 2.6.32-696.11 or later.
 
-    ```
-    yum update
-    ```
-
-    **Note:** Before you perform any operations on the instance, you must [create a snapshot](../../../../reseller.en-US/Snapshots/Use snapshots/Create a snapshot.md#) to back up your data.
+    **Note:** Before you perform operations on the instance, you must create a snapshot to back up your data. For more information, see [Create a normal snapshot](/intl.en-US/Snapshots/Use snapshots/Create a normal snapshot.md).
 
 
-## CentOS 7: The hostname changes from uppercase to lowercase letters after the instance is restarted {#section_qcx_jvc_dhb .section}
+## CentOS 7: The hostname changes from uppercase to lowercase letters after an instance restarts
 
--   **Issue**: After an ECS instance is restarted for the first time, the hostname of some CentOS 7 instances is changed from uppercase letters to lowercase letters. The following table shows some examples.
+-   Problem description: When ECS instances are restarted for the first time, the hostnames of some instances that run CentOS 7 change from uppercase to lowercase letters. The following table describes some examples.
 
     |Hostname|Hostname after the instance is restarted for the first time|Does the hostname remain in lowercase after the restart?|
     |:-------|:----------------------------------------------------------|:-------------------------------------------------------|
@@ -39,7 +147,7 @@ This topic describes the known issues of Alibaba Cloud images on different platf
     |ZZHost|zzhost|Yes|
     |NetworkNode|networknode|Yes|
 
--   **Image**: The following CentOS public images \(and custom images created based on them\) are affected:
+-   Involved images: the following CentOS public images and custom images derived from these public images:
     -   centos\_7\_2\_64\_40G\_base\_20170222.vhd
     -   centos\_7\_3\_64\_40G\_base\_20170322.vhd
     -   centos\_7\_03\_64\_40G\_alibase\_20170503.vhd
@@ -49,82 +157,85 @@ This topic describes the known issues of Alibaba Cloud images on different platf
     -   centos\_7\_02\_64\_20G\_alibase\_20170818.vhd
     -   centos\_7\_03\_64\_20G\_alibase\_20170818.vhd
     -   centos\_7\_04\_64\_20G\_alibase\_201701015.vhd
--   **Hostname**: If your applications are sensitive to the letter casing of hostnames, restarting such instances may affect the availability of corresponding services. The following table describes whether the hostname is changed after an instance is restarted.
+-   Involved hostnames: If the hostnames of your applications are case-sensitive, the availability of corresponding services may be affected when you restart such instances. The following table describes whether the hostname will change after an instance is restarted.
 
-    |Current state of hostname|Will the hostname change after an instance restart?|When will the change take effect?|
-    |:------------------------|:--------------------------------------------------|:--------------------------------|
-    |The hostname contains uppercase letters at the time of instance creation \(either in the ECS console or through APIs\).|Yes|When the instance is restarted for the first time.|
-    |The hostname contains no uppercase letters at the time of instance creation \(either in the ECS console or through APIs\).|No|N/A|
-    |The hostname contains uppercase letters because the hostname is modified after you log on to an instance.|No|N/A|
+    |Current state of hostname|Will the hostname change after an instance restart?|When will the change occur?|Continue reading this section?|
+    |:------------------------|:--------------------------------------------------|:--------------------------|:-----------------------------|
+    |The hostname contains uppercase letters when you created the instance by using the ECS console or by calling ECS API operations.|Yes|When the instance is restarted for the first time|Yes|
+    |The hostname contains only lowercase letters when you created the instance by using the ECS console or by calling ECS API operations.|No|N/A|No|
+    |The hostname contains uppercase letters, and you modify the hostname after you log on to the instance.|No|N/A|Yes|
 
--   **Solution**: To retain uppercase letters in a hostname after you restart an instance, follow these steps:
-    1.  Connect to the target instance.
-    2.  View the existing hostname:
+-   Solution: To retain uppercase letters in the hostname of an instance after you restart the instance, perform the following steps:
+    1.  Connect to your instance. For more information, see [Connection methods](/intl.en-US/Instance/Connect to instances/Overview.md).
+    2.  View the existing hostname.
 
-        ``` {#codeblock_eqi_06q_ft0}
+        ```
         [root@izbp193*****3i161uynzzx ~]# hostname
         izbp193*****3i161uynzzx
         ```
 
-    3.  Run the following command:
+    3.  Run the following command to staticize the hostname:
 
-        ``` {#codeblock_jvk_zp9_ncm}
+        ```
         hostnamectl set-hostname --static iZbp193*****3i161uynzzX
         ```
 
-    4.  View the updated hostname.
+    4.  Run the following commands to view the updated hostname:
 
-        ``` {#codeblock_k28_zfk_w6z}
+        ```
         [root@izbp193*****3i161uynzzx ~]# hostname
         iZbp193*****3i161uynzzX
         ```
 
--   **Additional actions**: If you are using a custom image, we recommend that you update the cloud-init software to the latest version and create a custom image again. Such an action prevents the custom image from being affected by the aforementioned issue. For more information, see [Install cloud-init](reseller.en-US/Images/Custom image/Import images/Install cloud-init for Linux images.md#) and [Create a custom image by using an instance](reseller.en-US/Images/Custom image/Create custom image/Create a custom image by using an instance.md#).
+-   Additional actions: If you are using a custom image, we recommend that you update cloud-init to the latest version and create a custom image again to prevent the previous issue from occurring to the custom image. For more information, see [Install cloud-init](/intl.en-US/Images/Custom image/Import images/Install cloud-init.md) and [Create a custom image from an instance](/intl.en-US/Images/Custom image/Create custom image/Create a custom image from an instance.md).
 
-## Linux: The pip requests time out {#section_yee_nt1_43y .section}
+## Linux: Pip requests time out
 
--   **Issue**: The pip requests occasionally time out or fail.
--   **Image**: CentOS, Debian, Ubuntu, SUSE, OpenSUSE, and Aliyun Linux.
--   **Cause**: Alibaba Cloud provides the following three pip source addresses, and the default address is mirrors.aliyun.com. To access this address, instances need to be able to access Internet. If your instance has no public IP address assigned, a pip request timeout will occur.
-    -   \(Default\) Internet: mirrors.aliyun.com
-    -   VPC intranet: mirrors.cloud.aliyuncs.com
-    -   Classic network intranet: mirrors.aliyuncs.com
--   **Solution**: You can solve the problem through one of the following methods:
+-   Problem description: Pip requests occasionally time out or fail.
+-   Involved images: CentOS, Debian, Ubuntu, SUSE, openSUSE, and Alibaba Cloud Linux.
+-   Cause: Alibaba Cloud provides three pip source addresses. The default address is mirrors.aliyun.com. To access this address, instances must be able to access the Internet. If your instance is not assigned a public IP address, pip requests will time out.
+    -   The Internet source address \(default\): mirrors.aliyun.com
+    -   The internal source address of VPCs: mirrors.cloud.aliyuncs.com
+    -   The internal source address of the classic network: mirrors.aliyuncs.com
+-   Solution: You can solve the problem by using one of the following methods:
     -   Method 1
 
-        Assign a public IP address to your instance, that is, attaching an Elastic IP address \(EIP\) to your instance. For more information, see [Bind EIP to an ENI](../../../../reseller.en-US/User Guide/Associate an EIP with an ENI.md#).
+        Assign a public IP address to your instance by associating an elastic IP address \(EIP\) to your instance. For more information, see [Overview](/intl.en-US/User Guide/Associate an EIP with a cloud instance/Bind an EIP to a secondary ENI/Overview.md).
 
-        A Subscription instance can also be reassigned a public IP address through changing its configurations. For more information, see [Upgrade configurations of Subscription instances](../../../../reseller.en-US/Instances/Change configurations/Upgrade configurations/Upgrade configurations of Subscription instances.md#).
+        A subscription instance can also be reassigned a public IP address through configuration upgrade or downgrade. For more information, see [Upgrade configurations of subscription instances](/intl.en-US/Instance/Change configurations/Upgrade configurations/Upgrade configurations of subscription instances.md).
 
     -   Method 2
 
-        Once a pip request fails, you can run the script fix\_pypi.sh in your ECS instance and then retry the pip operation. The specific steps are as follows:
+        If a pip request fails, you can run the fix\_pypi.sh script in your ECS instance and retry the pip operation. Specifically, perform the following steps:
 
-        1.  Connect to your ECS instance. For more information, see [Connect to an instance by using the Management Terminal](../../../../reseller.en-US/Instances/Connect to instances/Connect to Linux instances/Connect to an instance by using the Management Terminal.md#).
-        2.  Run the following command to get the script file:
+        1.  Connect to your instance. For more information, see [Connect to a Linux instance by using VNC](/intl.en-US/Instance/Connect to instances/Connect to Linux instances/Connect to a Linux instance by using VNC.md).
+        2.  Run the following command to obtain the script file:
 
-            ``` {#codeblock_qil_6bn_w52}
+            ```
             wget http://image-offline.oss-cn-hangzhou.aliyuncs.com/fix/fix_pypi.sh
             ```
 
-        3.  Run the script.
-            -   For VPC instances, run the command `bash fix_pypi.sh "mirrors.cloud.aliyuncs.com"`.
-            -   For Classic network instances, run the command `bash fix_pypi.sh "mirrors.aliyuncs.com"`.
+        3.  Run one of the following scripts based on the network type of the instance:
+            -   For instances in VPCs, run the `bash fix_pypi.sh "mirrors.cloud.aliyuncs.com"` script.
+            -   For instances in the classic network, run the `bash fix_pypi.sh "mirrors.aliyuncs.com"` script.
         4.  Retry the pip operation.
-        The content of fix\_pypi.sh is as follows:
+        The following section describes the content of the fix\_pypi.sh script:
 
-        ``` {#codeblock_s9m_90o_2f4}
-        #!/bin/bash
+        ```
+        #! /bin/bash
+        
         function config_pip() {
             pypi_source=$1
+        
             if [[ ! -f ~/.pydistutils.cfg ]]; then
         cat > ~/.pydistutils.cfg << EOF
         [easy_install]
         index-url=http://$pypi_source/pypi/simple/
         EOF
             else
-                sed -i “s#index-url.#index-url=http://$pypi_source/pypi/simple/#“ ~/.pydistutils.cfg
+                sed -i "s#index-url.*#index-url=http://$pypi_source/pypi/simple/#" ~/.pydistutils.cfg
             fi
+        
             if [[ ! -f ~/.pip/pip.conf ]]; then
             mkdir -p ~/.pip
         cat > ~/.pip/pip.conf << EOF
@@ -134,56 +245,12 @@ This topic describes the known issues of Alibaba Cloud images on different platf
         trusted-host=$pypi_source
         EOF
             else
-                sed -i “s#index-url.#index-url=http://$pypi_source/pypi/simple/#“ ~/.pip/pip.conf
-                sed -i “s#trusted-host.*#trusted-host=$pypi_source#” ~/.pip/pip.conf
+                sed -i "s#index-url.*#index-url=http://$pypi_source/pypi/simple/#" ~/.pip/pip.conf
+                sed -i "s#trusted-host.*#trusted-host=$pypi_source#" ~/.pip/pip.conf
             fi
         }
+        
         config_pip $1
         ```
-
-
-## Aliyun Linux 2: Enabling the CONFIG\_PARAVIRT\_SPINLOCK kernel feature causes performance issues {#section_nnm_3mw_fhb .section}
-
--   **Issue**: After you enable the `CONFIG_PARAVIRT_SPINLOCK` kernel feature, application performance is significantly impacted if there are a large number of vCPUs in an ECS instance and lock contentions in applications. For example, timed out connections degrade the performance of an Nginx application.
--   **Image**: Aliyun Linux 2
--   **Solution**: We recommend that you do not enable the `CONFIG_PARAVIRT_SPINLOCK` kernel feature for Aliyun Linux 2 \(disabled by default\).
-
-## Aliyun Linux 2: Setting the THP switch to always impacts system stability and causes performance issues {#section_mrx_xnw_fhb .section}
-
--   **Issue**: After you set the Transparent Hugepage \(THP\) switch in your production environment to always, the system becomes unstable and performance is noticeably degraded.
--   **Image**: Aliyun Linux 2
--   **Solution**: Set the THP switch to `madvise`. In outlier scenarios \(for example, if you run some performance benchmark test suites\), although performance is impacted if this switch is set to `madvise`, we recommend that you do so to prevent the system from being impacted by other contentions.
-
-## Aliyun Linux 2: A delegation conflict occurred in NFS v4.0 {#section_mmx_qrw_fhb .section}
-
--   **Issue**: A delegation conflict occurred in NFS v4.0. For more information, see [Delegation in NFS Version 4](https://docs.oracle.com/cd/E19253-01/816-4555/rfsrefer-140/index.html).
--   **Image**: Aliyun Linux 2
--   **Solution**: We recommend that you do not enable the Delegation feature when you use NFS v4.0. For information on how to disable this feature at the server side, see [How to Select Different Versions of NFS on a Server](https://docs.oracle.com/cd/E19253-01/816-4555/rfsadmin-965/index.html).
-
-## Aliyun Linux 2: NFS v4.1/4.2 has a defect that may cause logout failure of applications {#section_w35_dyw_fhb .section}
-
--   **Issue**: In NFS v4.1 or v4.2, if you use Asynchronous I/O \(AIO\) in applications to distribute requests, and close the corresponding file descriptors before all I/Os are returned, a livelock may be triggered and the corresponding process cannot be ended.
--   **Image**: Aliyun Linux 2
--   **Solution**: This problem has been fixed in kernel v4.13.10-10.al7 and higher. To upgrade the kernel version, run the command `sudo yum update kernel -y` 
-
-    **Note:** 
-
-    -   Upgrading the kernel may result in system boot failure. Please exercise caution when performing this action.
-    -   Before you upgrade the kernel, make sure you have created a snapshot or custom image to back up data. For more information, see [Create a snapshot](../../../../reseller.en-US/Snapshots/Use snapshots/Create a snapshot.md#) or [Create a custom image by using an instance](reseller.en-US/Images/Custom image/Create custom image/Create a custom image by using an instance.md#).
-
-## Aliyun Linux 2: System performance is impacted when a high-risk security vulnerability \(such as Spectre or Meltdown\) is fixed {#section_a2j_d4y_ghb .section}
-
--   **Issue**: In the kernel of Aliyun Linux 2, the repair of high-risk security vulnerabilities \(Meltdown and Spectre\) in processor hardware is enabled by default, which impacts system performance. As a result, performance degradation may be recorded during performance benchmark suite tests.
--   **Image**: Aliyun Linux 2
--   **Solution**: We recommend that in normal circumstances you do not disable the repair function. However, if you need to maximize system performance, you can run the following command to disable the repair function:
-
-    ``` {#codeblock_aqa_pwf_9md}
-    # Add nopti nospectre_v2 to the kernel startup parameters.
-    sudo sed -i 's/\(GRUB_CMDLINE_LINUX=".*\)"/\1 nopti nospectre_v2"/' /etc/default/grub
-    sudo grub2-mkconfig -o /boot/grub2/grub.cfg
-    
-    # Restart the system.
-    sudo reboot
-    ```
 
 
