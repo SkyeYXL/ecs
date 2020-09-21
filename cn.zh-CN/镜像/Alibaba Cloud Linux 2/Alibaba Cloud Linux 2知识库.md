@@ -16,4 +16,5 @@
 -   [Alibaba Cloud Linux 2系统的ECS实例挂载Overlayfs时共用挂载目录导致挂载失败](https://help.aliyun.com/knowledge_detail/175762.html)
 -   [Alibaba Cloud Linux 2快速启动版（qboot）系统的ECS实例系统盘自动扩容失败](https://help.aliyun.com/knowledge_detail/183364.html)
 -   [Alibaba Cloud Linux 2快速启动版（qboot）系统的ECS实例升级内核失败](https://help.aliyun.com/knowledge_detail/183121.html)
+-   [Alibaba Cloud Linux 2系统的ECS实例内核日志（dmesg）存在“integrity: Unable to open file”信息](https://help.aliyun.com/knowledge_detail/184050.html)
 
