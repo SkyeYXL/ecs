@@ -1,120 +1,105 @@
-# DescribeSecurityGroupReferences {#doc_api_1031572 .reference}
+# DescribeSecurityGroupReferences
 
-Queries whether a specified security group has been authorized by other security groups.
+You can call this operation to query whether a specified security group is authorized by other security groups.
 
-## Description {#description .section}
+## Description
 
-When you call this operation, note that:
+When you call this operation, take note of the following items:
 
 -   Security group authorization includes authorization for inbound and outbound traffic rules.
--   Each query returns a maximum of 100 records.
--   When you fail to delete a security group \([DeleteSecurityGroup](~~25558~~)\), you can call this operation to determine whether the specified security group has been authorized by other security groups. If the security group to be deleted is authorized by another security group, you need to revoke its authorization before it can be deleted.
+-   A maximum of 100 authorization entries can be returned each time.
+-   When you fail to delete a security group \([DeleteSecurityGroup](~~25558~~)\), you can call the DescribeSecurityGroupReferences operation to query whether the specified security group is authorized by other security groups. If the security group is authorized by other security groups, you must revoke the authorization before the security group can be deleted.
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=DescribeSecurityGroupReferences) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DescribeSecurityGroupReferences&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|RegionId|String|Yes|cn-hangzhou| The ID of the region where the security group resides.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|DescribeSecurityGroupReferences|The operation that you want to perform. Set the value to DescribeSecurityGroupReferences. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the security group. |
+|SecurityGroupId.N|RepeatList|Yes|sg-bp14vtedjtobkvi\*\*\*\*|The ID of security group N to be queried. Valid values of N: 1 to 10. |
 
- |
-|SecurityGroupId.N|RepeatList|Yes|sg-securitygroupid1| The ID of the security group that you want to query. Valid values of N: 1 to 10.
+## Response parameters
 
- |
-|Action|String|No|DescribeSecurityGroupReferences| The operation that you want to perform. Set the value to DescribeSecurityGroupReferences.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
+|SecurityGroupReferences|Array| |An array consisting of SecurityGroupReference data. |
+|SecurityGroupReference| | | |
+|ReferencingSecurityGroups|Array| |An array consisting of ReferencingSecurityGroup data. |
+|ReferencingSecurityGroup| | | |
+|AliUid|String|1234567890|The ID of the Alibaba Cloud account to which the security group belongs. |
+|SecurityGroupId|String|sg-bp67acfmxazb4j\*\*\*\*|The ID of the security group. |
+|SecurityGroupId|String|sg-bp67acfmxazb4p\*\*\*\*|The ID of the queried security group. |
 
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request.
-
- |
-|SecurityGroupReferences| | | The information about references between security groups.
-
- |
-|└ReferencingSecurityGroups| | | The information of other security groups referencing this security group.
-
- |
-|└AliUid|String|155780923770| The ID of an Alibaba Cloud user to whom the security group belongs.
-
- |
-|└SecurityGroupId|String|sg-securitygroupid1| The ID of the security group.
-
- |
-|└SecurityGroupId|String|sg-securitygroupid2| The ID of the security group that you want to query.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=DescribeSecurityGroupReferences
-&RegionId=cn-hangzhou 
-&SecurityGroupId. 1=sg-1133aa
+&RegionId=cn-hangzhou
+&SecurityGroupId.1=sg-bp14vtedjtobkvi****
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DescribeSecurityGroupReferencesResponse>
-  <RequestId>CEF72CEB-54B6-4AE8-B225-F876FF7BA984</RequestId> 
-  <SecurityGroupReferences>
-    <SecurityGroupReference>
-      <SecurityGroupId>sg-1133aa</SecurityGroupId>
-      <ReferencingSecurityGroups>
-        <ReferencingSecurityGroup>
-          <SecurityGroupId>sg-2255cc</SecurityGroupId>
-          <AliUid>123</AliUid>
-        </ReferencingSecurityGroup>
-        <ReferencingSecurityGroup>
-          <SecurityGroupId>sg-2255dd</SecurityGroupId>
-          <AliUid>123</AliUid>
-        </ReferencingSecurityGroup>
-      </ReferencingSecurityGroups>
-    </SecurityGroupReference>
-  </SecurityGroupReferences>
+      <RequestId>CEF72CEB-54B6-4AE8-B225-F876FF7BA984</RequestId>
+      <SecurityGroupReferences>
+          <SecurityGroupReference>
+              <SecurityGroupId>sg-bp67acfmxazb4ph****</SecurityGroupId>
+              <ReferencingSecurityGroups>
+                  <ReferencingSecurityGroup>
+                      <SecurityGroupId>sg-bp67acfmxazb4pi****</SecurityGroupId>
+                      <AliUid>1234567890</AliUid>
+                  </ReferencingSecurityGroup>
+                  <ReferencingSecurityGroup>
+                      <SecurityGroupId>sg-bp67acfmxazb4pj****</SecurityGroupId>
+                      <AliUid>1234567890</AliUid>
+                  </ReferencingSecurityGroup>
+              </ReferencingSecurityGroups>
+          </SecurityGroupReference>
+      </SecurityGroupReferences>
 </DescribeSecurityGroupReferencesResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RequestId":"CEF72CEB-54B6-4AE8-B225-F876FF7BA984",
-	"SecurityGroupReferences":[
-		{
-			"SecurityReferencingGroups":[
-				{
-					 "SecurityGroupId":"sg-2255cc",
-					"AliUid":123
-				},
-				{
-					"SecurityGroupId":"sg-2255dd",
-					"AliUid":123
-				}
-			],
-			"SecurityGroupId":"sg-1133aa"
-		}
-	]
+    "RequestId": "CEF72CEB-54B6-4AE8-B225-F876FF7BA984",
+    "SecurityGroupReferences": [
+        {
+            "SecurityGroupId": "sg-bp67acfmxazb4ph****",
+            "SecurityReferencingGroups": [
+                {
+                    "AliUid": "1234567890",
+                    "SecurityGroupId": "sg-bp67acfmxazb4pi****"
+                },
+                {
+                    "AliUid": "1234567890",
+                    "SecurityGroupId": "sg-bp67acfmxazb4pj****"
+                }
+            ]
+        }
+    ]
 }
 ```
 
-## Error codes {#section_xae_3qb_k5n .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|400|InvalidSecurityGroupId.Malformed|The specified parameter SecurityGroupId is essential and size should less than 10|The error message returned when the security group ID is invalid.|
+|400|InvalidSecurityGroupId.Malformed|The specified parameter SecurityGroupId is essential and size should less than 10|The error message returned because the specified SecurityGroupId.N parameter must be specified and the value of N cannot exceed 10.|
+|404|InvalidSecurityGroupId.NotFound|The SecurityGroupId provided does not exist in our records.|The error message returned because the specified security group does not exist under this account. Check whether the security group ID is correct.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
