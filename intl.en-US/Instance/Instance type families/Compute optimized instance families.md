@@ -69,7 +69,7 @@ Instance types
 
 ## c6t, trusted compute optimized instance family
 
-c6t is in invitational preview. To use c6t, [submit a ticket](https://workorder-intl.console.aliyun.com/console.htm).
+c6t is in invitational preview.
 
 Features
 
