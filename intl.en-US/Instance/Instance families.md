@@ -232,7 +232,7 @@ Instance types
 
 ## g6t, trusted general purpose instance family
 
-g6t is in invitational preview. To use g6t, [submit a ticket](https://workorder-intl.console.aliyun.com/console.htm).
+g6t is in invitational preview.
 
 Features
 
@@ -581,7 +581,7 @@ Instance types
 
 ## c6t, trusted compute optimized instance family
 
-c6t is in invitational preview. To use c6t, [submit a ticket](https://workorder-intl.console.aliyun.com/console.htm).
+c6t is in invitational preview.
 
 Features
 
@@ -2998,10 +2998,10 @@ Instance types
 
 Features:
 
--   Equipped with 2.5 GHz Intel ® Xeon ®Cascade Lake processors with a maximum turbo frequency of 3.2 GHz.
+-   Equipped with 2.5 GHz Intel® Xeon® Cascade Lake processors with a maximum turbo frequency of 3.2 GHz.
 -   More cost-effective when compared with the t5 burstable instance family.
 -   Delivers a bandwidth of up to 6 Gbit/s.
--   Paired with DDR4 memory.
+-   Paired with the DDR4 memory.
 -   Provides baseline CPU performance and is burstable, but limited by accumulated CPU credits.
 -   Supports VPCs only.
 -   Scenarios:
@@ -3023,7 +3023,7 @@ Instance types
 
 **Note:**
 
--   When you bind or unbind an ENI, instances of the following instance types must be in the stopped state: ecs.t6-c1m1.large, ecs.t6-c1m2.large, ecs.t6-c1m4.large, ecs.t6-c2m1.large, and ecs.t6-c4m1.large.
+-   When you bind or unbind an ENI, instances of the following instance types must be in the Stopped state: ecs.t6-c1m1.large, ecs.t6-c1m2.large, ecs.t6-c1m4.large, ecs.t6-c2m1.large, and ecs.t6-c4m1.large.
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
@@ -3031,9 +3031,9 @@ Instance types
 
 Features:
 
--   Equipped with 2.5 GHz Intel ® Xeon ® processors.
--   Paired with DDR4 memory.
--   Supports multiple CPU-to-memory ratios.
+-   Equipped with 2.5 GHz Intel® Xeon® processors.
+-   Paired with the DDR4 memory.
+-   Offers multiple CPU-to-memory ratios.
 -   Provides baseline CPU performance and is burstable, but limited by accumulated CPU credits.
 -   Offers a balance of compute, memory, and network resources.
 -   Supports VPCs only.
@@ -3065,7 +3065,7 @@ Instance types
 
 **Note:**
 
--   When you bind or unbind an ENI, instances of the following instance types must be in the stopped state: ecs.t5-lc2m1.nano, ecs.t5-c1m1.large, ecs.t5-c1m2.large, ecs.t5-c1m4.large, ecs.t5-lc1m1.small, ecs.t5-lc1m2.large, ecs.t5-lc1m2.small, and ecs.t5-lc1m4.large.
+-   When you bind or unbind an ENI, instances of the following instance types must be in the Stopped state: ecs.t5-lc2m1.nano, ecs.t5-c1m1.large, ecs.t5-c1m2.large, ecs.t5-c1m4.large, ecs.t5-lc1m1.small, ecs.t5-lc1m2.large, ecs.t5-lc1m2.small, and ecs.t5-lc1m4.large.
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
