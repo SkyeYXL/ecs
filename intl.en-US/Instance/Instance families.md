@@ -23,7 +23,7 @@ Alibaba Cloud ECS instances are categorized into the following instance families
 |Recommended intance families|Other available instance families|
 |-   [g6, general purpose instance family](#g6)
 -   [g6a, general purpose instance family](#g6a)
--   [g6t, trusted general purpose instance family](#g6t)
+-   [g6t, security-enhanced general purpose instance family](#g6t)
 -   [g6e, general purpose instance family with enhanced performance](#g6e)
 -   [g5, general purpose instance family](#g5)
 -   [g5se, storage enhanced instance family](#g5se)
@@ -31,7 +31,7 @@ Alibaba Cloud ECS instances are categorized into the following instance families
 -   [ic5, compute intensive instance family](#ic5)
 -   [c6, compute optimized instance family](#c6)
 -   [c6a, compute optimized instance family](#c6a)
--   [c6t, trusted compute optimized instance family](#c6t)
+-   [c6t, security-enhanced compute optimized instance family](#c6t)
 -   [c6e, compute optimized instance family with enhanced performance](#c6e)
 -   [c5, compute optimized instance family](#c5)
 -   [r6, memory optimized instance family](#r6)
@@ -230,7 +230,7 @@ Instance types
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
-## g6t, trusted general purpose instance family
+## g6t, security-enhanced general purpose instance family
 
 g6t is in invitational preview.
 
@@ -579,7 +579,7 @@ Instance types
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
-## c6t, trusted compute optimized instance family
+## c6t, security-enhanced compute optimized instance family
 
 c6t is in invitational preview.
 
