@@ -97,7 +97,7 @@ Alibaba Cloud ECS instances are categorized into the following instance families
 -   [ebmhfc6, compute optimized ECS Bare Metal Instance family with high clock speed](#ebmhfc6)
 -   [ebmhfg6, general purpose ECS Bare Metal Instance family with high clock speed](#ebmhfg6)
 -   [ebmhfr6, memory optimized ECS Bare Metal Instance family with high clock speed](#ebmhfr6)
--   [ebmre6p, non-volatile memory optimized ECS Bare Metal Instance family with enhanced performance](#ebmre6p)
+-   [ebmre6p, persistent memory optimized ECS Bare Metal Instance family with enhanced performance](#ebmre6p)
 -   [ebmre6-6t, memory optimized ECS Bare Metal Instance family with enhanced performance](#ebmre6-6t)
 -   [scchfc6, compute optimized SCC instance family with high clock speed](#scchfc6)
 -   [scchfg6, general purpose SCC instance family with high clock speed](#scchfg6)
@@ -2604,7 +2604,7 @@ Instance types
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
-## ebmre6p, non-volatile memory optimized ECS Bare Metal Instance family with enhanced performance
+## ebmre6p, persistent memory optimized ECS Bare Metal Instance family with enhanced performance
 
 To use ebmre6p, [submit a ticket](https://workorder-intl.console.aliyun.com/console.htm).
 
