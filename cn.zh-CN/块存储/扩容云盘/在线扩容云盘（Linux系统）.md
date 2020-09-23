@@ -31,7 +31,7 @@ keyword: [ecs, 磁盘扩容, 扩展分区]
 
 |资源|描述|
 |--|--|
-|ECS实例的镜像|公共镜像Aliyun Linux 2.1903 LTS 64位|
+|ECS实例的镜像|公共镜像Alibaba Cloud Linux 2.1903 LTS 64位|
 |系统盘|/dev/vda：使用MBR分区和ext4文件系统，由40 GiB扩容到60 GiB。|
 |数据盘|-   /dev/vdb：使用MBR分区和ext4文件系统，由40 GiB扩容到60 GiB。
 -   /dev/vdc：使用GPT分区和xfs文件系统，由40 GiB扩容到60 GiB。 |
@@ -117,7 +117,11 @@ keyword: [ecs, 磁盘扩容, 扩展分区]
     yum install gdisk -y
     ```
 
-2.  运行命令`growpart /dev/vda 1`扩容分区。
+2.  根据不同Linux版本安装growpart工具。
+
+    -   CentOS 7及以上版本：运行命令`yum install -y cloud-utils-growpart`。
+    -   Debian 9及以上版本、Ubuntu14及以上版本：运行命令`apt install -y cloud-guest-utils`。
+3.  运行命令`growpart /dev/vda 1`扩容分区。
 
     此示例以扩容系统盘为例，`/dev/vda`和`1`之间需要空格分隔。如果需要扩容其他分区，请根据实际情况修改命令。
 
@@ -159,7 +163,7 @@ keyword: [ecs, 磁盘扩容, 扩展分区]
 
 支持在线扩容的Linux公共镜像（或基于公共镜像制作的自定义镜像）包括：
 
--   Aliyun Linux：Aliyun Linux 2.1903 LTS 64位
+-   Alibaba Cloud Linux：Alibaba Cloud Linux 2.1903 LTS 64位
 -   CentOS：CentOS 6.8+、CentOS 7.2+、CentOS 8及以上版本
 -   Red Hat Enterprise Linux：RHEL 6.9+、RHEL 7.4+、RHEL 8及以上版本
 -   Ubuntu：Ubuntu 16及以上版本
