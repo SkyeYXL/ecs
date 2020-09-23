@@ -8,7 +8,7 @@ This topic describes the features of compute optimized instance families of ECS 
 
 -   Recommended instance families
     -   [c6a, compute optimized instance family](#section_i7i_zsw_bde)
-    -   [c6t, trusted compute optimized instance family](#section_c0u_8gn_bry)
+    -   [c6t, security-enhanced compute optimized instance family](#section_c0u_8gn_bry)
     -   [c6e, compute optimized instance family with enhanced performance](#section_wiv_kqq_u7o)
     -   [c6, compute optimized instance family](#section_0yl_3wv_ims)
     -   [c5, compute optimized instance family](#section_1zf_ox2_m08)
@@ -67,7 +67,7 @@ Instance types
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.mdsection_e9r_xkf_z15).
 
-## c6t, trusted compute optimized instance family
+## c6t, security-enhanced compute optimized instance family
 
 c6t is in invitational preview.
 
