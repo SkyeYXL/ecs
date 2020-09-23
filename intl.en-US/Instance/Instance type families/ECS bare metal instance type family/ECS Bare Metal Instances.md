@@ -19,7 +19,7 @@ This topic describes the features of ECS Bare Metal Instance families and lists 
         -   [ebmr6a, memory optimized ECS Bare Metal Instance family](#section_qwd_bje_kuu)
         -   [ebmr6e, memory optimized ECS Bare Metal Instance family with enhanced performance](#section_ltv_trm_b0o)
         -   [ebmr6, memory optimized ECS Bare Metal Instance family](#section_yv1_t65_log)
-        -   [ebmre6p, non-volatile memory optimized ECS Bare Metal Instance family with enhanced performance](#section_xli_oah_7tq)
+        -   [ebmre6p, persistent memory optimized ECS Bare Metal Instance family with enhanced performance](#section_xli_oah_7tq)
         -   [ebmre6-6t, memory optimized ECS Bare Metal Instance family with enhanced performance](#section_6kk_g42_kgh)
     -   Instance families with high clock speed:
         -   [ebmhfg6, general purpose ECS Bare Metal Instance family with high clock speed](#section_czp_w4q_mb8)
@@ -392,7 +392,7 @@ Instance types
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
-## ebmre6p, non-volatile memory optimized ECS Bare Metal Instance family with enhanced performance
+## ebmre6p, persistent memory optimized ECS Bare Metal Instance family with enhanced performance
 
 To use ebmre6p, [submit a ticket](https://workorder-intl.console.aliyun.com/console.htm).
 
@@ -567,7 +567,7 @@ Instance types
 
 |Instance type|vCPUs|Memory \(GiB\)|Local storage \(GiB\)|GPUs|GPU memory \(GB\)|Bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
 |:------------|:----|:-------------|:--------------------|----|-----------------|:-------------------|:------------------------------|:-----------|:---------|:---------------------------------|----------------------------|
-|ecs.ebmgn6e.24xlarge|96|768.0|None|V100\*8|256|32.0|4,800|Yes|16|8|20|
+|ecs.ebmgn6e.24xlarge|96|768.0|None|V100\*8|256|32.0|4,800|Yes|16|15|20|
 
 **Note:**
 
