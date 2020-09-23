@@ -1,152 +1,164 @@
-# ModifyPrepayInstanceSpec {#doc_api_1161590 .reference}
+# ModifyPrepayInstanceSpec
 
-Changes the type of your subscription instance. The new instance type will take effect for the entire lifecycle of the instance.
+You can call this operation to upgrade or downgrade the instance type of a subscription ECS instance. The new instance type takes effect for the entire lifecycle of the instance.
 
-## Description {#description .section}
+## Description
 
-Before you call this operation, make sure that you have fully understood the billing methods and pricing schedule of [ECS](../../../../reseller.en-US/Pricing/Pricing overview.md#). For more information about instance configuration change types, see [Query available resources for configuration changes](../../../../reseller.en-US/SDK Reference/Use API to run ECS/Query available resources for configuration changes.md#).
+Before you call this operation, make sure that you have fully understood the billing methods and pricing schedule of [ECS](https://www.alibabacloud.com/product/ecs#pricing).
 
-When you call this operation, note that:
+Before you change the instance type of a subscription instance, you can call the [DescribeResourcesModification](~~66187~~) operation to query the instance types to which you can change. For more information, see the Python SDK example in [Query available resources for configuration changes](~~109517~~).
 
--   The instance must be in the **stopped** \(`Stopped`\) state.
--   The specified instance cannot have overdue payment.
--   Before changing the [subscription](~~56220~~) instance type, you can call the [DescribeResourcesModification](~~66187~~) operation to query the instance types you can change to.
--   For instance type downgrade:
-    -   You can downgrade the type of an instance up to three times. The refund for the price difference cannot exceed three times.
-    -   The price difference is refunded to the payment account you used. Price difference of coupon purchases are not refunded.
-    -   You have to wait for five minutes to initiate another instance type downgrade after a successful downgrade for an instance.
+When you call this operation, take note of the following items:
 
-## Debugging {#apiExplorer .section}
+-   You cannot modify the instance type of an expired instance. You can renew the instance and try again.
+-   When you downgrade the instance type of an instance, take note of the following items:
+    -   The instance must be in the **Stopped** \(`Stopped`\) state.
+    -   You must specify the operation type by setting `OperatorType` to downgrade.
+    -   You can downgrade an instance for a maximum of three times. That is, the refund for the price difference cannot exceed three times. Downgrade operations include instance type downgrades, bandwidth downgrades, and the change of the disk billing method from subscription to pay-as-you-go.
+    -   The price difference is refunded to the payment account you used. Price differences of coupon purchases are not refunded.
+-   This operation is asynchronous and you must wait for about five to ten seconds for the instance type change to complete. Then, you must call the RebootInstance operation or restart the instance in the console to allow the instance type change to take effect. If you restart only the operating system, the change does not take effect.
+    -   If the instance is in the **Stopped** state, you only need to start the instance. You do not need to restart the instance after it is in the Running state.
+    -   If `RebootWhenFinished` is set to true for the instance, you do not need to manually restart the instance.
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=ModifyPrepayInstanceSpec) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+## Debugging
 
-## Request parameters {#parameters .section}
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=ModifyPrepayInstanceSpec&type=RPC&version=2014-05-26)
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|InstanceId|String|Yes|i-xxxxx1| The ID of the instance.
+## Request parameters
 
- |
-|InstanceType|String|Yes|ecs.s1.large| The new instance type. For more information, see [Instance type families](~~25378~~), or call the [DescribeInstanceTypes](~~25620~~) operation to obtain the latest instance type list.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|ModifyPrepayInstanceSpec|The operation that you want to perform. Set the value to ModifyPrepayInstanceSpec. |
+|InstanceId|String|Yes|i-bp67acfmxazb4ph\*\*\*\*|The ID of the instance. |
+|InstanceType|String|Yes|ecs.g5.xlarge|The new instance type. For information about available instance types, see [Instance families](~~25378~~) or call the [DescribeInstanceTypes](~~25620~~) operation. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the instance. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|OperatorType|String|No|upgrade|The operation type. Default value: upgrade. Valid values:
 
- |
-|RegionId|String|Yes|cn-hangzhou| The region ID of the instance. You can call the [DescribeRegions](~~25609~~) operation to view the latest region list.
+-   upgrade: upgrades the instance type. Make sure that the balance in your payment account is sufficient.
+-   downgrade: downgrades the instance type. When the new instance type specified by the `InstanceType` parameter is of lower specifications than the current instance type, you must set `OperatorType` to downgrade.
 
- |
-|Action|String|No|ModifyPrepayInstanceSpec| The operation that you want to perform. Set the value to **ModifyPrepayInstanceSpec**.
+**Note:** For more information about the precautions on upgrading or downgrading instance types, see the preceding "Description" section in this topic. |
+|ClientToken|String|No|123e4567-e89b-12d3-a456-426655440000|The client token that is used to ensure the idempotence of the request. You can use the client to generate the value, but you must ensure that it is unique among different requests. The **ClientToken** value can only contain ASCII characters and cannot exceed 64 characters in length. For more information, see [How to ensure idempotence](~~25693~~). |
+|AutoPay|Boolean|No|true|Specifies whether to enable automatic payment when you upgrade the instance type. Default value: true. Valid values:
 
- |
-|AutoPay|Boolean|No|true| Indicates whether to enable automatic payment. When OperatorType is set to downgrade, AutoPay is ignored. Default value: true. Valid values:
+-   true: Automatic payment is enabled.
 
- -   true: enables automatic payment. Make sure that your account has sufficient balance. Otherwise, your order becomes invalid and you have to cancel this order.
--   false: No payment is made and only an order is generated. After you change the billing method, AutoPay is set to true. Make sure that your account has sufficient balance. Otherwise, your order becomes invalid and you have to cancel this order. If your account balance is insufficient, you can set **AutoPay** to **false**. Then an order is generated. You can log on to the ECS console to pay for it.
+**Note:** When your account balance is insufficient, your order will become invalid and you have to cancel this order. If your account balance is insufficient, you can set the `AutoPay` parameter to `false` to generate an unpaid order. Then, you can log on to the ECS console to complete the payment for the order.
 
- |
-|MigrateAcrossZone|Boolean|No|false| Indicates whether to enable cross-cluster instance type upgrade. Default value: false.
+-   false: An order is generated but no payment is made.
 
- When MigrateAcrossZone is set to true and you upgrade the instance type based on the returned information, make sure that:
+When `OperatorType` is set to `downgrade`, `AutoPay` is ignored. |
+|MigrateAcrossZone|Boolean|No|false|Specifies whether to enable cross-cluster instance type upgrade.
 
- Classic instances:
+Default value: false.
 
- -   For [phased-out instance types](~~55263~~), when a non-optimized instance is upgraded to an optimized instance, the following items are modified: private IP address, driver name, and software authorization code. For Linux instances, basic disks \(cloud\) are identified as xvda or xvdb. Ultra disks \(cloud\_efficiency\) and SSDs \(cloud\_ssd\) are identified as vda or vdb.
--   For [instance type families available on the Alibaba Cloud market](~~25378~~), the private IP is modified after instance type upgrade.
+When the MigrateAcrossZone parameter is set to true and you upgrade the ECS instance based on the returned information, take note of the following items:
 
- VPC-type instances: For phased-out instance types, when a non-optimized instance is upgraded to an optimized instance, the following items are modified: driver name and software authorization code. For Linux instances, basic disks \(cloud\) are identified as xvda or xvdb. Ultra disks \(cloud\_efficiency\) and SSDs \(cloud\_ssd\) are identified as vda or vdb.
+Classic network-type instances:
 
- |
-|OperatorType|String|No|downgrade| The configuration change type. Default value: downgrade. Valid values:
+-   For retired instance types, when a non-I/O optimized instance is upgraded to an I/O optimized instance, the following items are modified: private IP address, disk device name, and software authorization code. For more information, see [Retired instance types](~~55263~~). For Linux instances, basic disks \(cloud\) are identified as xvda or xvdb. Ultra disks \(cloud\_efficiency\) and standard SSDs \(cloud\_ssd\) are identified as vda or vdb.
+-   For available instance families, private IP addresses are modified after the instance types are upgraded. For more information, see [Instance families](~~25378~~).
 
- -   upgrade \(Default\): When `OperatorType` is set to `upgrade`, make sure that your payment account has sufficient balance or credit.
--   downgrade.
+VPC-type instances: For retired instance types, when a non-I/O optimized instance is upgraded to an I/O optimized instance, the following items are modified: disk device name and software authorization code. For Linux instances, basic disks \(cloud\) are identified as xvda or xvdb. Ultra disks \(cloud\_efficiency\) and standard SSDs \(cloud\_ssd\) are identified as vda or vdb. |
+|SystemDisk.Category|String|No|cloud\_efficiency|The category of the system disk. This parameter is valid only when you upgrade an instance of a retired instance type to an instance type of an available instance family and upgrade a non-I/O optimized instance to an I/O optimized instance. For more information, see [Retired instance types](~~55263~~) and [Instance families](~~25378~~). Valid values:
 
- |
-|SystemDisk.Category|String|No|cloud\_efficiency| System disk change option. This parameter is valid only when you upgrade one of the [phased-out instance types](~~55263~~) to one of the [instance type families available on the Alibaba Cloud market](~~25378~~) and upgrade a non-optimized instance to an optimized instance. Valid values:
+-   cloud\_efficiency: ultra disk
+-   cloud\_ssd: standard SSD |
+|RebootTime|String|No|2018-01-01T12:05Z|The restart time of the instance. Specify the time in the [ISO 8601](~~25696~~) standard in the yyyy-MM-ddTHH:mm:ssZ format. The time must be in UTC. |
+|EndTime|String|No|2018-01-01T12:05Z|The end time of the temporary change. Specify the time in the [ISO 8601](~~25696~~) standard in the yyyy-MM-ddTHH:mm:ssZ format. The time must be in UTC. |
+|RebootWhenFinished|Boolean|No|false|Specifies whether to restart the instance immediately after the change of instance type is completed. Valid values:
 
- -   cloud\_efficiency: ultra disk.
--   cloud\_ssd: SSD.
+Default value: false.
 
- |
-|ClientToken|String|No|123e4567-e89b-12d3-a456-426655440000| The token used to ensure idempotence. You can generate the token in your client, but you must ensure that it is globally unique.**ClientToken** can contain only ASCII characters. It must be no more than 64 characters in length. For more information, see [How to ensure idempotence](~~25693~~).
+**Note:** If the instance is in the **Stopping** state, even if you set `RebootWhenFinished` to true, the instance status remains unchanged and no operations are performed. |
 
- |
+## Response parameters
 
-## Response parameters {#resultMapping .section}
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|OrderId|String|1234567890|The ID of the generated order. |
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
 
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|OrderId|String|1111111111111111111111110| The ID of the order.
-
- |
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The request ID.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=ModifyPrepayInstanceSpec
-&RegionId=cn-hangzhou 
-&InstanceId=i-xxxxx1 
-&InstanceType=ecs.s1.large 
-&AutoPay=true 
-&OperatorType=upgrade 
-&ClientToken=xxxxxxxxxxxxxx 
+&RegionId=cn-hangzhou
+&InstanceId=i-bp67acfmxazb4ph****
+&InstanceType=ecs.g5.xlarge
+&AutoPay=true
+&OperatorType=upgrade
+&ClientToken=123e4567-e89b-12d3-a456-426655440000
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <ModifyPrepayInstanceSpecResponse>
-  <RequestId>04F0F334-1335-436C-A1D7-6C044FE73368</RequestId> 
-  <OrderId>1011111111111111</OrderId> 
+      <RequestId>04F0F334-1335-436C-A1D7-6C044FE73368</RequestId>
+      <OrderId>1234567890</OrderId>
 </ModifyPrepayInstanceSpecResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"OrderId":1011111111111111,
-	"RequestId":"04F0F334-1335-436C-A1D7-6C044FE73368"
+    "RequestId": "04F0F334-1335-436C-A1D7-6C044FE73368",
+    "OrderId": "1234567890"
 }
 ```
 
-## Error codes { .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|400|InvalidInstanceType.ValueNotSupported|The specified InstanceType does not exist or beyond the permitted range.|The error message returned when the specified instance type is not supported.|
-|500|InternalError|The request processing has failed due to some unknown error, exception or failure.|The error message returned when an unknown error occurs.|
-|400|InvalidBillingMethod.ValueNotSupported|The operation is not permitted due to an invalid billing method of the instance.|The error message returned when the operation is not supported due to the invalid billing method for the instance.|
-|400|InvalidInstanceId.Released|The specified instance has been released.|The error message returned when the instance has been released.|
-|400|InvalidInstance.PurchaseNotFound|The specified instance has no purchase history.|The error message returned when the order record for this instance does not exist.|
-|400|Account.Arrearage|Your account has an outstanding payment.|The error message returned when you have unpaid orders under your account.|
-|403|InvalidUser.PassRoleForbidden|The RAM user does not have privilege to pass a role.|The error message returned when RAM users attempt to assign RAM roles.|
-|400|InvalidRebootTime.MalFormed|The specified rebootTime is not valid.|The error message returned when the specified RebootTime is invalid.|
-|403|ImageNotSupportInstanceType|The specified image does not support the specified InstanceType.|The error message returned when the specified instance type is not supported in the specified image.|
-|403|InstanceType.Offline|%s|The error message returned when the specified instance type is unavailable.|
-|400|IdempotenceParamNotMatch|Request uses a client token in a previous request but is not identical to that request.|The error message returned when ClientToken in this request is not identical to the one used in the previous request.|
-|403|IncorrectInstanceStatus|The current status of the resource does not support this operation.|The error message returned when the operation is not supported while the resource is in the current state.|
-|400|IdempotenceParamNotMatch|%s|The error message returned when the idempotent signatures are inconsistent.|
-|400|InvalidInstanceChargeType.ValueNotSupported|%s|The error message returned when the specified billing method is not supported.|
-|400|InvalidStatus.NotStopped|Instance status must be stopped.|The error message returned when the instance is not in the stopped state.|
-|400|InvalidAction|%s|The error message returned when the operation is invalid.|
-|400|InstanceDowngrade.QuotaExceed|Quota of instance downgrade is exceed.|The error message returned when the maximum number of instance type downgrades for the instance is reached.|
-|400|InvalidInstanceType.ValueNotSupported|%s|The error message returned when the instance type attribute is incorrect.|
-|403|InvalidParameter.InstanceId|%s|The error message returned when the specified InstanceId is invalid.|
-|400|InvalidParameter|%s|The error message returned when the parameter format is incorrect.|
-|403|ImageNotSupportInstanceType|The specified instanceType is not supported by instance with marketplace image.|The error message returned when the marketplace image does not support the instance type.|
-|403|InvalidInstanceStatus|The current status of the instance does not support this operation.|The error message returned when the operation is not supported while the instance is in the current state.|
-|403|InvalidInstance.PreInstanceExpired|Instance business status is not Expired|The error message returned when the instance status is incorrect.|
-|403|InvalidInstance.EipNotSupport|The special instance with eip not support operate, please unassociate eip first.|The error message returned when the operation is not supported while an EIP has been bound to this instance. Unbind the EIP first.|
-|403|InvalidOperation.Ipv4CountExceeded|%s|The error message returned when the maximum number of IPv4 addresses is reached.|
-|403|InvalidOperation.Ipv6CountExceeded|%s|The error message returned when the maximum number of IPv6 addresses is reached.|
-|403|InvalidOperation.Ipv6NotSupport|%s|The error message returned when IPv6 addresses are not supported by the instance type.|
+|404|InvalidRegionId.NotFound|The specified RegionId does not exist.|The error message returned because the specified RegionId parameter does not exist.|
+|400|InvalidInstanceType.ValueUnauthorized|The specified InstanceType is not authorized.|The error message returned because you are not authorized to use the specified instance type.|
+|400|InvalidInstanceType.ValueNotSupported|The specified InstanceType does not exist or beyond the permitted range.|The error message returned because the specified instance type does not exist or you are not authorized to manage instances of the instance type.|
+|500|InternalError|The request processing has failed due to some unknown error, exception or failure.|The error message returned because an internal error has occurred. Try again later. If the problem persists, submit a ticket.|
+|404|BillingMethodNotFound|The account has not chosen any billing method.|The error message returned because no billing method is selected for this account.|
+|403|OperationDenied.NoStock|The specified instance is out of usage.|The error message returned because the specified instance is out of stock.|
+|400|InvalidBillingMethod.ValueNotSupported|The operation is not permitted due to an invalid billing method of the instance.|The error message returned because the operation is not supported due to the invalid billing method of the instance.|
+|404|InvalidInstanceId.NotFound|The specified InstanceId does not exist.|The error message returned because the specified InstanceId parameter does not exist. Check whether the instance ID is correct.|
+|400|InvalidInstance.PurchaseNotFound|The specified instance has no purchase history.|The error message returned because the order record for this instance does not exist.|
+|400|InvalidInstanceType.NotSupported|The specified InstanceType is not Supported.|The error message returned because the specified InstanceType parameter is invalid.|
+|400|OrderCreationFailed|Order creation failed, please check your params and try it again later.|The error message returned because the order fails to be created. Check your parameters and try again later.|
+|400|Throttling|You have made too many requests within a short time; your request is denied due to request throttling.|The error message returned because your request is denied due to request throttling. Try again later.|
+|400|Account.Arrearage|Your account has an outstanding payment.|The error message returned because your account has overdue payments.|
+|403|InvalidUser.PassRoleForbidden|The RAM user does not have privilege to pass a role.|The error message returned because the RAM user attempts to assign RAM roles. RAM users do not have the corresponding permissions.|
+|400|InvalidRebootTime.MalFormed|The specified rebootTime is not valid.|The error message returned because the specified RebootTime parameter is invalid.|
+|400|InvalidRebootTime.ValueNotSupported|The specified RebootTime is not valid.|The error message returned because the specified RebootTime parameter is invalid.|
+|403|ImageNotSupportInstanceType|The specified image does not support the specified InstanceType.|The error message returned because the specified image cannot be used for instances of the specified instance type.|
+|403|InstanceType.Offline|%s|The error message returned because the instance type is retired or instances of this instance type are insufficient.|
+|400|IdempotenceParamNotMatch|Request uses a client token in a previous request but is not identical to that request.|The error message returned because the specified ClientToken in this request is not identical to the one used in the previous request.|
+|403|IncorrectInstanceStatus|The current status of the resource does not support this operation.|The error message returned because the operation is not supported while the resource is in the current state.|
+|400|IdempotenceParamNotMatch|%s|The error message returned because the idempotence parameters do not match.|
+|400|InvalidInstanceChargeType.ValueNotSupported|%s|The error message returned because the charge type is not supported. Check related information and try again.|
+|400|InvalidStatus.NotStopped|Instance status must be stopped.|The error message returned because the instance is not in the Stopped state. The operation can be performed only when the instance is in the Stopped state.|
+|400|InvalidAction|%s|The error message returned because this operation is invalid.|
+|400|InstanceDowngrade.QuotaExceed|Quota of instance downgrade is exceed.|The error message returned because the maximum number of times that an instance can be downgraded for has been reached.|
+|400|InvalidInstanceType.ValueNotSupported|%s|The error message returned because this operation cannot be performed on instances of the specified instance type.|
+|403|InvalidParameter.InstanceId|%s|The error message returned because the specified InstanceId parameter is invalid.|
+|400|InvalidParameter|%s|The error message returned because the specified parameter is invalid.|
+|403|OperationDenied|%s|The error message returned because the operation is denied.|
+|403|ImageNotSupportInstanceType|The specified instanceType is not supported by instance with marketplace image.|The error message returned because the specified Alibaba Cloud Marketplace image does not support the instance type.|
+|403|InvalidInstanceStatus|The current status of the instance does not support this operation.|The error message returned because this operation is not supported while the instance is in the current state.|
+|403|InvalidInstance.PreInstanceExpired|Instance business status is not Expired|The error message returned because the current instance has expired.|
+|403|InvalidInstance.EipNotSupport|The special instance with eip not support operate, please unassociate eip first.|The error message returned because the operation is not supported while an elastic IP address \(EIP\) is associated with this instance. Disassociate the EIP first.|
+|400|OperationDenied|The current user does not support this operation.|The error message returned because the specified account does not support this operation.|
+|403|OperationDenied.LocalDiskUnsupported|The configuration change is not allowed when the specified instance has local disks mounted.|The error message returned because the instance type of instances that have local disks attached cannot be changed.|
+|403|OperationDenied.NoStock|The resource is out of stock in the specified zone. Please try other types, or choose other regions and zones.|The error message returned because the specified resource is unavailable in the specified zone. Try with other types, or choose other regions or zones.|
+|400|LastOrderProcessing|The previous order is still processing, please try again later.|The error message returned because the order is being processed. Try again later.|
+|403|InvalidOperation.Ipv4CountExceeded|%s|The error message returned because the maximum number of IPv4 addresses has been reached.|
+|403|InvalidOperation.Ipv6CountExceeded|%s|The error message returned because the maximum number of IPv6 addresses has been reached.|
+|403|InvalidOperation.Ipv6NotSupport|%s|The error message returned because IPv6 addresses do not support the current operation.|
+|500|InternalError|The request processing has failed due to some unknown error.|The error message returned because an internal error has occurred. Try again later. If the problem persists, submit a ticket.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
