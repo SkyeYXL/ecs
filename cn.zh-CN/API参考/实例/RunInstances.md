@@ -225,7 +225,10 @@
  -   NoSpot（默认）：正常按量付费实例
 -   SpotWithPriceLimit：设置上限价格的抢占式实例
 -   SpotAsPriceGo：系统自动出价，跟随当前市场实际价格 |
-|SpotDuration|Integer|否|1|抢占式实例的保留时长，单位为小时。取值范围：1~6
+|SpotDuration|Integer|否|1|抢占式实例的保留时长，单位为小时。取值范围：0~6
+
+ -   保留时长2~6正在邀测中，如需开通请提交工单。
+-   取值为0，则为无保护期模式。
 
  默认值：1 |
 |SpotPriceLimit|Float|否|0.97|设置实例的每小时最高价格。支持最大3位小数，参数`SpotStrategy`取值为`SpotWithPriceLimit`时生效。 |
@@ -492,8 +495,8 @@ https://ecs.aliyuncs.com/?Action=RunInstances
 |400|InvalidInternetMaxBandwidthOut.Malformed|The specified parameter internetMaxBandwidthOut is not valid.|指定的InternetMaxBandwidthOut参数不合法。|
 |400|InvalidInternetMaxBandwidthIn.Malformed|The specified parameter internetMaxBandwidthIn is not valid.|指定的InternetMaxBandwidthIn参数不合法。|
 |400|InvalidSnapshotId.NotFound|The specified parameter SnapshotId is not exist.|指定的快照不存在，请您检查快照是否正确。|
-|400|InvalidTagKey.Malformed|The specified Tag.n.Key is not valid.|指定的标签键不合法。|
-|400|InvalidTagValue.Malformed|The specified Tag.n.Value is not valid.|指定的标签值不合法。|
+|400|InvalidTagKey.Malformed|The specified Tag.n.Key is not valid.|指定的标签键参数有误。|
+|400|InvalidTagValue.Malformed|The specified Tag.n.Value is not valid.|指定的标签值参数有误。|
 |403|InvalidResourceId.NotSupported|The specified ResourceId does not support tagging.|指定的资源ID不支持标记。|
 |400|InvalidTag.Mismatch|The specified Tag.n.Key and Tag.n.Value are not match.|指定的Tag.N.Key和Tag.N.Value不匹配。|
 |400|InvalidTagCount|The specified tags are beyond the permitted range.|指定的标记超出取值范围。|
