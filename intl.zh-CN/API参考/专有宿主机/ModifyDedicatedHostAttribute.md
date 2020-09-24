@@ -39,7 +39,7 @@
 |DedicatedHostClusterId|String|否|dc-bp165p6xk2tlw61e\*\*\*\*|专有宿主机集群ID。 |
 |CpuOverCommitRatio|Float|否|1|CPU超卖比。仅自定义规格g6s、c6s、r6s支持设置CPU超卖比。取值范围：1~5
 
- CPU超卖比影响DDH的可用vCPU数，一台DDH的可用vCPU数=物理CPU核数\*2\*CPU超卖比。例如，g6s的物理CPU核数为52，如果设置CPU超卖比为4，则DDH创建完成后vCPU总数显示为412。针对CPU绝对稳定性要求不严苛或者CPU负载不高的场景，例如开发测试环境，提升超卖比可以提升可用vCPU数，用于部署更多同等规格的ECS实例，降低单位部署成本。 |
+ CPU超卖比影响DDH的可用vCPU数，一台DDH的可用vCPU数=物理CPU核数\*2\*CPU超卖比。例如，g6s的物理CPU核数为52，如果设置CPU超卖比为4，则修改完成后vCPU总数显示为416。针对CPU绝对稳定性要求不严苛或者CPU负载不高的场景，例如开发测试环境，提升超卖比可以提升可用vCPU数，用于部署更多同等规格的ECS实例，降低单位部署成本。 |
 
 ## 返回数据
 
