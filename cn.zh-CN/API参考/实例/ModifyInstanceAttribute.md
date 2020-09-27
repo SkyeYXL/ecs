@@ -28,6 +28,7 @@
     -   实例必须为已停止（`Stopped`）状态。
     -   不能超过实例规格允许的单块网卡最大队列数。
     -   实例的所有网卡累加队列数不能超过实例规格允许的队列数总配额。实例规格的单块网卡最大队列数和总配额可以通过[DescribeInstanceTypes](~~25620~~)接口查询`MaximumQueueNumberPerEni`、`TotalEniQueueQuantity`字段。
+    -   当取值为-1时，将重置主网卡队列数为对应实例规格的默认值。实例规格的弹性网卡默认队列数可以通过[DescribeInstanceTypes](~~25620~~)接口查询 `PrimaryEniQueueNumber`字段。
 
 ## 调试
 
