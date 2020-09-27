@@ -98,11 +98,16 @@
  默认值：10。 |
 |DiskName|String|否|testDiskName|云盘或本地盘名称。 |
 |AutoSnapshotPolicyId|String|否|sp-m5e2w2jutw8bv31\*\*\*\*|根据自动快照策略ID查询云盘。 |
-|EnableAutoSnapshot|Boolean|否|false|查询已经创建了自动快照策略，是否应用的云盘。
+|EnableAutoSnapshot|Boolean|否|true|云盘是否启用自动快照策略功能。
 
- -   true：应用
--   false：未应用 |
-|EnableAutomatedSnapshotPolicy|Boolean|否|false|是否查询开启了自动快照策略的云盘。
+ -   true：启用
+-   false：未启用
+
+ **说明：** 创建后的云盘默认启用自动快照策略功能，您只需要为云盘绑定自动快照策略即可正常使用。 |
+|EnableAutomatedSnapshotPolicy|Boolean|否|false|云盘是否设置了自动快照策略。
+
+ -   true：已设置
+-   false：未设置
 
  默认值：false |
 |DiskChargeType|String|否|PostPaid|云盘或本地盘的计费方式。取值范围：
@@ -188,8 +193,8 @@
 -   PostPaid：按量付费 |
 |DiskId|String|d-bp18um4r4f2fve24\*\*\*\*|云盘或本地盘ID。 |
 |DiskName|String|testDiskName|云盘或本地盘名称。 |
-|EnableAutoSnapshot|Boolean|false|如果您已经创建了自动快照策略，是否应用于该云盘。 |
-|EnableAutomatedSnapshotPolicy|Boolean|false|云盘是否执行自动快照策略。 |
+|EnableAutoSnapshot|Boolean|false|云盘是否启用自动快照策略功能。 |
+|EnableAutomatedSnapshotPolicy|Boolean|false|云盘是否设置了自动快照策略。 |
 |Encrypted|Boolean|false|是否为加密云盘。 |
 |ExpiredTime|String|2018-01-10T01:01:22Z|包年包月云盘的过期时间。 |
 |IOPS|Integer|4000|每秒读写（I/O）操作的次数，单位：次/s。 |
