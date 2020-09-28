@@ -1,112 +1,100 @@
-# ModifyNetworkInterfaceAttribute {#doc_api_1000113 .reference}
+# ModifyNetworkInterfaceAttribute
 
-You can call this operation to modify attributes of an ENI.
+You can call this operation to modify the properties such as the name, description, and security group of an elastic network interface \(ENI\).
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=ModifyNetworkInterfaceAttribute) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can call APIs, dynamically generate SDK example code, and quickly retrieve APIs.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=ModifyNetworkInterfaceAttribute&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|NetworkInterfaceId|String|Yes|eni-myeni| The ID of the ENI.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|ModifyNetworkInterfaceAttribute|The operation that you want to perform. Set the value to ModifyNetworkInterfaceAttribute. |
+|NetworkInterfaceId|String|Yes|eni-bp67acfmxazb4p\*\*\*\*|The ID of the ENI. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the ENI. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|SecurityGroupId.N|RepeatList|No|sg-bp67acfmxazb4p\*\*\*\*|The ID of security group N to which the ENI finally belongs. If a security group to which the ENI has belonged is in the ID list, that security group is removed from the list. Valid values of N: 1, 2, 3, 4, and 5.
 
- |
-|RegionId|String|Yes|cn-hangzhou| The ID of the region where the ECS instance resides. You can call [DescribeRegions](~~25609~~) to view the latest regions of Alibaba Cloud.
+**Note:** After you modify the security group, the modification will take effect after a short delay. |
+|NetworkInterfaceName|String|No|eniTestName|The name of the ENI. The name must be 2 to 128 characters in length. It must start with a letter and cannot start with http:// or https://. It can contain letters, digits, colons \(:\), underscores \(\_\), and hyphens \(-\).
 
- |
-|Action|String|No|ModifyNetworkInterfaceAttribute| The operation that you want to perform. Set the value to ModifyNetworkInterfaceAttribute.
+This parameter is empty by default. |
+|QueueNumber|Integer|No|8|The number of ENI queues. Valid values: 1 to 2048.
 
- |
-|Description|String|No|test| The description of the ENI.
+-   You can modify only the queue numbers of secondary ENIs.
+-   You can modify the queue number of a secondary ENI only when the ENI is in the `Available` state or the secondary ENI is bound \(`InUse`\) to an instance that is in the `Stopped` state.
+-   The maximum queue number of a single secondary ENI cannot exceed the service quota of queues allowed by the instance type of the instance to which the secondary ENI is bound. The total queue number of all ENIs that are bound to the instance also cannot exceed the total queue quota allowed by the instance type of the instance. To learn the queue quotas for a single ENI and all ENIs bound to an instance, you can call the [DescribeInstanceTypes](~~25620~~) operation to query the `MaximumQueueNumberPerEni` and `TotalEniQueueQuantity` fields. |
+|Description|String|No|testDescription|The description of the ENI. The description must be 2 to 256 characters in length and cannot start with http:// or https://.
 
- -   The description must be 2 to 256 characters in length.
--   It cannot start with http:// or https://.
--   If not specified, this parameter is null.
+This parameter is empty by default. |
 
- Default value: null.|
-|NetworkInterfaceName|String|No|my-eni-name| The name of the ENI.
+## Response parameters
 
- -   The name must be 2 to 128 characters in length. It must start with a letter and can contain digits, underscores \(\_\), and hyphens \(-\).
--   The ENI name is displayed in the console.
--   It cannot start with http:// or https://.
--   If not specified, this parameter is null.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
 
- Default value: null.|
-|SecurityGroupId.N|RepeatList|No|sg-1133aa| Changes the security group for the ENI. The existing security groups will be replaced by the specified SecurityGroupId.N.
-
- Valid range of N: 1 to 5.Valid range of N: 1 to 5.
-
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=ModifyNetworkInterfaceAttribute
-&NetworkInterfaceId=eni-myeni
-&RegionId=cn-hangzhou 
-&SecurityGroupId.1=sg-1133aa
-&NetworkInterfaceName=my-eni-name
-&Description=test
+&NetworkInterfaceId=eni-bp67acfmxazb4p****
+&RegionId=cn-hangzhou
+&SecurityGroupId.1=sg-bp67acfmxazb4p****
+&NetworkInterfaceName=eniTestName
+&Description=testDescription
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DetachNetworkInterfaceResponse>
-  <RequestId>04F0F334-1335-436C-A1D7-6C044FExxxxx</RequestId>
+        <RequestId>04F0F334-1335-436C-A1D7-6C044FExxxxx</RequestId>
 </DetachNetworkInterfaceResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RequestId":"04F0F334-1335-436C-A1D7-6C044FExxxxx"
+    "RequestId":"04F0F334-1335-436C-A1D7-6C044FExxxxx"
 }
 ```
 
-## Error codes {#section_6cm_j4s_c8u .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|403|InvalidUserType.NotSupported|%s|The error message returned when your account type is not supported.|
-|403|Abs.InvalidAccount.NotFound|%s|The error message returned when the specified Alibaba Cloud account does not exist, or your AccessKey has expired.|
-|400|MissingParameter|%s|The error message returned when a required parameter is not specified.|
-|403|Forbidden.NotSupportRAM|%s|The error message returned when RAM users are not allowed to perform this operation.|
-|400|UnsupportedParameter|%s|The error message returned when a parameter is not supported.|
-|403|Forbidden.SubUser|%s|The error message returned when a RAM user is not authorized to perform operations on this resource.|
-|400|InvalidParameter|%s|The error message returned when the parameter format is invalid.|
-|400|InvalidInstanceId.MalFormed|%s|The error message returned when the instance ID format is invalid.|
-|400|InvalidOperation.InvalidEcsState|%s|The error message returned when the private IP address cannot be released under the instance state.|
-|400|InvalidOperation.InvalidEniState|%s|The error message returned when the private IP address cannot be released under the ENI state.|
-|400|InvalidOperation.DetachPrimaryEniNotAllowed|%s|The error message returned when the primary ENI cannot be detached from the instance.|
-|400|InvalidParams.EniId|%s|The error message returned when the format of the specified ENI ID is invalid.|
-|404|InvalidEcsId.NotFound|%s|The error message returned when the specified instance ID does not exist.|
-|404|InvalidEniId.NotFound|%s|The error message returned when the specified ENI ID does not exist.|
-|404|InvalidVSwitchId.NotFound|%s|The error message returned when the specified VSwitch ID does not exist.|
-|404|InvalidSecurityGroupId.NotFound|%s|The error message returned when the specified security group ID does not exist.|
-|403|EniPerInstanceLimitExceeded|%s|The error message returned when the number of ENIs exceeds the upper limit for the specified instance type.|
-|403|InvalidOperation.AvailabilityZoneMismatch|%s|The error message returned when the specified VSwitch, ENI, and instance are not in the same zone.|
-|403|InvalidOperation.VpcMismatch|%s|The error message returned when the specified ENI and security group do not belong to the same VPC.|
-|403|SecurityGroupInstanceLimitExceed|%s|The error message returned when the number of instances in the specified security group exceeds the upper limit.|
-|403|InvalidSecurityGroupId.NotVpc|%s|The error message returned when the specified security group is not VPC-connected.|
-|403|InvalidOperation.InvalidEniType|%s|The error message returned when the ENI type is not supported.|
-|400|Forbidden.RegionId|%s|The error message returned when this operation is not supported in the region.|
+|403|InvalidUserType.NotSupported|%s|The error message returned because the current account does not support this operation.|
+|403|Abs.InvalidAccount.NotFound|%s|The error message returned because your Alibaba Cloud account does not exist or your AccessKey pair has expired.|
+|400|MissingParameter|%s|The error message returned because a required parameter is not specified.|
+|403|Forbidden.NotSupportRAM|%s|The error message returned because RAM users are not authorized to perform this operation.|
+|400|UnsupportedParameter|%s|The error message returned because the specified parameter is not supported.|
+|403|Forbidden.SubUser|%s|The error message returned because you are not authorized to manage this resource. Apply for permissions to the Alibaba Cloud account.|
+|400|InvalidParameter|%s|The error message returned because the specified parameter is invalid.|
+|400|InvalidInstanceID.Malformed|%s|The error message returned because the specified InstanceId parameter is invalid.|
+|400|InvalidOperation.InvalidEcsState|%s|The error message returned because the operation is not supported while the instance is in the current state.|
+|400|InvalidOperation.InvalidEniState|%s|The error message returned because the operation is not supported while the ENI is in the current state.|
+|400|InvalidOperation.DetachPrimaryEniNotAllowed|%s|The error message returned because you cannot unbind the primary ENI from the instance.|
+|400|InvalidParams.EniId|%s|The error message returned because the specified EniId parameter is invalid.|
+|404|InvalidEcsId.NotFound|%s|The error message returned because the specified instance ID does not exist.|
+|404|InvalidEniId.NotFound|%s|The error message returned because the specified ENI ID does not exist.|
+|404|InvalidVSwitchId.NotFound|%s|The error message returned because the specified VSwitch ID does not exist.|
+|404|InvalidSecurityGroupId.NotFound|%s|The error message returned because the specified security group ID does not exist.|
+|403|MaxEniCountExceeded|%s|The error message returned because the maximum number of ENIs that can be managed has been reached.|
+|403|EniPerInstanceLimitExceeded|%s|The error message returned because the maximum number of ENIs that can be bound to the specified instance has been reached.|
+|403|InvalidOperation.AvailabilityZoneMismatch|%s|The error message returned because this operation is invalid.|
+|403|InvalidOperation.VpcMismatch|%s|The error message returned because this operation is invalid. Check whether the VPC in the operation corresponds to other parameters.|
+|403|SecurityGroupInstanceLimitExceed|%s|The error message returned because the maximum number of instances in the specified security group has been reached.|
+|403|InvalidSecurityGroupId.NotVpc|%s|The error message returned because the specified SecurityGroupId parameter is invalid and the network type of the security group is not VPC.|
+|403|InvalidOperation.InvalidEniType|%s|The error message returned because the ENI type does not support this operation.|
+|400|Forbidden.RegionId|%s|The error message returned because the service is unavailable in the current region.|
+|403|InvalidOperation.EniServiceManaged|%s|The error message returned because this operation is invalid.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
