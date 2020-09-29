@@ -1,85 +1,84 @@
-# JoinSecurityGroup {#doc_api_1031574 .reference}
+# JoinSecurityGroup
 
-Adds an instance to a specified security group.
+You can call this operation to add an ECS instance to a security group.
 
-## Description {#description .section}
+## Description
 
-When you call this operation, note that:
+**Note:** This operation is not recommended. We recommend that you call the [ModifyInstanceAttribute](~~25503~~) operation to add or remove ECS instances to or from a security group, and call the [ModifyNetworkInterfaceAttribute](~~58513~~) operation to add or remove elastic network interfaces \(ENIs\) to or from a security group.
 
--   Before you add an instance to a security group, the instance must be in the Stopped or Running state.
--   An instance can belong to a maximum of five security groups.
--   You can [submit a ticket](https://workorder-intl.console.aliyun.com/#/ticket/createIndex) to add the instance to more security groups. An instance can belong to a maximum of 16 security groups.
--   A security group can manage up to 1,000 instances.
--   The specified security group and instance must belong to the same region.
--   The specified security group and instance must have the same network type. If the network type is [VPC](~~34217~~), the security group and the instance must be in the same VPC.
+When you call this operation, take note of the following items:
 
-## Debugging {#apiExplorer .section}
+-   Before you add an instance to a security group, the instance must be in the **Stopped** \(Stopped\) or **Running** \(Running\) state.
+-   An instance can be added to a maximum of five security groups.
+-   You can [submit a ticket](https://workorder-intl.console.aliyun.com/#/ticket/createIndex) to add an instance to more security groups. An instance can be added to a maximum of 16 security groups.
+-   A basic security group can contain a maximum of 2,000 instances. An advanced security group can contain a maximum of 65,536 instances.
+-   The security group and the instance must belong to the same region.
+-   The security group and the instance must be of the same network type. If the network type is VPC, the security group and the instance must be in the same VPC.
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=JoinSecurityGroup) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+## Debugging
 
-## Request parameters {#parameters .section}
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=JoinSecurityGroup&type=RPC&version=2014-05-26)
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|InstanceId|String|Yes|i-instanceid1| The ID of an instance. You can call [DescribeRegions](~~25609~~) to view the latest regions of Alibaba Cloud.
+## Request parameters
 
- |
-|SecurityGroupId|String|Yes|sg-securitygroupid1| The ID of the security group to which the instance belongs. You can call [DescribeSecurityGroups](~~25556~~) to view the available security groups.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|JoinSecurityGroup|The operation that you want to perform. Set the value to JoinSecurityGroup. |
+|InstanceId|String|Yes|i-bp67acfmxazb4p\*\*\*\*|The ID of the instance. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|SecurityGroupId|String|Yes|sg-bp67acfmxazb4p\*\*\*\*|The ID of the security group. You can call the [DescribeSecurityGroups](~~25556~~) operation to view available security groups. |
 
- |
-|Action|String|No|JoinSecurityGroup| The operation that you want to perform. Set the value to JoinSecurityGroup.
+## Response parameters
 
- |
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
 
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=JoinSecurityGroup
-&InstanceId=i-instance1
-&SecurityGroupId=F876FF7BA984 
+&InstanceId=i-bp67acfmxazb4p****
+&SecurityGroupId=sg-bp67acfmxazb4p****
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <JoinSecurityGroupResponse>
-  <RequestId>473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E</RequestId>
+      <RequestId>473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E</RequestId>
 </JoinSecurityGroupResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RequestId": "473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E"
+    "RequestId": "473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E"
 }
 ```
 
-## Error codes {#section_397_qzn_gqu .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|404|InvalidSecurityGroupId.NotFound|The specified SecurityGroupId does not exist.|The error message returned when the specified security group does not exist under this account. Check whether the security group ID is correct.|
-|400|InstanceSecurityGroupLimitExceeded|Exceeding the allowed amount of security groups that an instance can be in.|The error message returned when the number of security groups for an instance reaches the upper limit.|
-|403|IncorrectInstanceStatus|The current status of the resource does not support this operation.|The error message returned when this operation is not supported under the current instance state.|
-|403|SecurityGroupInstanceLimitExceeded|The maximum number of instances in a security group is exceeded.|The error message returned when the number of instances in a security group reaches the upper limit.|
-|403|InvalidInstanceId.AlreadyExists|The specified instance already exists in the specified security group.|The error message returned when the specified instance already exists in the security group.|
-|403|SecurityGroupInstanceLimitExceeded|%s|The error message returned when the number of instances in a security group reaches the upper limit.|
-|403|AclLimitExceed|%s|The error message returned when the value of AccessPoint exceeds the upper limit.|
-|403|InstanceSecurityGroupLimitExceeded|%s|The error message returned when the number of security groups for an instance reaches the upper limit.|
+|404|InvalidSecurityGroupId.NotFound|The specified SecurityGroupId does not exist.|The error message returned because the specified security group does not exist in this account. Check whether the security group ID is correct.|
+|400|InstanceSecurityGroupLimitExceeded|Exceeding the allowed amount of security groups that an instance can be in.|The error message returned because the maximum number of security groups to which the instance can be added has been reached.|
+|403|IncorrectInstanceStatus|The current status of the resource does not support this operation.|The error message returned because the operation is not supported while the resource is in the current state.|
+|403|InstanceLockedForSecurity|The specified operation is denied as your instance is locked for security reasons.|The error message returned because the operation is not supported while the instance is locked for security reasons.|
+|403|SecurityGroupInstanceLimitExceeded|The maximum number of instances in a security group is exceeded.|The error message returned because the maximum number of instances in the specified security group has been reached.|
+|404|InvalidInstanceId.NotFound|The specified InstanceId does not exist.|The error message returned because the specified instance does not exist. Check whether the instance ID is correct.|
+|400|InvalidInstanceId.Mismatch|Specified instance and security group are not in the same VPC.|The error message returned because the specified instance and security group do not belong to the same VPC or one of the following special cases occurs: 1. The security group is of the VPC network type but the instance is not. 2. The instance is of the VPC network type but the security group is not.|
+|403|InvalidInstanceId.AlreadyExists|The specified instance already exists in the specified security group.|The error message returned because the specified instance already exists in the security group.|
+|500|InternalError|The request processing has failed due to some unknown error.|The error message returned because an internal error has occurred. Try again later. If the problem persists, submit a ticket.|
+|403|SecurityGroupInstanceLimitExceeded|%s|The error message returned because the maximum number of instances in the specified security group has been reached.|
+|403|AclLimitExceed|%s|The error message returned because the value of AccessPoint exceeds the upper limit.|
+|403|InstanceSecurityGroupLimitExceeded|%s|The error message returned because the maximum number of security groups to which the instance can be added has been reached.|
+|400|InvalidInstanceId.Malformed|The specified parameter "InstanceId" is not valid.|The error message returned because the specified InstanceId parameter is invalid.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
