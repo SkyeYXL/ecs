@@ -416,7 +416,7 @@ https://ecs.aliyuncs.com/?Action=RunInstances
 |400|InvalidParameter|The specified parameter "InternetMaxBandwidthOut" is not valid.|指定的InternetMaxBandwidthOut参数不合法。|
 |400|InvalidHostName.Malformed|The specified parameter "HostName" is not valid.|指定的HostName格式不合法。|
 |403|InvalidParams.InstanceNameExceed|The uniqueSuffix takes three naming places, please shorten your InstanceName.|UniqueSuffix参数会占用三个命名空间，请缩短您的实例名称。|
-|403|InvalidParams.HostnameExceed|The uniqueSuffix takes three naming places, please shorten your Hostname.|UniqueSuffix参数会占用三个命名空间，请缩短您的实例名称。|
+|403|InvalidParams.HostnameExceed|The uniqueSuffix takes three naming places, please shorten your Hostname.|UniqueSuffix参数会占用三个命名空间，请缩短您的实例主机名。|
 |400|InvalidPassword.Malformed|The specified parameter "Password" is not valid.|指定的Password参数不合法。|
 |400|InvalidPasswordParam.Mismatch|The input password should be null when passwdInherit is true.|启用PasswdInherit后，用户名密码应该设置为空。|
 |400|InvalidSystemDiskCategory.ValueNotSupported|The specified parameter "SystemDisk.Category" is not valid.|指定的SystemDisk.Category不合法。|
@@ -532,11 +532,11 @@ https://ecs.aliyuncs.com/?Action=RunInstances
 |403|InvalidInstanceType.ZoneNotSupported|The specified zone does not support this instancetype.|指定的可用区里不支持指定的InstanceType。|
 |400|InstanceDiskNumber.LimitExceed|The total number of specified disk in an instance exceeds.|实例下磁盘数目超过限制。|
 |400|InvalidSpotStrategy|The specified SpotStrategy is not valid.|指定的SpotStrategy参数无效。|
-|400|InvalidSpotPriceLimit|The specified SpotPriceLimitis not valid.|指定的SpotPriceLimit不合法。|
-|400|InvalidSpotDuration|The specified SpotDuration is not valid.|指定的SpotDuration不合法。|
-|400|InvalidSpotAuthorized|The specified Spot param is unauthorized.|指定的Spot未获得授权。|
-|400|InvalidSpotPrepaid|The specified Spot type is not support PrePay Instance.|指定的Spot类型不支持包年包月实例。|
-|400|InvalidSpotAliUid|The specified UID is not authorized to use SPOT instance.|指定的UID无权使用SPOT实例。|
+|400|InvalidSpotPriceLimit|The specified SpotPriceLimitis not valid.|指定的SpotPriceLimit参数有误。|
+|400|InvalidSpotDuration|The specified SpotDuration is not valid.|指定的SpotDuration参数有误。|
+|400|InvalidSpotAuthorized|The specified Spot param is unauthorized.|指定的SpotDuration参数值未获得授权。|
+|400|InvalidSpotPrepaid|The specified Spot type is not support PrePay Instance.|指定的抢占式实例不支持包年包月的付费方式。|
+|400|InvalidSpotAliUid|The specified UID is not authorized to use SPOT instance.|用户账户未获得创建抢占式实例的权限。|
 |400|InvalidParameter.Bandwidth|%s|指定的带宽无效，请检查参数是否正确。|
 |400|InvalidDataDiskCategory.ValueNotSupported|%s|指定的数据磁盘类型无效。|
 |400|InvalidSystemDiskCategory.ValueNotSupported|%s|当前操作不支持此系统磁盘类型。|
