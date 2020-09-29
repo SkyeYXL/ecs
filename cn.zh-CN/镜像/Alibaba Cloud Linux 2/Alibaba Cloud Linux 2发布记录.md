@@ -28,12 +28,10 @@ keyword: [发布更新, ecs, alibaba cloud linux]
     -   增加阿里巴巴自研特性TCP-RT支持
     -   增加virtio-mem特性支持
     -   增强Intel® IceLake处理器电源管理、PCIe Gen4、RAS等功能
-    -   增加Intel® Speed Select Technology技术支持
--   适用地域：华东1（杭州）、中国（香港）、华北2（北京）、华北3（张家口）、西南1（成都） |
+    -   增加Intel® Speed Select Technology技术支持 |
 |aliyun\_2\_1903\_x64\_20G\_qboot\_alibase\_20200904.vhd|2020-09-04|-   更新镜像到最新的软件版本，兼容最新CentOS 7.8版本，修复软件包安全漏洞
 -   基于Alibaba Cloud Linux 2 LTS镜像aliyun\_2\_1903\_x64\_20G\_alibase\_20200904.vhd制作
--   支持qboot快速启动
--   适用地域：华东1（杭州）、中国（香港）、华北2（北京）、华北3（张家口） |
+-   支持qboot快速启动 |
 |aliyun\_2\_1903\_x64\_20G\_alibase\_20200529.vhd|2020-05-29|-   更新镜像到最新的软件版本，兼容最新CentOS 7.8版本，修复软件包安全漏洞
 -   增加/etc/image-id标识
 -   默认关闭tuned服务
@@ -109,16 +107,14 @@ keyword: [发布更新, ecs, alibaba cloud linux]
 |-   更新镜像到最新的软件版本，兼容最新CentOS 7.8版本，修复软件包安全漏洞
 -   基于Alibaba Cloud Linux 2 LTS镜像aliyun\_2\_1903\_x64\_20G\_alibase\_20200904.vhd制作
 -   启动切换为UEFI模式，而且仅支持该模式
--   增加可信功能
--   适用地域：华东1（杭州）、中国（香港）、华北2（北京）、华北3（张家口）、西南1（成都） |
+-   增加可信功能 |
 |aliyun\_2\_1903\_x64\_20G\_uefi\_alibase\_20200904.vhd|2020-09-04|AMD实例规格族：-   ecs.ebmg6a
 -   ecs.ebmc6a
 -   ecs.ebmr6a
 
 |-   更新镜像到最新的软件版本，兼容最新CentOS 7.8版本，修复软件包安全漏洞
 -   基于Alibaba Cloud Linux 2 LTS镜像aliyun\_2\_1903\_x64\_20G\_alibase\_20200904.vhd制作
--   启动切换为UEFI模式，而且仅支持该模式
--   适用地域：华东1（杭州）、中国（香港）、华北2（北京）、华北3（张家口）、西南1（成都） |
+-   启动切换为UEFI模式，而且仅支持该模式 |
 |aliyun\_2\_1903\_x64\_20G\_secured\_alibase\_20200622.vhd|2020-06-22|可信实例规格族：-   ecs.g6t
 -   ecs.c6t
 
