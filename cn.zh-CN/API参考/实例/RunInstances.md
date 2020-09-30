@@ -17,6 +17,9 @@
     -   创建实例时，默认自动启动实例，直到实例状态变成运行中（`Running`）。
     -   与[CreateInstance](~~25499~~)相比，通过`RunInstances`创建的实例如果参数`InternetMaxBandwidthOut`的值大于0，则自动为实例分配公网IP。
     -   提交创建任务后，参数不合法或者库存不足的情况下会报错，具体的报错原因参见错误码。
+
+**说明：** 如果创建实例时返回`QuotaExceed.ElasticQuota`错误，表示您在当前地域选择的实例规格所要创建的台数超出系统限额，或者全实例规格vCPU配额超出系统限额，您可以前往[ECS管理控制台](https://ecs.console.aliyun.com/?spm=a2c8b.12215451.favorites.decs.5e3a336aMGTtzy#/privileges/quota)或[配额中心](https://quotas.console.aliyun.com/products/ecs/quotas)申请提高限额。
+
 -   **最佳实践**：
     -   `RunInstances`可以执行批量创建任务，为便于管理与检索，建议您为每批次启动的实例指定标签（`Tag.N.Key`和`Tag.N.Value`），并且为主机名（`HostName`）和实例名称（`InstanceName`）添加有序后缀（`UniqueSuffix`）。
     -   实例启动模板能免除您每次创建实例时都需要填入大量配置参数，您可以创建实例启动模板（[CreateLaunchTemplate](~~74686~~)）后，在`RunInstances`请求中指定`LaunchTemplateId`和`LaunchTemplateVersion`使用启动模板。
@@ -531,6 +534,7 @@ https://ecs.aliyuncs.com/?Action=RunInstances
 |403|OperationDenied.NoStock|The resource is out of stock in the specified zone. Please try other types, or choose other regions and zones.|指定的资源在指定可用区中无货。请尝试其他类型，或选择其他可用区和地域。|
 |403|InvalidInstanceType.ZoneNotSupported|The specified zone does not support this instancetype.|指定的可用区里不支持指定的InstanceType。|
 |400|InstanceDiskNumber.LimitExceed|The total number of specified disk in an instance exceeds.|实例下磁盘数目超过限制。|
+|400|InvalidDiskCategory.ValueNotSupported|The specified parameter "DiskCategory" is not valid.|指定的DiskCategory参数有误。|
 |400|InvalidSpotStrategy|The specified SpotStrategy is not valid.|指定的SpotStrategy参数无效。|
 |400|InvalidSpotPriceLimit|The specified SpotPriceLimitis not valid.|指定的SpotPriceLimit参数有误。|
 |400|InvalidSpotDuration|The specified SpotDuration is not valid.|指定的SpotDuration参数有误。|
