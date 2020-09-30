@@ -17,6 +17,9 @@
     -   可以通过参数`IoOptimized`指定是否创建I/O优化实例。
     -   产品选型：参见[实例规格族](~~25378~~)或调用[DescribeInstanceTypes](~~25620~~)查看目标实例规格的性能数据，或者参见[选型配置](~~58291~~)了解如何选择实例规格。
     -   查询库存：调用[DescribeAvailableResource](~~66186~~)查看指定地域或者可用区内的资源供给情况。
+
+**说明：** 如果创建实例时返回`QuotaExceed.ElasticQuota`错误，表示您在当前地域选择的实例规格所要创建的台数超出系统限额，或者全实例规格vCPU配额超出系统限额，您可以前往[ECS管理控制台](https://ecs.console.aliyun.com/?spm=a2c8b.12215451.favorites.decs.5e3a336aMGTtzy#/privileges/quota)或[配额中心](https://quotas.console.aliyun.com/products/ecs/quotas)申请提高限额。
+
 -   **镜像**：
     -   镜像确定实例的系统盘配置，实例的系统盘即为指定镜像的完全克隆。
     -   实例内存为512 MiB时，不能使用除半年渠道之外的Windows Server镜像。
@@ -448,15 +451,16 @@ https://ecs.aliyuncs.com/?Action=CreateInstance
 |403|InvalidInstanceType.ZoneNotSupported|The specified zone does not support this instancetype.|指定的可用区里不支持指定的InstanceType。|
 |400|InstanceDiskNumber.LimitExceed|The total number of specified disk in an instance exceeds.|实例下磁盘数目超过限制。|
 |400|Account.Arrearage|Your account has an outstanding payment.|您的账号存在未支付的款项。|
+|400|InvalidDiskCategory.ValueNotSupported|The specified parameter "DiskCategory" is not valid.|指定的DiskCategory参数有误。|
 |400|InvalidAutoRenewPeriod.ValueNotSupported|The specified autoRenewPeriod is not valid.|指定的参数AutoRenewPeriod不合法。|
 |400|QuotaExceed.AfterpayInstance|The maximum number of Pay-As-You-Go instances is exceeded.|按量付费的实例库存不足，请减少创建数量。|
 |400|InvalidSpotStrategy|The specified SpotStrategy is not valid.|指定的SpotStrategy参数无效。|
 |400|InvalidSpotParam.EmptyZoneID|The specified ZoneId is empty when SpotStrategy is set.|设置SpotStrategy时ZoneId为空。|
-|400|InvalidSpotPriceLimit|The specified SpotPriceLimitis not valid.|指定的SpotPriceLimit不合法。|
-|400|InvalidSpotDuration|The specified SpotDuration is not valid.|指定的SpotDuration不合法。|
-|400|InvalidSpotAuthorized|The specified Spot param is unauthorized.|指定的Spot未获得授权。|
-|400|InvalidSpotPrepaid|The specified Spot type is not support PrePay Instance.|指定的Spot类型不支持包年包月实例。|
-|400|InvalidSpotAliUid|The specified UID is not authorized to use SPOT instance.|指定的UID无权使用SPOT实例。|
+|400|InvalidSpotPriceLimit|The specified SpotPriceLimitis not valid.|指定的SpotPriceLimit参数有误。|
+|400|InvalidSpotDuration|The specified SpotDuration is not valid.|指定的SpotDuration参数有误。|
+|400|InvalidSpotAuthorized|The specified Spot param is unauthorized.|指定的SpotDuration参数值未获得授权。|
+|400|InvalidSpotPrepaid|The specified Spot type is not support PrePay Instance.|指定的抢占式实例不支持包年包月的付费方式。|
+|400|InvalidSpotAliUid|The specified UID is not authorized to use SPOT instance.|用户账户未获得创建抢占式实例的权限。|
 |403|InvalidPayMethod|The specified pay method is not valid.|没有可用的付费方式。|
 |403|OperationDenied.ImageNotValid|The specified Image is disabled or is deleted.|指定的镜像不存在。|
 |400|InvalidTagKey.Malformed|The specified Tag.n.Key is not valid.|指定的标签键参数有误。|
