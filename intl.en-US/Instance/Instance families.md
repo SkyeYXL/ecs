@@ -117,7 +117,6 @@ Alibaba Cloud ECS instances are categorized into the following instance families
 |-----------------------------------------------------------------|
 |Recommended intance families|Other available instance families|
 |-   [t6, burstable instance family](#t6)
--   [s6, shared standard instance family](#s6)
 
 |-   [t5, burstable instance family](#t5)
 -   [v5, CPU overprovisioned instance family](#v5)
@@ -1159,27 +1158,27 @@ Instance types
 
 Features
 
--   Provides predictable and consistent high performance and reduces virtualization overheads with the use of the third-generation X-Dragon architecture.
+-   Uses the third-generation X-Dragon architecture to provide predictable and consistent high performance and reduce virtualization overheads.
 -   I/O optimized.
 -   Supports enhanced SSDs \(ESSDs\) and provides ultra-high I/O performance.
--   Provides strong storage I/O performance based on large computing capacity.
+-   Provides high storage I/O performance based on large computing capacity.
 
     **Note:** For more information about the storage I/O performance of the new generation of enterprise-level instance families, see [Storage I/O performance](/intl.en-US/Block Storage/Performance/Storage I/O performance.md).
 
 -   Offers a CPU-to-memory ratio of 1:2.
 -   Provides an ultra-high packet forwarding rate.
--   Equipped with 3.3 GHz Intel ® Xeon ® Platinum 8369HC \(Cooper Lake\) processors with a maximum turbo frequency of 3.8 GHz for consistent computing performance.
--   Allows you to enable or disable Hyper-Threading.
+-   Equipped with Intel ® Xeon ® Platinum 8369HB \(Cooper Lake\) or Intel ® Xeon ® Platinum 8369HC \(Cooper Lake\) processors that deliver a maximum turbo frequency of 3.8 GHz and a minimum clock speed of 3.3 GHz for consistent computing performance.
+-   Allows you to enable or disable hyper-threading.
 
     **Note:** By default, Hyper-Threading is enabled on ECS instances. For more information, see [Customize CPU options](/intl.en-US/Instance/Manage instances/Customize CPU options.md).
 
 -   Provides high network performance based on large computing capacity.
 -   Suitable for the following scenarios:
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are transmitted and received
     -   High-performance frontend server clusters
     -   Frontend servers of massively multiplayer online \(MMO\) games
     -   Data analysis, batch processing, and video encoding
-    -   High-performance scientific and engineering applications
+    -   High-performance science and engineering applications
 
 Instance types
 
@@ -1204,18 +1203,18 @@ Instance types
 
 Features
 
--   Provides predictable and consistent high performance and reduces virtualization overheads with the use of the X-Dragon architecture.
+-   Uses the X-Dragon architecture to provide predictable and consistent high performance and reduce virtualization overheads.
 -   I/O optimized.
 -   Supports ESSDs, standard SSDs, and ultra disks.
--   Provides strong storage I/O performance based on large computing capacity.
+-   Provides high storage I/O performance based on large computing capacity.
 
     **Note:** For more information about the storage I/O performance of the new generation of enterprise-level instance families, see [Storage I/O performance](/intl.en-US/Block Storage/Performance/Storage I/O performance.md).
 
 -   Offers a CPU-to-memory ratio of 1:2.
 -   Provides an ultra-high packet forwarding rate.
--   Equipped with 3.1 GHz Intel ® Xeon ® Platinum 8269 \(Cascade Lake\) processors with a maximum turbo frequency of 3.5 GHz for consistent computing performance.
+-   Equipped with 3.1 GHz Intel ® Xeon ® Platinum 8269 \(Cascade Lake\) processors that deliver a maximum turbo frequency of 3.5 GHz for consistent computing performance.
 
-    **Note:** The CPU of this instance family provides a 3.1 GHz clock speed. The Intel System Studio \(ISS\) feature may cause a lower clock speed to be displayed. Alibaba Cloud is trying to fix the display problem. The problem does not affect the actual clock speed of your instances.
+    **Note:** The CPU of this instance family provides a 3.1 GHz clock speed. The Intel System Studio \(ISS\) feature may cause a lower clock speed to be displayed. Alibaba Cloud is working on to resolve this issue. This issue does not affect the actual clock speed of your instances.
 
     You can run the following commands separately and use the turbostat tool to view the actual clock speed.
 
@@ -1227,13 +1226,13 @@ Features
     turbostat
     ```
 
--   Allows you to enable or disable Hyper-Threading.
+-   Allows you to enable or disable hyper-threading.
 
     **Note:** By default, Hyper-Threading is enabled on ECS instances. For more information, see [Customize CPU options](/intl.en-US/Instance/Manage instances/Customize CPU options.md).
 
 -   Provides high network performance based on large computing capacity.
 -   Suitable for the following scenarios:
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are transmitted and received
     -   Web frontend servers
     -   Frontend servers of MMO games
     -   Data analysis, batch processing, and video encoding
@@ -1263,23 +1262,23 @@ Instance types
 
 Features
 
--   Provides predictable and consistent high performance and reduces virtualization overheads with the use of the third-generation X-Dragon architecture.
+-   Uses the third-generation X-Dragon architecture to provide predictable and consistent high performance and reduce virtualization overheads.
 -   I/O optimized.
 -   Supports ESSDs and provides ultra-high I/O performance.
--   Provides strong storage I/O performance based on large computing capacity.
+-   Provides high storage I/O performance based on large computing capacity.
 
     **Note:** For more information about the storage I/O performance of the new generation of enterprise-level instance families, see [Storage I/O performance](/intl.en-US/Block Storage/Performance/Storage I/O performance.md).
 
 -   Offers a CPU-to-memory ratio of 1:4.
 -   Provides an ultra-high packet forwarding rate.
--   Equipped with 3.3 GHz Intel ® Xeon ® Platinum 8369HC \(Cooper Lake\) processors with a maximum turbo frequency of 3.8 GHz for consistent computing performance.
--   Allows you to enable or disable Hyper-Threading.
+-   Equipped with Intel ® Xeon ® Platinum 8369HB \(Cooper Lake\) or Intel ® Xeon ® Platinum 8369HC \(Cooper Lake\) processors that deliver a maximum turbo frequency of 3.8 GHz and a minimum clock speed of 3.3 GHz for consistent computing performance.
+-   Allows you to enable or disable hyper-threading.
 
     **Note:** By default, Hyper-Threading is enabled on ECS instances. For more information, see [Customize CPU options](/intl.en-US/Instance/Manage instances/Customize CPU options.md).
 
 -   Provides high network performance based on large computing capacity.
 -   Suitable for the following scenarios:
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are transmitted and received
     -   Enterprise-level applications of various types and sizes
     -   Game servers
     -   Small and medium-sized database systems, caches, and search clusters
@@ -1298,29 +1297,29 @@ Instance types
 |ecs.hfg7.6xlarge|24|96.0|None|8.0|10.0|3,000|Yes|12|8|30|90|4.0|
 |ecs.hfg7.8xlarge|32|128.0|None|10.0|None|4,000|Yes|16|8|30|105|5.0|
 |ecs.hfg7.12xlarge|48|192.0|None|16.0|None|6,000|Yes|24|8|30|150|8.0|
-|ecs.hfg7.24xlarge|96|384.0|None|32.0|None|12.000|Yes|32|15|30|300|16.0|
+|ecs.hfg7.24xlarge|96|384.0|None|32.0|None|12,000|Yes|32|15|30|300|16.0|
 
 **Note:**
 
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
--   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
+-   For more information about the specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
 ## hfg6, general purpose instance family with high clock speed
 
 Features
 
--   Provides predictable and consistent high performance and reduces virtualization overheads with the use of the X-Dragon architecture.
+-   Uses the X-Dragon architecture to provide predictable and consistent high performance and reduce virtualization overheads.
 -   I/O optimized.
 -   Supports ESSDs, standard SSDs, and ultra disks.
--   Provides strong storage I/O performance based on large computing capacity.
+-   Provides high storage I/O performance based on large compute capacity.
 
     **Note:** For more information about the storage I/O performance of the new generation of enterprise-level instance families, see [Storage I/O performance](/intl.en-US/Block Storage/Performance/Storage I/O performance.md).
 
 -   Offers a CPU-to-memory ratio of 1:4.
 -   Provides an ultra-high packet forwarding rate.
--   Equipped with 3.1 GHz Intel ® Xeon ® Platinum 8269 \(Cascade Lake\) processors with a maximum turbo frequency of 3.5 GHz for consistent computing performance.
+-   Equipped with 3.1 GHz Intel ® Xeon ® Platinum 8269 \(Cascade Lake\) processors that deliver a maximum turbo frequency of 3.5 GHz for consistent computing performance.
 
-    **Note:** The CPU of this instance family provides a 3.1 GHz clock speed. The Intel System Studio \(ISS\) feature may cause a lower clock speed to be displayed. Alibaba Cloud is trying to fix the display problem. The problem does not affect the actual clock speed of your instances.
+    **Note:** The CPU of this instance family provides a 3.1 GHz clock speed. The Intel System Studio \(ISS\) feature may cause a lower clock speed to be displayed. Alibaba Cloud is working on to resolve this issue. This issue does not affect the actual clock speed of your instances.
 
     You can run the following commands separately and use the turbostat tool to view the actual clock speed.
 
@@ -1332,13 +1331,13 @@ Features
     turbostat
     ```
 
--   Allows you to enable or disable Hyper-Threading.
+-   Allows you to enable or disable hyper-threading.
 
     **Note:** By default, Hyper-Threading is enabled on ECS instances. For more information, see [Customize CPU options](/intl.en-US/Instance/Manage instances/Customize CPU options.md).
 
 -   Provides high network performance based on large computing capacity.
 -   Suitable for the following scenarios:
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are transmitted and received
     -   Enterprise-level applications of various types and sizes
     -   Websites and application servers
     -   Game servers
@@ -1370,23 +1369,23 @@ Instance types
 
 Features
 
--   Provides predictable and consistent high performance and reduces virtualization overheads with the use of the third-generation X-Dragon architecture.
+-   Uses the third-generation X-Dragon architecture to provide predictable and consistent high performance and reduce virtualization overheads.
 -   I/O optimized.
 -   Supports ESSDs and provides ultra-high I/O performance.
--   Provides strong storage I/O performance based on large computing capacity.
+-   Provides high storage I/O performance based on large computing capacity.
 
     **Note:** For more information about the storage I/O performance of the new generation of enterprise-level instance families, see [Storage I/O performance](/intl.en-US/Block Storage/Performance/Storage I/O performance.md).
 
 -   Offers a CPU-to-memory ratio of 1:8.
 -   Provides an ultra-high packet forwarding rate.
--   Equipped with 3.3 GHz Intel ® Xeon ® Platinum 8369HC \(Cooper Lake\) processors with a maximum turbo frequency of 3.8 GHz for consistent computing performance.
--   Allows you to enable or disable Hyper-Threading.
+-   Equipped with Intel ® Xeon ® Platinum 8369HB \(Cooper Lake\) or Intel ® Xeon ® Platinum 8369HC \(Cooper Lake\) processors that deliver a maximum turbo frequency of 3.8 GHz and a minimum clock speed of 3.3 GHz for consistent computing performance.
+-   Allows you to enable or disable hyper-threading.
 
     **Note:** By default, Hyper-Threading is enabled on ECS instances. For more information, see [Customize CPU options](/intl.en-US/Instance/Manage instances/Customize CPU options.md).
 
 -   Provides high network performance based on large computing capacity.
 -   Suitable for the following scenarios:
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are transmitted and received
     -   High-performance and in-memory databases
     -   Data analysis, data mining, and distributed memory caching
     -   Hadoop clusters, Spark clusters, and other memory intensive enterprise applications
@@ -1408,24 +1407,24 @@ Instance types
 **Note:**
 
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
--   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
+-   For more information about the specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
 ## hfr6, memory optimized instance family with high clock speed
 
 Features
 
--   Provides predictable and consistent high performance and reduces virtualization overheads with the use of the X-Dragon architecture.
+-   Uses the X-Dragon architecture to provide predictable and consistent high performance and reduce virtualization overheads.
 -   I/O optimized.
 -   Supports ESSDs, standard SSDs, and ultra disks.
--   Provides strong storage I/O performance based on large computing capacity.
+-   Provides high storage I/O performance based on large compute capacity.
 
     **Note:** For more information about the storage I/O performance of the new generation of enterprise-level instance families, see [Storage I/O performance](/intl.en-US/Block Storage/Performance/Storage I/O performance.md).
 
 -   Offers a CPU-to-memory ratio of 1:8.
 -   Provides an ultra-high packet forwarding rate.
--   Equipped with 3.1 GHz Intel ® Xeon ® Platinum 8269 \(Cascade Lake\) processors with a maximum turbo frequency of 3.5 GHz for consistent computing performance.
+-   Equipped with 3.1 GHz Intel ® Xeon ® Platinum 8269 \(Cascade Lake\) processors that deliver a maximum turbo frequency of 3.5 GHz for consistent computing performance.
 
-    **Note:** The CPU of this instance family provides a 3.1 GHz clock speed. The Intel System Studio \(ISS\) feature may cause a lower clock speed to be displayed. Alibaba Cloud is trying to fix the display problem. The problem does not affect the actual clock speed of your instances.
+    **Note:** The CPU of this instance family provides a 3.1 GHz clock speed. The Intel System Studio \(ISS\) feature may cause a lower clock speed to be displayed. Alibaba Cloud is working on to resolve this issue. This issue does not affect the actual clock speed of your instances.
 
     You can run the following commands separately and use the turbostat tool to view the actual clock speed.
 
@@ -1437,13 +1436,13 @@ Features
     turbostat
     ```
 
--   Allows you to enable or disable Hyper-Threading.
+-   Allows you to enable or disable hyper-threading.
 
     **Note:** By default, Hyper-Threading is enabled on ECS instances. For more information, see [Customize CPU options](/intl.en-US/Instance/Manage instances/Customize CPU options.md).
 
 -   Provides high network performance based on large computing capacity.
 -   Suitable for the following scenarios:
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are transmitted and received
     -   High-performance and in-memory databases
     -   Data analysis, data mining, and distributed memory caching
     -   Hadoop clusters, Spark clusters, and other memory intensive enterprise applications
@@ -1466,7 +1465,7 @@ Instance types
 **Note:**
 
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
--   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
+-   For more information about the specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
 ## sn2ne, general purpose instance family with enhanced network performance
 
@@ -1727,7 +1726,7 @@ Instance types
 Features
 
 -   I/O optimized.
--   Supports standard SSDs and ultra disks.
+-   Supports standard SSDs and ultra disks only.
 -   Provides consistent computing performance.
 -   Equipped with 3.1 GHz Intel ® Xeon ® Gold 6149 \(Skylake\) processors.
 -   Offers a CPU-to-memory ratio of 1:2.
@@ -1735,7 +1734,7 @@ Features
 -   Suitable for the following scenarios:
     -   High-performance web frontend servers
     -   High-performance scientific and engineering applications
-    -   MMO gaming and video coding
+    -   MMO gaming and video encoding
 
 Instance types
 
@@ -1752,14 +1751,14 @@ Instance types
 **Note:**
 
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
--   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
+-   For more information about the specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
-## hfg5, general purpose instance family with high clock speed.
+## hfg5, general purpose instance family with high clock speed
 
 Features
 
 -   I/O optimized.
--   Supports standard SSDs and ultra disks.
+-   Supports standard SSDs and ultra disks only.
 -   Provides consistent computing performance.
 -   Equipped with 3.1 GHz Intel ® Xeon ® Gold 6149 \(Skylake\) processors.
 -   Offers a CPU-to-memory ratio of 1:4 \(excluding the instance type with 56 vCPUs\).
@@ -1767,7 +1766,7 @@ Features
 -   Suitable for the following scenarios:
     -   High-performance web frontend servers
     -   High-performance scientific and engineering applications
-    -   MMO gaming and video coding
+    -   MMO gaming and video encoding
 
 Instance types
 
@@ -3142,43 +3141,6 @@ Instance types
 |ecs.v5-c1m8.8xlarge|32|256.0|4.0|500|Yes|8|4|6|
 
 **Note:** For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
-
-## s6, shared standard instance family
-
-Features:
-
--   More cost-effective than the previous-generation shared instance families \(xn4, n4, mn4, and e4\).
--   Equipped with 2.5 GHz Intel ® Xeon ® Platinum 8269CY \(Cascade Lake\) processors with a maximum turbo frequency of 3.2 GHz for consistent computing performance.
--   Paired with DDR4 memory.
--   Offers multiple CPU-to-memory ratios, such as 1:1, 1:2, and 1:4.
--   I/O optimized.
--   Supports standard SSDs and ultra disks.
--   Supports VPCs only.
--   Suitable for the following scenarios:
-    -   Small and medium-sized websites, and web applications
-    -   Development environments, servers, code repositories, microservices, and testing and staging environments
-    -   Lightweight databases and caches
-    -   Lightweight enterprise applications and integrated application services
-
-Instance types
-
-|Instance type|vCPU|Memory \(GiB\)|Local storage \(GiB\)|Base bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
-|:------------|:---|:-------------|:--------------------|-------------------------|:------------------------------|:-----------|:---------|:---------------------------------|----------------------------|
-|ecs.s6-c1m1.small|1|1.0|None|0.1|150|Yes|1|2|2|
-|ecs.s6-c1m2.small|1|2.0|None|0.1|150|Yes|1|2|2|
-|ecs.s6-c1m4.small|1|4.0|None|0.1|150|Yes|1|2|2|
-|ecs.s6-c1m2.large|2|4.0|None|0.2|200|Yes|1|2|2|
-|ecs.s6-c1m4.large|2|8.0|None|0.4|200|Yes|1|2|2|
-|ecs.s6-c1m2.xlarge|4|8.0|None|0.4|300|Yes|1|2|6|
-|ecs.s6-c1m4.xlarge|4|16.0|None|0.8|300|Yes|1|2|6|
-|ecs.s6-c1m2.2xlarge|8|16.0|None|0.8|600|Yes|1|2|6|
-|ecs.s6-c1m4.2xlarge|8|32.0|None|1.2|600|Yes|1|2|6|
-
-**Note:**
-
--   To bind or unbind an Elastic Network Interface \(ENI\), instances of the following instance types must be in the stopped state: ecs.s6-c1m1.small, ecs.s6-c1m2.large, ecs.s6-c1m2.small, ecs.s6-c1m4.large, and ecs.s6-c1m4.small.
--   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
--   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
 ## Previous-generation shared instance families xn4, n4, mn4, and e4
 
