@@ -26,6 +26,8 @@ WordPress是使用PHP语言开发的博客平台，在支持PHP和MySQL数据库
 
     2.  进入MySQL数据库。
 
+        使用`root`用户登录MySQL，并输入密码。密码为您在搭建环境时为数据库设置的密码。
+
         ```
         mysql -uroot -p
         ```
@@ -38,7 +40,7 @@ WordPress是使用PHP语言开发的博客平台，在支持PHP和MySQL数据库
         create database wordpress;
         ```
 
-    4.  创建一个新用户。
+    4.  创建一个新用户管理WordPress库，提高安全性。
 
         Mysql在5.7版本后默认安装了密码强度验证插件validate\_password。您可以登录Mysql后查看密码强度规则。
 
@@ -103,6 +105,8 @@ WordPress是使用PHP语言开发的博客平台，在支持PHP和MySQL数据库
 
     3.  按i键切换至编辑模式，根据配置完成的wordpress数据库信息，修改MySQL相关配置信息，修改代码如下所示。
 
+        WordPress网站的数据信息将通过数据库的`user`用户保存在wordpress库中。
+
         ```
         // ** MySQL 设置 - 具体信息来自您正在使用的主机 ** //
         /** WordPress数据库的名称 */
@@ -132,11 +136,11 @@ WordPress是使用PHP语言开发的博客平台，在支持PHP和MySQL数据库
 
         在`server`大括号内，将`root`后的内容替换为wordpress根目录。本示例中根目录为/usr/share/nginx/html/wordpress。
 
-        ![nginx配置文件](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/1212649951/p103576.png)
+        ![nginx配置文件](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/6504930061/p103576.png)
 
         在`location ~ .php$`大括号内，将`root`后的内容替换为wordpress根目录。
 
-        ![nginx配置文件](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/1212649951/p103578.png)
+        ![nginx配置文件](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/6504930061/p103578.png)
 
         修改完成后按Esc键，输入`:wq`保存并退出配置文件。
 
@@ -160,7 +164,7 @@ WordPress是使用PHP语言开发的博客平台，在支持PHP和MySQL数据库
         -   您的电子邮件：用于接收通知的电子邮件。例如：1234567890@aliyun.com。
     3.  单击**登录**。
 
-    4.  输入在安装WordPress时设置的用户名testwp和密码Wp.123456，然后单击**登录**。
+    4.  输入在安装WordPress时设置的用户名`testwp`和密码`Wp.123456`，然后单击**登录**。
 
         成功进入您个人的WordPress网站。
 
@@ -175,7 +179,7 @@ WordPress是使用PHP语言开发的博客平台，在支持PHP和MySQL数据库
 
 2.  备案。
 
-    如果您的域名指向的网站托管在阿里云中国内地节点服务器，您需要进行备案。备案流程请参见[ICP备案流程概述]()。
+    如果您的域名指向的网站托管在阿里云中国内地节点服务器，您需要进行备案。
 
 3.  解析域名。将域名指向实例公网IP。
 
