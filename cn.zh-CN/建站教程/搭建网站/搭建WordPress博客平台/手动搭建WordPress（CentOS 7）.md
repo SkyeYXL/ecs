@@ -18,8 +18,6 @@ WordPress是使用PHP语言开发的博客平台，在支持PHP和MySQL数据库
 
 
 
-
-
 ## 搭建WordPress网站
 
 1.  通过ECS控制台，远程连接部署好LNMP环境的ECS实例，配置WordPress数据库。
@@ -140,11 +138,11 @@ WordPress是使用PHP语言开发的博客平台，在支持PHP和MySQL数据库
 
         在`server`大括号内，将`root`后的内容替换为wordpress根目录。本示例中根目录为/usr/share/nginx/html/wordpress。
 
-        ![nginx配置文件](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/1212649951/p103576.png)
+        ![nginx配置文件](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/6504930061/p103576.png)
 
         在`location ~ .php$`大括号内，将`root`后的内容替换为wordpress根目录。
 
-        ![nginx配置文件](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/1212649951/p103578.png)
+        ![nginx配置文件](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/6504930061/p103578.png)
 
         修改完成后按Esc键，输入`:wq`保存并退出配置文件。
 
