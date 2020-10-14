@@ -10,7 +10,7 @@ ECS instances are categorized into different instance families based on their us
 
 **Note:** The available instance families and types vary based on regions. You can go to the [ECS Instance Types Available for Each Region](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) page to view the available instance types in each region.
 
-Enterprise scenarios have high requirements for business stability. Alibaba Cloud ECS instance families are divided into enterprise-level and shared instance families based on whether the instance families are suitable for enterprise scenarios. Enterprise-level instance families offer consistent performance and dedicated resources. In enterprise-level instance families, each vCPU corresponds to a hyperthread of the Intel ® Xeon ® core. For more information about the differences between enterprise-level and shared instance families, see [ECS instance FAQ](/intl.en-US/Instance/ECS instance FAQ.md).
+Enterprise scenarios have high requirements for business stability. Alibaba Cloud ECS instance families are divided into enterprise-level and shared instance families based on whether the instance families are suitable for enterprise scenarios. Enterprise-level instance families offer consistent performance and dedicated resources. In enterprise-level instance families, each vCPU corresponds to a hyperthread of the Intel ® Xeon ® core. For more information about the differences between enterprise-level and shared instance families, see [Instance FAQ](/intl.en-US/Instance/ECS instance FAQ.md).
 
 You can upgrade or downgrade instance types within an instance family or across instance families. For more information, see [Change instance types of instances](/intl.en-US/Instance/Change configurations/Change instance types of instances.md).
 
@@ -3024,21 +3024,25 @@ Instance types
 
 Features:
 
--   Equipped with 2.5 GHz Intel® Xeon® Cascade Lake processors with a maximum turbo frequency of 3.2 GHz.
 -   More cost-effective when compared with the t5 burstable instance family.
--   Delivers a bandwidth of up to 6 Gbit/s.
--   Paired with the DDR4 memory.
+-   Equipped with 2.5 GHz Intel® Xeon® Cascade Lake processors that deliver a maximum turbo frequency of 3.2 GHz.
 -   Provides baseline CPU performance and is burstable, but limited by accumulated CPU credits.
+-   Paired with the DDR4 memory.
+-   Supports enhanced SSDs \(ESSD\), standard SSDs, and ultra disks.
+
+    **Note:** PL2 and PL3 ESSDs cannot provide maximum performance due to the specification limits of burstable instances. We recommend that you use enterprise-level instances or ESSDs that are of lower performance levels.
+
+-   Delivers a bandwidth of up to 4 Gbit/s.
 -   Supports VPCs only.
--   Scenarios:
+-   Suitable for the following scenarios:
     -   Web application servers
     -   Lightweight applications and microservices
     -   Development and testing environments
 
 Instance types
 
-|Instance type|vCPU|Memory \(GiB\)|Baseline CPU computing performance|CPU credits per hour|Max CPU credit balance|Local storage \(GiB\)|Base bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
-|:------------|:---|--------------|:---------------------------------|:-------------------|:---------------------|---------------------|-------------------------|-------------------------------|:-----------|----------|:---------------------------------|----------------------------|
+|Instance type|vCPUs|Memory \(GiB\)|Baseline CPU computing performance|CPU credits per hour|Max CPU credit balance|Local storage \(GiB\)|Base bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
+|:------------|:----|--------------|:---------------------------------|:-------------------|:---------------------|---------------------|-------------------------|-------------------------------|:-----------|----------|:---------------------------------|----------------------------|
 |ecs.t6-c4m1.large|2|0.5|5%|6|144|None|0.08|40|Yes|1|2|2|
 |ecs.t6-c2m1.large|2|1.0|10%|12|288|None|0.08|60|Yes|1|2|2|
 |ecs.t6-c1m1.large|2|2.0|20%|24|576|None|0.08|100|Yes|1|2|2|
@@ -3049,7 +3053,7 @@ Instance types
 
 **Note:**
 
--   When you bind or unbind an ENI, instances of the following instance types must be in the Stopped state: ecs.t6-c1m1.large, ecs.t6-c1m2.large, ecs.t6-c1m4.large, ecs.t6-c2m1.large, and ecs.t6-c4m1.large.
+-   When you bind an ENI to or unbind an ENI from an instance of the following instance types, the instance must be in the Stopped state: ecs.t6-c1m1.large, ecs.t6-c1m2.large, ecs.t6-c1m4.large, ecs.t6-c2m1.large, and ecs.t6-c4m1.large.
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
@@ -3063,15 +3067,15 @@ Features:
 -   Provides baseline CPU performance and is burstable, but limited by accumulated CPU credits.
 -   Offers a balance of compute, memory, and network resources.
 -   Supports VPCs only.
--   Scenarios:
+-   Suitable for the following scenarios:
     -   Web application servers
     -   Lightweight applications and microservices
     -   Development and testing environments
 
 Instance types
 
-|Instance type|vCPU|Memory \(GiB\)|Baseline CPU computing performance|CPU credits per hour|Max CPU credit balance|Local storage \(GiB\)|Bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
-|:------------|:---|--------------|:---------------------------------|:-------------------|:---------------------|---------------------|--------------------|-------------------------------|:-----------|----------|:---------------------------------|----------------------------|
+|Instance type|vCPUs|Memory \(GiB\)|Baseline CPU computing performance|CPU credits per hour|Max CPU credit balance|Local storage \(GiB\)|Bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
+|:------------|:----|--------------|:---------------------------------|:-------------------|:---------------------|---------------------|--------------------|-------------------------------|:-----------|----------|:---------------------------------|----------------------------|
 |ecs.t5-lc2m1.nano|1|0.5|20%|12|288|None|0.1|40|Yes|1|2|2|
 |ecs.t5-lc1m1.small|1|1.0|20%|12|288|None|0.2|60|Yes|1|2|2|
 |ecs.t5-lc1m2.small|1|2.0|20%|12|288|None|0.2|60|Yes|1|2|2|
@@ -3091,7 +3095,7 @@ Instance types
 
 **Note:**
 
--   When you bind or unbind an ENI, instances of the following instance types must be in the Stopped state: ecs.t5-lc2m1.nano, ecs.t5-c1m1.large, ecs.t5-c1m2.large, ecs.t5-c1m4.large, ecs.t5-lc1m1.small, ecs.t5-lc1m2.large, ecs.t5-lc1m2.small, and ecs.t5-lc1m4.large.
+-   When you bind an ENI to or unbind an ENI from an instance of the following instance types, the instance must be in the Stopped state: ecs.t5-lc2m1.nano, ecs.t5-c1m1.large, ecs.t5-c1m2.large, ecs.t5-c1m4.large, ecs.t5-lc1m1.small, ecs.t5-lc1m2.large, ecs.t5-lc1m2.small, and ecs.t5-lc1m4.large.
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
@@ -3146,40 +3150,40 @@ Instance types
 
 Features:
 
--   Equipped with 2.5 GHz Intel ® Xeon ® E5-2682 v4 \(Broadwell\) processors.
--   Paired with DDR4 memory.
--   Offers multiple CPU-to-memory ratios.
+-   Equipped with 2.5 GHz Intel® Xeon® E5-2682 v4 \(Broadwell\) processors.
+-   Paired with the DDR4 memory.
+-   Offer multiple CPU-to-memory ratios.
 
 |Instance family|Description|vCPU-to-memory ratio|Scenario|
 |:--------------|:----------|:-------------------|:-------|
 |xn4|Shared compact type|1:1|-   Frontend web applications
 -   Lightweight applications and microservices
--   Applications for development or testing applications |
-|n4|Shared compute optimized type|1:2|-   Websites and web applications
+-   Applications for development or testing environments |
+|n4|Shared compute type|1:2|-   Websites and web applications
 -   Development environments, servers, code repositories, microservices, and testing and staging environments
 -   Lightweight enterprise applications |
-|mn4|Shared general purpose type|1:4|-   Websites and web applications
+|mn4|Shared balanced type|1:4|-   Websites and web applications
 -   Lightweight databases and caches
 -   Integrated applications and lightweight enterprise services |
-|e4|Shared memory optimized type|1:8|-   Applications that require a large amount of memory
+|e4|Shared memory type|1:8|-   Applications that require a large amount of memory
 -   Lightweight databases and caches |
 
 Instance types of xn4
 
-|Instance type|vCPU|Memory \(GiB\)|Local storage \(GiB\)|Bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
-|:------------|:---|:-------------|:--------------------|:-------------------|:------------------------------|:-----------|:---------|:---------------------------------|----------------------------|
+|Instance type|vCPUs|Memory \(GiB\)|Local storage \(GiB\)|Bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
+|:------------|:----|:-------------|:--------------------|:-------------------|:------------------------------|:-----------|:---------|:---------------------------------|----------------------------|
 |ecs.xn4.small|1|1.0|None|0.5|50|No|1|2|2|
 
 **Note:**
 
--   To bind or unbind an ENI, instances of the ecs.xn4.small instance type must be in the stopped state.
+-   When you bind an ENI to or unbind an ENI from an instance of the ecs.xn4.small instance type, the instance must be in the Stopped state.
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
 Instance types of n4
 
-|Instance type|vCPU|Memory \(GiB\)|Local storage \(GiB\)|Bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
-|:------------|:---|:-------------|:--------------------|:-------------------|:------------------------------|:-----------|:---------|:---------------------------------|----------------------------|
+|Instance type|vCPUs|Memory \(GiB\)|Local storage \(GiB\)|Bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
+|:------------|:----|:-------------|:--------------------|:-------------------|:------------------------------|:-----------|:---------|:---------------------------------|----------------------------|
 |ecs.n4.small|1|2.0|None|0.5|50|No|1|2|2|
 |ecs.n4.large|2|4.0|None|0.5|100|No|1|2|2|
 |ecs.n4.xlarge|4|8.0|None|0.8|150|No|1|2|6|
@@ -3189,14 +3193,14 @@ Instance types of n4
 
 **Note:**
 
--   To bind or unbind an ENI, instances of the ecs.n4.small and ecs.n4.large instance types must be in the stopped state.
+-   When you bind an ENI to or unbind an ENI from an instance of the ecs.n4.small and ecs.n4.large instance types, the instance must be in the Stopped state.
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
 Instance types of mn4
 
-|Instance type|vCPU|Memory \(GiB\)|Local storage \(GiB\)|Bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
-|:------------|:---|:-------------|:--------------------|:-------------------|:------------------------------|:-----------|:---------|:---------------------------------|----------------------------|
+|Instance type|vCPUs|Memory \(GiB\)|Local storage \(GiB\)|Bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
+|:------------|:----|:-------------|:--------------------|:-------------------|:------------------------------|:-----------|:---------|:---------------------------------|----------------------------|
 |ecs.mn4.small|1|4.0|None|0.5|50|No|1|2|2|
 |ecs.mn4.large|2|8.0|None|0.5|100|No|1|2|2|
 |ecs.mn4.xlarge|4|16.0|None|0.8|150|No|1|2|6|
@@ -3206,14 +3210,14 @@ Instance types of mn4
 
 **Note:**
 
--   To bind or unbind an ENI, instances of the ecs.mn4.small and ecs.mn4.large instance types must be in the stopped state.
+-   When you bind an ENI to or unbind an ENI from an instance of the ecs.mn4.small and ecs.mn4.large instance types, the instance must be in the Stopped state.
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
 Instance types of e4
 
-|Instance type|vCPU|Memory \(GiB\)|Local storage \(GiB\)|Bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
-|:------------|:---|:-------------|:--------------------|:-------------------|:------------------------------|:-----------|:---------|:---------------------------------|----------------------------|
+|Instance type|vCPUs|Memory \(GiB\)|Local storage \(GiB\)|Bandwidth \(Gbit/s\)|Packet forwarding rate \(Kpps\)|IPv6 support|NIC queues|ENIs \(including one primary ENI\)|Private IP addresses per ENI|
+|:------------|:----|:-------------|:--------------------|:-------------------|:------------------------------|:-----------|:---------|:---------------------------------|----------------------------|
 |ecs.e4.small|1|8.0|None|0.5|50|No|1|2|2|
 |ecs.e4.large|2|16.0|None|0.5|100|No|1|2|2|
 |ecs.e4.xlarge|4|32.0|None|0.8|150|No|1|2|6|
@@ -3222,7 +3226,7 @@ Instance types of e4
 
 **Note:**
 
--   To bind or unbind an ENI, instances of the ecs.e4.small and ecs.e4.large instance types must be in the stopped state.
+-   When you bind an ENI to or unbind an ENI from an instance of the ecs.e4.small and ecs.e4.large instance types, the instance must be in the Stopped state.
 -   You can go to the [ECS Instance Types Available for Each Region page](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) to view the instance types available in each region.
 -   For more information about these specifications, see [Description of instance specifications](/intl.en-US/Instance/Instance families.md).
 
