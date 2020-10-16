@@ -6,8 +6,7 @@
 
 -   请求参数的作用类似于一个过滤器，过滤器为逻辑与（AND）关系。如果某一参数为空，则过滤器不起作用。但是参数InstanceIds如果是一个空JSON数组，则视为该过滤器有效，且返回空。
 -   如果您使用的是RAM用户账号或者RAM角色，当用户或者角色缺乏接口权限时，将会返回空列表。您可以在请求中加入`DryRun`参数，判断是否因权限问题导致的空列表现象。
-
-通过阿里云CLI调用API时，不同数据类型的请求参数取值必须遵循格式要求，详情请参见[CLI参数格式说明](~~110340~~)。
+-   通过阿里云CLI调用API时，不同数据类型的请求参数取值必须遵循格式要求，详情请参见[CLI参数格式说明](~~110340~~)。
 
 ## 调试
 
@@ -67,12 +66,14 @@
 |Tag.N.key|String|否|keyTest|标签键。
 
  **说明：** 为提高兼容性，建议您尽量使用Tag.N.Key参数。 |
-|Tag.N.Key|String|否|TestKey|实例的标签键。N的取值范围：1~20 |
+|Tag.N.Key|String|否|TestKey|实例的标签键。N的取值范围：1~20
+
+ 使用一个标签过滤资源，查询到该标签下的资源数量不能超过1000个；使用多个标签过滤资源，查询到同时绑定了多个标签的资源数量不能超过1000个。如果资源数量超过1000个，请使用[ListTagResources](~~110425~~)接口进行查询。 |
 |Tag.N.Value|String|否|TestValue|实例的标签值。N的取值范围：1~20 |
 |InstanceType|String|否|ecs.g5.large|实例的规格。 |
 |InstanceTypeFamily|String|否|ecs.g5|实例的规格族。 |
 |KeyPairName|String|否|KeyPairNameTest|实例使用的SSH密钥对名称。 |
-|ResourceGroupId|String|否|rg-bp67acfmxazb4p\*\*\*\*|实例所在的企业资源组ID。 |
+|ResourceGroupId|String|否|rg-bp67acfmxazb4p\*\*\*\*|实例所在的企业资源组ID。使用该参数过滤资源时，资源数量不能超过1000个。 |
 |HpcClusterId|String|否|hpc-bp67acfmxazb4p\*\*\*\*|实例所在的HPC集群ID。 |
 |RdmaIpAddresses|String|否|10.10.10.102|HPC实例的Rdma网络IP。 |
 |DryRun|Boolean|否|false|是否只预检此次请求。取值范围：
@@ -224,6 +225,10 @@
 |SaleCycle|String|month|实例计费周期。 |
 |SecurityGroupIds|List|sg-bp67acfmxazb4p\*\*\*\*|实例所属安全组集合。 |
 |SerialNumber|String|51d1353b-22bf-4567-a176-8b3e12e4\*\*\*\*|实例序列号。 |
+|SpotDuration|Integer|1|抢占式实例的保留时长，单位为小时。可能值：0~6
+
+ -   保留时长2~6正在邀测中，如需开通请提交工单。
+-   值为0，则为无保护期模式。 |
 |SpotPriceLimit|Float|0.98|实例的每小时最高价格。支持最大3位小数，参数SpotStrategy=SpotWithPriceLimit时，该参数生效。 |
 |SpotStrategy|String|NoSpot|抢占式实例的抢占策略。可能值：
 
