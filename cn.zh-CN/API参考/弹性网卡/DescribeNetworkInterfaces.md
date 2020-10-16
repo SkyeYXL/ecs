@@ -22,9 +22,11 @@
 |--|--|----|---|--|
 |Action|String|是|DescribeNetworkInterfaces|系统规定参数。取值：DescribeNetworkInterfaces |
 |RegionId|String|是|cn-hangzhou|所在地域ID。您可以调用[DescribeRegions](~~25609~~)查看最新的阿里云地域列表。 |
-|Tag.N.Key|String|否|TestKey|弹性网卡的标签值。N的取值范围：1~20 |
+|Tag.N.Key|String|否|TestKey|弹性网卡的标签值。N的取值范围：1~20
+
+ 使用一个标签过滤资源，查询到该标签下的资源数量不能超过1000个；使用多个标签过滤资源，查询到同时绑定了多个标签的资源数量不能超过1000个。如果资源数量超过1000个，请使用[ListTagResources](~~110425~~)接口进行查询。 |
 |Tag.N.Value|String|否|TestValue|弹性网卡的标签键。N的取值范围：1~20 |
-|ResourceGroupId|String|否|rg-bp67acfmxazb4p\*\*\*\*|资源组ID。 |
+|ResourceGroupId|String|否|rg-bp67acfmxazb4p\*\*\*\*|资源组ID。使用该参数过滤资源时，资源数量不能超过1000个。 |
 |VSwitchId|String|否|vsw-bp16usj2p27htro3\*\*\*\*|VPC的交换机ID。 |
 |VpcId|String|否|vsw-bp16usj2p27htro3\*\*\*\*|网卡所属的专有网络VPC ID。 |
 |PrimaryIpAddress|String|否|192.168.\*\*.\*\*|弹性网卡主私网IP地址。 |
