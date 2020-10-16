@@ -15,6 +15,19 @@ keyword: [发布更新, ecs, alibaba cloud linux]
 
 |镜像ID|发布时间|发布内容|
 |----|----|----|
+|aliyun\_2\_1903\_x64\_20G\_dengbao\_alibase\_20200925.vhd|2020-09-25|-   新增Alibaba Cloud Linux 2等保2.0三级版镜像
+-   该镜像是根据*GB/T22239-2019信息安全技术网络安全等级保护基本要求*进行等保加固的镜像，您使用本镜像无需额外配置即可满足以下等保合规要求：
+
+    -   身份鉴别
+    -   访问控制
+    -   安全审计
+    -   入侵防范
+    -   恶意代码防范
+详情请参见[Alibaba Cloud Linux等保2.0三级版镜像使用说明]()
+
+-   该镜像基于Alibaba Cloud Linux 2 LTS镜像aliyun\_2\_1903\_x64\_20G\_alibase\_20200904.vhd制作
+-   内核版本：kernel-4.19.91-21.al7
+-   适用地域：华北1（青岛）、华北3（张家口）、华北5（呼和浩特）、华东1（杭州）、西南1（成都） |
 |aliyun\_2\_1903\_x64\_20G\_alibase\_20200904.vhd|2020-09-04|-   更新镜像到最新的软件版本，兼容最新CentOS 7.8版本，修复软件包安全漏洞
 -   /etc/redhat-release的信息从Aliyun Linux release 7.2 LTS \(Hunting Beagle\)变更成Alibaba Cloud Linux \(Aliyun Linux\) release 2.1903 LTS \(Hunting Beagle\)
 -   优化/etc/image-id标识镜像类型
