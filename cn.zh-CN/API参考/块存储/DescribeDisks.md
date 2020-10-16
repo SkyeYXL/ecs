@@ -130,9 +130,11 @@
 |Tag.N.key|String|否|null|云盘或本地盘的标签键。
 
  **说明：** 为提高代码兼容性，请尽量使用Tag.N.Key参数。 |
-|Tag.N.Key|String|否|TestKey|云盘或本地盘的标签键。N的取值范围：1~20 |
+|Tag.N.Key|String|否|TestKey|云盘或本地盘的标签键。N的取值范围：1~20
+
+ 使用一个标签过滤资源，查询到该标签下的资源数量不能超过1000个；使用多个标签过滤资源，查询到同时绑定了多个标签的资源数量不能超过1000个。如果资源数量超过1000个，请使用[ListTagResources](~~110425~~)接口进行查询。 |
 |Tag.N.Value|String|否|TestValue|云盘或本地盘的标签值。N的取值范围：1~20 |
-|ResourceGroupId|String|否|rg-bp67acfmxazb4p\*\*\*\*|云盘或本地盘所在的企业资源组ID。 |
+|ResourceGroupId|String|否|rg-bp67acfmxazb4p\*\*\*\*|云盘或本地盘所在的企业资源组ID。使用该参数过滤资源时，资源数量不能超过1000个。 |
 |EnableShared|Boolean|否|false|是否是共享块存储。 |
 |Encrypted|Boolean|否|false|是否只筛选出加密云盘。
 
