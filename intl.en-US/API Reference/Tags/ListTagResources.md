@@ -1,157 +1,148 @@
-# ListTagResources {#doc_api_Ecs_ListTagResources .reference}
+# ListTagResources
 
-Queries a list of tags that are attached to one or more ECS resources.
+You can call this operation to query the tags that are bound to one or more ECS instances.
 
-## Description {#description .section}
+## Description
 
--   To determine the search object, a request should include the parameter `ResourceId.N` or `Tag.N` \(that is, `Tag.N.Key` and `Tag.N.Value`\).
--   `Tag.N` is a resource tag and consists of a key-value pair. When only `Tag.N.Key` is specified, all tag values associated with the tag key are returned. When only `Tag.N.Value` is specified, the error `InvalidParameter.TagValue` is reported.
--   If you specify `Tag.N` and `Resource.N` simultaneously,`ResourceId.N` must match all the tag key-value inputs.
--   If you specify multiple tag key-value pairs at the same time, the returned results are the resources that contain the specified multiple key-value pairs.
+-   Specify in the request at least one of the following parameters or parameter pairs to determine a query object: the `ResourceId.N` parameter, the `Tag.N` parameter pair \(`Tag.N.Key` and `Tag.N.Value`\), and the `TagFilter.N` parameter pair \(TagFilter.N.TagValues.N and TagFilter.N.TagKey\).
+-   If one of the following sets of request parameters is specified as filter conditions, the response contains only ECS resources that meet all these filter conditions:
+    -   Set 1: `Tag.N.Key, Tag.N.Value`, and `ResourceId.N`
+    -   Set 2: `TagFilter.N.TagValues.N, TagFilter.N.TagKey`, and `ResourceId.N`
 
-## Debug {#apiExplorer .section}
+## Debugging
 
-By using API Explorer, you can easily debug APIs, automatically generate SDK code examples, and quickly search for APIs.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates a sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=ListTagResources&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Parameter|Type|Required?|Example value|Description|
-|---------|----|---------|-------------|-----------|
-|RegionId|String|Yes|cn-hangzhou| The ID of the region to which the ECS resource belongs. For more information, call [DescribeRegions](https://www.alibabacloud.com/help/doc-detail/25609.htm) to obtain the latest region list.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|ListTagResources|The operation that you want to perform. Set the value to ListTagResources. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the resource. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|ResourceType|String|Yes|instance|The type of the resource. Valid values:
 
- |
-|ResourceType|String|Yes|instance| The type of the ECS resource. Valid values:
+ -   instance: ECS instance
+-   disk: disk
+-   snapshot: snapshot
+-   image: image
+-   securitygroup: security group
+-   volume: storage volume
+-   eni: elastic network interface \(ENI\)
+-   ddh: dedicated host
+-   ddhcluster: dedicated host cluster
+-   keypair: SSH key pair
+-   launchtemplate: launch template
+-   reservedinstance: reserved instance
+-   snapshotpolicy: automatic snapshot policy |
+|TagFilter.N.TagKey|String|Yes|env|The key of tag N used for fuzzy search of ECS resources. It must be 1 to 128 characters in length. Valid values of N: 1 to 5.
 
- -   instance
--   disk
--   snapshot
--   image
--   securitygroup
--   volume
--   eni
--   ddh
--   keypair
--   launchtemplate
+ The `TagFilter.N` parameter pair \(TagFilter.N.TagKey and TagFilter.N.TagValues.N\) specifies tags used for fuzzy search of ECS resources that are bound with the tags. In these tags, a tag key may correspond to one or more tag values. Fuzzy search may have a latency of two seconds. A fuzzy search can return a result set of up to 5,000 resources.
 
- |
-|Action|String|No|ListTagResources| The name of this action. Value: ListTagResources.
+ -   When a tag key \(`TagFilter.N.TagKey`\) is used for fuzzy search of ECS resources, tag values \(`TagFilter.N.TagValues.N`\) that correspond to this tag key must not be specified. For example, when you use the `environment` tag key for fuzzy search of ECS resources, you can set `TagFilter.1.TagKey` to `env` and leave `TagFilter.1.TagValues` empty.
+-   When a tag value \(`TagFilter.N.TagValues.N`\) is used for fuzzy search of ECS resources, the corresponding tag key \(`TagFilter.N.TagKey`\) must be specified. For example, when you use the `env` tag key and the `product` tag value for fuzzy search of ECS resources, you can set `TagFilter.1.TagKey` to `env` and `TagFilter.1.TagValues.1`to `proc`.
+-   If you specify multiple tag keys, only the ECS resources whose tags contain all the specified tag keys are returned.
+-   If you specify a tag key and multiple corresponding tag values, all the ECS resources that are bound with any of these tag key-value pairs are returned.
 
- |
-|NextToken|String|No|caeba0bbb2be03f84eb48b699f0a4883| The token for the next query.
+ **Note:** The `TagFilter.N` parameter pair \(TagFilter.N.TagKey and TagFilter.N.TagValues.N\) cannot be used together with the `Tag.N` parameter pairs \(TagFilter.N.TagValues.N and TagFilter.N.TagKey\). Otherwise, an error message is returned. |
+|ResourceId.N|RepeatList|No|i-bp1j6qtvdm8w0z1o\*\*\*\*|The IDs of ECS resources. Valid values of N: 1 to 50. |
+|Tag.N.Key|String|No|TestKey|The key of tag N used for exact search of ECS resources. It must be 1 to 128 characters in length. Valid values of N: 1 to 20.
 
- |
-|ResourceId.N|RepeatList|No|i-instanceid1| The ID of the ECS resource. Value range of N: 1 to 50.
+ `Tag.N` is used for exact match of ESS resources that are bound with specified tags. It consists of one key-value pair.
 
- |
-|Tag.N.Key|String|No|FinanceDept| The value of a tag. Value range of N: 1 to 20. The parameter cannot be a null string. The parameter must be 1 to 64 characters in length. It can neither start with aliyun or acs:, nor contain http:// or https://.
+ -   If you specify only `Tag.N.Key`, all resources that are bound with the tag key are returned.
+-   If you specify only `Tag.N.Value`, the `InvalidParameter.TagValue` error is returned.
+-   If you specify multiple tag key-value pairs, only the ECS resources that are bound with all these tag key-value pairs are returned. |
+|Tag.N.Value|String|No|TestValue|The value of tag N used for exact search of ECS resources. It must be 1 to 128 characters in length. Valid values of N: 1 to 20. |
+|TagFilter.N.TagValues.N|RepeatList|No|TestTagFilter|The value of tag N used for fuzzy search of ECS resources. It must be 1 to 128 characters in length. Valid values of N: 1 to 5. |
+|NextToken|String|No|caeba0bbb2be03f84eb48b699f0a4883|The token for starting the next query. |
 
- |
-|Tag.N.Value|String|No|FinanceJoshua| The value of a tag. Value range of N: 1 to 20. The parameter can be a null string. The parameter must be 1 to 128 characters in length. It can neither start with aliyun or acs:, nor contain http://, or https://.
+## Response parameters
 
- |
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|NextToken|String|caeba0bbb2be03f84eb48b699f0a4883|The token for starting the next query. |
+|RequestId|String|484256DA-D816-44D2-9D86-B6EE4D5BA78C|The ID of the request. |
+|TagResources|Array of TagResource| |The collection of details about resources and tags, such as resource IDs, resource types, and tag key-value pairs. |
+|TagResource| | | |
+|ResourceId|String|i-bp1j6qtvdm8w0z1o\*\*\*\*|The ID of the resource. |
+|ResourceType|String|instance|The type of the resource. |
+|TagKey|String|TestKey|The tag key of the resource. |
+|TagValue|String|TestValue|The tag value of the resource. |
 
-## Response parameters {#resultMapping .section}
+## Examples
 
-|Parameter|Type|Example value|Description|
-|---------|----|-------------|-----------|
-|NextToken|String|caeba0bbb2be03f84eb48b699f0a4883| The token for the next query.
+Sample requests
 
- |
-|RequestId|String|DE65F6B7-7566-4802-9007-96F2494AC5XX| The request ID.
-
- |
-|TagResources| | | A collection of resources and their tags that contain information such as resource IDs, resource types, and tag keys.
-
- |
-|└ResourceId|String|i-bp1j6qtvdm8w0z1o0XXX| The resource ID.
-
- |
-|└ResourceType|String|instance| The resource type.
-
- |
-|└TagKey|String|FinanceDept| The tag key.
-
- |
-|└TagValue|String|FinanceJoshua| The tag value.
-
- |
-
-## Examples {#demo .section}
-
-Request example
-
-``` {#request_demo}
-
+```
 https://ecs.aliyuncs.com/?Action=ListTagResources
 &RegionId=cn-hangzhou
 &ResourceType=instance
-&ResourceId.1=i-bp1j6qtvdm8w0z1o0XXX
-&<Common Request Parameters>
-
+&ResourceId.1=i-bp1j6qtvdm8w0z1o****
+&<Common request parameters>
 ```
 
-Response example
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <ListTagResourcesResponse>
-  <TagResources>
-    <TagResource>
-      <ResourceType>instance</ResourceType>
-      <TagValue>FinanceJoshua</TagValue>
-      <ResourceId>i-bp1j6qtvdm8w0z1o0XXX</ResourceId>
-      <TagKey>FinanceDept</TagKey>
-    </TagResource>
-  </TagResources>
-  <RequestId>DE65F6B7-7566-4802-9007-96F2494AC5XX</RequestId>
+	  <TagResources>
+		    <TagResource>
+			      <ResourceType>instance</ResourceType>
+			      <TagValue>TestValue</TagValue>
+			      <ResourceId>i-bp1j6qtvdm8w0z1o****</ResourceId>
+			      <TagKey>TestKey</TagKey>
+		    </TagResource>
+	  </TagResources>
+	  <RequestId>DE65F6B7-7566-4802-9007-96F2494AC5XX</RequestId>
 </ListTagResourcesResponse>
-
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"TagResources":{
-		"TagResource":[
-			{
-				"ResourceType":"instance",
-				"TagValue":"FinanceJoshua",
-				"ResourceId":"i-bp1j6qtvdm8w0z1o0XXX",
-				"TagKey":"FinanceDept"
-			}
-		]
-	},
-	"RequestId":"DE65F6B7-7566-4802-9007-96F2494AC512"
+    "TagResources": {
+        "TagResource": [
+            {
+                "ResourceType": "instance",
+                "TagValue": "TestValue",
+                "ResourceId": "i-bp1j6qtvdm8w0z1o****",
+                "TagKey": "TestKey"
+            }
+        ]
+    },
+    "RequestId": "DE65F6B7-7566-4802-9007-96F2494AC512"
 }
 ```
 
-## Errors {#section_140_ios_32z .section}
+## Error codes
 
-|HTTP status code|Error codes|Error message|Description|
-|----------------|-----------|-------------|-----------|
-|404|MissingParameter.TagOwnerUid|The parameter - TagOwnerUid should not be null|The tag owner UID is not specified.|
-|404|MissingParameter.TagOwnerBid|The parameter - TagOwnerBid should not be null|The tag owner BID is not specified.|
-|404|MissingParameter.ResourceType|The parameter - ResourceType should not be null|The resource type is not specified.|
-|404|MissingParameter.Tags|The parameter - Tags should not be null|The tag is not specified.|
-|404|MissingParameter.RegionId|The parameter - RegionId should not be null|The region ID is not specified.|
-|403|PermissionDenied.TagOwnerUid|The specified operator not have permission to set TagOwnerUid value.|You do not have permission to set the tag owner.|
-|403|PermissionDenied.Scope|The specified operator not have permission to set Scope value.|You do not have permission to modify the scope value.|
-|400|NumberExceed.ResourceIds|The ResourceIds parameter's number is exceed , Valid : 50|The number of resource IDs cannot exceed 50.|
-|400|NumberExceed.Tags|The Tags parameter's number is exceed , Valid : 20|The number of tags cannot exceed 20.|
-|400|Duplicate.TagKey|The Tag.N.Key contain duplicate key.|Duplicate tag keys exist.|
-|404|InvalidResourceId.NotFound|The specified ResourceIds are not found in our records.|The specified resource does not exist.|
-|404|InvalidResourceType.NotFound|The ResourceType provided does not exist in our records.|The specified resource type does not exist.|
-|400|InvalidTagKey.Malformed|The specified Tag.n.Key is not valid.|The specified tag key is invalid.|
-|400|InvalidTagValue.Malformed|The specified Tag.n.Value is not valid.|The specified tag value is invalid.|
-|400|OperationDenied.QuotaExceed|The quota of tags on resource is beyond permitted range.|The quota of resource tags is reached.|
-|403|InvalidResourceId.NotSupported|The specified ResourceId does not support tagging.|Tags are not supported by the specified resource ID.|
-|400|InvalidTag.Mismatch|The specified Tag.n.Key and Tag.n.Value are not match.|The specified Tag.n.Key and Tag.n.Value do not match.|
-|400|InvalidTagCount|The specified tags are beyond the permitted range.|The specified number of tags exceeds the quota.|
-|404|InvalidRegionId.NotFound|The specified RegionId does not exist.|The specified region ID does not exist. Please check if this product is available in this region.|
-|400|Invalid.Scope|The specified scope is invalid.|The specified scope is invalid.|
-|403|NoPermission.Tag|The operator is not permission for the tag.|You do not have permission to use this resource tag.|
+|HttpCode|Error code|Error message|Description|
+|--------|----------|-------------|-----------|
+|404|InvalidRegionId.NotFound|%s|The error message returned because the specified RegionId parameter does not exist.|
+|404|MissingParameter.TagOwnerUid|The parameter - TagOwnerUid should not be null|The error message returned because the TagOwnerUid parameter is not specified.|
+|404|MissingParameter.TagOwnerBid|The parameter - TagOwnerBid should not be null|The error message returned because the TagOwnerBid parameter is not specified.|
+|404|MissingParameter.ResourceType|The parameter - ResourceType should not be null|The error message returned because the ResourceType parameter is not specified.|
+|404|MissingParameter.Tags|The parameter - Tags should not be null|The error message returned because the tag-related parameters are not specified.|
+|404|MissingParameter.RegionId|The parameter - RegionId should not be null|The error message returned because the RegionId parameter is not specified.|
+|403|PermissionDenied.TagOwnerUid|The specified operator not have permission to set TagOwnerUid value.|The error message returned because you are not authorized to set the owner of the tag.|
+|403|PermissionDenied.Scope|The specified operator not have permission to set Scope value.|The error message returned because the specified operator is not authorized to specify the Scope parameter.|
+|400|NumberExceed.ResourceIds|The ResourceIds parameter's number is exceed , Valid : 50|The error message returned because more than 50 resource IDs are specified.|
+|400|NumberExceed.Tags|The Tags parameter's number is exceed , Valid : 20|The error message returned because the number of tags has exceeded the maximum value of the Tags parameter. Maximum value: 20.|
+|400|Duplicate.TagKey|The Tag.N.Key contain duplicate key.|The error message returned because the specified tag key already exists. Tag keys must be unique.|
+|404|InvalidResourceId.NotFound|The specified ResourceIds are not found in our records.|The error message returned because the specified resource does not exist. Check whether the resource ID is correct.|
+|404|InvalidResourceType.NotFound|The ResourceType provided does not exist in our records.|The error message returned because the specified ResourceType parameter does not exist.|
+|400|InvalidTagKey.Malformed|The specified Tag.n.Key is not valid.|The error message returned because the specified Tag.N.Key parameter is invalid.|
+|400|InvalidTagValue.Malformed|The specified Tag.n.Value is not valid.|The error message returned because the specified Tag.N.Value parameter is invalid.|
+|400|OperationDenied.QuotaExceed|The quota of tags on resource is beyond permitted range.|The error message returned because the maximum number of tags that can be bound to the resource has been reached.|
+|403|InvalidResourceId.NotSupported|The specified ResourceId does not support tagging.|The error message returned because the specified resource does not support tagging.|
+|400|InvalidTag.Mismatch|The specified Tag.n.Key and Tag.n.Value are not match.|The error message returned because the specified Tag.N.Key and Tag.N.Value parameters do not match.|
+|400|InvalidTagCount|The specified tags are beyond the permitted range.|The error message returned because the maximum number of tags has been reached.|
+|404|InvalidRegionId.NotFound|The specified RegionId does not exist.|The error message returned because the specified RegionId parameter does not exist.|
+|400|Invalid.Scope|The specified scope is invalid.|The error message returned because the specified scope is invalid.|
+|403|NoPermission.Tag|The operator is not permission for the tag.|The error message returned because you are not authorized to manage the tag.|
 
-For a list of error codes, visit the [API Error Center](https://error-center.aliyun.com/status/product/Ecs).
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
