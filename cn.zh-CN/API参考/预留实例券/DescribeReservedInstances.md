@@ -12,7 +12,9 @@
 |--|--|----|---|--|
 |Action|String|是|DescribeReservedInstances|系统规定参数。取值： DescribeReservedInstances |
 |RegionId|String|是|cn-hangzhou|实例所属的地域ID。您可以调用[DescribeRegions](~~25609~~)查看最新的阿里云地域列表。 |
-|Tag.N.Key|String|否|TestKey|预留实例券的标签键。N的取值范围：1~20。一旦传入该值，则不允许为空字符串。最多支持128个字符，不能以aliyun和acs:开头，不能包含http://或者https://。 |
+|Tag.N.Key|String|否|TestKey|预留实例券的标签键。N的取值范围：1~20。一旦传入该值，则不允许为空字符串。最多支持128个字符，不能以aliyun和acs:开头，不能包含http://或者https://。
+
+ 使用一个标签过滤资源，查询到该标签下的资源数量不能超过1000个；使用多个标签过滤资源，查询到同时绑定了多个标签的资源数量不能超过1000个。如果资源数量超过1000个，请使用[ListTagResources](~~110425~~)接口进行查询。 |
 |Tag.N.Value|String|否|TestValue|预留实例券的标签值。N的取值范围：1~20。一旦传入该值，允许为空字符串。最多支持128个字符，不能以acs:开头，不能包含http://或者https://。 |
 |PageNumber|Integer|否|1|预留实例券列表的页码，起始值：1
 
