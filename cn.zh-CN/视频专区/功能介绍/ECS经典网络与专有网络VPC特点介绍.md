@@ -14,7 +14,7 @@
 **相关文档**  
 
 
-[网络类型](/cn.zh-CN/网络/网络类型.md)
+[网络类型](https://help.aliyun.com/document_detail/61651.htm)
 
-[安全组概述](/cn.zh-CN/安全/安全组/安全组概述.md)
+[安全组概述](https://help.aliyun.com/document_detail/25387.htm)
 
