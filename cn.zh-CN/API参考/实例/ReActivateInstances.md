@@ -69,7 +69,7 @@ https://ecs.aliyuncs.com/?Action=ReActivateInstances
 |403|InstanceLockedForSecurity|The specified operation is denied as your instance is locked for security reasons.|实例被安全锁定，指定的操作无法完成。|
 |403|InsufficientBalance|Your account does not have enough balance.|账户余额不足，请先充值再操作。|
 |500|InternalError|The request processing has failed due to some unknown error.|内部错误，请重试。如果多次尝试失败，请提交工单。|
-|400|ReopenInstance.InstanceStatusNotValid|Instance status is not Expired, ImageExpired or EcsAndImageExpired.|实例启动失败，可能是实例已过期或者镜像已过期。|
+|400|ReopenInstance.InstanceStatusNotValid|Instance status is not Expired, ImageExpired or EcsAndImageExpired.|实例重启失败，原因是实例或镜像未过期。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/Ecs)查看更多错误码。
 
