@@ -23,7 +23,7 @@ keyword: [发布更新, ecs, alibaba cloud linux]
     -   安全审计
     -   入侵防范
     -   恶意代码防范
-详情请参见[Alibaba Cloud Linux等保2.0三级版镜像使用说明]()
+详情请参见[Alibaba Cloud Linux等保2.0三级版镜像使用说明](/cn.zh-CN/镜像/Alibaba Cloud Linux 2/Alibaba Cloud Linux 2支持的功能和接口/Alibaba Cloud Linux等保2.0三级版镜像使用说明.md)
 
 -   该镜像基于Alibaba Cloud Linux 2 LTS镜像aliyun\_2\_1903\_x64\_20G\_alibase\_20200904.vhd制作
 -   内核版本：kernel-4.19.91-21.al7
