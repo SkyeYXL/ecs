@@ -118,6 +118,15 @@
 |[ModifyImageAttribute](/intl.zh-CN/API参考/镜像/ModifyImageAttribute.md)|调用ModifyImageAttribute修改一份自定义镜像的名称或描述信息。|
 |[ModifyImageSharePermission](/intl.zh-CN/API参考/镜像/ModifyImageSharePermission.md)|调用ModifyImageSharePermission管理镜像共享权限。您可以将自己的自定义镜像共享给其他阿里云用户，该用户可以使用共享的自定义镜像创建ECS实例（RunInstances）或者更换实例的系统盘（ReplaceSystemDisk）。|
 |[DescribeImageSupportInstanceTypes](/intl.zh-CN/API参考/镜像/DescribeImageSupportInstanceTypes.md)|调用DescribeImageSupportInstanceTypes查询指定镜像支持的实例规格。|
+|[DescribeImageFromFamily](/intl.zh-CN/API参考/镜像/DescribeImageFromFamily.md)|调用DescribeImageFromFamily查询指定镜像族系内最新创建的可用自定义镜像。|
+
+## 存储容量单位包
+
+|API|描述|
+|---|--|
+|[PurchaseStorageCapacityUnit](/intl.zh-CN/API参考/存储容量单位包/PurchaseStorageCapacityUnit.md)|调用PurchaseStorageCapacityUnit购买一个或多个存储容量单位包SCU（Storage Capacity Unit）。|
+|[ModifyStorageCapacityUnitAttribute](/intl.zh-CN/API参考/存储容量单位包/ModifyStorageCapacityUnitAttribute.md)|调用ModifyStorageCapacityUnitAttribute修改一个存储容量单位包SCU的名称或者描述信息。|
+|[DescribeStorageCapacityUnits](/intl.zh-CN/API参考/存储容量单位包/DescribeStorageCapacityUnits.md)|调用DescribeStorageCapacityUnits查询一个或多个存储容量单位包SCU的详细信息。|
 
 ## 快照
 
