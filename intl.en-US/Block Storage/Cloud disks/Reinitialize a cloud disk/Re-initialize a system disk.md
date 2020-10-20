@@ -49,7 +49,7 @@ When a disk is attached to an ECS instance, you can re-initialize the disk to re
     |Security|Windows instances: Specify a logon password. You can use the old password or specify a new password.|
     |Linux instances: Select **Set SSH Key** or **Set Password**.    -   **Set SSH Key**: binds an SSH key pair to the instance. You can then log on the instance by using the SSH key pair.
     -   **Set Password**: specifies a logon password. You can use the old password or specify a new password. |
-    |Security Enhancement|After you select **Activate**, security components are loaded to the instance free of charge. These components provide services such as webshell detection, remote logon reminder, and protection against brute-force attacks.|
+    |Security Hardening|After you select **Activate**, security components are loaded to the instance free of charge. These components provide services such as webshell detection, remote logon reminder, and protection against brute-force attacks.|
     |Instance Startup Policy|If you select **Start Instance after Resetting Disk**, the instance automatically starts up after you re-initialize the system disk.|
 
 8.  Click **Confirm**.
