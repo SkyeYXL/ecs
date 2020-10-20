@@ -229,10 +229,10 @@ Default: 1. |
 Default: 1 |
 |SpotPriceLimit|Float|No|0.97|The maximum hourly price of the instance. This parameter takes effect only when `SpotStrategy` is set to `SpotWithPriceLimit`. A maximum of three decimal places are allowed. |
 |SpotInterruptionBehavior|String|No|Terminate|The interruption mode of the preemptible instance. Set the value to Terminate, which specifies that the instance is released. |
-|SecurityEnhancementStrategy|String|No|Active|Specifies whether to enable security enhancement. Valid values:
+|SecurityEnhancementStrategy|String|No|Active|Specifies whether to enable security hardening. Valid values:
 
--   Active: enables security enhancement. This value is applicable only to public images.
--   Deactive: disables security enhancement. This value is applicable to all image types. |
+-   Active: enables security hardening. This value is applicable only to public images.
+-   Deactive: disables security hardening. This value is applicable to all image types. |
 |ClientToken|String|No|123e4567-e89b-12d3-a456-426655440000|The client token that is used to ensure the idempotence of the request. You can use the client to generate the value, but you must ensure that it is unique among different requests. The **ClientToken** value can only contain ASCII characters and cannot exceed 64 characters in length. For more information, see [How to ensure idempotence](~~25693~~). |
 |Tag.N.Key|String|No|TestKey|The key of tag N to be bound to the instance, disks, and primary ENI. Valid values of N: 1 to 20. The tag key cannot be an empty string. It can be up to 128 characters in length and cannot start with acs: or aliyun. It cannot contain http:// or https://. |
 |Tag.N.Value|String|No|TestValue|The value of tag N to be bound to the instance, disks, and the primary ENI. Valid values of N: 1 to 20. The tag value can be an empty string. It can be up to 128 characters in length and cannot start with acs: or contain http:// or https://. |
@@ -329,10 +329,10 @@ Default value: default |
 Default value: enabled.
 
 **Note:** For more information about instance metadata, see [Overview of instance metadata](~~49122~~). |
-|HttpTokens|String|No|optional|Specifies whether to forcibly use the security enhancement mode \(IMDSv2\) to access instance metadata. Valid values:
+|HttpTokens|String|No|optional|Specifies whether to forcibly use the security hardening mode \(IMDSv2\) to access instance metadata. Valid values:
 
--   optional: The security enhancement mode \(IMDSv2\) is not forcibly used.
--   required: The security enhancement mode \(IMDSv2\) is forcibly used. After you set this parameter to required, you cannot access the instance metadata in normal mode.
+-   optional: The security hardening mode \(IMDSv2\) is not forcibly used.
+-   required: The security hardening mode \(IMDSv2\) is forcibly used. After you set this parameter to required, you cannot access the instance metadata in normal mode.
 
 Default value: optional.
 
