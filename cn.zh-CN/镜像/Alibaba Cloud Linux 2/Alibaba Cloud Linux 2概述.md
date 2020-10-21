@@ -54,7 +54,9 @@ Alibaba Cloud Linux 2是免费镜像，但当您选用Alibaba Cloud Linux 2镜�
 您可通过下列方法获取并使用Alibaba Cloud Linux 2。
 
 -   ECS实例
-    -   新创建ECS实例时选择**公共镜像**，并选择Alibaba Cloud Linux 2的相应版本。详情请参见[使用向导创建实例](/cn.zh-CN/实例/创建实例/使用向导创建实例.md)。
+    -   新创建ECS实例时选择**公共镜像**，并选择Alibaba Cloud Linux 2的相应版本。
+        -   创建ECS实例的具体操作请参见[使用向导创建实例](/cn.zh-CN/实例/创建实例/使用向导创建实例.md)。
+        -   Alibaba Cloud Linux 2多个版本的区别请参见[Alibaba Cloud Linux 2的多个镜像之间有何不同？](/cn.zh-CN/镜像/Alibaba Cloud Linux 2/Alibaba Cloud Linux 2 FAQ.md)。
     -   已创建的ECS实例可通过更换系统盘，将现有操作系统更换为Alibaba Cloud Linux 2。详情请参见[更换系统盘（公共镜像）](/cn.zh-CN/块存储/云盘基础操作/更换系统盘/更换系统盘（公共镜像）.md)。
 -   本地环境（基于KVM技术的虚拟化环境）
 
