@@ -39,7 +39,7 @@ Site monitoring is at the network access layer to test the availability.
 
 **Set RDS monitoring**
 
-We recommend that you set the RDS CPU utilization alarm threshold to 70% and to trigger an alarm when the threshold is exceeded by three times in a row. You can set the disk utilization , IOPS utilization, total connections and other [metrics](/intl.en-US/Quick Start/Cloud service monitoring.md) as needed.
+We recommend that you set the RDS CPU utilization alarm threshold to 70% and to trigger an alarm when the threshold is exceeded by three times in a row. You can set the disk utilization , IOPS utilization, total connections and other [metrics](/intl.en-US/.md) as needed.
 
 ## Set Server Load Balancer monitoring
 
