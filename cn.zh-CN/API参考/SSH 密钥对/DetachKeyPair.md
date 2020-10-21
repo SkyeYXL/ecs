@@ -1,6 +1,6 @@
 # DetachKeyPair
 
-调用DetachKeyPair为一台或者多台Linux实例解绑 SSH 密钥对。
+调用DetachKeyPair为一台或者多台Linux实例解绑SSH密钥对。
 
 ## 接口说明
 
@@ -33,7 +33,7 @@
 |Result| | | |
 |Code|String|200|传递的操作状态码，其中200表示操作成功。 |
 |InstanceId|String|i-bp1d6tsvznfghy7y\*\*\*\*|实例ID。 |
-|Message|String|successful|传递的操作信息，当code=200时，message为successful。 |
+|Message|String|successful|传递的操作信息。例如，当`Code=200`时，`Message`为`successful`。 |
 |Success|String|true|此次操作是否成功。 |
 |TotalCount|String|2|解绑密钥对的实例总数量。 |
 
@@ -107,7 +107,7 @@ https://ecs.aliyuncs.com/?Action=DetachKeyPair
 |--------|---|----|--|
 |400|InvalidKeyPairName.NotFound|The specified KeyPairName does not exist in our records.|指定的KeyPairName不存在。|
 |403|DependencyViolation.WindowsInstance|The instance creating is windows, cannot use ssh key pair to login|指定的实例是Windows操作系统，此类实例不支持SSH密钥对登录。|
-|400|InvalidInstanceIds.ValueNotSupported|The specified parameter InstanceIds is not valid.|指定的InstanceId参数不合法。|
+|400|InvalidInstanceIds.ValueNotSupported|The specified parameter InstanceIds is not valid.|指定的InstanceIds参数有误。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/Ecs)查看更多错误码。
 
