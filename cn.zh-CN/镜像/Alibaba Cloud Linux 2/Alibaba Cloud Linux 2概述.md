@@ -45,6 +45,33 @@ Alibaba Cloud Linux 2适用于下列场景。
     -   优化调度、内存、IO及网络等子系统，在部分的开源基准测试（benchmark）中，相比其他操作系统约提升10%~30%性能。
     -   持续增强系统稳定性，在宕机数据统计结果中，相比其他操作系统减少约50%的宕机率。
 
+## Alibaba Cloud Linux 2镜像
+
+-   Alibaba Cloud Linux 2.1903 LTS 64位。
+
+    Alibaba Cloud Linux 2操作系统的默认标准镜像。
+
+-   Alibaba Cloud Linux 2.1903 64位 快速启动版。
+
+    该镜像支持Qboot（quick boot）快速启动，基于Alibaba Cloud Kernel，并直接从内核引导虚拟机启动的定制化镜像。使用该镜像创建的ECS实例相比其它镜像创建的ECS实例，启动速度得到了极大的提升，并且默认运行时与标准镜像完全一致。快速启动版镜像的相关说明如下：
+
+    -   只对实例的初次启动加速，后续启动实例的速度将保持正常水准。
+    -   优化加速内存初始化的过程，模块化了启动耗时的鼠标等设备，加速内核引导速度。
+    -   使用最新的AliyunInit服务替代了CloudInit服务，降低了操作系统的初始化耗时。
+    -   目前快速启动版镜像支持的地域：华东1（杭州）、华南1（深圳）、华北2（北京）、华北3（张家口）、中国（香港）。
+-   Alibaba Cloud Linux 2.1903 64位 等保2.0三级版。
+
+    基于默认标准镜像进行等保加固的镜像版本，该镜像符合等保2.0三级安全保护的基本要求。使用说明请参见[Alibaba Cloud Linux等保2.0三级版镜像使用说明](/cn.zh-CN/镜像/Alibaba Cloud Linux 2/Alibaba Cloud Linux 2支持的功能和接口/Alibaba Cloud Linux等保2.0三级版镜像使用说明.md)。
+
+-   Alibaba Cloud Linux 2.1903 LTS 64位 AMD版。
+
+    基于默认标准镜像支持阿里云AMD实例的镜像版本。仅阿里云AMD弹性裸金属实例可以使用该镜像，实例规格族包括ecs.ebmg6a、ecs.ebmc6a、ecs.ebmr6a。
+
+-   Alibaba Cloud Linux 2.1903 64位 可信版。
+
+    基于默认标准镜像支持阿里云可信实例的镜像版本。仅阿里云可信实例可以使用该镜像，实例规格族包括ecs.g6t、ecs.c6t。
+
+
 ## 费用
 
 Alibaba Cloud Linux 2是免费镜像，但当您选用Alibaba Cloud Linux 2镜像创建ECS实例时，需要支付其他资源产生的费用，如vCPU、内存、存储、公网带宽和快照等。计费详情请参见[计费概述](/cn.zh-CN/产品定价/计费概述.md)。
