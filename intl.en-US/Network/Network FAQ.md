@@ -63,7 +63,7 @@ You can achieve minimum latency when instances within the same zone and region c
 
 The 5 Mbit/s that you purchased applies to the outbound bandwidth. The inbound bandwidth for this instance is capped at 10 Mbit/s.
 
--   Outbound bandwidth is consumed when data is sent from the ECS instance. The maximum outbound bandwidth of an ECS instance is capped at 100 Mbit/s or 200 Mbit/s regardless of whether the instance resides in a VPC or the classic network. The maximum available outbound bandwidth value depends on the billing method of the instance.
+-   Outbound bandwidth is consumed when data is sent from the ECS instance. The maximum outbound bandwidth of an ECS instance is capped at 100 Mbit/s or 200 Mbit/s regardless of whether the instance resides in a VPC or the classic network. The maximum available outbound bandwidth value depends on the billing method of the instance. For more information, see [Public bandwidth limits](/intl.en-US/Product Introduction/Limits.md)。
 -   Inbound bandwidth is consumed when data is transferred to the ECS instance. The maximum inbound bandwidth is determined by the outbound bandwidth:
     -   If the outbound bandwidth is less than 10 Mbit/s, the maximum inbound bandwidth is 10 Mbit/s.
     -   If the outbound bandwidth is greater than 10 Mbit/s, the maximum inbound bandwidth is the same as the purchased outbound bandwidth.
@@ -74,7 +74,7 @@ The public bandwidth of each instance is exclusive to the instance for which it 
 
 ## How is the network usage of ECS instances billed?
 
-For more information, see [Billing methods of public bandwidth](/intl.en-US/Pricing/Billing items/Billing methods of public bandwidth.md).
+For more information, see [Public bandwidth](/intl.en-US/Pricing/Billing items/Public bandwidth.md).
 
 ## Why has 200 Kbit/s of inbound traffic already been consumed on a newly created ECS instance?
 
@@ -197,7 +197,7 @@ After six hours, whether the public IP address of the instance can be changed de
 ## If no public IPv4 address was assigned to an ECS instance during instance creation, how do I assign a public IP address to the instance?
 
 -   Apply for and bind an Elastic IP Address \(EIP\) to the ECS instance. For more information, see the following topic of *EIP documentation:* [Apply for new EIPs](/intl.en-US/User Guide/Create an EIP/Apply for new EIPs.md).
--   Modify the public bandwidth of the ECS instance to allocate a fixed public IP address. For more information about modifying the public bandwidth of a subscription ECS instance, see [Overview of instance upgrade and downgrade](/intl.en-US/Instance/Change configurations/Overview of instance upgrade and downgrade.md). For more information about modifying the public bandwidth of a pay-as-you-go ECS instance, see [Change Internet bandwidth](/intl.en-US/Instance/Change configurations/Change configurations of Pay-As-You-Go instances/Change the Internet bandwidth of a pay-as-you-go instance.md).
+-   Modify the public bandwidth of the ECS instance to allocate a fixed public IP address. For more information about modifying the public bandwidth of a subscription ECS instance, see [Overview of instance upgrade and downgrade](/intl.en-US/Instance/Change configurations/Overview of instance upgrade and downgrade.md). For more information about modifying the public bandwidth of a pay-as-you-go ECS instance, see [Modify the bandwidth configurations of pay-as-you-go instances](/intl.en-US/Instance/Change configurations/Modify bandwidth configurations/Modify the bandwidth configurations of pay-as-you-go instances.md).
 
 ## What is a BGP data center?
 
