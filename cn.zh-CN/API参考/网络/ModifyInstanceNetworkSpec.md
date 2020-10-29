@@ -24,7 +24,9 @@
 |--|--|----|---|--|
 |Action|String|是|ModifyInstanceNetworkSpec|系统规定参数。取值：ModifyInstanceNetworkSpec |
 |InstanceId|String|是|i-bp67acfmxazb4\*\*\*\*|需要修改网络配置的实例ID。 |
-|InternetMaxBandwidthOut|Integer|否|10|公网出带宽最大值，单位：Mbit/s（Megabit per second）。取值范围：0~100 |
+|InternetMaxBandwidthOut|Integer|否|10|公网出带宽最大值，单位：Mbit/s（Megabit per second）。取值范围：0~100
+
+ 您设置的**按使用流量计费**的出带宽峰值是带宽上限。当出现资源争抢时，该带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**的模式。 |
 |InternetMaxBandwidthIn|Integer|否|10|设置公网入带宽最大值，单位：Mbit/s（Megabit per second）。取值范围：
 
  -   当所购公网出带宽小于等于10 Mbit/s时：1~10，默认为10。
@@ -32,7 +34,9 @@
 |NetworkChargeType|String|否|PayByTraffic|转换网络计费方式。取值范围：
 
  -   PayByBandwidth：按固定带宽计费。
--   PayByTraffic：按使用流量计费。 |
+-   PayByTraffic：按使用流量计费。
+
+ 您设置的**按使用流量计费**的出带宽峰值是带宽上限。当出现资源争抢时，该带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**的模式。 |
 |AllocatePublicIp|Boolean|否|false|是否分配公网IP地址。
 
  默认值：false |
@@ -120,7 +124,7 @@ https://ecs.aliyuncs.com/?Action=ModifyInstanceNetworkSpec
 |403|InvalidInstanceStatus|The current status of the instance does not support this operation.|当前实例的状态不支持此操作。|
 |400|InvalidInstance.UnPaidOrder|Unpaid order exists in your account, please complete or cancel the payment in the expense center.|您的账号里有未支付的订单，请处理后重试。|
 |400|OperationDenied|After downgrade, you cannot upgrade or downgrade your instances again in the remaining time of the current billing cycle.|降配后，您将无法在当前结算周期的剩余时间内再次升级或降级实例配置。|
-|400|InvalidInternetChargeType.ValueNotSupported|%s|暂不支持指定的实例付费类型，请确认相关参数是否正确。|
+|400|InvalidInternetChargeType.ValueNotSupported|%s|暂不支持指定的网络计费方式，请确认相关参数是否正确。|
 |400|LastOrderProcessing|The previous order is still processing, please try again later.|订单正在处理中，稍后重试。|
 |400|OperationDenied|The current user does not support this operation.|您使用的账号暂不支持此操作。|
 |403|NAT\_PUBLIC\_IP\_BINDING\_FAILED|Binding nat public ip failed|公网IP绑定网关失败。|
