@@ -102,7 +102,9 @@
 |InternetChargeType|String|否|PayByTraffic|公网出方向带宽计费方式。取值范围：
 
  -   PayByBandwidth：按固定带宽计费
--   PayByTraffic：按使用流量计费 |
+-   PayByTraffic：按使用流量计费
+
+ 您设置的**按使用流量计费**的出带宽峰值是带宽上限。当出现资源争抢时，该带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**的模式。 |
 |EnableVmOsConfig|Boolean|否|false|是否启用实例操作系统配置。 |
 |NetworkType|String|否|vpc|实例网络类型。取值范围：
 
