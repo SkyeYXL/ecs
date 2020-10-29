@@ -1,19 +1,19 @@
 ---
-keyword: [pay-as-you-go, No Fees for Stopped Instances \(VPC-Connected\), computing resource, public IP address, retain and bill, stop mode]
+keyword: [pay-as-you-go, no fees for stopped instances, computing resources, public IP address, retain and bill, stop mode]
 ---
 
 # No Fees for Stopped Instances \(VPC-Connected\)
 
-The No Fees for Stopped Instances \(VPC-Connected\) feature allows some ECS resources to be recycled while retaining ECS instances, reducing upkeep costs. It does not stop consumed resources from being billed.
+The No Fees for Stopped Instances \(VPC-Connected\) feature is used to recycle some ECS resources while retaining ECS instances. This helps reduce maintenance costs. The feature does not stop consumed resources from being billed.
 
 ## Prerequisites
 
 The No Fees for Stopped Instances \(VPC-Connected\) feature is applicable to ECS instances that meet the following requirements:
 
 -   The network type of the instances is VPC.
--   The instances are pay-as-you-go instances.
+-   The instances are pay-as-you-go or preemptible instances.
 
-    You can change the billing method of an instance from subscription to pay-as-you-go. For more information, see [Change the billing method of instances from subscription to pay-as-you-go](/intl.en-US/Pricing/Change the billing method/Change the billing method of instances from subscription to pay-as-you-go.md).
+    You can change the billing method of an instance from subscription to pay-as-you-go. For more information, see [Change the billing method of an instance from subscription to pay-as-you-go](/intl.en-US/Pricing/Change the billing method/Change the billing method of instances from subscription to pay-as-you-go.md).
 
 -   The instance family is not attached with local disks.
 
@@ -24,7 +24,7 @@ The No Fees for Stopped Instances \(VPC-Connected\) feature is disabled by defau
 
 ## Applicable resources
 
-This feature recycles some resources while retaining ECS instances to reduce the overall costs.
+This feature recycles some resources while retaining ECS instances to reduce overall costs.
 
 -   The No Fees for Stopped Instances \(VPC-Connected\) feature is applicable to the following resources:
     -   ECS instances \(including vCPUs and memory\)
@@ -52,11 +52,11 @@ If an ECS instance is in the start period, the No Fees for Stopped Instances \(V
 
 After the No Fees for Stopped Instances \(VPC-Connected\) feature is triggered for an ECS instance, the ECS instance \(including vCPUs and memory\) and its public IP address are recycled. You are no longer charged for these resources. However, the following risks exist:
 
--   The stopped resources are recycled and the instance may fail to restart due to insufficient resources. In this case, you can try again later or switch to another instance type. For more information, see [Change the instance type of a pay-as-you-go instance](/intl.en-US/Instance/Change configurations/Change configurations of Pay-As-You-Go instances/Change the instance type of a pay-as-you-go instance.md).
+-   The stopped instance may fail to restart due to insufficient resources as a result of resource recycling. In this case, you can try again later or switch to another instance type. For more information, see [Change the instance type of a pay-as-you-go instance](/intl.en-US/Instance/Change configurations/Change instance types/Change the instance type of a pay-as-you-go instance.md).
 
-    **Note:** We recommend that you restart the instance in advance to ensure that resources are sufficient for the instance to start, avoiding service interruptions caused by instance start failures.
+    **Note:** We recommend that you restart the instance in advance to ensure that resources are sufficient to start the instance. This can avoid service interruptions caused by instance start failures.
 
--   Because the public IP address has been recycled, the public IP address may change after the instance is restarted. However, the private IP address remains unchanged.
+-   Because the public IP address has been recycled, the public IP address may change when the instance is restarted. However, the private IP address remains unchanged.
 
     **Note:** If your application depends on a specific public IP address, we recommend that you disable the No Fees for Stopped Instances \(VPC-Connected\) feature or convert the public IP address to an EIP. For more information, see [Disable the No Fees for Stopped Instances \(VPC-Connected\) feature](#section_4h6_utd_2yr) or [Convert the public IP address of a VPC-type instance to an Elastic IP address](/intl.en-US/Network/Change IPv4 addresses/Convert the public IP address of a VPC-type instance to an Elastic IP address.md).
 
@@ -65,13 +65,13 @@ After the No Fees for Stopped Instances \(VPC-Connected\) feature is triggered f
 In some cases, you may need to restart your instances multiple times within a short amount of time. We recommend that you disable the No Fees for Stopped Instances \(VPC-Connected\) feature to ensure that the instances can be started and run normally. You can disable this feature in the following scenarios:
 
 -   [Replace the system disk](/intl.en-US/Block Storage/Cloud disks/Change the operating system/Replace the system disk (public images).md) \([ReplaceSystemDisk](/intl.en-US/API Reference/Disk/ReplaceSystemDisk.md)\)
--   [Roll back a disk](/intl.en-US/Block Storage/Cloud disks/Roll back a disk.md) \([ResetDisk](/intl.en-US/API Reference/Disk/ResetDisk.md)\)
--   [Reinitialize a system disk](/intl.en-US/Block Storage/Cloud disks/Reinitialize a cloud disk/Reinitialize a system disk.md) \([ReInitDisk](/intl.en-US/API Reference/Disk/ReInitDisk.md)\)
+-   [Roll back a disk by using a snapshot](/intl.en-US/Block Storage/Cloud disks/Roll back a disk by using a snapshot.md) \([ResetDisk](/intl.en-US/API Reference/Disk/ResetDisk.md)\)
+-   [Re-initialize a system disk](/intl.en-US/Block Storage/Cloud disks/Reinitialize a cloud disk/Re-initialize a system disk.md) \([ReInitDisk](/intl.en-US/API Reference/Disk/ReInitDisk.md)\)
 
-For an instance that is stopped due to an overdue payment, if you clear the overdue payment within the specified time and reactivate the ECS instance, the retention of the public IP address is determined by the status of the No Fees for Stopped Instances \(VPC-Connected\) feature:
+For an instance that is stopped due to an overdue payment, if you clear the overdue payment within the specified period of time and reactivate the ECS instance, the public IP address is retained based on whether the No Fees for Stopped Instances \(VPC-Connected\) feature is enabled.
 
--   When the feature is enabled: After the instance is stopped due to an overdue payment, it enters the No Fees for Stopped Instances state. Its vCPUs, memory, and public IP address are automatically released and the public IP address may change after the instance is reactivated.
--   When the feature is disabled: After the instance is stopped due to an overdue payment, the billing of the instance is stopped. Its vCPUs and memory are automatically released. However, the public IP address is retained and does not change after the instance is reactivated.
+-   When the feature is enabled: If the instance is stopped due to an overdue payment, it enters the No Fees for Stopped Instances state. Its vCPUs, memory, and public IP address are automatically released and the public IP address may change after the instance is reactivated.
+-   When the feature is disabled: If the instance is stopped due to an overdue payment, the billing of the instance is stopped. However, the public IP address is retained and does not change after the instance is reactivated.
 
 **Note:** ECS instances do not remain in the Stopped state after a payment becomes overdue in your account. For more information, see [Pay-as-you-go](/intl.en-US/Pricing/Billing methods/Pay-as-you-go.md).
 
@@ -91,7 +91,7 @@ This section describes how to enable the No Fees for Stopped Instances \(VPC-Con
 
 4.  In the message that appears, read the note and click **OK**.
 
-5.  In the Custom Settings dialog box, click **OK**.
+5.  Click **OK**.
 
 
 ## Disable the No Fees for Stopped Instances \(VPC-Connected\) feature
@@ -113,7 +113,7 @@ If an ECS instance is in the No Fees for Stopped Instances state, its vCPUs, mem
 
 4.  In the message that appears, read the note and click **OK**.
 
-5.  In the Custom Settings dialog box, click **OK**.
+5.  Click **OK**.
 
 
 ## Configure a single instance to enter the No Fees for Stopped Instances \(VPC-Connected\) state when it is stopped
