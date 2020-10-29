@@ -28,7 +28,9 @@
 |Action|String|是|ModifyInstanceSpec|系统规定参数。取值：ModifyInstanceSpec |
 |InstanceId|String|是|i-bp67acfmxazb4p\*\*\*\*|指定的实例ID。 |
 |InstanceType|String|否|ecs.g6.large|实例的目标规格。更多详情，请参见[实例规格族](~~25378~~)，也可以调用[DescribeInstanceTypes](~~25620~~)接口获得最新的规格表。 |
-|InternetMaxBandwidthOut|Integer|否|10|公网出带宽最大值，单位为Mbit/s（Megabit per second）。取值范围：0~100 |
+|InternetMaxBandwidthOut|Integer|否|10|公网出带宽最大值，单位为Mbit/s（Megabit per second）。取值范围：0~100
+
+ 您设置的**按使用流量计费**的出带宽峰值是带宽上限。当出现资源争抢时，该带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**的模式。 |
 |InternetMaxBandwidthIn|Integer|否|10|公网入带宽最大值，单位为Mbit/s（Megabit per second）。取值范围：
 
  -   当所购公网出带宽小于等于10 Mbit/s时：1~10，默认为10。
@@ -154,6 +156,7 @@ https://ecs.aliyuncs.com/?Action=ModifyInstanceSpec
 |403|QuotaExceed.ElasticQuota|The number of the specified ECS instances has exceeded the quota of the specified instance type.|您在当前地域选择的实例规格所要创建的台数超出系统限额，您可以选择其他地域、实例规格或减少台数重新购买，也可以前往ECS管理控制台或配额中心申请提高限额。|
 |403|QuotaExceed.ElasticQuota|The number of vCPUs assigned to the ECS instances has exceeded the quota in the zone.|您的全实例规格vCPU配额超出系统限额，您可以前往ECS管理控制台或配额中心申请提高限额。|
 |403|QuotaExceed.ElasticQuota|The number of the specified ECS instances has exceeded the quota of the specified instance type, or the number of vCPUs assigned to the ECS instances has exceeded the quota in the zone.|您在当前地域选择的实例规格所要创建的台数超出系统限额，或者全实例规格vCPU配额超出系统限额，您可以前往ECS管理控制台或配额中心申请提高限额。|
+|400|InvalidOperation.VpcHasEnabledAdvancedNetworkFeature|The specified vpc has enabled advanced network feature.|该VPC开启了高阶特性，不能创建低规格的ECS。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/Ecs)查看更多错误码。
 
