@@ -47,12 +47,13 @@ You can click **Privileges** on the **Overview** page of the ECS console, and se
 |----|-----|------------------------------------------|
 |Quota for regional reserved instances in an account|20|Submit a ticket.|
 |Quota for zonal reserved instances per zone in an account|20|Submit a ticket.|
-|Instance families that support reserved instances|Instance families that support reserved instances include:-   Compute optimized instance families: c6e, c6, c5, ic5, and sn1ne
--   General purpose instance families: g6e, g6, g5, and sn2ne
+|Instance families that support reserved instances|Instance families that support reserved instances include:-   General purpose instance families: g6e, g6, g5, and sn2ne
+-   Compute optimized instance families: c6e, c6, c5, ic5, and sn1ne
 -   Memory optimized instance families: r6e, r6, r5, and se1ne
+-   Big data instance family: d2s
 -   Instance families with local SSDs: i2 and i2g
 -   Instance families with high clock speed: hfc6, hfc5, hfg6, hfg5, and hfr6
--   Compute optimized instance families with GPU capabilities: gn6i and gn6e
+-   GPU-accelerated compute optimized instance families: gn6i and gn6e
 -   ECS Bare Metal Instance families: ebmc6, ebmg6, ebmr6, ebmhfc6, ebmhfg6, and ebmhfr6
 -   Burstable instance families: t6 and t5
 
@@ -77,10 +78,6 @@ You can click **Privileges** on the **Overview** page of the ECS console, and se
 |Capacity of an enhanced SSD \(ESSD\)|20 GiB to 32,768 GiB.|None.|
 |Capacity of a local SSD|5 GiB to 800 GiB.|None.|
 |Total capacity of all local SSDs on an instance|1,024 GiB.|None.|
-|Capacity of a local NVMe SSD|1,456 GiB.|None.|
-|Total capacity of all local NVMe SSDs on an instance|2,912 GiB.|None.|
-|Capacity of a local SATA HDD|5,500 GiB.|None.|
-|Total capacity of all local SATA HDDs on an instance|154,000 GiB.|None.|
 |Capacity of a system disk|-   Windows Server: 40 GiB to 500 GiB
 -   CoreOS and FreeBSD: 30 GiB to 500 GiB
 -   Linux systems excluding CoreOS: 20 GiB to 500 GiB
@@ -127,6 +124,8 @@ You can click **Privileges** on the **Overview** page of the ECS console, and se
 |None.|
 |Peak outbound bandwidth|-   Subscription instance: 200 Mbit/s
 -   Pay-as-you-go instance: 100 Mbit/s
+
+**Note:** 100 Mbit/s is the maximum value that you can specify for the peak outbound bandwidth when the pay-by-traffic billing method is used. In the event of resource contention, this bandwidth cannot be guaranteed. If you want a guaranteed bandwidth for your instance, use the pay-by-bandwidth billing method.
 
 |None.|
 |Change to the public IP address of an instance|The public IP address of an instance can be changed within six hours after the instance is created, and can be changed a maximum of three times.|None.|
