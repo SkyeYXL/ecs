@@ -119,7 +119,9 @@ Snapshots created on or before July 15, 2013 cannot be used here. Otherwise, an 
 |InternetChargeType|String|No|PayByTraffic|The billing method for network usage. Valid values:
 
 -   PayByBandwidth
--   PayByTraffic |
+-   PayByTraffic
+
+**Note:** When the pay-by-traffic billing method is used, the peak inbound and outbound bandwidths indicate the upper limits for bandwidths and are only for reference. In the event of resource contention, the peak bandwidths cannot be guaranteed. If you want guaranteed bandwidths for your instance, use the pay-by-bandwidth billing method. |
 |EnableVmOsConfig|Boolean|No|false|Specifies whether to enable the operating system configurations of the instance.
 
 **Note:** This parameter will be removed in the future. We recommend that you use other parameters to ensure future compatibility. |
