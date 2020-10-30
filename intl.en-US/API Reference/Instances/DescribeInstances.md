@@ -45,7 +45,9 @@ Default value: 10. |
 |InstanceChargeType|String|No|PostPaid|The billing method of the instance. Valid values:
 
 -   PostPaid: pay-as-you-go
--   PrePaid: subscription |
+-   PrePaid: subscription
+
+**Note:** When the pay-by-traffic billing method is used, the peak inbound and outbound bandwidths indicate the upper limits for bandwidths and are only for reference. In the event of resource contention, the peak bandwidths cannot be guaranteed. If you want guaranteed bandwidths for your instance, use the pay-by-bandwidth billing method. |
 |InternetChargeType|String|No|PayByTraffic|The billing method for network usage. Valid values:
 
 -   PayByBandwidth
