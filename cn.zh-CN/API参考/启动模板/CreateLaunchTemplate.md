@@ -119,7 +119,9 @@
 |InternetChargeType|String|否|PayByTraffic|网络计费方式。取值范围：
 
  -   PayByBandwidth：按固定带宽计费
--   PayByTraffic：按使用流量计费 |
+-   PayByTraffic：按使用流量计费
+
+ **说明：** **按使用流量计费**模式下的出入带宽峰值都是带宽上限，不作为业务承诺指标。当出现资源争抢时，带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**模式。 |
 |EnableVmOsConfig|Boolean|否|false|是否启用实例操作系统配置。
 
  **说明：** 该参数即将被弃用，为提高兼容性，请尽量使用其他参数。 |
