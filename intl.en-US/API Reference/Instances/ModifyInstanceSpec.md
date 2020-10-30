@@ -26,11 +26,15 @@ When you call this operation, take note of the following items:
 |Action|String|Yes|ModifyInstanceSpec|The operation that you want to perform. Set the value to ModifyInstanceSpec. |
 |InstanceId|String|Yes|i-bp67acfmxazb4p\*\*\*\*|The ID of the instance. |
 |InstanceType|String|No|ecs.g6.large|The new instance type. For more information, see [Instance families](~~25378~~) or call the [DescribeInstanceTypes](~~25620~~) operation to query the most recent instance type list. |
-|InternetMaxBandwidthOut|Integer|No|10|The maximum outbound public bandwidth. Unit: Mbit/s. Valid values: 0 to 100. |
+|InternetMaxBandwidthOut|Integer|No|10|The maximum outbound public bandwidth. Unit: Mbit/s. Valid values: 0 to 100.
+
+**Note:** When the pay-by-traffic billing method is used, the peak inbound and outbound bandwidths indicate the upper limits for bandwidths and are only for reference. In the event of resource contention, the peak bandwidths cannot be guaranteed. If you want guaranteed bandwidths for your instance, use the pay-by-bandwidth billing method. |
 |InternetMaxBandwidthIn|Integer|No|10|The maximum inbound public bandwidth. Unit: Mbit/s. Valid values:
 
 -   If the purchased outbound network bandwidth is less than or equal to 10 Mbit/s, the valid values of InternetMaxBandwidthIn are 1 to 10 and the default value is 10.
--   If the purchased outbound public bandwidth is greater than 10 Mbit/s, the valid values of InternetMaxBandwidthIn are 1 to the `InternetMaxBandwidthOut` value and the default value is the `InternetMaxBandwidthOut` value. |
+-   If the purchased outbound public bandwidth is greater than 10 Mbit/s, the valid values of InternetMaxBandwidthIn are 1 to the `InternetMaxBandwidthOut` value and the default value is the `InternetMaxBandwidthOut` value.
+
+**Note:** When the pay-by-traffic billing method is used, the peak inbound and outbound bandwidths indicate the upper limits for bandwidths and are only for reference. In the event of resource contention, the peak bandwidths cannot be guaranteed. If you want guaranteed bandwidths for your instance, use the pay-by-bandwidth billing method. |
 |Temporary.StartTime|String|No|2017-12-05T22:40:00Z|The start time of the temporary bandwidth upgrade. Specify the time in the [ISO 8601](~~25696~~) standard in the yyyy-MM-ddTHH:mm:ssZ format. The time must be in UTC. |
 |Temporary.EndTime|String|No|2017-12-05T22:40:00Z|The end time of the temporary bandwidth upgrade. Specify the time in the [ISO 8601](~~25696~~) standard in the yyyy-MM-ddTHH:mm:ssZ format. The time must be in UTC. |
 |Temporary.InternetMaxBandwidthOut|Integer|No|50|The maximum outbound public bandwidth after the temporary bandwidth upgrade. Valid values: 1 to 100.
