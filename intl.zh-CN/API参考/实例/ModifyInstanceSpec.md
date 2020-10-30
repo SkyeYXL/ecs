@@ -28,11 +28,13 @@
 |InstanceType|String|否|ecs.g6.large|实例的目标规格。更多详情，请参见[实例规格族](~~25378~~)，也可以调用[DescribeInstanceTypes](~~25620~~)接口获得最新的规格表。 |
 |InternetMaxBandwidthOut|Integer|否|10|公网出带宽最大值，单位为Mbit/s（Megabit per second）。取值范围：0~100
 
- **按使用流量计费**的出带宽峰值100Mbit/s是带宽上限。当出现资源争抢时，该带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**的模式。 |
+ **说明：** **按使用流量计费**模式下的出入带宽峰值都是带宽上限，不作为业务承诺指标。当出现资源争抢时，带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**模式。 |
 |InternetMaxBandwidthIn|Integer|否|10|公网入带宽最大值，单位为Mbit/s（Megabit per second）。取值范围：
 
  -   当所购公网出带宽小于等于10 Mbit/s时：1~10，默认为10。
--   当所购公网出带宽大于10 Mbit/s时：1~`InternetMaxBandwidthOut`的取值，默认为`InternetMaxBandwidthOut`的取值。 |
+-   当所购公网出带宽大于10 Mbit/s时：1~`InternetMaxBandwidthOut`的取值，默认为`InternetMaxBandwidthOut`的取值。
+
+ **说明：** **按使用流量计费**模式下的出入带宽峰值都是带宽上限，不作为业务承诺指标。当出现资源争抢时，带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**模式。 |
 |Temporary.StartTime|String|否|2017-12-05T22:40:00Z|临时提升带宽的起始时间点。按照[ISO8601](~~25696~~)标准表示，并使用UTC +0时间，格式为yyyy-MM-ddTHH:mm:ssZ。 |
 |Temporary.EndTime|String|否|2017-12-05T22:40:00Z|临时提升带宽的截止时间点。按照[ISO8601](~~25696~~)标准表示，并使用UTC +0时间，格式为yyyy-MM-ddTHH:mm:ssZ。 |
 |Temporary.InternetMaxBandwidthOut|Integer|否|50|临时公网出带宽的最大值。取值范围：1~100
