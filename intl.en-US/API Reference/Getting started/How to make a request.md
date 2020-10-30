@@ -1,10 +1,15 @@
-# How to make a request {#IntroductionOfImporting .concept}
+# How to make a request
 
-This section is applicable for users who make a GET request over HTTP or HTTPS protocol by sending a URL.
+This section is applicable to users who make a GET request over HTTP or HTTPS by sending a URL.
 
-If you prefer using [SDK](https://github.com/aliyun), Alibaba Cloud [CLI](https://partners-intl.aliyun.com/help/doc-detail/29993.htm), or [API Explorer](https://api.aliyun.com/), skip this section.
+If you prefer using [SDK](https://github.com/aliyun), Alibaba Cloud CLI, or [OpenAPI Explorer](https://api.aliyun.com/), skip this section.
 
-The GET request URL, which can be directly used in a browser, has a formulated [request structure](reseller.en-US/API Reference/Getting started/Request structure.md#). The URL consists of several parameters, such as the [common request parameters](reseller.en-US/API Reference/Getting started/Common parameters.md#), your [signature](reseller.en-US/API Reference/Getting started/Digital signature.md#), and some API-specific parameters. We provide URL request example for every API. However, these URL examples are not encoded to make them easy to read. Thus, you must encode the URL before making a request. After the authentication process is complete, we [return the results](reseller.en-US/API Reference/Getting started/Response results.md#) to you. The response parameters are displayed if it is a success response, and the error message is displayed if it is an error response. You can fix the error according to the common error codes and API-specific error codes.
+The request URL consists of different parameters and has a fixed syntax. For more information, see [Request structure](/intl.en-US/API Reference/Getting started/Request syntax.md). The URL contains common request parameters, your signature, and operation-specific parameters. For more information, see [Common parameters](/intl.en-US/API Reference/Getting started/Common parameters.md) and [Digital signature](/intl.en-US/API Reference/Getting started/Digital signature.md). URL request examples are available for each API operation. These URL examples are not encoded so that they are easy to read. You must encode the URL before making a request. A result is returned to you after the authentication process is complete based on your signature. For more information, see [Responses](/intl.en-US/API Reference/Getting started/Responses.md). Response parameters are returned if the call is successful, whereas an error message is returned if the call fails. You can troubleshoot issues based on the common error codes and operation-specific error codes.
 
-**Note:** We recommend that you use SDK to manage your ECS resources or develop applications. It is easier for you to get started by using the language-specific SDK instead of making a request over HTTP or HTTPS. For more information, see Developer Resources.
+**Note:** We recommend that you use SDK to call operations and manage resources, which avoids manual authentication.
+
+**Related topics**  
+
+
+[What is Alibaba Cloud CLI?]()
 
