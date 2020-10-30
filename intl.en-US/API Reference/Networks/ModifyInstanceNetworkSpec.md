@@ -32,9 +32,7 @@ When you call this operation, take note of the following points:
 |---------|----|--------|-------|-----------|
 |Action|String|Yes|ModifyInstanceNetworkSpec|The operation that you want to perform. Set the value to ModifyInstanceNetworkSpec. |
 |InstanceId|String|Yes|i-bp67acfmxazb4ph\*\*\*|The ID of the instance for which you want to modify network configurations. |
-|InternetMaxBandwidthOut|Integer|No|10|The maximum outbound public bandwidth. Unit: Mbit/s. Valid values: 0 to 100.
-
-**Note:** The bandwidth that you specify when the pay-by-traffic billing method is used is the peak outbound bandwidth. In the event of resource contention, this bandwidth cannot be guaranteed. If you want a guaranteed bandwidth for your instance, use the pay-by-bandwidth billing method. |
+|InternetMaxBandwidthOut|Integer|No|10|The maximum outbound public bandwidth. Unit: Mbit/s. Valid values: 0 to 100. |
 |InternetMaxBandwidthIn|Integer|No|10|The maximum inbound public bandwidth. Unit: Mbit/s. Valid values:
 
 -   If the purchased outbound bandwidth is less than 10 Mbit/s, valid values are 1 to 10. Default value: 10.
@@ -44,7 +42,7 @@ When you call this operation, take note of the following points:
 -   PayByBandwidth
 -   PayByTraffic
 
-**Note:** The bandwidth that you specify when the pay-by-traffic billing method is used is the peak outbound bandwidth. In the event of resource contention, this bandwidth cannot be guaranteed. If you want a guaranteed bandwidth for your instance, use the pay-by-bandwidth billing method. |
+**Note:** When the pay-by-traffic billing method is used, the peak inbound and outbound bandwidths indicate the upper limits for bandwidths and are only for reference. In the event of resource contention, the peak bandwidths cannot be guaranteed. If you want guaranteed bandwidths for your instance, use the pay-by-bandwidth billing method. |
 |AllocatePublicIp|Boolean|No|false|Specifies whether to allocate a public IP address.
 
 Default value: false. |
