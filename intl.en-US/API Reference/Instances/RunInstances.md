@@ -102,7 +102,9 @@ If you do not specify a zone ID, the system randomly selects a zone. |
 |InternetChargeType|String|No|PayByTraffic|The billing method for network usage. Default value: PayByTraffic. Valid values:
 
 -   PayByBandwidth: pay-by-bandwidth.
--   PayByTraffic: pay-by-traffic. |
+-   PayByTraffic: pay-by-traffic.
+
+**Note:** When the pay-by-traffic billing method is used, the peak inbound and outbound bandwidths indicate the upper limits for bandwidths and are only for reference. In the event of resource contention, the peak bandwidths cannot be guaranteed. If you want guaranteed bandwidths for your instance, use the pay-by-bandwidth billing method. |
 |SystemDisk.Size|String|No|40|The size of the system disk. Unit: GiB. Valid values: 20 to 500.
 
 The value of this parameter must be at least 20 and greater than or equal to the size of the image.
