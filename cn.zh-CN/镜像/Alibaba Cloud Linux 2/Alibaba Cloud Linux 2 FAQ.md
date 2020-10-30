@@ -46,7 +46,7 @@ Alibaba Cloud Linux 2的发布记录请参见[Alibaba Cloud Linux 2发布记录]
 
 ## 如何开始在阿里云上使用Alibaba Cloud Linux 2？
 
-阿里云为Alibaba Cloud Linux 2提供了公共镜像，您可以在创建ECS实例时选择**公共镜像** \> **Alibaba Cloud Linux**，并选择Alibaba Cloud Linux 2镜像的版本。
+阿里云为Alibaba Cloud Linux 2提供了公共镜像，您可以在创建ECS实例时，选择公共镜像下的Alibaba Cloud Linux 2镜像的版本。
 
 ## 在阿里云ECS中运行Alibaba Cloud Linux 2是否有任何相关成本？
 
