@@ -24,9 +24,7 @@
 |--|--|----|---|--|
 |Action|String|是|ModifyInstanceNetworkSpec|系统规定参数。取值：ModifyInstanceNetworkSpec |
 |InstanceId|String|是|i-bp67acfmxazb4\*\*\*\*|需要修改网络配置的实例ID。 |
-|InternetMaxBandwidthOut|Integer|否|10|公网出带宽最大值，单位：Mbit/s（Megabit per second）。取值范围：0~100
-
- 您设置的**按使用流量计费**的出带宽峰值是带宽上限。当出现资源争抢时，该带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**的模式。 |
+|InternetMaxBandwidthOut|Integer|否|10|公网出带宽最大值，单位：Mbit/s（Megabit per second）。取值范围：0~100 |
 |InternetMaxBandwidthIn|Integer|否|10|设置公网入带宽最大值，单位：Mbit/s（Megabit per second）。取值范围：
 
  -   当所购公网出带宽小于等于10 Mbit/s时：1~10，默认为10。
@@ -36,7 +34,7 @@
  -   PayByBandwidth：按固定带宽计费。
 -   PayByTraffic：按使用流量计费。
 
- 您设置的**按使用流量计费**的出带宽峰值是带宽上限。当出现资源争抢时，该带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**的模式。 |
+ **说明：** **按使用流量计费**模式下的出入带宽峰值都是带宽上限，不作为业务承诺指标。当出现资源争抢时，带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**模式。 |
 |AllocatePublicIp|Boolean|否|false|是否分配公网IP地址。
 
  默认值：false |
