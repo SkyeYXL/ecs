@@ -148,7 +148,7 @@
 |[DescribeSnapshotLinks](/cn.zh-CN/API参考/快照/DescribeSnapshotLinks.md)|调用DescribeSnapshotLinks查询云盘快照链。快照链是一块云盘所有快照组成的关系链，一块云盘对应一条快照链。|
 |[ModifyAutoSnapshotPolicyEx](/cn.zh-CN/API参考/快照/ModifyAutoSnapshotPolicyEx.md)|调用ModifyAutoSnapshotPolicyEx修改一条自动快照策略。修改自动快照策略后，之前已应用该策略的云盘随即执行修改后的自动快照策略。|
 |[DescribeSnapshotsUsage](/cn.zh-CN/API参考/快照/DescribeSnapshotsUsage.md)|调用DescribeSnapshotsUsage查询您在一个地域下的快照数量以及快照容量。|
-|[DescribeSnapshotPackage](/cn.zh-CN/API参考/快照/DescribeSnapshotPackage.md)|调用DescribeSnapshotPackage查询您在一个阿里云地域下已经购买的对象存储OSS存储包，存储包可以用于抵扣快照存储容量。|
+|[DescribeSnapshotPackage](/cn.zh-CN/API参考/快照/DescribeSnapshotPackage.md)|调用DescribeSnapshotPackage查询您在一个阿里云地域下已经购买的对象存储OSS存储包。存储包可以用于抵扣普通快照存储容量，但不支持抵扣本地快照。|
 |[ModifySnapshotAttribute](/cn.zh-CN/API参考/快照/ModifySnapshotAttribute.md)|调用ModifySnapshotAttribute修改一份快照的名称或描述。|
 
 ## 安全组
@@ -295,5 +295,6 @@
 |[DescribeAccountAttributes](/cn.zh-CN/API参考/其他接口/DescribeAccountAttributes.md)|调用DescribeAccountAttributes查询您在一个阿里云地域下能创建的ECS资源配额。包括您能创建的安全组数量、弹性网卡数量、按量付费vCPU核数、抢占式实例vCPU核数、专用宿主机数量、地域网络类型以及账号是否已完成实名认证。|
 |[JoinResourceGroup](/cn.zh-CN/API参考/其他接口/JoinResourceGroup.md)|调用JoinResourceGroup将一个ECS资源或者服务加入另一个资源组。|
 |[DescribePrice](/cn.zh-CN/API参考/其他接口/DescribePrice.md)|（Beta）调用DescribePrice查询云服务器ECS资源的最新价格。|
+|[DescribeRenewalPrice](/cn.zh-CN/API参考/其他接口/DescribeRenewalPrice.md)|（Beta）调用DescribeRenewalPrice查询云服务器ECS资源的续费价格。仅支持查询包年包月资源的续费价格。|
 |[DescribeDemands](/cn.zh-CN/API参考/其他接口/DescribeDemands.md)|调用DescribeDemands查询报备资源的交付及使用状态。|
 
