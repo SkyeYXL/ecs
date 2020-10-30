@@ -125,10 +125,10 @@ You can click **Privileges** on the **Overview** page of the ECS console, and se
 |Peak outbound bandwidth|-   Subscription instance: 200 Mbit/s
 -   Pay-as-you-go instance: 100 Mbit/s
 
-**Note:** 100 Mbit/s is the maximum value that you can specify for the peak outbound bandwidth when the pay-by-traffic billing method is used. In the event of resource contention, this bandwidth cannot be guaranteed. If you want a guaranteed bandwidth for your instance, use the pay-by-bandwidth billing method.
-
 |None.|
 |Change to the public IP address of an instance|The public IP address of an instance can be changed within six hours after the instance is created, and can be changed a maximum of three times.|None.|
+
+**Note:** When the pay-by-traffic billing method is used, the peak inbound and outbound bandwidths indicate the upper limits for bandwidths and are only for reference. In the event of resource contention, the peak bandwidths cannot be guaranteed. If you want guaranteed bandwidths for your instance, use the pay-by-bandwidth billing method.
 
 ## Security group limits
 
