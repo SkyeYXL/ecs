@@ -106,7 +106,9 @@
 |InternetChargeType|String|否|PayByTraffic|网络计费类型。取值范围：
 
  -   PayByBandwidth：按固定带宽计费
--   PayByTraffic（默认）：按使用流量计费 |
+-   PayByTraffic（默认）：按使用流量计费
+
+ **说明：** **按使用流量计费**模式下的出入带宽峰值都是带宽上限，不作为业务承诺指标。当出现资源争抢时，带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**模式。 |
 |SystemDisk.Size|String|否|40|系统盘大小，单位为GiB。取值范围：20~500
 
  该参数的取值必须大于或者等于max\{20, ImageSize\}。
