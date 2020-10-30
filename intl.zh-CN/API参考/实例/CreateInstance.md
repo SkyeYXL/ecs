@@ -15,6 +15,9 @@
     -   可以通过参数`IoOptimized`指定是否创建I/O优化实例。
     -   产品选型：参见[实例规格族](~~25378~~)或调用[DescribeInstanceTypes](~~25620~~)查看目标实例规格的性能数据，或者参见[选型配置](~~58291~~)了解如何选择实例规格。
     -   查询库存：调用[DescribeAvailableResource](~~66186~~)查看指定地域或者可用区内的资源供给情况。
+
+**说明：** 如果创建实例时返回`QuotaExceed.ElasticQuota`错误，表示您在当前地域选择的实例规格所要创建的台数超出系统限额，或者全实例规格vCPU配额超出系统限额，您可以前往[ECS管理控制台](https://ecs.console.aliyun.com/?spm=a2c8b.12215451.favorites.decs.5e3a336aMGTtzy#/privileges/quota)或[配额中心](https://quotas.console.aliyun.com/products/ecs/quotas)申请提高限额。
+
 -   **镜像**：
     -   镜像确定实例的系统盘配置，实例的系统盘即为指定镜像的完全克隆。
     -   实例内存为512 MiB时，不能使用除半年渠道之外的Windows Server镜像。
@@ -68,7 +71,9 @@
 |InternetChargeType|String|否|PayByTraffic|网络计费类型。取值范围：
 
  -   PayByBandwidth：按固定带宽计费。
--   PayByTraffic（默认）：按使用流量计费。 |
+-   PayByTraffic（默认）：按使用流量计费。
+
+ **说明：** **按使用流量计费**模式下的出入带宽峰值都是带宽上限，不作为业务承诺指标。当出现资源争抢时，带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**模式。 |
 |AutoRenew|Boolean|否|true|是否要自动续费。当参数`InstanceChargeType`取值`PrePaid`时才生效。取值范围：
 
  -   true：自动续费。
@@ -181,7 +186,6 @@
 -   PL3：单盘最高随机读写IOPS 100万。
 
  有关如何选择ESSD性能等级，请参见[ESSD云盘](~~122389~~)。 |
-|NodeControllerId|String|否|null|节点控制器ID。 |
 |Description|String|否|InstanceTest|实例的描述。长度为2~256个英文或中文字符，不能以http://和https://开头。
 
  默认值：空 |
@@ -443,15 +447,16 @@ https://ecs.aliyuncs.com/?Action=CreateInstance
 |403|InvalidInstanceType.ZoneNotSupported|The specified zone does not support this instancetype.|指定的可用区里不支持指定的InstanceType。|
 |400|InstanceDiskNumber.LimitExceed|The total number of specified disk in an instance exceeds.|实例下磁盘数目超过限制。|
 |400|Account.Arrearage|Your account has an outstanding payment.|您的账号存在未支付的款项。|
+|400|InvalidDiskCategory.ValueNotSupported|The specified parameter "DiskCategory" is not valid.|指定的DiskCategory参数有误。|
 |400|InvalidAutoRenewPeriod.ValueNotSupported|The specified autoRenewPeriod is not valid.|指定的参数AutoRenewPeriod不合法。|
 |400|QuotaExceed.AfterpayInstance|The maximum number of Pay-As-You-Go instances is exceeded.|按量付费的实例库存不足，请减少创建数量。|
 |400|InvalidSpotStrategy|The specified SpotStrategy is not valid.|指定的SpotStrategy参数无效。|
 |400|InvalidSpotParam.EmptyZoneID|The specified ZoneId is empty when SpotStrategy is set.|设置SpotStrategy时ZoneId为空。|
-|400|InvalidSpotPriceLimit|The specified SpotPriceLimitis not valid.|指定的SpotPriceLimit不合法。|
-|400|InvalidSpotDuration|The specified SpotDuration is not valid.|指定的SpotDuration不合法。|
-|400|InvalidSpotAuthorized|The specified Spot param is unauthorized.|指定的Spot未获得授权。|
-|400|InvalidSpotPrepaid|The specified Spot type is not support PrePay Instance.|指定的Spot类型不支持包年包月实例。|
-|400|InvalidSpotAliUid|The specified UID is not authorized to use SPOT instance.|指定的UID无权使用SPOT实例。|
+|400|InvalidSpotPriceLimit|The specified SpotPriceLimitis not valid.|指定的SpotPriceLimit参数有误。|
+|400|InvalidSpotDuration|The specified SpotDuration is not valid.|指定的SpotDuration参数有误。|
+|400|InvalidSpotAuthorized|The specified Spot param is unauthorized.|指定的SpotDuration参数值未获得授权。|
+|400|InvalidSpotPrepaid|The specified Spot type is not support PrePay Instance.|指定的抢占式实例不支持包年包月的付费方式。|
+|400|InvalidSpotAliUid|The specified UID is not authorized to use SPOT instance.|用户账户未获得创建抢占式实例的权限。|
 |403|InvalidPayMethod|The specified pay method is not valid.|没有可用的付费方式。|
 |403|OperationDenied.ImageNotValid|The specified Image is disabled or is deleted.|指定的镜像不存在。|
 |400|InvalidTagKey.Malformed|The specified Tag.n.Key is not valid.|指定的标签键参数有误。|
@@ -547,10 +552,15 @@ https://ecs.aliyuncs.com/?Action=CreateInstance
 |404|InvalidDiskIds.NotPortable|The specified DiskId is not portable.|指定的磁盘是不可移植的。|
 |403|QuotaExceed.Tags|%s|标签数超过可以配置的最大数量。|
 |401|InvalidRamRole.NotEcsRole|The specified ram role is not authorized for ecs, please check your role policy.|指定的RAM角色无权使用ECS，请检查您的角色策略。|
+|403|QuotaExceed.ElasticQuota|No additional quota is available for the specified ECS instance type.|您在当前地域选择的实例规格所要创建的台数超出系统限额，您可以选择其他地域、实例规格或减少台数重新购买，也可以前往ECS管理控制台或配额中心申请提高限额。|
+|403|QuotaExceed.ElasticQuota|The number of the specified ECS instances has exceeded the quota of the specified instance type.|您在当前地域选择的实例规格所要创建的台数超出系统限额，您可以选择其他地域、实例规格或减少台数重新购买，也可以前往ECS管理控制台或配额中心申请提高限额。|
+|403|QuotaExceed.ElasticQuota|The number of vCPUs assigned to the ECS instances has exceeded the quota in the zone.|您的全实例规格vCPU配额超出系统限额，您可以前往ECS管理控制台或配额中心申请提高限额。|
+|403|QuotaExceed.ElasticQuota|The number of the specified ECS instances has exceeded the quota of the specified instance type, or the number of vCPUs assigned to the ECS instances has exceeded the quota in the zone.|您在当前地域选择的实例规格所要创建的台数超出系统限额，或者全实例规格vCPU配额超出系统限额，您可以前往ECS管理控制台或配额中心申请提高限额。|
 |400|InvalidHttpEndpoint.NotSupported|The specified HttpEndpoint not supported, you can use enabled\(default\) or disabled.|指定的参数HttpEndpoint值非法，请使用enabled（默认）或者disabled。|
 |400|InvalidHttpTokens.NotSupported|The specified HttpTokens not supported, you can use optional\(default\) or required.|指定的参数HttpTokens值非法，请使用optional（默认）或者required。|
 |400|InvalidHttpPutResponseHopLimit.NotSupported|The specified HttpPutResponseHopLimit not supported, more than 1 and less than 64 is reasonable.|指定的参数HttpPutResponseHopLimit值非法，取值范围必须大于等于1且小于等于64。|
 |400|InvalidPrivateIpAddress.Malformed|Specified private IP address is malformed.|指定的私有IP不合法。|
+|400|InvalidOperation.VpcHasEnabledAdvancedNetworkFeature|The specified vpc has enabled advanced network feature.|该VPC开启了高阶特性，不能创建低规格的ECS。|
 
 访问[错误中心](https://error-center.alibabacloud.com/status/product/Ecs)查看更多错误码。
 
