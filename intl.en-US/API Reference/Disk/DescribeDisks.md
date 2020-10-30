@@ -4,29 +4,29 @@ You can call this operation to query one or more Elastic Block Storage \(EBS\) d
 
 ## Description
 
--   You can specify multiple request parameters such as `RegionId`, `ZoneId`, `DiskIds`, and `InstanceId` to be queried. Specified parameters have logical AND relations. Only the specified parameters are used as filter conditions.
--   The `DiskIds` value is a JSON array. If DiskIds is not specified, it is not used as a filter condition. If `DiskIds` is set to an empty JSON array, it is regarded as a valid filter condition and an empty response is returned.
--   You can use one of the following methods to view returned data:
-    -   Method 1: Use `NextToken` to configure the query token. Set the value of this parameter to the `NextToken` value that is returned in the last call to the DescribeDisks operation. Then use `MaxResults` to specify the maximum number of entries to return on each page.
+-   You can specify multiple request parameters such as `RegionId`, `ZoneId`, `DiskIds`, and `InstanceId` to be queried. Specified parameters have logical AND relations. Only the specified parameters are included in the filter conditions.
+-   The `DiskIds` value is a JSON array. If DiskIds is not specified, it is not used as a filter condition. If `DiskIds` is set to an empty JSON array, it is regarded as a valid filter condition and an empty result is returned.
+-   You can use one of the following methods to check the responses:
+    -   Method 1: Use `NextToken` to configure the query token. Set this parameter to the `NextToken` value returned in the last call to the DescribeDisks operation. Then, use `MaxResults` to specify the maximum number of entries to return on each page.
     -   Method 2: Use `PageSize` to specify the number of entries to return on each page and then use `PageNumber` to specify the number of the page to return.
 
         You can use only one of the preceding methods. If a large number of entries are returned, we recommend that you use method 1. If `NextToken` is specified, `PageSize` and `PageNumber` do not take effect and `TotalCount` in the response is invalid.
 
 
-When you call an API operation by using Alibaba Cloud CLI, you must specify request parameter values of different data types in required formats. For more information, see [CLI parameter format](~~110340~~).
+When you call an API operation by using Alibaba Cloud CLI, you must specify request parameter values of different data types in required formats. For more information, see [CLI parameter formats](~~110340~~).
 
 ## Debugging
 
-[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates a sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DescribeDisks&type=RPC&version=2014-05-26)
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DescribeDisks&type=RPC&version=2014-05-26)
 
 ## Request parameters
 
 |Parameter|Type|Required|Example|Description|
 |---------|----|--------|-------|-----------|
 |Action|String|Yes|DescribeDisks|The operation that you want to perform. Set the value to DescribeDisks. |
-|RegionId|String|Yes|cn-hangzhou|The region ID of the EBS device. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
-|ZoneId|String|No|cn-hangzhou-g|The zone ID of the EBS device. |
-|DiskIds|String|No|\["d-bp67acfmxazb4p\*\*\*\*", "d-bp67acfmxazb4g\*\*\*\*", ... "d-bp67acfmxazb4d\*\*\*\*"\]|The IDs of the disks. The value is a JSON array that consists of up to 100 disk IDs. Separate multiple disk IDs with commas \(,\). |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the disk. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|ZoneId|String|No|cn-hangzhou-g|The zone ID of the disk. |
+|DiskIds|String|No|\["d-bp67acfmxazb4p\*\*\*\*", "d-bp67acfmxazb4g\*\*\*\*", ... "d-bp67acfmxazb4d\*\*\*\*"\]|The IDs of disks. The value is a JSON array that consists of up to 100 disk IDs. Separate multiple disk IDs with commas \(,\). |
 |InstanceId|String|No|i-bp67acfmxazb4q\*\*\*\*|The ID of the instance to which the disk is attached. |
 |DiskType|String|No|all|The type of the disk. Valid values:
 
@@ -63,18 +63,17 @@ Default value: All |
 |Portable|Boolean|No|false|Specifies whether the disk is removable. Valid values:
 
 -   true: The disk is removable. A removable disk can exist independently and can be attached to or detached from an instance within the same zone.
--   false: The disk is not removable. A disk that is not removable cannot exist independently or be attached to or detached from an instance within the same zone.
+-   false: The disk is not removable. A disk that is not removable cannot exist independently or be detached from one instance and then attached to another instance within the same zone.
 
-The `Portable` property of the following EBS devices is `false` and the lifecycle of the EBS devices is the same as that of the instances to which the EBS devices are attached:
+When the `Portable` property of the following disks is set to `false`, these disks share the same lifecycle with their associated instances:
 
 -   Local disk
 -   Local SSD
--   System disk
 -   Subscription data disk |
-|DeleteWithInstance|Boolean|No|false|Specifies whether the disk is released when its attached instance is released. Valid values:
+|DeleteWithInstance|Boolean|No|false|Specifies whether the disk is released when its associated instance is released. Valid values:
 
--   true: The disk is released when its attached instance is released.
--   false: The disk is not released but is retained as a pay-as-you-go data disk when its attached instance is released.
+-   true: The disk is released when its associated instance is released.
+-   false: The disk is not released but is retained as a pay-as-you-go data disk when its associated instance is released.
 
 Default value: false |
 |DeleteAutoSnapshot|Boolean|No|false|Specifies whether the automatic snapshots of the disk are deleted when the disk is released.
@@ -87,21 +86,21 @@ Pages start from page 1.
 Default value: 1 |
 |PageSize|Integer|No|10|The number of entries to return on each page.
 
-Maximum value: 100
+Valid values: 1 to 100.
 
 Default value: 10 |
-|NextToken|String|No|AAAAAdDWBF2\*\*\*\*|The query token. Set the value to the `NextToken` value that is returned in the last call to the DescribeDisks operation.
+|NextToken|String|No|AAAAAdDWBF2\*\*\*\*|The query token. Set the value to the `NextToken` value returned in the last call to the DescribeDisks operation.
 
-For more information about how to check responses returned by this operation, see the preceding "Description" section. |
-|MaxResults|Integer|No|50|The maximum number of entries to return on each page. Valid values: 1 to 500
+For more information about how to check the responses returned by this operation, see the preceding "Description" section. |
+|MaxResults|Integer|No|50|The maximum number of entries to return on each page. Valid values: 1 to 500.
 
-Default value: 10 |
+Default value: 10. |
 |DiskName|String|No|testDiskName|The name of the disk. |
 |AutoSnapshotPolicyId|String|No|sp-m5e2w2jutw8bv31\*\*\*\*|The ID of the automatic snapshot policy that is applied to the disk. |
-|EnableAutoSnapshot|Boolean|No|true|Specifies whether to enable the automatic snapshot policy feature for the disks to be queried.
+|EnableAutoSnapshot|Boolean|No|true|Specifies whether the automatic snapshot policy feature is enabled for the disk.
 
--   true: The automatic snapshot policy feature is enabled.
--   false: The automatic snapshot policy feature is disabled.
+-   true: The automatic snapshot policy feature is enabled for the disk.
+-   false: The automatic snapshot policy feature is disabled for the disk.
 
 **Note:** By default, the automatic snapshot policy feature is enabled for created disks. You only need to apply an automatic snapshot policy to a disk before you can use the automatic snapshot policy. |
 |EnableAutomatedSnapshotPolicy|Boolean|No|false|Specifies whether an automatic snapshot policy is applied to the disk.
@@ -112,12 +111,12 @@ Default value: 10 |
 Default value: false |
 |DiskChargeType|String|No|PostPaid|The billing method of the disk. Valid values:
 
--   PrePaid: Subscription
+-   PrePaid: subscription
 -   PostPaid: pay-as-you-go |
 |LockReason|String|No|recycling|The reason why the disk is locked. Valid values:
 
--   financial: The instance is locked due to overdue payments.
--   security: The instance is locked for security reasons.
+-   financial: overdue payments.
+-   security: security reasons.
 -   recycling: The preemptible instance is locked and pending for release.
 -   dedicatedhostfinancial: The instance is locked due to overdue payments for the dedicated host. |
 |Filter.1.Key|String|No|CreationStartTime|The key of filter 1 used to query resources. Set the value to CreationStartTime. |
@@ -126,25 +125,27 @@ Default value: false |
 |Filter.2.Value|String|No|2017-12-06T22:40:00Z|The value of filter 2 used to query resources. The value must be the end of the time range in which to query created resources. |
 |Tag.N.value|String|No|null|The value of tag N of the disk.
 
-**Note:** This parameter will be removed in the future. We recommend that you use the Tag.N.Value parameter to ensure future compatibility. |
+**Note:** We recommend that you use the Tag.N.Value parameter to ensure future compatibility. |
 |Tag.N.key|String|No|null|The key of tag N of the disk.
 
-**Note:** This parameter will be removed in the future. We recommend that you use the Tag.N.Key parameter to ensure future compatibility. |
-|Tag.N.Key|String|No|TestKey|The key of tag N of the disk. Valid values of N: 1 to 20. |
+**Note:** We recommend that you use the Tag.N.Key parameter to ensure future compatibility. |
+|Tag.N.Key|String|No|TestKey|The key of tag N of the disk. Valid values of N: 1 to 20.
+
+If a single tag is specified to query resources, up to 1,000 resources that are bound with this tag can be displayed in the response. If multiple tags are specified to query resources, up to 1,000 resources that are bound with all these tags can be displayed in the response. To query more than 1,000 resources that are bound with specified tags, call the [ListTagResources](~~110425~~) operation. |
 |Tag.N.Value|String|No|TestValue|The value of tag N of the disk. Valid values of N: 1 to 20. |
-|ResourceGroupId|String|No|rg-bp67acfmxazb4p\*\*\*\*|The ID of the resource group to which the disk belongs. |
+|ResourceGroupId|String|No|rg-bp67acfmxazb4p\*\*\*\*|The ID of the resource group to which the disk belongs. If this parameter is specified to query resources, up to 1,000 resources that belong to the specified resource group can be displayed in the response. |
 |EnableShared|Boolean|No|false|Specifies whether the disk is a Shared Block Storage device. |
 |Encrypted|Boolean|No|false|Specifies whether to query only encrypted disks.
 
 Default value: false |
-|AdditionalAttributes.N|RepeatList|No|IOPS|Other attribute values. This parameter can be set only to IOPS, which indicates the maximum IOPS of the queried disk. |
-|DryRun|Boolean|No|false|Specifies whether to check the validity of the request without actually making the request.request Valid values:
+|AdditionalAttributes.N|RepeatList|No|IOPS|Other attribute values. Set the value to IOPS, which indicates the maximum IOPS of the disk. |
+|DryRun|Boolean|No|false|Specifies whether to check the validity of the request without actually making the request. Valid values:
 
 -   true: The validity of the request is checked but the request is not made. Check items include whether your AccessKey pair is valid, whether RAM users are authorized, and whether the required parameters are specified. If the check fails, the corresponding error message is returned. If the check succeeds, the `DryRunOperation` error code is returned.
 -   false: The validity of the request is checked. If the check succeeds, a 2XX HTTP status code is returned and the request is made.
 
 Default value: false |
-|KMSKeyId|String|No|0e478b7a-4262-4802-b8cb-00d3fb40\*\*\*\*|The ID of the KMS key for the disk. |
+|KMSKeyId|String|No|0e478b7a-4262-4802-b8cb-00d3fb40\*\*\*\*|The ID of the KMS key used by the disk. |
 
 ## Response parameters
 
@@ -162,7 +163,7 @@ This parameter is valid only when the value of `Status` is `Available`. |
 -   cloud: basic disk
 -   cloud\_efficiency: ultra disk
 -   cloud\_ssd: standard SSD
--   cloud\_essd: enhanced SSD \(ESSD\)
+-   cloud\_essd: ESSD
 -   local\_ssd\_pro: I/O intensive local disk
 -   local\_hdd\_pro: throughput intensive local disk
 -   ephemeral: retired local disk
@@ -173,23 +174,23 @@ This parameter is valid only when the value of `Status` is `Available`. |
 -   true: The automatic snapshots of the disk are deleted when the disk is released.
 -   false: The automatic snapshots of the disk are retained when the disk is released.
 
-Snapshots created by calling the [CreateSnapshot](~~25524~~) operation or by using the console are retained permanently and not affected by this parameter setting. |
-|DeleteWithInstance|Boolean|true|Indicates whether the disk is released when its attached instance is released. Valid values:
+Snapshots created by calling the [CreateSnapshot](~~25524~~) operation or by using the ECS console are retained permanently and not affected by this parameter setting. |
+|DeleteWithInstance|Boolean|true|Indicates whether the disk is released when its associated instance is released. Valid values:
 
--   true: The disk is released when its attached instance is released.
--   false: The disk is retained when its attached instance is released. |
+-   true: The disk is released when its associated instance is released.
+-   false: The disk is retained when its associated instance is released. |
 |Description|String|testDescription|The description of the disk. |
 |DetachedTime|String|2018-01-08T01:01:22Z|The time when the disk was detached.
 
 This parameter is valid only when the value of `Status` is `Available`. |
-|Device|String|/dev/xvdb|The device name of the disk on its attached instance, such as /dev/xvdb.
+|Device|String|/dev/xvdb|The device name of the disk on its associated instance, such as /dev/xvdb.
 
-This parameter has a value valid only when the value of `Status` is `In_use`. Otherwise, the parameter is empty.
+This parameter has a value only when the value of `Status` is `In_use`.
 
 **Note:** This parameter will be removed in the future. We recommend that you use other parameters to ensure future compatibility. |
 |DiskChargeType|String|PostPaid|The billing method of the disk. Valid values:
 
--   PrePaid: Subscription
+-   PrePaid: subscription
 -   PostPaid: pay-as-you-go |
 |DiskId|String|d-bp18um4r4f2fve24\*\*\*\*|The ID of the disk. |
 |DiskName|String|testDiskName|The name of the disk. |
@@ -197,14 +198,14 @@ This parameter has a value valid only when the value of `Status` is `In_use`. Ot
 |EnableAutomatedSnapshotPolicy|Boolean|false|Indicates whether an automatic snapshot policy was applied to the disk. |
 |Encrypted|Boolean|false|Indicates whether the disk was encrypted. |
 |ExpiredTime|String|2018-01-10T01:01:22Z|The time when the subscription disk expires. |
-|IOPS|Integer|4000|The number of input/output operations per second \(IOPS\). Unit: times/s. |
-|IOPSRead|Integer|2000|The number of I/O reads per second. Unit: times/s. |
-|IOPSWrite|Integer|2000|The number of I/O writes per second. Unit: times/s. |
+|IOPS|Integer|4000|The number of input/output operations per second \(IOPS\). |
+|IOPSRead|Integer|2000|The number of I/O reads per second. |
+|IOPSWrite|Integer|2000|The number of I/O writes per second. |
 |ImageId|String|m-bp13aqm171qynt3u\*\*\*|The ID of the image used to create the instance. This parameter is empty unless the disk was created from an image. The value of this parameter remains unchanged throughout the lifecycle of the disk. |
 |InstanceId|String|i-bp1j4i2jdf3owlheb\*\*\*|The ID of the instance to which the disk is attached.
 
-This parameter has a value only when the value of `Status` is `In_use`. Otherwise, the parameter is empty. |
-|KMSKeyId|String|0e478b7a-4262-4802-b8cb-00d3fb408\*\*\*|The ID of the KMS key for the disk. |
+This parameter has a value only when the value of `Status` is `In_use`. |
+|KMSKeyId|String|0e478b7a-4262-4802-b8cb-00d3fb408\*\*\*|The ID of the KMS key used by the disk. |
 |MountInstanceNum|Integer|1|The number of instances to which the Shared Block Storage device is attached. |
 |MountInstances|Array of MountInstance| |The attaching information of the disk. |
 |MountInstance| | | |
@@ -238,7 +239,7 @@ This parameter is empty unless the disk was created from a snapshot. The value o
 -   ReIniting |
 |StorageSetId|String|ss-i-bp1j4i2jdf3owlhe\*\*\*\*|The ID of the storage set. |
 |StorageSetPartitionNumber|Integer|11|The maximum number of partitions in a storage set. |
-|Tags|Array of Tag| |The tags bound to the disk. |
+|Tags|Array of Tag| |The tags of the disk. |
 |Tag| | | |
 |TagKey|String|TestKey|The tag key of the disk. |
 |TagValue|String|TestValue|The tag value of the disk. |
@@ -392,14 +393,14 @@ Sample success responses
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
 |400|InvalidDiskType.ValueNotSupported|The specified disk type is not supported.|The error message returned because the specified DiskType parameter is invalid.|
-|400|InvalidCategory.ValueNotSupported|The specified disk category is not supported.|The error message returned because the specified disk category is not supported.|
+|400|InvalidCategory.ValueNotSupported|The specified disk category is not supported.|The error message returned because the specified Category parameter is invalid.|
 |400|InvalidStatus.ValueNotSupported|The specified disk status is not supported.|The error message returned because the operation is not supported while the disk is in the current state.|
 |403|InvalidDiskIds.Malformed|The amount of specified disk Ids exceeds the limit.|The error message returned because the specified DiskIds parameter is invalid.|
 |404|InvalidDiskChargeType.NotFound|The DiskChargeType does not exist in our records|The error message returned because the specified DiskChargeType parameter does not exist.|
 |404|InvalidLockReason.NotFound|The specified LockReason is not found|The error message returned because the specified LockReason parameter does not exist.|
 |404|InvalidFilterKey.NotFound| |The error message returned because the specified start time or expiration time is invalid.|
 |400|InvalidTag.Mismatch|The specified Tag.n.Key and Tag.n.Value are not match.|The error message returned because the specified Tag.N.Key and Tag.N.Value parameters do not match.|
-|400|InvalidTagCount|The specified tags are beyond the permitted range.|The error message returned because the maximum number of tags has been reached.|
+|400|InvalidTagCount|The specified tags are beyond the permitted range.|The error message returned because the number of specified tags exceeds the upper limit.|
 |400|InvalidRegion.NotFound|The specified parameter RegionId is not valid.|The error message returned because the specified RegionId parameter is invalid.|
 |500|InternalError|The request processing has failed due to some unknown error.|The error message returned because an internal error has occurred. Try again later. If the problem persists, submit a ticket.|
 |400|InvalidZoneId.NotFound|The zoneId provided does not exist in our records.|The error message returned because the specified ZoneId parameter does not exist.|
