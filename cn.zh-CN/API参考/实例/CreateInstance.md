@@ -73,7 +73,9 @@
 |InternetChargeType|String|否|PayByTraffic|网络计费类型。取值范围：
 
  -   PayByBandwidth：按固定带宽计费。
--   PayByTraffic（默认）：按使用流量计费。 |
+-   PayByTraffic（默认）：按使用流量计费。
+
+ **说明：** **按使用流量计费**模式下的出入带宽峰值都是带宽上限，不作为业务承诺指标。当出现资源争抢时，带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**模式。 |
 |AutoRenew|Boolean|否|true|是否要自动续费。当参数`InstanceChargeType`取值`PrePaid`时才生效。取值范围：
 
  -   true：自动续费。
