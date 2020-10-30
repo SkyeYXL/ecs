@@ -63,10 +63,12 @@ You can achieve minimum latency when instances within the same zone and region c
 
 The 5 Mbit/s that you purchased applies to the outbound bandwidth. The inbound bandwidth for this instance is capped at 10 Mbit/s.
 
--   Outbound bandwidth is consumed when data is sent from the ECS instance. The maximum outbound bandwidth of an ECS instance is capped at 100 Mbit/s or 200 Mbit/s regardless of whether the instance resides in a VPC or the classic network. The maximum available outbound bandwidth value depends on the billing method of the instance. For more information, see [Public bandwidth limits](/intl.en-US/Product Introduction/Limits.md)。
+-   Outbound bandwidth is consumed when data is sent from the ECS instance. The maximum outbound bandwidth of an ECS instance is capped at 100 Mbit/s or 200 Mbit/s regardless of whether the instance resides in a VPC or the classic network. The maximum available outbound bandwidth value depends on the billing method of the instance.
 -   Inbound bandwidth is consumed when data is transferred to the ECS instance. The maximum inbound bandwidth is determined by the outbound bandwidth:
     -   If the outbound bandwidth is less than 10 Mbit/s, the maximum inbound bandwidth is 10 Mbit/s.
     -   If the outbound bandwidth is greater than 10 Mbit/s, the maximum inbound bandwidth is the same as the purchased outbound bandwidth.
+
+**Note:** When the pay-by-traffic billing method is used, the peak inbound and outbound bandwidths indicate the upper limits for bandwidths and are only for reference. In the event of resource contention, the peak bandwidths cannot be guaranteed. If you want guaranteed bandwidths for your instance, use the pay-by-bandwidth billing method.
 
 ## Is public bandwidth exclusive to each ECS instance, or is public bandwidth shared across multiple instances?
 
