@@ -6,8 +6,7 @@
 
 -   请求参数的作用类似于一个过滤器，过滤器为逻辑与（AND）关系。如果某一参数为空，则过滤器不起作用。但是参数InstanceIds如果是一个空JSON数组，则视为该过滤器有效，且返回空。
 -   如果您使用的是RAM用户账号或者RAM角色，当用户或者角色缺乏接口权限时，将会返回空列表。您可以在请求中加入`DryRun`参数，判断是否因权限问题导致的空列表现象。
-
-通过阿里云CLI调用API时，不同数据类型的请求参数取值必须遵循格式要求，详情请参见[CLI参数格式说明](~~110340~~)。
+-   通过阿里云CLI调用API时，不同数据类型的请求参数取值必须遵循格式要求，详情请参见[CLI参数格式说明](~~110340~~)。
 
 ## 调试
 
@@ -49,7 +48,9 @@
 |InternetChargeType|String|否|PayByTraffic|公网带宽计费方式。取值范围：
 
  -   PayByBandwidth：按固定带宽计费。
--   PayByTraffic：按使用流量计费。 |
+-   PayByTraffic：按使用流量计费。
+
+ **说明：** **按使用流量计费**模式下的出入带宽峰值都是带宽上限，不作为业务承诺指标。当出现资源争抢时，带宽峰值可能会受到限制。如果您的业务需要有带宽的保障，请使用**按固定带宽计费**模式。 |
 |InstanceName|String|否|Test|实例名称，支持使用通配符\*进行模糊搜索。 |
 |ImageId|String|否|m-bp67acfmxazb4p\*\*\*\*|镜像ID。 |
 |Status|String|否|Running|实例状态。取值范围：
@@ -67,12 +68,14 @@
 |Tag.N.key|String|否|keyTest|标签键。
 
  **说明：** 为提高兼容性，建议您尽量使用Tag.N.Key参数。 |
-|Tag.N.Key|String|否|TestKey|实例的标签键。N的取值范围：1~20 |
+|Tag.N.Key|String|否|TestKey|实例的标签键。N的取值范围：1~20
+
+ 使用一个标签过滤资源，查询到该标签下的资源数量不能超过1000个；使用多个标签过滤资源，查询到同时绑定了多个标签的资源数量不能超过1000个。如果资源数量超过1000个，请使用[ListTagResources](~~110425~~)接口进行查询。 |
 |Tag.N.Value|String|否|TestValue|实例的标签值。N的取值范围：1~20 |
 |InstanceType|String|否|ecs.g5.large|实例的规格。 |
 |InstanceTypeFamily|String|否|ecs.g5|实例的规格族。 |
 |KeyPairName|String|否|KeyPairNameTest|实例使用的SSH密钥对名称。 |
-|ResourceGroupId|String|否|rg-bp67acfmxazb4p\*\*\*\*|实例所在的企业资源组ID。 |
+|ResourceGroupId|String|否|rg-bp67acfmxazb4p\*\*\*\*|实例所在的企业资源组ID。使用该参数过滤资源时，资源数量不能超过1000个。 |
 |HpcClusterId|String|否|hpc-bp67acfmxazb4p\*\*\*\*|实例所在的HPC集群ID。 |
 |RdmaIpAddresses|String|否|10.10.10.102|HPC实例的Rdma网络IP。 |
 |DryRun|Boolean|否|false|是否只预检此次请求。取值范围：
