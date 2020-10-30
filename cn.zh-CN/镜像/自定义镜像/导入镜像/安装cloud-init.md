@@ -25,12 +25,12 @@ cloud-init是云平台为Linux操作系统的虚拟机做系统初始化配置�
 
 使用cloud-init时，您需要注意以下版本区别。
 
--   0.7.6a版本：初期的阿里云版本cloud-init，在Python环境上依赖于python2.7。部分低版本操作系统的公共镜像仍旧保持该版本cloud-init。
+-   0.7.6a版本：初期的阿里云版本cloud-init，在Python环境上依赖于python2.7。部分低版本操作系统的公共镜像仍旧保持该版本cloud-init。如果您所使用的镜像需要安装cloud-init 0.7.6a版本，请参见[（可选）安装阿里云版cloud-init 0.7.6a15](#section_bn5_s01_qv9)。
 
     **说明：** 由于Python社区停止对python2.7的技术支持，建议您尽量使用高版本cloud-init，避免依赖库隐患。
 
 -   低于社区0.7.9版本：初期的社区版cloud-init，不适用于初始化ECS实例，必须升级至较高版本。
--   18版本：高于18版本的cloud-init会自动完成网络的初始化配置，自动配置的网络为`BOOTPROTO=dhcp DEVICE=eth0 ONBOOT=yes STARTMODE=auto TYPE=Ethernet USERCTL=no`。如果您安装了cloud-init后有自定义网络配置的需求，请参见下文[（可选）自定义网络配置](#section_v23_ilz_0cn)。
+-   18版本：高于18版本的cloud-init会自动完成网络的初始化配置，自动配置的网络为`BOOTPROTO=dhcp DEVICE=eth0 ONBOOT=yes STARTMODE=auto TYPE=Ethernet USERCTL=no`。如果您安装了cloud-init后有自定义网络配置的需求，请参见[（可选）自定义网络配置](#section_v23_ilz_0cn)。
 -   19.1版本：阿里云公共镜像将逐步升级到cloud-init 19.1版本，在Python环境上依赖于python3.6。
 
 ## 检查cloud-init版本
@@ -51,12 +51,12 @@ cloud-init是云平台为Linux操作系统的虚拟机做系统初始化配置�
     cloud-init --version
     ```
 
-    如果返回版本低于社区0.7.9版本，您需要安装阿里云版cloud-init。
+    如果返回版本低于社区0.7.9版本，您需要安装阿里云版cloud-init 19.1.2。
 
 4.  完成服务器数据备份。
 
 
-## （推荐）安装阿里云版cloud-init
+## （推荐）安装阿里云版cloud-init 19.1.2
 
 按以下步骤，下载数据源为`Aliyun`的19.1.2版本cloud-init。
 
@@ -230,6 +230,45 @@ cloud-init是云平台为Linux操作系统的虚拟机做系统初始化配置�
     issue_major=$( cat /etc/os-release | grep VERSION_ID | grep -Eo '[0-9]+\.?[0-9]+' | head -1 | awk -F'.' '{printf $1}')
     bash ./cloud-init-*/tools/deploy.sh opensuse"$issue_major"
     ```
+
+
+## （可选）安装阿里云版cloud-init 0.7.6a15
+
+部分低版本操作系统仍旧保持该版本cloud-init。例如，CentOS 6、Debian 9及SUSE Linux Enterprise Server 12等。
+
+**说明：** 阿里云公共镜像CentOS 6、Debian 9及SUSE Linux Enterprise Server 12默认已安装`cloud-init-0.7.6a15.tgz`。如果您需要进行测试，请先运行命令mv /etc/cloud/cloud.cfg /etc/cloud/cloud.cfg\_bak备份配置文件。
+
+1.  运行以下命令，检查操作系统的版本为CentOS 6、Debian 9及SUSE Linux Enterprise Server 12。
+
+    ```
+    cat /etc/issue
+    ```
+
+2.  运行以下命令，下载并解压阿里云版cloud-init 0.7.6a15。
+
+    ```
+    wget https://ecs-image-tools.oss-cn-hangzhou.aliyuncs.com/cloud-init-0.7.6a15.tgz
+    tar -zxvf cloud-init-0.7.6a15.tgz
+    ```
+
+3.  进入cloud-init的tools目录。
+
+    ```
+    cd cloud-init-0.7.6a15/tools/
+    ```
+
+4.  运行以下命令。安装cloud-init。
+
+    ```
+    bash ./deploy.sh <issue> <major_version>
+    ```
+
+    deploy.sh脚本的参数说明和取值示例如下：
+
+    |参数|说明|示例|
+    |--|--|--|
+    |issue|操作系统平台类型。取值范围：centos \| debian \| sles。参数取值均大小写敏感，其中sles表示SUSE/SLES。|centos|
+    |major\_version|操作系统平台主要版本号。|CentOS 6.5的主要版本号为6|
 
 
 ## （可选）安装社区版cloud-init
