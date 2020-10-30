@@ -13,7 +13,7 @@
         以上两种方式只能任选其中之一。当返回的条目数较多时，推荐使用方式一。如果设置了`NextToken`，则请求参数`PageSize`和`PageNumber`将失效，且返回数据中的`TotalCount`无效。
 
 
-通过阿里云CLI调用API时，不同数据类型的请求参数取值必须遵循格式要求，详情请参见[CLI参数格式说明](~~110340~~)。
+通过阿里云CLI调用API时，不同数据类型的请求参数取值必须遵循格式要求。详细信息，请参见[CLI参数格式说明](~~110340~~)。
 
 ## 调试
 
@@ -48,7 +48,7 @@
 -   ephemeral\_ssd：（已停售）本地SSD盘
 
  默认值：all |
-|Status|String|否|All|云盘状态，详情参见[云盘状态](~~25689~~)。取值范围：
+|Status|String|否|All|云盘状态。详细信息，请参见[云盘状态](~~25689~~)。取值范围：
 
  -   In\_use
 -   Available
@@ -69,7 +69,6 @@
 
  -   本地盘
 -   本地SSD盘
--   系统盘
 -   包年包月数据盘 |
 |DeleteWithInstance|Boolean|否|false|云盘是否设置了随实例释放。取值范围：
 
@@ -130,9 +129,11 @@
 |Tag.N.key|String|否|null|云盘或本地盘的标签键。
 
  **说明：** 为提高代码兼容性，请尽量使用Tag.N.Key参数。 |
-|Tag.N.Key|String|否|TestKey|云盘或本地盘的标签键。N的取值范围：1~20 |
+|Tag.N.Key|String|否|TestKey|云盘或本地盘的标签键。N的取值范围：1~20
+
+ 使用一个标签过滤资源，查询到该标签下的资源数量不能超过1000个；使用多个标签过滤资源，查询到同时绑定了多个标签的资源数量不能超过1000个。如果资源数量超过1000个，请使用[ListTagResources](~~110425~~)接口进行查询。 |
 |Tag.N.Value|String|否|TestValue|云盘或本地盘的标签值。N的取值范围：1~20 |
-|ResourceGroupId|String|否|rg-bp67acfmxazb4p\*\*\*\*|云盘或本地盘所在的企业资源组ID。 |
+|ResourceGroupId|String|否|rg-bp67acfmxazb4p\*\*\*\*|云盘或本地盘所在的企业资源组ID。使用该参数过滤资源时，资源数量不能超过1000个。 |
 |EnableShared|Boolean|否|false|是否是共享块存储。 |
 |Encrypted|Boolean|否|false|是否只筛选出加密云盘。
 
