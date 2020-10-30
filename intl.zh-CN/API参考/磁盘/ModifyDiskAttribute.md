@@ -31,7 +31,14 @@
  -   磁盘的种类（category）为本地盘（ephemeral）时。
 -   磁盘的种类（category）为普通云盘（cloud），且不可以卸载（Portable=false）时。 |
 |DeleteAutoSnapshot|Boolean|否|false|删除磁盘时，是否同时删除其自动快照。默认值：无，无表示不改变当前的值。 |
-|EnableAutoSnapshot|Boolean|否|true|如果您已经创建了自动快照策略，是否应用于该磁盘。默认值：无，无表示不改变当前的值。 |
+|EnableAutoSnapshot|Boolean|否|true|云盘是否启用自动快照策略功能。
+
+ -   ture：启用
+-   false：关闭
+
+ 默认值：无，表示不改变当前的值。
+
+ **说明：** 创建后的云盘默认启用自动快照策略功能。您只需要为云盘绑定自动快照策略即可正常使用。 |
 
 ## 返回数据
 
