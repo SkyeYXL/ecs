@@ -68,7 +68,9 @@ When you create an ECS instance, take note of the following items:
 |InternetChargeType|String|No|PayByTraffic|The billing method for network bandwidth. Default value: PayByTraffic. Valid values:
 
 -   PayByBandwidth
--   PayByTraffic |
+-   PayByTraffic
+
+**Note:** When the pay-by-traffic billing method is used, the peak inbound and outbound bandwidths indicate the upper limits for bandwidths and are only for reference. In the event of resource contention, the peak bandwidths cannot be guaranteed. If you want guaranteed bandwidths for your instance, use the pay-by-bandwidth billing method. |
 |AutoRenew|Boolean|No|true|Specifies whether to enable auto-renewal for the instance. This parameter takes effect only when `InstanceChargeType` is set to `PrePaid`. Default value: false. Valid values:
 
 -   true: enables auto-renewal for the instance.
