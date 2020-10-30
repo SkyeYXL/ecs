@@ -1,333 +1,251 @@
-# DescribeSnapshots {#doc_api_1023709 .reference}
+# DescribeSnapshots
 
-Queries all the snapshots of an ECS instance or a disk. Request parameters such as InstanceId, DiskId, and SnapshotIds act as filtering conditions and have a Boolean AND relationship.
+You can call this operation to query all snapshots of an ECS instance or a disk.
 
-## Debugging {#apiExplorer .section}
+## Description
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=DescribeSnapshots) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+You can specify multiple request parameters such as `InstanceId`, `DiskId`, and `SnapshotIds` to be queried. Specified parameters have logical AND relations. Only the specified parameters are included in the filter conditions.
 
-## Request parameters {#parameters .section}
+When you call an API operation by using Alibaba Cloud CLI, specify request parameter values of different data types in required formats. For more information, see [CLI parameter formats](~~110340~~).
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|RegionId|String|Yes|cn-hangzhou| The ID of the region to which the disk belongs. You can call [DescribeRegions](~~25609~~) to view the latest regions of Alibaba Cloud.
+## Debugging
 
- |
-|Action|String|No|DescribeSnapshots| The operation that you want to perform. Set the value to DescribeSnapshots.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DescribeSnapshots&type=RPC&version=2014-05-26)
 
- |
-|DiskId|String|No|d-diskid1| The ID of the disk.
+## Request parameters
 
- |
-|DryRun|Boolean|No|false| Indicates whether the system performs a permission check only.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|DescribeSnapshots|The operation that you want to perform. Set the value to DescribeSnapshots. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|InstanceId|String|No|i-bp67acfmxazb4p\*\*\*\*|The ID of the instance. |
+|DiskId|String|No|d-bp67acfmxazb4p\*\*\*\*|The ID of the disk. |
+|SnapshotLinkId|String|No|sp-bp67acfmxazb4p\*\*\*\*|The ID of the snapshot chain. |
+|SnapshotIds|String|No|\["s-bp67acfmxazb4p\*\*\*\*", "s-bp67acfmxazb5p\*\*\*\*", ... "s-bp67acfmxazb6p\*\*\*\*"\]|The IDs of snapshots. The value can be a JSON array that consists of up to 100 snapshot IDs. Separate multiple snapshot IDs with commas \(,\). |
+|PageNumber|Integer|No|1|The number of the page to return. Pages start from page 1.
 
- -   true: Sends a permission check request, without querying resource status. The system checks whether your AccessKey is valid, whether RAM users are authorized, and whether the required parameters are set. For a failed check, the corresponding error message is returned. For a successful check, the DryRunOperation error code is returned.
--   False \(default\): Sends a normal request, returns the 2XX HTTP status code after the check and queries the resource status directly.
+Default value: 1 |
+|PageSize|Integer|No|10|The number of entries to return on each page. Valid values: 1 to 100
 
- |
-|Encrypted|Boolean|No|false| Indicates whether to filter an encrypted snapshot. Default value: false.
+Default value: 10 |
+|SnapshotName|String|No|testSnapshotName|The name of the snapshot. |
+|Status|String|No|all|The status of the snapshot. Default value: all. Valid values:
 
- |
-|Filter.1.Key|String|No|CreationStartTime| The filter key used to query resources. The parameter value must be the start time when the resource was created \(CreationStartTime\).
-
- **Note:** This parameter will be removed in the future. We recommend that you use other parameters to ensure compatibility.
-
- |
-|Filter.1.Value|String|No|2017-12-05T22:40:00Z| The filter value used to query resources. The parameter value must be the start time when the resource was created \(CreationStartTime\).
-
- **Note:** This parameter will be removed in the future. We recommend that you use other parameters to ensure compatibility.
-
- |
-|Filter.2.Key|String|No|CreationEndTime| The filter key used to query resources. The parameter value must be the end time when the resource was created \(CreationEndTime\).
-
- **Note:** This parameter will be removed in the future. We recommend that you use other parameters to ensure compatibility.
-
- |
-|Filter.2.Value|String|No|2017-12-06T22:40:00Z| The filter value used to query resources. The parameter value must be the end time when the resource was created \(CreationEndTime\).
-
- **Note:** This parameter will be removed in the future. We recommend that you use other parameters to ensure compatibility.
-
- |
-|InstanceId|String|No|i-instanceid1| The ID of the instance.
-
- |
-|KMSKeyId|String|No|0e478b7a-4262-4802-b8cb-00d3fb40826X| The ID of the KMS key corresponding to the data disk.
-
- |
-|PageNumber|Integer|No|1| The page number that you query in the snapshot list. Starting value: 1.
-
- Default value: 1.
-
- |
-|PageSize|Integer|No|10| The number of entries per page. Maximum value: 100.
-
- Default value: 10.
-
- |
-|ResourceGroupId|String|No|rg-resourcegrouid| The ID of the resource group.
-
- |
-|SnapshotIds|String|No|\["s-xxxxxxxxx", "s-yyyyyyyyy", … "s-zzzzzzzzz"\]| The IDs of the snapshots. The parameter value is an array of snapshot IDs separated with commas \(,\). You can specify a maximum of 100 IDs.
-
- |
-|SnapshotLinkId|String|No|d-25okbh2pj| The ID of the snapshot chain.
-
- |
-|SnapshotName|String|No|FinanceJoshua| The name of the snapshot.
-
- |
-|SnapshotType|String|No|all| The type of the snapshot. Valid values:
-
- -   auto: automatic snapshot
--   user: manually created snapshot
--   all \(default\): all snapshot types
-
- |
-|SourceDiskType|String|No|Data| The type of the source disk. Valid values:
-
- -   System: The snapshot is created for a system disk.
--   Data: The snapshot is created for a data disk.
-
- |
-|Status|String|No|all| The status of the snapshot. Valid values:
-
- -   progressing: The snapshot is being created.
+-   progressing: The snapshot is being created.
 -   accomplished: The snapshot is created.
--   failed: The snapshot failed to be created.
--   all \(default\): all snapshot statuses
+-   failed: The snapshot fails to be created.
+-   all: All snapshot statuses. |
+|SnapshotType|String|No|all|The type of the snapshot. Default value: all. Valid values:
 
- |
-|Tag.N.Key|String|No|FinanceDept| The tag key of the snapshot. Valid values of N: 1 to 20. It cannot be a null string. It can be a maximum of 64 characters in length. It cannot start with aliyun or acs:. It cannot contain http:// or https://.
+-   auto: automatic snapshot
+-   user: manual snapshot \(also called user-created snapshot\)
+-   all: all snapshot types |
+|Filter.1.Key|String|No|CreationStartTime|The key of filter 1 used to query resources. Set the value to CreationStartTime. |
+|Filter.2.Key|String|No|CreationEndTime|The key of filter 2 used to query resources. Set the value to CreationEndTime. |
+|Filter.1.Value|String|No|2019-12-13T17:00Z|The value of filter 1 used to query resources. The value must be the beginning of the time range in which to query created resources. |
+|Filter.2.Value|String|No|2019-12-13T22:00Z|The value of filter 2 used to query resources. The value must be the end of the time range in which to query created resources. |
+|Usage|String|No|none|Specifies whether the snapshot has been used to create images or disks. Valid values:
 
- |
-|Tag.N.Value|String|No|FinanceDeptJoshua| The tag value of the snapshot. Valid values of N: 1 to 20. It can be a null string. It can be a maximum of 128 characters in length. It cannot start with aliyun or acs:. It cannot contain http:// or https://.
+-   image: The snapshot has been used to create custom images.
+-   disk: The snapshot has been used to create disks.
+-   image\_disk: The snapshot has been used to create custom images and data disks.
+-   none: The snapshot has not been used to create custom images or disks. |
+|SourceDiskType|String|No|Data|The type of the disk for which the snapshot was created. Valid values:
 
- |
-|Tag.N.key|String|No|FinanceDept| The tag key of the snapshot.
+-   System: system disk
+-   Data: data disk
 
- **Note:** This parameter will be removed in the future. We recommend that you use the Tag.N.Key parameter to ensure compatibility.
+**Note:** These values are case-insensitive. |
+|Tag.N.Key|String|No|TestKey|The key of tag N of the snapshot. Valid values of N: 1 to 20.
 
- |
-|Tag.N.value|String|No|FinanceDeptJoshua| The tag value of the snapshot.
+If a single tag is specified to query resources, up to 1,000 resources that are bound with this tag can be displayed in the response. If multiple tags are specified to query resources, up to 1,000 resources that are bound with all these tags can be displayed in the response. To query more than 1,000 resources that are bound with specified tags, call the [ListTagResources](~~110425~~) operation. |
+|Tag.N.Value|String|No|TestValue|The value of tag N of the snapshot. Valid values of N: 1 to 20. |
+|Encrypted|Boolean|No|false|Specifies whether the snapshot is encrypted. Default value: false. |
+|ResourceGroupId|String|No|rg-bp67acfmxazb4p\*\*\*\*|The ID of the resource group to which the snapshot belongs. If this parameter is specified to query resources, up to 1,000 resources that belong to the specified resource group can be displayed in the response. |
+|DryRun|Boolean|No|false|Specifies whether to check the validity of the request without actually making the request. Default value: false. Valid values:
 
- **Note:** This parameter will be removed in the future. We recommend that you use the Tag.N.Key parameter to ensure compatibility.
+-   true: The validity of the request is checked but the request is not made. Check items include whether your AccessKey pair is valid, whether RAM users are authorized, and whether the required parameters are specified. If the check fails, the corresponding error message is returned. If the check succeeds, the DryRunOperation error code is returned.
+-   false: The validity of the request is checked. If the check succeeds, a 2XX HTTP status code is returned and the request is made. |
+|KMSKeyId|String|No|0e478b7a-4262-4802-b8cb-00d3fb40\*\*\*\*|The ID of the KMS key used by the data disk. |
+|Category|String|No|Standard|The category of the snapshot. Valid values:
 
- |
-|Usage|String|No|none| The referenced resource type. Valid values:
+-   Standard: normal snapshot
+-   Flash: local snapshot
 
- -   image: The snapshot is used to [create custom images](~~25535~~).
--   disk: The snapshot is used to [create disks](~~25513~~).
--   image\_disk: The snapshot is used to create custom images and data disks.
--   none: The snapshot is not referenced by any other resources.
+**Note:** This parameter will be removed in the future. We recommend that you use other parameters to ensure future compatibility. |
 
- |
+## Response parameters
 
-## Response parameters {#resultMapping .section}
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|PageNumber|Integer|1|The page number of the returned page. |
+|PageSize|Integer|10|The number of entries returned per page. |
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
+|Snapshots|Array of Snapshot| |Details about the snapshots. |
+|Snapshot| | | |
+|Category|String|standard|The category of the snapshot.
 
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|PageNumber|Integer|1| The page number that you query in the snapshot list.
+**Note:** This parameter will be removed in the future. We recommend that you use other parameters to ensure future compatibility. |
+|CreationTime|String|2020-08-20T14:52:28Z|The time when the snapshot was created. The time follows the [ISO 8601](~~25696~~) standard in the yyyy-MM-ddTHH:mm:ssZ format. The time is displayed in UTC. |
+|Description|String|testDescription|The description of the snapshot. |
+|Encrypted|Boolean|false|Indicates whether the snapshot was encrypted. |
+|KMSKeyId|String|0e478b7a-4262-4802-b8cb-00d3fb40826X|The ID of the KMS key used by the data disk. |
+|LastModifiedTime|String|2020-08-25T14:18:09Z|The time when the snapshot was last changed. The time follows the [ISO 8601](~~25696~~) standard in the yyyy-MM-ddTHH:mm:ssZ format. The time is displayed in UTC. |
+|ProductCode|String|jxsc000\*\*\*\*|The product code of the Alibaba Cloud Marketplace image. |
+|Progress|String|100|The progress of the snapshot creation task. Unit: percent \(%\). |
+|RemainTime|Integer|38|The remaining time required to create the snapshot. Unit: seconds. |
+|ResourceGroupId|String|rg-bp67acfmxazb4p\*\*\*\*|The ID of the resource group. |
+|RetentionDays|Integer|30|The number of days that an automatic snapshot can be retained. |
+|SnapshotId|String|s-bp67acfmxazb4p\*\*\*\*|The ID of the snapshot. |
+|SnapshotName|String|testSnapshotName|The name of the snapshot. This parameter is returned only if a snapshot name was specified when the snapshot was being created. |
+|SnapshotSN|String|64472-116742336-61976\*\*\*\*|The serial number of the snapshot. |
+|SnapshotType|String|all|The type of the snapshot. Default value: all. Valid values:
 
- |
-|PageSize|Integer|10| The number of entries per page.
+-   auto: automatic snapshot
+-   user: manual snapshot \(also called user-created snapshot\)
+-   all: all snapshot types |
+|SourceDiskId|String|d-bp67acfmxazb4ph\*\*\*\*|The ID of the source disk. This parameter is retained even after the source disk of the snapshot is released. |
+|SourceDiskSize|String|2000|The capacity of the source disk. Unit: GiB. |
+|SourceDiskType|String|Data|The type of the source disk. Valid values:
 
- |
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request.
+-   system
+-   data |
+|SourceStorageType|String|disk|The category of the source disk.
 
- |
-|Snapshots| | | The snapshot details.
+**Note:** This parameter will be removed in the future. We recommend that you use other parameters to ensure future compatibility. |
+|Status|String|accomplished|The status of the snapshot. Valid values:
 
- |
-|└ CreationTime|String|2014-07-24T13:00:52Z| The creation time of the snapshot. The time follows the [ISO 8601](~~25696~~) standard and uses UTC time. The format is yyyy-MM-ddThh:mmZ.
-
- |
-|└Description|String|FinanceDept| The description of the snapshot.
-
- |
-|└Encrypted|Boolean|false| Indicates whether the snapshot is encrypted.
-
- |
-|└ KMSKeyId|String|0e478b7a-4262-4802-b8cb-00d3fb40826X| The ID of the KMS key corresponding to the data disk.
-
- |
-|└ProductCode|String|jxsc000204| The product code in the image marketplace.
-
- |
-|└Progress|String|100| The progress of snapshot creation. Unit: percent \(%\).
-
- |
-|└ RemainTime|Integer|38| The time remaining for a snapshot creation task before it is completed. Unit: second.
-
- |
-|└ResourceGroupId|String|rg-resourcegrouid| The ID of the resource group.
-
- |
-|└RetentionDays|Integer|30| The number of days that an automatic snapshot retains in the console for your instance.
-
- |
-|└ SnapshotId|String|s-snapshotid1| The ID of the snapshot.
-
- |
-|└SnapshotName|String|FinanceJoshua| The name of the snapshot. This parameter is returned only if a snapshot name was specified during creation.
-
- |
-|└ SourceDiskId|String|d-diskid1| The ID of the source disk. It is retained after the source disk of the snapshot is deleted.
-
- |
-|└ SourceDiskSize|String|2000| The size of the source disk. Unit: GB.
-
- |
-|└ SourceDiskType|String|Data| The type of the source disk. Valid values: System | Data.
-
- |
-|└ SourceStorageType|String|disk| The type of the source disk.
-
- **Note:** This parameter will be removed in the future. We recommend that you use other parameters to ensure compatibility.
-
- |
-|└Status|String|accomplished| The status of the snapshot. Valid values:
-
- -   progressing
+-   progressing
 -   accomplished
--   failed
+-   failed |
+|Tags|Array of Tag| |The tags of the snapshot. |
+|Tag| | | |
+|TagKey|String|TestKey|The tag key of the snapshot. |
+|TagValue|String|TestValue|The tag value of the snapshot. |
+|Usage|String|none|Indicates whether the snapshot was used to create images or disks. Valid values:
 
- |
-|└Tags| | | The tags.
-
- |
-|└TagKey|String|test| The tag key of the snapshot.
-
- |
-|└TagValue|String|api| The tag value of the snapshot.
-
- |
-|└ Usage|String|none| The referenced resource type. Valid values:
-
- -   image
+-   image
 -   disk
 -   image\_disk
--   none
+-   none |
+|TotalCount|Integer|36|The total number of snapshots. |
 
- |
-|TotalCount|Integer|36| The total number of snapshots
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=DescribeSnapshots
 &RegionId=cn-hangzhou
-&InstanceId=i-instanceid1
-&DiskId=d-diskid1
-&SnapshotIds=["s-xxxxxxxxx", "s-yyyyyyyyy", … "s-zzzzzzzzz"] 
-&PageNumber=1 
-&PageSize=10 
-&SnapshotName=FinanceJoshua
+&InstanceId=i-bp67acfmxazb4p****
+&DiskId=d-bp67acfmxazb4p****
+&SnapshotIds=["s-bp67acfmxazb4p****", "s-bp67acfmxazb5p****", ... "s-bp67acfmxazb6p****"]
+&PageNumber=1
+&PageSize=10
+&SnapshotName=testSnapshotName
 &Status=all
 &SnapshotType=all
 &Usage=none
 &SourceDiskType=Data
-&Tag.1.Key=FinanceDept
-&Tag.1.Value=FinanceDeptJoshua
+&Tag.1.Key=TestKey
+&Tag.1.Value=TestValue
 &Encrypted=false
 &DryRun=false
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DescribeSnapshotsResponse>
-  <Snapshots>
-    <Snapshot>
-      <CreationTime>2014-07-24T13:00:52Z</CreationTime>
-      <Description/> 
-      <SourceDiskId>d-23x0r79qy</SourceDiskId>
-      <SourceDiskType>DATA</SourceDiskType>
-      <ProductCode/>
-      <SnapshotName>auto_20140724_2</SnapshotName>
-      <Progress>100%</Progress>
-      <SourceDiskSize>50</SourceDiskSize>
-      <Status>accomplished</Status>
-      <SnapshotId>s-23f2i9s4t</SnapshotId>
-      <Usage>none</Usage>
-    </Snapshot>
-    <Snapshot>
-      <CreationTime>2014-07-24T13:00:42Z</CreationTime>
-      <Description/> 
-      <SourceDiskId>101-70105379</SourceDiskId>
-      <SourceDiskType>DATA</SourceDiskType> 
-      <ProductCode/>
-      <SnapshotName>auto_20140724_2</SnapshotName> 
-      <Progress>100%</Progress>
-      <SourceDiskSize>5</SourceDiskSize>
-      <Status>accomplished</Status>
-      <SnapshotId>s-23izto5qm</SnapshotId>
-      <Usage>none</Usage>
-    </Snapshot>
-  </Snapshots>
-  <PageNumber>1</PageNumber>
-  <PageSize>2</PageSize>
-  <TotalCount>36</TotalCount>
-  <RequestId>2F409D67-329A-4405-B924-2FC28566B366</RequestId>
+      <PageNumber>1</PageNumber>
+      <PageSize>2</PageSize>
+      <RequestId>659F91C6-1949-43B0-90C4-B6342CA757D5</RequestId>
+      <Snapshots>
+            <Snapshot>
+                  <CreationTime>2020-08-20T14:52:28Z</CreationTime>
+                  <LastModifiedTime>2020-08-25T14:18:09Z</LastModifiedTime>
+                  <Progress>100%</Progress>
+                  <SnapshotId>s-943ypfg****</SnapshotId>
+                  <SnapshotName>auto_20150730_3</SnapshotName>
+                  <SourceDiskId>d-944qyqj****</SourceDiskId>
+                  <SourceDiskSize>20</SourceDiskSize>
+                  <SnapshotType>user</SnapshotType>
+                  <SourceDiskType>system</SourceDiskType>
+                  <Status>accomplished</Status>
+                  <Usage>none</Usage>
+            </Snapshot>
+            <Snapshot>
+                  <CreationTime>2015-07-30T05:00:14Z</CreationTime>
+                  <Progress>100%</Progress>
+                  <SnapshotId>s-94osg32****</SnapshotId>
+                  <SnapshotName>auto_20150730_3</SnapshotName>
+                  <SourceDiskId>d-94j355j****</SourceDiskId>
+                  <SourceDiskSize>20</SourceDiskSize>
+                  <SourceDiskType>system</SourceDiskType>
+                  <Status>accomplished</Status>
+                  <Usage>none</Usage>
+            </Snapshot>
+      </Snapshots>
+      <TotalCount>36</TotalCount>
 </DescribeSnapshotsResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"PageNumber":1,
-	"TotalCount":36,
-	"PageSize":2,
-	"RequestId":"659F91C6-1949-43B0-90C4-B6342CA757D5",
-	"Snapshots":{
-		"Snapshot":[
-			{
-				"CreationTime":"2015-07-30T05:00:14Z",
-				"Status":"accomplished",
-				"SnapshotName":"auto_20150730_3",
-				"SourceDiskType":"system",
-				"SourceDiskId":"d-944qyqjfa",
-				"SnapshotId":"s-943ypfgic",
-				"SourceDiskSize":20,
-				"Progress":"100%",
-				"Usage":"none"
-			},
-			{
-				"CreationTime":"2015-07-30T05:00:14Z",
-				"Status":"accomplished",
-				"SnapshotName":"auto_20150730_3",
-				"SourceDiskType":"system",
-				"SourceDiskId":"d-94j355jsq",
-				"SnapshotId":"s-94osg320e",
-				"SourceDiskSize":20,
-				"Progress":"100%",
-				"Usage":"none"
-			}
-		]
-	}
+    "PageNumber": 1,
+    "PageSize": 2,
+    "RequestId": "659F91C6-1949-43B0-90C4-B6342CA757D5",
+    "Snapshots": {
+        "Snapshot": [
+            {
+                "CreationTime": "2020-08-20T14:52:28Z",
+                "LastModifiedTime": "2020-08-25T14:18:09Z",
+                "Progress": "100%",
+                "SnapshotId": "s-943ypfg****",
+                "SnapshotName": "auto_20150730_3",
+                "SourceDiskId": "d-944qyqj****",
+                "SourceDiskSize": 20,
+                "SnapshotType": "user",
+                "SourceDiskType": "system",
+                "Status": "accomplished",
+                "Usage": "none"
+            },
+            {
+                "CreationTime": "2015-07-30T05:00:14Z",
+                "Progress": "100%",
+                "SnapshotId": "s-94osg32****",
+                "SnapshotName": "auto_20150730_3",
+                "SourceDiskId": "d-94j355j****",
+                "SourceDiskSize": 20,
+                "SourceDiskType": "system",
+                "Status": "accomplished",
+                "Usage": "none"
+            }
+        ]
+    },
+    "TotalCount": 36
 }
 ```
 
-## Error codes {#section_6kb_y9k_f0s .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|403|InvalidSnapshotIds.Malformed|The amount of specified snapshot Ids exceeds the limit.|The error message returned when the specified value of the SnapshotIds parameter is invalid.|
-|404|InvalidFilterKey.NotFound| |The error message returned when the specified start time or end time is incorrect.|
-|404|InvalidFilterValue| |The error message returned when the format of the specified time is invalid.|
-|404|InvalidUsage|The specified Usage is not valid|The error message returned when the specified referenced resource type \(image, disk, image\_disk, or none\) is invalid.|
-|404|InvalidStatus.NotFound|The specified Status is not found|The error message returned when the specified resource status does not exist.|
-|404|InvalidSnapshotType.NotFound|The specified SnapshotType is not found|The error message returned when the specified snapshot type does not exist.|
-|400|InvalidTag.Mismatch|The specified Tag.n.Key and Tag.n.Value are not match.|The error message returned when the specified Tag.n.Key parameter does not correspond to the specified Tag.n.Value parameter.|
-|400|InvalidTagCount|The specified tags are beyond the permitted range.|The error message returned when the number of specified tags has reached the upper limit.|
-|404|InvalidSnapshotLinkId.NotFound|The specified snapshot link is not found.|The error message returned when the specified snapshot chain does not exist.|
+|403|InvalidSnapshotIds.Malformed|The amount of specified specified snapshot Ids exceeds the limit.|The error message returned because the specified SnapshotIds parameter is invalid.|
+|404|InvalidFilterKey.NotFound| |The error message returned because the specified start time or end time is invalid.|
+|404|InvalidUsage|The specifed Usage is not valid|The error message returned because the specified Usage parameter is invalid. The valid values are image, disk, image\_disk, or none.|
+|404|InvalidSourceDiskType|The specifed SourceDiskType is not valid|The error message returned because the specified SourceDiskType parameter is invalid.|
+|404|InvalidStatus.NotFound|The specified Status is not found|The error message returned because the specified Status parameter does not exist.|
+|404|InvalidSnapshotType.NotFound|The specfied SnapshotType is not found|The error message returned because the specified SnapshotType parameter does not exist.|
+|400|InvalidTag.Mismatch|The specified Tag.n.Key and Tag.n.Value are not match.|The error message returned because the specified Tag.N.Key and Tag.N.Value parameters do not match.|
+|400|InvalidTagCount|The specified tags are beyond the permitted range.|The error message returned because the number of specified tags exceeds the upper limit.|
+|500|InternalError|The request processing has failed due to some unknown error.|The error message returned because an internal error has occurred. Try again later. If the problem persists, submit a ticket.|
+|404|InvalidSnapshotLinkId.NotFound|The specified snapshot link is not found.|The error message returned because the specified SnapshotLinkId parameter does not exist.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
