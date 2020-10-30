@@ -90,7 +90,7 @@ WAF has the following benefits:
 -   WAF can handle various web application attacks to ensure web security and availability of a website without installing any software or hardware or modifying website configuration and code. In addition to powerful web protection capabilities, WAF can customize protection for specific websites. WAF is used to protect web applications in fields such as finance, e-commerce, O2O, Internet Plus, gaming, governments, and insurance.
 -   Without WAF, you may be vulnerable to web intrusions such as data leaks, HTTP floods, and trojans.
 
-For more information about how to access WAF, see [Deploy WAF]().
+For more information about how to access WAF, see [Deploy WAF](/intl.en-US/Quick Start/Quick start.md).
 
 Alibaba Cloud provides multiple security services to safeguard ECS instances. You can choose appropriate methods as needed to enhance systems and data protection, prevent intrusion into ECS instances, and ensure stability and reliability.
 
