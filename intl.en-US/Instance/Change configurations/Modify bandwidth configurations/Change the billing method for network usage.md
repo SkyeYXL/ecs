@@ -15,7 +15,10 @@ The billing methods available for network usage are pay-by-bandwidth and pay-by-
 -   Pay-by-bandwidth: You are charged based on the specified bandwidth. Your actual outbound bandwidth does not exceed the specified bandwidth.
 -   Pay-by-traffic: a pay-as-you-go billing method in which you are charged based on the traffic that you actually used. You can configure a bandwidth limit for outbound traffic to avoid excess costs caused by bursts in outbound traffic.
 
-This topic describes how to change the billing method for network usage of an instance that uses a public IP address. For more information about how to change the billing method for network usage of an instance that uses an elastic IP address \(EIP\), see [Modify the bandwidth of an EIP](/intl.en-US/Instance/Change configurations/Modify bandwidth configurations/Modify the bandwidth of an Elastic IP address.md).
+    **Note:** When the pay-by-traffic billing method is used, the peak inbound and outbound bandwidths indicate the upper limits for bandwidths and are only for reference. In the event of resource contention, the peak bandwidths cannot be guaranteed. If you want guaranteed bandwidths for your instance, use the pay-by-bandwidth billing method.
+
+
+This topic describes how to change the billing method for network usage of an instance that uses a public IP address. For more information about how to change the billing method for network usage of an instance that uses an elastic IP address \(EIP\), see [Modify the bandwidth of an EIP](/intl.en-US/Instance/Change configurations/Modify bandwidth configurations/Modify the bandwidth of an EIP.md).
 
 ## Change from pay-by-bandwidth to pay-by-traffic
 
