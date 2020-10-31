@@ -39,7 +39,7 @@ This topic describes the features of ECS Bare Metal Instance families and lists 
 
 ## Overview
 
-ECS Bare Metal Instance is a compute service that combines the elasticity of virtual machines and the performance and features of physical machines. ECS Bare Metal Instance is designed based on the state-of-the-art virtualization 2.0 technology developed by Alibaba Cloud. The virtualization technology used by ECS Bare Metal Instance is optimized to support common ECS instances and nested virtualization. It maintains the elastic performance of ECS instances and the performance and features of physical machines.
+ECS Bare Metal Instance is a compute service that combines the elasticity of virtual machines and the performance and features of physical machines. ECS Bare Metal Instance is designed based on the state-of-the-art virtualization 2.0 technology developed by Alibaba Cloud. The virtualization 2.0 technology used by ECS Bare Metal Instance is optimized to support common ECS instances and nested virtualization. It maintains the elastic performance of ECS instances and the performance and features of physical machines.
 
 ECS Bare Metal Instance combines the strengths of both physical machines and ECS instances to deliver powerful and robust computing capabilities. ECS Bare Metal Instance uses virtualization 2.0 to provide your business applications with direct access to the processor and memory resources of the underlying servers without virtualization overheads. ECS Bare Metal Instance retains the hardware feature sets \(such as Intel® VT-x\) and resource isolation capabilities of physical machines, which is ideal for applications that need to run in non-virtualization environments.
 
@@ -116,7 +116,7 @@ Features
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
     -   Video encoding, decoding, and rendering
-    -   Computing clusters and memory intensive data processing
+    -   Compute clusters and memory intensive data processing
     -   Data analysis and computing
 
 Instance types
@@ -147,7 +147,7 @@ Features
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are received and transmitted
     -   Enterprise-level applications of various types and sizes
     -   Websites and application servers
     -   Game servers
@@ -184,7 +184,7 @@ Features
     -   Containers including Docker, Clear Containers, and Pouch
     -   Video encoding, decoding, and rendering
     -   Enterprise-level applications such as large and medium-sized databases
-    -   Computing clusters and memory intensive data processing
+    -   Compute clusters and memory intensive data processing
     -   Data analysis and computing
 
 Instance types
@@ -247,7 +247,7 @@ Features
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are received and transmitted
     -   Web frontend servers
     -   Frontend servers of massively multiplayer online \(MMO\) games
     -   Data analysis, batch processing, and video encoding
@@ -276,7 +276,7 @@ Features
 -   Supports VPCs only.
 -   Provides dedicated hardware resources and physical isolation.
 -   Suitable for the following scenarios:
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are received and transmitted
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
@@ -345,8 +345,8 @@ Features
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
-    -   High-performance databases and in-memory databases
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are received and transmitted
+    -   High-performance and in-memory databases
     -   Data analysis, data mining, and distributed memory caching
     -   Hadoop clusters, Spark clusters, and other memory intensive enterprise applications
     -   High-performance scientific and engineering applications
@@ -377,7 +377,7 @@ Features
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
-    -   High-performance databases and in-memory databases
+    -   High-performance and in-memory databases
     -   Data analysis, data mining, and distributed memory caching
     -   Hadoop clusters, Spark clusters, and other memory intensive enterprise applications
 
@@ -437,7 +437,7 @@ Features
 -   Provides dedicated hardware resources and physical isolation.
 -   Suitable for the following scenarios:
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
-    -   High-performance databases and in-memory databases such as SAP HANA
+    -   High-performance and in-memory databases such as SAP HANA
     -   Memory intensive applications
     -   Big data processing engines such as Apache Spark and Presto
 
@@ -493,7 +493,7 @@ Features
 -   Supports VPCs only.
 -   Provides dedicated hardware resources and physical isolation.
 -   Suitable for the following scenarios:
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are received and transmitted
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
@@ -525,7 +525,7 @@ Features
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
-    -   High-performance databases and in-memory databases
+    -   High-performance and in-memory databases
     -   Data analysis, data mining, and distributed memory caching
     -   Hadoop clusters, Spark clusters, and other memory intensive enterprise applications
 
@@ -619,7 +619,7 @@ Features
     -   Powered by the new NVIDIA Turing architecture.
     -   Equipped with 16 GB memory \(320 GB/s bandwidth\) per GPU.
     -   Equipped with 2,560 CUDA cores per GPU.
-    -   Euipped with up to 320 Turing Tensor cores per GPU.
+    -   Equipped with up to 320 Turing Tensor cores per GPU.
     -   Mixed-precision Tensor cores support 65 FP16 TFLOPS, 130 INT8 TOPS, and 260 INT4 TOPS.
 -   Provides high network performance based on large computing capacity.
 -   Suitable for the following scenarios:
@@ -711,7 +711,7 @@ Features
 -   Supports VPCs only.
 -   Provides dedicated hardware resources and physical isolation.
 -   Suitable for the following scenarios:
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are received and transmitted
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
@@ -772,7 +772,7 @@ Features
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
-    -   High-performance databases and in-memory databases
+    -   High-performance and in-memory databases
     -   Data analysis, data mining, and distributed memory caching
     -   Hadoop clusters, Spark clusters, and other memory intensive enterprise applications
 
@@ -822,5 +822,5 @@ Instance types
 
 ## Billing methods
 
-ECS Bare Metal Instance supports pay-as-you-go and subscription billing methods. For more information, see [Comparison of billing methods](/intl.en-US/Pricing/Comparison of billing methods.md).
+ECS Bare Metal Instance supports pay-as-you-go and subscription billing methods. For more information, see [Billing overview](/intl.en-US/Pricing/Billing methods/Billing overview.md).
 
