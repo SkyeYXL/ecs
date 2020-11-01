@@ -1,150 +1,131 @@
-# DescribeBandwidthLimitation {#doc_api_1000083 .reference}
+# DescribeBandwidthLimitation
 
-Queries a list of bandwidth resources.
+You can call this operation to query the maximum public bandwidth that can be purchased, upgraded, or downgraded for various instance types.
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=DescribeBandwidthLimitation) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DescribeBandwidthLimitation&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|RegionId|String|Yes|cn-hangzhou| The ID of the region where an instance resides. You can call [DescribeRegions](~~25609~~) to view the latest regions of Alibaba Cloud.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|DescribeBandwidthLimitation|The operation that you want to perform. Set the value to DescribeBandwidthLimitation. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|InstanceType|String|No|ecs.g5.large|The instance type. For more information about the values, see [Instance families](~~25378~~).
 
- |
-|Action|String|No|DescribeBandwidthLimitation| The operation that you want to perform. Set the value to DescribeBandwidthLimitation.
+**Note:** This parameter is required. |
+|InstanceChargeType|String|No|PrePaid|The billing method of the instance. For more information, see [Billing overview](~~25398~~). Valid values:
 
- |
-|InstanceChargeType|String|No|PrePaid| The billing method of the instance. For more information, see [Pricing overview](~~25398~~). Valid values:
+-   PrePaid: subscription
+-   PostPaid: pay-as-you-go
 
- -   PrePaid: the subscription-based billing method.
--   PostPaid: the Pay-As-You-Go billing method.
+Default value: PostPaid. |
+|SpotStrategy|String|No|NoSpot|The preemption policy for the preemptible or pay-as-you-go instance. Valid values:
 
- Default value: PostPaid.
+-   NoSpot: The instance is a regular pay-as-you-go instance.
+-   SpotWithPriceLimit: The instance is a preemptible instance with user-defined maximum hourly prices.
+-   SpotAsPriceGo: The system automatically offers a bid, which is not higher than the pay-as-you-go price for the same instance type.
 
- |
-|InstanceType|String|No|ecs.g5.large| The type of the instance. For more information, see [Instance type families](~~25378~~), or call the[DescribeInstanceTypes](~~25620~~) to query latest instance types.
+Default value: NoSpot.
 
- |
-|OperationType|String|No|Upgrade| Specifies bandwidth operations. Valid values:
+**Note:** This parameter takes effect only when the InstanceChargeType parameter is set to PostPaid. |
+|ResourceId|String|No|i-bp67acfmxazb4ph\*\*\*|The ID of the resource.
 
- -   Upgrade
--   Downgrade
--   Create
+**Note:** This parameter is required when the OperationType parameter is set to Upgrade or Downgrade. |
+|OperationType|String|No|Upgrade|Specifies the operation for which to query the maximum public bandwidth. Valid values:
 
- Default value: Create.
+-   Upgrade: upgrades the public bandwidth.
+-   Downgrade: downgrades the public bandwidth.
+-   Create: creates an ECS instance.
 
- |
-|ResourceId|String|No|s-946ntx4xx| The ID of the resource. When you set the OperationType parameter to Upgrade or Downgrade, the ResourceId parameter is required.
+Default value: Create. |
 
- |
-|SpotStrategy|String|No|NoSpot| The spot strategy for a Pay-As-You-Go instance. Valid values:
+## Response parameters
 
- -   NoSpot: indicates a regular Pay-As-You-Go instance.
--   SpotWithPriceLimit: indicates a Pay-As-You-Go instance with the maximum hourly price.
--   SpotAsPriceGo: indicates that the system automatically offers a spot hourly price for an instance based on the supply-demand statistics. The spot price is limited to the cost of resources you actually use.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|Bandwidths|Array of Bandwidth| |Details about the maximum public bandwidth. |
+|Bandwidth| | | |
+|InternetChargeType|String|PayByTraffic|The billing method for network usage. Valid values:
 
- Default: NoSpot.
+-   PayByBandwidth
+-   PayByTraffic |
+|Max|Integer|100|The maximum public bandwidth. |
+|Min|Integer|0|The minimum public bandwidth. |
+|Unit|String|Mbps|The unit of the public bandwidth. |
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
 
- The SpotStrategy parameter is applicable only when the InstanceChargeType parameter is set to PostPaid.
-
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|Bandwidths| | | The bandwidth types.
-
- |
-|└InternetChargeType|String|PayByTraffic| The bandwidth billing method. Valid values:
-
- -   PayByBandwidth: You are billed based on the fixed amount of bandwidth.
--   PayByTraffic
-
- |
-|└Max|Integer|100| The maximum bandwidth. No value is returned if the parameter is empty.
-
- |
-|└Min|Integer|0| The minimum bandwidth. No value is returned if the parameter is empty.
-
- |
-|└Unit|String|Mbps| The bandwidth unit. No value is returned if the parameter is empty.
-
- |
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=DescribeBandwidthLimitation
-&RegionId=cn-hangzhou 
+&RegionId=cn-hangzhou
+&InstanceType=ecs.g5.large
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DescribeBandwidthLimitationResponse>
-  <Bandwidths>
-    <Bandwidth>
-      <InternetChargeType>PayByTraffic</InternetChargeType>
-      <Max>100</Max>
-      <Min>0</Min>
-      <Unit>Mbps</Unit>
-    </Bandwidth>
-    <Bandwidth>
-      <InternetChargeType>PayByTraffic</InternetChargeType>
-      <Max>100</Max>
-      <Min>0</Min>
-      <Unit>Mbps</Unit>
-    </Bandwidth>
-  </Bandwidths>
-  <RequestId>675B6D89-A3EB-4987-BAF3-610591E0D019</RequestId>
+      <Bandwidths>
+            <Bandwidth>
+                  <Max>100</Max>
+                  <InternetChargeType>PayByBandwidth</InternetChargeType>
+                  <Unit>Mbps</Unit>
+                  <Min>0</Min>
+            </Bandwidth>
+            <Bandwidth>
+                  <Max>100</Max>
+                  <InternetChargeType>PayByTraffic</InternetChargeType>
+                  <Unit>Mbps</Unit>
+                  <Min>0</Min>
+            </Bandwidth>
+      </Bandwidths>
+      <RequestId>226CB38E-29E3-423E-85DD-DCD1C99832B0</RequestId>
 </DescribeBandwidthLimitationResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RequestId":"675B6D89-A3EB-4987-BAF3-610591E0D019",
-	" Bandwidths":{
-		" Bandwidth":[
-			{
-				"Max":100,
-				"InternetChargeType":"PayByTraffic",
-				"Unit":"Mbps",
-				"Min":0
-			},
-			{
-				"Max":100,
-				"InternetChargeType":"PayByTraffic",
-				"Unit":"Mbps",
-				"Min":0
-			}
-		]
-	}
+    "Bandwidths": {
+        "Bandwidth": [
+            {
+                "Max": 100,
+                "InternetChargeType": "PayByBandwidth",
+                "Unit": "Mbps",
+                "Min": 0
+            },
+            {
+                "Max": 100,
+                "InternetChargeType": "PayByTraffic",
+                "Unit": "Mbps",
+                "Min": 0
+            }
+        ]
+    },
+    "RequestId": "226CB38E-29E3-423E-85DD-DCD1C99832B0"
 }
 ```
 
-## Error codes {#section_yyl_z7c_bjo .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|400|Invalid.InstanceChargeType|The specified InstanceChargeType is not valid.|The error message returned when the InstanceChargeType parameter is invalid.|
-|404|Invalid.NetworkCategory|The specified NetworkCategory is not valid.|The error message returned when the NetworkCategory parameter is invalid.|
-|404|Invalid.SpotStrategy|The specified SpotStrategy is not valid.|The error message returned when the SpotStrategy parameter is invalid.|
-|404|Invalid.IoOptimized|The specified IoOptimized is not valid.|The error message returned when the IoOptimized parameter is invalid.|
-|404|Invalid.ResourceId|The specified ResourceId is not valid.|The error message returned when the resource does not exist in the region or is released.|
-|404|Invalid.InstancePayType|The specified InstancePayType is not valid.|The error message returned when the InstancePayType parameter is invalid.|
+|400|Invalid.InstanceChargeType|The specified InstanceChargeType is not valid.|The error message returned because the specified InstanceChargeType parameter is invalid.|
+|404|Invalid.NetworkCategory|The specified NetworkCategory is not valid.|The error message returned because the specified NetworkCategory parameter is invalid.|
+|404|Invalid.SpotStrategy|The specified SpotStrategy is not valid.|The error message returned because the specified SpotStrategy parameter is invalid.|
+|404|Invalid.IoOptimized|The specified IoOptimized is not valid.|The error message returned because the specified IoOptimized parameter is invalid.|
+|404|Invalid.ResourceId|The specified ResourceId is not valid.|The error message returned because the specified ResourceId parameter is invalid.|
+|404|Invalid.InstancePayType|The specified InstancePayType is not valid.|The error message returned because the specified InstanceChargeType parameter is invalid.|
+|400|InvalidInstanceType.ValueNotSupported|The specified InstanceType beyond the permitted range.|The error message returned because the specified InstanceType parameter is invalid.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
