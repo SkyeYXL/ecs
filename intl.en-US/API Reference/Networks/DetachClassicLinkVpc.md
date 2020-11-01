@@ -1,74 +1,71 @@
-# DetachClassicLinkVpc {#doc_api_1000064 .reference}
+# DetachClassicLinkVpc
 
-Unlinks a classic network-connected instance from the VPC. After the ClassicLink is disabled, the classic network-connected instance cannot access the VPC.
+You can call this operation to unlink a classic network-type instance from a virtual private cloud \(VPC\) by removing the ClassicLink connection between them. After the instance is unlinked from the VPC, it can no longer communicate with instances in the VPC.
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=DetachClassicLinkVpc) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DetachClassicLinkVpc&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|InstanceId|String|Yes|i-test| The ID of the classic network-connected instance.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|DetachClassicLinkVpc|The operation that you want to perform. Set the value to DetachClassicLinkVpc. |
+|InstanceId|String|Yes|i-bp67acfmxazb4p\*\*\*\*|The ID of the classic network-type instance. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the classic network-type instance. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|VpcId|String|Yes|vpc-bp67acfmxazb4p\*\*\*\*|The ID of the VPC to which the instance is linked. |
 
- |
-|RegionId|String|Yes|cn-hangzhou| The ID of the region where the instance resides. You can call [DescribeRegions](~~25609~~) to view the latest regions of Alibaba Cloud.
+## Response parameters
 
- |
-|VpcId|String|Yes|vpc-test| The ID of the VPC to which the instance is linked.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
 
- |
-|Action|String|No|DetachClassicLinkVpc| The operation that you want to perform. Set the value to DetachClassicLinkVpc.
-
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=DetachClassicLinkVpc
-&RegionId=cn-hangzhou 
-&VpcId=vpc-test
-&InstanceId=i-test
+&RegionId=cn-hangzhou
+&VpcId=vpc-bp67acfmxazb4p****
+&InstanceId=i-bp67acfmxazb4p****
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DetachClassicLinkVpcResponse>
-  <RequestId>C0003E8B-B930-4F59-ADC0-0E209A9012A8</RequestId>
+      <RequestId>C0003E8B-B930-4F59-ADC0-0E209A9012A8</RequestId>
 </DetachClassicLinkVpcResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RequestId":"C0003E8B-B930-4F59-ADC0-0E209A9012A8"
+    "RequestId": "C0003E8B-B930-4F59-ADC0-0E209A9012A8"
 }
 ```
 
-## Error codes {#section_dps_n73_kjc .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|403|InvalidRegionId.Malformed|The specified parameter ? RegionId? is not valid.|The error message returned when the specified region ID is invalid.|
-|403|OperationDenied|The instances are not allowed to detach from the linked vpc.|The error message returned when the linked instance cannot be detached from the VPC.|
-|403|InvalidStatus.InstanceStatus|The specified instance status is not support this operation ,expect status is running or shutted.|The error message returned when the operation is not supported under the instance state. The expected state is Running or Shutted.|
-|403|Forbidden.SubUser|User not authorized to operate on the specified resource.|The error message returned when the RAM user is not authorized to perform operations on this resource.|
+|403|InvalidInstanceId.NotFound|The InstanceId provided does not exist in our records.|The error message returned because the specified InstanceId parameter does not exist.|
+|403|InvalidRegionId.Malformed|The specified parameter ? RegionId? is not valid.|The error message returned because the specified RegionId parameter is invalid.|
+|403|InvalidVpcId.Malformed|The specified parameter ? VpcId? is not valid.|The error message returned because the specified VpcId parameter is invalid.|
+|403|InvalidInstanceId.MalFormed|The specified instance is not a classic network instance.|The error returned because the specified instance is not in the classic network.|
+|403|OperationDenied|The instances are not allowed to detach from the linked vpc.|The error message returned because the instance cannot be unlinked from the VPC.|
+|403|InvalidParameter.InvalidInstanceIdAndVpcId|The parameter InstanceId and VpcId are not allowed to be empty at the same time.|The error message returned because neither InstanceId nor VpcId is specified.|
+|403|InvalidInstanceId.NotFound|The specified instance does not exist.|The error message returned because the specified InstanceId parameter does not exist.|
+|403|InvalidStatus.InstanceStatus|The specified instance status is not support this operation ,expect status is running or shutted.|The error message returned because the operation is not supported while the instance is in the current state. The instance must be in the Running or Stopped state.|
+|403|InvalidInstanceId.NotBelong|The specified instance is not belong to you.|The error message returned because the specified instance does not exist in your account.|
+|403|Forbidden.SubUser|User not authorized to operate on the specified resource.|The error message returned because the RAM user is not authorized to manage the specified resource.|
+|403|InvalidStatus.InstanceStatus|The specified instance status does not support this operation, expected status is Running or Stopped.|The error message returned because the operation is not supported while the instance is in the current state. The instance must be in the Running or Stopped state.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
