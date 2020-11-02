@@ -1,136 +1,113 @@
-# DetachKeyPair {#doc_api_999668 .reference}
+# DetachKeyPair
 
-Detaches SSH key pairs from one or multiple Linux-based instances.
+You can call this operation to unbind an SSH key pair from one or more Linux instances.
 
-## Description {#description .section}
+## Description
 
-When you call this operation, note that:
+When you call this operation, take note of the following items:
 
--   After you detach an SSH key pair, you must restart the instance \([RebootInstance](~~25502~~)\) for the operation to take effect.
--   After an SSH key pair is detached from an instance, the account-password authentication method is used by default.
+-   After you unbind an SSH key pair from an instance, you must call the [RebootInstance](~~25502~~) operation to restart the instance for the unbind operation to take effect.
+-   By default, the username and password authentication is used for an instance after you unbind an SSH key pair from the instance.
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=DetachKeyPair) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DetachKeyPair&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|InstanceIds|String|Yes|\["d-xxxxxxxxx", "d-yyyyyyyyy", … "d-zzzzzzzzz"\]| The IDs of instances from which SSH key pairs are detached. The value can be a JSON array consisting of up to 50 instance IDs. Multiple IDs must be separated by commas \(,\).
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|DetachKeyPair|The operation that you want to perform. Set the value to DetachKeyPair. |
+|InstanceIds|String|Yes|\["i-bp1d6tsvznfghy7y\*\*\*\*", "i-bp1ippxbaql9zet7\*\*\*\*", … "i-bp1ib7bcz07l\*\*\*\*"\]|The IDs of instances from which you want to detach the SSH key pair. The value can be a JSON array that consists of up to 50 instance IDs. Separate multiple instance IDs with commas \(,\). |
+|KeyPairName|String|Yes|testKeyPairName|The name of the SSH key pair. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the SSH key pair. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
 
- |
-|KeyPairName|String|Yes|FinanceJoshuaV26| The SSH key pair names.
+## Response parameters
 
- |
-|RegionId|String|Yes|cn-hangzhou| The ID of the region where an SSH key pair resides. You can call [DescribeRegions](~~25609~~) to view the latest list of Alibaba Cloud regions.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|FailCount|String|0|The number of instances from which the SSH key pair failed to be unbound. |
+|KeyPairName|String|testKeyPairName|The name of the SSH key pair. |
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
+|Results|Array of Result| |The result set of the unbind operation. |
+|Result| | | |
+|Code|String|200|The operation status code returned. 200 indicates that the operation is successful. |
+|InstanceId|String|i-bp1d6tsvznfghy7y\*\*\*\*|The ID of the instance. |
+|Message|String|successful|The operation information returned. When the value of Code is 200, the value of Message is successful. |
+|Success|String|true|Indicates whether the operation was successful. |
+|TotalCount|String|2|The total number of instances from which you attempted to unbind the SSH key pair. |
 
- |
-|Action|String|No|DetachKeyPair| The operation that you want to perform. Set the value to DetachKeyPair.
-
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|FailCount|String|0| The number of instances from which key pairs fail to be detached.
-
- |
-|KeyPairName|String|FinanceJoshuaV26| The name of a key pair.
-
- |
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request. This parameter is returned regardless of whether the operation is successful.
-
- |
-|Results| | | The result set of detach operation.
-
- |
-|└Code|String|200| The operation status code returned. 200 indicates that the operation is successful.
-
- |
-|└InstanceId|String|i-instanceid1| The ID of an instance.
-
- |
-|└Message|String|successful| The operation information returned. When the value of code is 200, the value of message is successful.
-
- |
-|└Success|String|true| The message returned indicating whether the operation is successful.
-
- |
-|TotalCount|String|2| The total number of instances from which key pairs are detached.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=DetachKeyPair
 &RegionId=cn-qingdao
-&InstanceIds=["i-xxxxxxx", "i-yyyyyyy"]
-&KeyPairName=test
+&InstanceIds=["i-bp1d6tsvznfghy7y****", "i-bp1ippxbaql9zet7****", … "i-bp1ib7bcz07l****"]
+&KeyPairName=testKeyPairName
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DetachKeyPairResponse>
-  <TotalCount>2</TotalCount>
-   <RequestId>834B3E6B-2D1D-482F-81A4-810C327D4735</RequestId>
-  <Results>
-    </Result>
-      <Message>AccessDenied</Message>
-      <InstanceId>i-m5eg7be9ndloji64jknv</InstanceId>
-      <Success>true</Success>
-      <Code>200</Code>
-    </Result>
-    </Result>
-      <Message>successful</Message>
-      <InstanceId>i-m5e25x2mwr0hk33dwv0h</InstanceId>
-      <Success>true</Success>
-      <Code>200</Code>
-    </Result>
-  </Results>
-  <FailCount>0</FailCount>
- </DetachKeyPairResponse>
+      <TotalCount>2</TotalCount>
+      <RequestId>834B3E6B-2D1D-482F-81A4-810C327D4735</RequestId>
+      <Results>
+            <Result>
+                  <Message>successful</Message>
+                  <InstanceId>i-m5eg7be9ndloji64****</InstanceId>
+                  <Success>true</Success>
+                  <Code>200</Code>
+            </Result>
+            <Result>
+                  <Message>successful</Message>
+                  <InstanceId>i-m5e25x2mwr0hk33d****</InstanceId>
+                  <Success>true</Success>
+                  <Code>200</Code>
+            </Result>
+      </Results>
+      <FailCount>0</FailCount>
+</DetachKeyPairResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"TotalCount":2,
-	"RequestId":"834B3E6B-2D1D-482F-81A4-810C327D4735",
-	"Results":{
-		"Result":[
-			{
-				"Message":"successful",
-				"InstanceId":"i-m5eg7be9ndloji64jknv",
-				"Success":true,
-				"Code":"200"
-			},
-			{
-				"Message":"successful",
-				"InstanceId":"i-m5e25x2mwr0hk33dwv0h",
-				"Success":true,
-				"Code":"200"
-			}
-		]
-	},
-	"FailCount": 0
+    "TotalCount": 2,
+    "RequestId": "834B3E6B-2D1D-482F-81A4-810C327D4735",
+    "Results": {
+        "Result": [
+            {
+                "Message": "successful",
+                "InstanceId": "i-m5eg7be9ndloji64****",
+                "Success": true,
+                "Code": "200"
+            },
+            {
+                "Message": "successful",
+                "InstanceId": "i-m5e25x2mwr0hk33d****",
+                "Success": true,
+                "Code": "200"
+            }
+        ]
+    },
+    "FailCount": 0
 }
 ```
 
-## Error codes {#section_w9q_s3a_fyh .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|403|DependencyViolation.WindowsInstance|The instance creating is windows, cannot use ssh key pair to login|The error message returned when you cannot detach key pairs from the specified Windows-based instance.|
+|400|InvalidKeyPairName.NotFound|The specified KeyPairName does not exist in our records.|The error message returned because the specified KeyPairName parameter does not exist.|
+|403|DependencyViolation.WindowsInstance|The instance creating is windows, cannot use ssh key pair to login|The error message returned because the specified instance is a Windows instance and does not support logons with SSH key pairs.|
+|400|InvalidInstanceIds.ValueNotSupported|The specified parameter InstanceIds is not valid.|The error message returned because the specified InstanceIds parameter is invalid.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
