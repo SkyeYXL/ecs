@@ -1,88 +1,77 @@
-# ModifySecurityGroupPolicy {#doc_api_1031578 .reference}
+# ModifySecurityGroupPolicy
 
-Modifies the intranet communication policy of a security group.
+You can call this operation to modify the internal access policy of a basic security group. The internal access policy of an advanced security group cannot be modified.
 
-## Description {#description .section}
+## Description
 
-When you call this operation, note that:
+When you call this operation, take note of the following items:
 
--   When the InnerAccessPolicy parameter value is Accept, instances within the security group can communicate with each other. The Accept policy has the highest priority of all rules, and all other user-defined rules are ignored.
--   When the InnerAccessPolicy value is Drop, instances in the security group are isolated from each other. In this case, user-defined security group rules have a higher priority and can be used to change the intranet access policy. For example, you can use [AuthorizeSecurityGroup](~~25554~~) to allow ECS instances in the security group to communicate with each other.
--   You can use [DescribeSecurityGroupAttribute](~~25555~~) to query the intranet communication policy of the security group.
+-   When InnerAccessPolicy is set to Accept, instances within the security group can communicate with each other. In this case, the Accept policy has the highest priority of all rules, and all other user-defined rules are ignored.
+-   When InnerAccessPolicy is set to Drop, instances within the security group are isolated from each other. In this case, user-defined security group rules have a higher priority and can be used to change the internal access policy. For example, you can call the [AuthorizeSecurityGroup](~~25554~~) operation to allow ECS instances in the security group to communicate with each other.
+-   You can call the [DescribeSecurityGroupAttribute](~~25555~~) operation to query the internal access policy of the current security group.
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=ModifySecurityGroupPolicy) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=ModifySecurityGroupPolicy&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|InnerAccessPolicy|String|Yes|Accept| The intranet communication policy of the security group. Valid values:
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|ModifySecurityGroupPolicy|The operation that you want to perform. Set the value to ModifySecurityGroupPolicy. |
+|InnerAccessPolicy|String|Yes|Drop|The internal access policy of the security group. Valid values:
 
- -   Accept: Instances in the security group can communicate with each other.
--   Drop: Instances in the security group are isolated from each other.
+-   Accept: All instances in the security group can communicate with each other.
+-   Drop: All instances in the security group are isolated from each other.
 
- The values are case-insensitive.
+The values are case-insensitive. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the security group. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|SecurityGroupId|String|Yes|sg-bp67acfmxazb4ph\*\*\*\*|The ID of the security group. |
+|ClientToken|String|No|123e4567-e89b-12d3-a456-426655440000|The client token that is used to ensure the idempotence of the request. You can use the client to generate the value, but you must ensure that it is unique among different requests. The **ClientToken** value must contain only ASCII characters and cannot exceed 64 characters in length. For more information, see [How to ensure idempotence](~~25693~~). |
 
- |
-|RegionId|String|Yes|cn-hangzhou| The ID of the region where the security group resides. You can call [DescribeRegions](~~25609~~) to view the latest regions of Alibaba Cloud.
+## Response parameters
 
- |
-|SecurityGroupId|String|Yes|sg-securitygroupid1| The ID of the security group.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RequestId|String|CEF72CEB-54B6-4AE8-B225-F876FF7BA984|The ID of the request. |
 
- |
-|Action|String|No|ModifySecurityGroupPolicy| The operation that you want to perform. Set the value to ModifySecurityGroupPolicy.
-
- |
-|ClientToken|String|No|123e4567-e89b-12d3-a456-426655440000| A client token. It is used to ensure the idempotency of requests. The value of this parameter is generated by the client and is unique among different requests. The **ClientToken** parameter must be no more than 64 ASCII characters in length. For more information, see [How to ensure idempotency](~~25693~~).
-
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=ModifySecurityGroupPolicy
-&RegionId=cn-hangzhou 
-&SecurityGroupId=sg-1133aa
+&RegionId=cn-hangzhou
+&SecurityGroupId=sg-bp67acfmxazb4ph****
 &InnerAccessPolicy=Drop
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <ModifySecurityGroupPolicyResponse>
-  <RequestId>CEF72CEB-54B6-4AE8-B225-F876FF7BZ015</RequestId>
+      <RequestId>CEF72CEB-54B6-4AE8-B225-F876FF7BA984</RequestId>
 </ModifySecurityGroupPolicyResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RequestId":"CEF72CEB-54B6-4AE8-B225-F876FF7BA984"
+    "RequestId": "CEF72CEB-54B6-4AE8-B225-F876FF7BA984"
 }
 ```
 
-## Error codes {#section_c56_qlf_2li .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|400|InvalidSecurityGroupId.Malformed|The SecurityGroupId is invalid. Only letters, numbers and underscores are supported. Maximum length is 100 characters.|The error message returned when the security group ID is invalid.|
-|400|InvalidPolicy.Malformed|The Policy is invalid. Only 'Accept' and 'Drop' are supported. Ignore case.|The error message returned when the Policy parameter value is invalid.|
+|400|InvalidSecurityGroupId.Malformed|The SecurityGroupId is invalid. Only letters, numbers and underscores are supported. Maximum length is 100 characters.|The error message returned because the specified SecurityGroupId parameter is invalid. The security group ID can be up to 100 characters in length and can contain only letters, digits, and underscores \(\_\).|
+|400|InvalidPolicy.Malformed|The Policy is invalid. Only 'Accept' and 'Drop' are supported. Ignore case.|The error message returned because the specified InnerAccessPolicy parameter is invalid. Valid values of this parameter are Accept and Drop, and these values are case-insensitive.|
+|404|InvalidSecurityGroupId.NotFound|The specified SecurityGroupId does not exist.|The error message returned because the specified security group does not exist under this account. Check whether the security group ID is correct.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
