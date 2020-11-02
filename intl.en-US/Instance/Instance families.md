@@ -4,7 +4,7 @@ keyword: [ECS instance family, instance family]
 
 # Instance families
 
-An ECS instance is the smallest unit that can provide compute capabilities and services for your business. Compute capabilities vary based on instance types. This topic describes available ECS instance families and the features, specifications, and application scenarios of each instance family.
+An ECS instance is the smallest unit that can provide compute capabilities and services for your business. Compute capabilities vary based on instance types. This topic describes available ECS instance families, including their features, specifications, and application scenarios.
 
 ECS instances are categorized into different instance families based on their usage scenarios. Each instance family is divided into different instance types based on their CPU and memory specifications. ECS instance type defines the basic properties of an ECS instance, such as CPU, clock speed, and memory. In addition to the instance type, you must also configure the Elastic Block Storage \(EBS\) devices, image, and network type when you create an ECS instance.
 
@@ -12,15 +12,15 @@ ECS instances are categorized into different instance families based on their us
 
 Enterprise scenarios have high requirements for business stability. Alibaba Cloud ECS instance families are divided into enterprise-level and shared instance families based on whether the instance families are suitable for enterprise scenarios. Enterprise-level instance families offer consistent performance and dedicated resources. In enterprise-level instance families, each vCPU corresponds to a hyperthread of the Intel ® Xeon ® core. For more information about the differences between enterprise-level and shared instance families, see [Instance FAQ](/intl.en-US/Instance/ECS instance FAQ.md).
 
-You can upgrade or downgrade instance types within an instance family or across instance families. For more information, see [Change instance types of instances](/intl.en-US/Instance/Change configurations/Change instance types of instances.md).
+You can upgrade or downgrade instance types within an instance family or across instance families. For more information, see [Change instance types of instances](/intl.en-US/Instance/Change configurations/Change instance types/Change instance types of instances.md).
 
 For information about how to choose instance families based on scenarios, see [Best practices for instance type selection](/intl.en-US/Best Practices/Best practices for instance type selection.md).
 
-Alibaba Cloud ECS instances are categorized into the following instance families:
+Alibaba Cloud ECS instances are categorized into the following instance families based on the system architecture and usage scenarios:
 
 |Enterprise-level computing instance families based on the x86 architecture:|
 |---------------------------------------------------------------------------|
-|Recommended intance families|Other available instance families|
+|Recommended instance families|Other available instance families|
 |-   [g6, general purpose instance family](#g6)
 -   [g6a, general purpose instance family](#g6a)
 -   [g6t, security-enhanced general purpose instance family](#g6t)
@@ -66,7 +66,7 @@ Alibaba Cloud ECS instances are categorized into the following instance families
 
 |Enterprise-level heterogeneous computing instance families:|
 |-----------------------------------------------------------|
-|Recommended intance families|Other available instance families|
+|Recommended instance families|Other available instance families|
 |-   [vgn6i, lightweight GPU-accelerated compute optimized instance family](#vgn6i)
 -   [gn6i, GPU-accelerated compute optimized instance family](#gn6i)
 -   [gn6e, GPU-accelerated compute optimized instance family](#gn6e)
@@ -81,7 +81,7 @@ Alibaba Cloud ECS instances are categorized into the following instance families
 
 |ECS Bare Metal Instance families and Super Computing Cluster \(SCC\) instance families:|
 |---------------------------------------------------------------------------------------|
-|Recommended intance families|Other available instance families|
+|Recommended instance families|Other available instance families|
 |-   [ebmgn6e, GPU-accelerated compute optimized ECS Bare Metal Instance family](#ebmgn6e)
 -   [ebmgn6v, GPU-accelerated compute optimized ECS Bare Metal Instance family](#ebmgn6v)
 -   [ebmgn6i, GPU-accelerated compute optimized ECS Bare Metal Instance family](#ebmgn6i)
@@ -115,7 +115,7 @@ Alibaba Cloud ECS instances are categorized into the following instance families
 
 |Shared computing instance families based on the x86 architecture:|
 |-----------------------------------------------------------------|
-|Recommended intance families|Other available instance families|
+|Recommended instance families|Other available instance families|
 |-   [t6, burstable instance family](#t6)
 
 |-   [t5, burstable instance family](#t5)
@@ -2198,7 +2198,7 @@ Features
     -   Powered by the new NVIDIA Turing architecture.
     -   Equipped with 16 GB memory \(320 GB/s bandwidth\) per GPU.
     -   Equipped with 2,560 CUDA cores per GPU.
-    -   Euipped with up to 320 Turing Tensor cores per GPU.
+    -   Equipped with up to 320 Turing Tensor cores per GPU.
     -   Mixed-precision Tensor cores support 65 FP16 TFLOPS, 130 INT8 TOPS, and 260 INT4 TOPS.
 -   Provides high network performance based on large computing capacity.
 -   Suitable for the following scenarios:
@@ -2269,7 +2269,7 @@ Features
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are received and transmitted
     -   Web frontend servers
     -   Frontend servers of massively multiplayer online \(MMO\) games
     -   Data analysis, batch processing, and video encoding
@@ -2298,7 +2298,7 @@ Features
 -   Supports VPCs only.
 -   Provides dedicated hardware resources and physical isolation.
 -   Suitable for the following scenarios:
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are received and transmitted
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
@@ -2336,7 +2336,7 @@ Features
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
     -   Video encoding, decoding, and rendering
-    -   Computing clusters and memory intensive data processing
+    -   Compute clusters and memory intensive data processing
     -   Data analysis and computing
 
 Instance types
@@ -2367,7 +2367,7 @@ Features
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are received and transmitted
     -   Enterprise-level applications of various types and sizes
     -   Websites and application servers
     -   Game servers
@@ -2404,7 +2404,7 @@ Features
     -   Containers including Docker, Clear Containers, and Pouch
     -   Video encoding, decoding, and rendering
     -   Enterprise-level applications such as large and medium-sized databases
-    -   Computing clusters and memory intensive data processing
+    -   Compute clusters and memory intensive data processing
     -   Data analysis and computing
 
 Instance types
@@ -2468,8 +2468,8 @@ Features
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
-    -   High-performance databases and in-memory databases
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are received and transmitted
+    -   High-performance and in-memory databases
     -   Data analysis, data mining, and distributed memory caching
     -   Hadoop clusters, Spark clusters, and other memory intensive enterprise applications
     -   High-performance scientific and engineering applications
@@ -2500,7 +2500,7 @@ Features
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
-    -   High-performance databases and in-memory databases
+    -   High-performance and in-memory databases
     -   Data analysis, data mining, and distributed memory caching
     -   Hadoop clusters, Spark clusters, and other memory intensive enterprise applications
 
@@ -2527,7 +2527,7 @@ Features
 -   Supports VPCs only.
 -   Provides dedicated hardware resources and physical isolation.
 -   Suitable for the following scenarios:
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are received and transmitted
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
@@ -2588,7 +2588,7 @@ Features
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
-    -   High-performance databases and in-memory databases
+    -   High-performance and in-memory databases
     -   Data analysis, data mining, and distributed memory caching
     -   Hadoop clusters, Spark clusters, and other memory intensive enterprise applications
 
@@ -2648,7 +2648,7 @@ Features
 -   Provides dedicated hardware resources and physical isolation.
 -   Suitable for the following scenarios:
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
-    -   High-performance databases and in-memory databases such as SAP HANA
+    -   High-performance and in-memory databases such as SAP HANA
     -   Memory intensive applications
     -   Big data processing engines such as Apache Spark and Presto
 
@@ -2853,7 +2853,7 @@ Features
 -   Supports VPCs only.
 -   Provides dedicated hardware resources and physical isolation.
 -   Suitable for the following scenarios:
-    -   Scenarios where large volumes of packets are received and transmitted, such as on-screen video comments and telecom data forwarding
+    -   Scenarios such as on-screen video comments and telecom data forwarding where large volumes of packets are received and transmitted
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
@@ -2914,7 +2914,7 @@ Features
     -   Workloads that require direct access to physical resources or scenarios that require a license to be bound to the hardware
     -   Third-party virtualization including Xen and KVM, and AnyStack including OpenStack and ZStack
     -   Containers including Docker, Clear Containers, and Pouch
-    -   High-performance databases and in-memory databases
+    -   High-performance and in-memory databases
     -   Data analysis, data mining, and distributed memory caching
     -   Hadoop clusters, Spark clusters, and other memory intensive enterprise applications
 
@@ -3236,7 +3236,7 @@ Instance types of e4
 |-------------|------------|
 |Local storage|Local storage, also called cache disks or local disks, refers to the disks attached to the physical servers where ECS instances are hosted. Local storage provides temporary block storage for instances. Local storage capacity is measured in GiB. Data stored on local disks may be lost when the compute resources \(vCPUs and memory\) of an instance are released or when an instance is failed over to a normal physical server upon a physical server failure. For more information, see [Local disks](/intl.en-US/Block Storage/Block Storage overview/Local disks.md).|
 |Bandwidth|The maximum bandwidth in one direction. Inbound bandwidth and outbound bandwidth are calculated separately. **Note:** Each instance specification is obtained through verification in a test environment. In actual scenarios, the performance of an instance may vary depending on other factors such as instance load. We recommend that you perform business stress tests on instances to choose appropriate instance types. |
-|Packet forwarding rate|The maximum sum of inbound and outbound packet forwarding rates. For more information about how to test the packet forwarding rate, see [Test network performance](https://www.alibabacloud.com/help/faq-detail/55757.htm). **Note:** Each instance specification is obtained through verification in a test environment. In actual scenarios, the performance of an instance may vary depending on other factors such as instance load. We recommend that you perform business stress tests on instances to choose appropriate instance types. |
+|Packet forwarding rate|The maximum sum of inbound and outbound packet forwarding rates. For information about how to test the packet forwarding rate, see [Test network performance](https://www.alibabacloud.com/help/faq-detail/55757.htm). **Note:** Each instance specification is obtained through verification in a test environment. In actual scenarios, the performance of an instance may vary depending on other factors such as instance load and image version. We recommend that you perform business stress tests on instances to choose appropriate instance types. |
 |Connections|Connections, also called sessions, are the process of establishing connections and transferring data between a client and a server. A connection is uniquely defined by the network communication quintuple that consists of a source IP address, a destination IP address, a source port, a destination port, and a protocol. Connections of an ECS instance include TCP, UDP, and ICMP connections.|
-|NIC queues|The maximum number of NIC queues that the primary NIC of an instance supports. If your instance type is not a member of an ECS Bare Metal Instance family, the maximum number of NIC queues supported by the secondary NIC is the same as that supported by the primary NIC.|
+|NIC queues|The maximum number of NIC queues that the primary NIC of an instance supports. If your instance type is not a member of an ECS Bare Metal Instance family, the maximum number of NIC queues supported by a secondary NIC is the same as that supported by the primary NIC.|
 
