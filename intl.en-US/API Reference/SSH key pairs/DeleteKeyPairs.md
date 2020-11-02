@@ -1,75 +1,70 @@
-# DeleteKeyPairs {#doc_api_999672 .reference}
+# DeleteKeyPairs
 
-Deletes one or multiple SSH key pairs. The entry of a deleted SSH key pair is removed from the database. However, the instances bound with the SSH key pair can still use it.
+You can call this operation to delete one or more SSH key pairs.
 
-## Description {#description .section}
+## Description
 
-When you call this operation, note that:
+After an SSH key pair is deleted:
 
--   After you delete an SSH key pair, this pair cannot be returned in response to [DescribeKeyPairs](~~51773~~).
--   When you call [DescribeInstances](~~25506~~) to query instance information, the SSH key pair name \(KeyPairNames\) is still returned, but without any other information.
+-   You cannot query the SSH key pair by calling the [DescribeKeyPairs](~~51773~~) operation.
+-   If the SSH key pair was bound to one or more ECS instances:
+    -   The key pair is no longer stored in Alibaba Cloud, but the instances can still use the key pair.
+    -   When you call the [DescribeInstances](~~25506~~) operation to query information about an instance, the SSH key pair name \(KeyPairNames\) is still returned, but no other information is returned.
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=DeleteKeyPairs) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DeleteKeyPairs&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|KeyPairNames|String|Yes|\["key-xxxxxxxxx", "key-yyyyyyyyy", … "key-zzzzzzzzz"\]| The SSH key pair names. The value can be a JSON array consisting of up to 100 SSH key pairs. Multiple key pairs must be separated by commas \(,\).
+|Parameter|Position|Type|Required|Example|Description|
+|---------|--------|----|--------|-------|-----------|
+|Action|Query|String|Yes|DeleteKeyPairs|The operation that you want to perform. Set the value to DeleteKeyPairs. |
+|KeyPairNames|Query|String|Yes|\["skp-bp67acfmxazb41\*\*\*\*", "skp-bp67acfmxazb42\*\*\*\*", … "skp-bp67acfmxazb4p3\*\*\*"\]|The names of SSH key pairs. The value can be a JSON array that consists of up to 100 key pair names. Separate multiple key pair names with commas \(,\). |
+|RegionId|Query|String|Yes|cn-hangzhou|The ID of the region. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
 
- |
-|RegionId|String|Yes|cn-hangzhou| The ID of the region where a SSH key pair resides. You can call [DescribeRegions](~~25609~~) to view the latest list of Alibaba Cloud regions.
+## Response parameters
 
- |
-|Action|String|No|DeleteKeyPairs| The operation that you want to perform. Set the value to DeleteKeyPairs.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
 
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=DeleteKeyPairs
-&RegionId=cn-qingdao
-&KeyPairNames=test
+&RegionId=cn-hangzhou
+&KeyPairNames=["skp-bp67acfmxazb41****", "skp-bp67acfmxazb42****", … "skp-bp67acfmxazb4p3***"]
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DeleteKeyPairsResponse>
-  <RequestId>473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E</RequestId>
+      <RequestId>473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E</RequestId>
 </DeleteKeyPairsResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RequestId": "473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E"
+    "RequestId": "473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E"
 }
 ```
 
-## Error codes {#section_5mk_8w7_63w .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|400|MissingParameter|The input parameter "KeyPairNames" that is mandatory for processing this request is not supplied.|The error message returned when the required KeyPairNames parameter is not specified.|
-|400|InvalidKeyPairNames. ValueNotSupported|The specified parameter "KeyPairNames" is not valid.|The error message returned when the KeyPairNames parameter is invalid.|
+|400|MissingParameter|The input parameter "KeyPairNames" that is mandatory for processing this request is not supplied.|The error message returned because the required KeyPairNames parameter is not specified.|
+|400|InvalidKeyPairNames.ValueNotSupported|The specified parameter "KeyPairNames" is not valid.|The error message returned because the specified KeyPairNames parameter is invalid.|
+|403|InstanceKeyPairLimitExceeded|Exceeding the allowed amount of instance which will be deleted.|The error message returned because the number of specified instances exceeds the upper limit.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
