@@ -1,54 +1,54 @@
-# ApplyAutoSnapshotPolicy {#ApplyAutoSnapshotPolicy .reference}
+# ApplyAutoSnapshotPolicy
 
-Applies automatic snapshot policies to one or more disks. If an automatic snapshot policy has been applied to a disk, ApplyAutoSnapshotPolicy can change the automatic snapshot policy for the specified disks.
+You can call this operation to apply an automatic snapshot policy to one or more disks. If you apply an automatic snapshot policy to a disk that already has an automatic snapshot policy, the new policy replaces the original policy to take effect on the disk.
 
-## Description  {#section_idr_vwz_xdb .section}
+## Description
 
-When you call this interface, consider the following: 
+-   A disk can have only one automatic snapshot policy.
+-   A single automatic snapshot policy can be applied to multiple disks.
 
--   One disk can be applied to only one automatic snapshot policy.
+## Debugging
 
--   You can apply an automatic snapshot policy to multiple disks.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=ApplyAutoSnapshotPolicy&type=RPC&version=2014-05-26)
 
--   A short queuing waiting time exists if many automatic snapshot tasks at a certain time point exist. Consequently, the automatic snapshot tasks scheduled at the same time cannot be carried out simultaneously.
+## Request parameters
 
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|ApplyAutoSnapshotPolicy|The operation that you want to perform. Set the value to ApplyAutoSnapshotPolicy. |
+|regionId|String|Yes|cn-hangzhou|The region ID of the automatic snapshot policy and the disks. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|autoSnapshotPolicyId|String|Yes|sp-bp14yziiuvu3s6jn\*\*\*\*|The ID of the automatic snapshot policy. |
+|diskIds|String|Yes|\["d-bp14k9cxvr5uzy54\*\*\*\*", "d-bp1dtj8v7x6u08iw\*\*\*\*", "d-bp1c0tyj9tfli2r8\*\*\*\*"\]|The IDs of the disks. The value is a JSON array that consists of disk IDs. Separate multiple disk IDs with commas \(,\). |
 
-## Request parameters  {#RequestParameter .section}
+## Response parameters
 
-|Name |Type |Required |Description |
-|:----|:----|:--------|:-----------|
-|Action |String |Yes |The name of this interface. Value: ApplyAutoSnapshotPolicy.|
-|RegionId |String |Yes|The region ID of the automatic snapshot policy and the disks. For more information, call [DescribeRegions](reseller.en-US/API Reference/Regions/DescribeRegions.md#) to obtain the latest region list.|
-|Autosnapshotpolicyid|String |Yes|The ID of the automatic snapshot policy. You can call DescribeAutoSnapshotPolicyEx to obtain all of your automatic snapshot policy IDs.|
-|DiskIds|String |Yes|The disk ID. When you want to apply the automatic snapshot policy to multiple disks, you can set the DiskIds to an array.  The format is a JSON array of \["d-xxxxxxxxx", "d-yyyyyyyyy", … "d-zzzzzzzzz"\]  and the IDs are separated by commas \(,\).|
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
 
-## Response parameters  {#section_odr_vwz_xdb .section}
+## Examples
 
-All are common response parameters. For more information, see [Common parameters](reseller.en-US/API Reference/Getting started/Common parameters.md#commonResponseParameters).
-
-## Examples  { .section}
-
-**Request example ** 
+Sample requests
 
 ```
 https://ecs.aliyuncs.com/?Action=ApplyAutoSnapshotPolicy
-&RegionId=cn-hangzhou
-&AutoSnapshotPolicyId=p-233e6ylv0
-&DiskIds=["d-233e6ylv0", "d-23vbpbi03", "d-23vasz3ds"]
-&<Common Request Parameters>
+&autoSnapshotPolicyId=sp-bp14yziiuvu3s6jn****
+&diskIds=["d-bp14k9cxvr5uzy54****", "d-bp1dtj8v7x6u08iw****", "d-bp1c0tyj9tfli2r8****"]
+&regionId=cn-hangzhou
+&<Common request parameters>
 ```
 
-**Response example ** 
+Sample success responses
 
-**XML format **
+`XML` format
 
 ```
 <ApplyAutoSnapshotPolicyResponse>
-    <RequestId>F3CD6886-D8D0-4FEE-B93E-1B73239673DE</RequestId>
+      <RequestId>F3CD6886-D8D0-4FEE-B93E-1B73239673DE</RequestId>
 </ApplyAutoSnapshotPolicyResponse>
 ```
 
- **JSON format ** 
+`JSON` format
 
 ```
 {
@@ -56,15 +56,20 @@ https://ecs.aliyuncs.com/?Action=ApplyAutoSnapshotPolicy
 }
 ```
 
-## Error codes {#ErrorCode .section}
+## Error codes
 
-|Error code|Error message|HTTP status code|Description|
-|:---------|:------------|:---------------|:----------|
-|DiskCategory.OperationNotSupported |The type of the specified disk does not support creating a snapshot.|400 |You cannot apply automatic policy to a local disk. For more information, see [Local disks](../../../../reseller.en-US/Product Introduction/Block storage/Local disks.md#).|
-|DiskCategory.OperationNotSupported|The types of some disks in the disk list do not support creating snapshots.|400|IDs of local disks exist in the `DiskIds`.|
-|ParameterInvalid|The specified automatic snapshot policy does not exist.|404 |The specified `AutoSnapshotPolicyId` does not exist.|
-|ParameterInvalid|The specified automatic snapshot policy does not exist in the region.|404 |The specified `AutoSnapshotPolicyId` does not exist in the specified region.|
-|ParameterInvalid|The specified AutoSnapshotPolicyId parameter is invalid.|404 |The specified `AutoSnapshotPolicyId` is invalid.|
-|ParameterInvalid|The specified DiskIds are invalid.|404 |The specified `DiskIds` are invalid.|
-|ParameterInvalid|The specified RegionId parameter is invalid.|404 |The specified `RegionId` is invalid.|
+|HTTP status code|Error code|Error message|Description|
+|----------------|----------|-------------|-----------|
+|404|ParameterInvalid|The specified automatic snapshot policy does not exist.|The error message returned because the specified autoSnapshotPolicyId parameter does not exist. Check whether the policy ID is correct.|
+|404|ParameterInvalid|The specified automatic snapshot policy does not exist in the region.|The error message returned because the specified automatic snapshot policy does not exist in this region. Check whether the policy ID is correct.|
+|404|InvalidDiskId.NotFound|The specified disk does not exist in the region.|The error message returned because the specified disk does not exist in the current region.|
+|403|ParameterInvalid|The specified RegionId parameter is invalid.|The error message returned because the specified regionId parameter is invalid.|
+|403|ParameterInvalid|The specified AutoSnapshotPolicyId parameter is invalid.|The error message returned because the specified autoSnapshotPolicyId parameter is invalid.|
+|403|ParameterInvalid|The specified DiskIds are invalid.|The error message returned because the specified diskIds parameter is invalid.|
+|400|DiskCategory.OperationNotSupported|The type of the specified disk does not support creating a snapshot.|The error message returned because the operation is not supported by the current disk category.|
+|400|PartofDiskCategory.OperationNotSupported|The types of some disks in the disk list do not support creating snapshots.|The error message returned because some of the specified disks do not support this operation.|
+|403|InvalidAccountStatus.NotEnoughBalance|Your account does not have enough balance.|The error message returned because your account balance is insufficient. Add funds to your account before you proceed.|
+|403|InvalidAccountStatus.SnapshotServiceUnavailable|Snapshot service has not been opened yet.|The error message returned because the operation is not supported while the snapshot service is disabled.|
+
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
