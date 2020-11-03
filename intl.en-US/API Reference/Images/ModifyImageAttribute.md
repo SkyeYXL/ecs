@@ -1,86 +1,78 @@
-# ModifyImageAttribute {#doc_api_999579 .reference}
+# ModifyImageAttribute
 
-Modifies the name and description of a custom image.
+You can call this operation to modify the name, description, status, or image family of a custom image.
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=ModifyImageAttribute) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=ModifyImageAttribute&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|ImageId|String|Yes|m-imageid1| The ID of the custom image.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|ModifyImageAttribute|The operation that you want to perform. If you use a custom HTTP URL or HTTPS URL to make an API request, you must specify the `Action` parameter. Set the value to ModifyImageAttribute. |
+|ImageId|String|Yes|m-bp18ygjuqnwhechc\*\*\*\*|The ID of the custom image. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the custom image. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|ImageName|String|No|testImageName|The name of the custom image. The name must be 2 to 128 characters in length and can contain letters, digits, colons \(:\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with http:// or https://.
 
- |
-|RegionId|String|Yes|cn-hangzhou| The ID of the region to which the custom image belongs. You can call [DescribeRegions](~~25609~~) to view the latest regions of Alibaba Cloud.
+This parameter is empty by default, which indicates that the original name is retained. |
+|Status|String|No|Deprecated|The status of the custom image. Valid values:
 
- |
-|Action|String|No|ModifyImageAttribute| The operation that you want to perform. Set the value to ModifyImageAttribute.
+-   Deprecated: puts the image into the Deprecated state. If the custom image is shared, you must unshare it before you can put it into the Deprecated state. Images in the Deprecated state cannot be shared or copied, but can be used to create instances or replace system disks.
+-   Available: puts the image into the Available state. You can restore an image from the Deprecated state to the Available state.
 
- |
-|Description|String|No|FinanceDept| The description of the custom image.
+**Note:** If you want to roll back a custom image in the image family to a previous version, you can put the latest available custom image into the Deprecated state. Proceed with caution if only one custom image is in the Available state within the image family. You will not be able to create instances if no custom images are in the Available state within the instance family. |
+|ImageFamily|String|No|hangzhou-daily-update|The name of the image family. The name must be 2 to 128 characters in length and can contain letters, digits, colons \(:\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with acs: or aliyun. It cannot contain http:// or https://. This parameter is empty by default. |
+|Description|String|No|testDescription|The description of the custom image. The description must be 2 to 256 characters in length and cannot start with http:// or https://.
 
- -   The description must be 0 to 256 characters in length.
--   It cannot start with http:// or https://.
--   If not specified, this parameter is null. Default value: null.
+This parameter is empty by default, which indicates that the original description is retained. |
 
- |
-|ImageName|String|No|FinanceJoshua| The name of the custom image.
+## Response parameters
 
- -   The name must be 2 to 128 characters in length.
--   It must start with a letter and can contain letters, digits, colons \(:\), underscores \(\_\), and hyphens \(-\).
--   It cannot start with http:// or https://.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
 
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=ModifyImageAttribute
-&ImageId=m-imageid1
-&RegionId=cn-hangzhou 
-&ImageName=FinanceJoshua
-&Description=FinanceDept
+&ImageId=m-bp18ygjuqnwhechc****
+&RegionId=cn-hangzhou
+&ImageName=testImageName
+&Description=testDescription
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <ModifyImageAttributeResponse>
-  <RequestId>C8B26B44-0189-443E-9816-D951F59623A9</RequestId>
+      <RequestId>C8B26B44-0189-443E-9816-D951F59623A9</RequestId>
 </ModifyImageAttributeResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RequestId":"C8B26B44-0189-443E-9816-D951F59623A9"
+    "RequestId": "C8B26B44-0189-443E-9816-D951F59623A9"
 }
 ```
 
-## Error codes {#section_4mf_j2s_w9r .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|400|MissingParameter|The input parameter RegionId that is mandatory for processing this request is not supplied.|The error message returned when the required RegionId parameter is not specified.|
-|400|InvalidImageName.Duplicated|The specified Image name has already bean used.|The error message returned when the specified image name is already in use.|
-|400|InvalidDescription.Malformed|The specified description is wrongly formed.|The error message returned when the specified description is invalid. The description must be 2 to 256 characters in length and cannot start with http:// or https://.|
-|404|InvalidImageId.NotFound|The specified ImageId does not exist.|The error message returned when the specified image does not exist under this account. Check whether the image ID is correct.|
+|400|InvalidImageName.Malformed|The specified Image name is wrongly formed.|The error message returned because the specified ImageName parameter is invalid. The name must be 2 to 128 characters in length and can contain letters, digits, periods \(.\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with http:// or https://.|
+|400|MissingParameter|The input parameter "RegionId" that is mandatory for processing this request is not supplied.|The error message returned because the required RegionId parameter is not specified.|
+|400|InvalidImageName.Duplicated|The specified Image name has already bean used.|The error message returned because the specified image name already exists.|
+|400|InvalidDescription.Malformed|The specified description is wrongly formed.|The error message returned because the specified Description parameter is invalid. The description must be 2 to 256 characters in length and cannot start with http:// or https://.|
+|404|InvalidImageId.NotFound|The specified ImageId does not exist.|The error message returned because the specified image does not exist in this account.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
