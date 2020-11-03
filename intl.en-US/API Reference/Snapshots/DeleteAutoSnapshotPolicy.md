@@ -1,41 +1,47 @@
-# DeleteAutoSnapshotPolicy {#DeleteAutoSnapshotPolicy .reference}
+# DeleteAutoSnapshotPolicy
 
-Creates an automatic snapshot policy. If the target automatic snapshot policy has been applied to a disk, the policy will not be not effective on the disk once the policy is deleted.
+You can call this operation to delete an automatic snapshot policy. After you delete an automatic snapshot policy, the policy will no longer be applied to the disks that it previously took effect on.
 
-## Request parameters {#RequestParameter .section}
+## Debugging
 
-|Name|Type|Required|Description|
-|:---|:---|:-------|:----------|
-|Action|String|Yes|The name of this interface. Value: DeleteAutoSnapshotPolicy.|
-|RegionId|String|Yes|The region ID to which the automatic snapshot policy belongs. For more information, call [DescribeRegions](intl.en-US/API Reference/Regions/DescribeRegions.md#) to obtain the latest region list.|
-|autoSnapshotPolicyId|String|Yes|The ID of the target automatic snapshot policy. You can call [DescribeAutoSnapshotPolicyEx](intl.en-US/API Reference/Snapshots/DescribeAutoSnapshotPolicyEx.md#) to obtain all your automatic snapshot policies.|
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DeleteAutoSnapshotPolicy&type=RPC&version=2014-05-26)
 
-## Return parameters {#section_byv_lyz_xdb .section}
+## Request parameters
 
-All are common parameters. See [Common parameters](intl.en-US/API Reference/Getting started/Common parameters.md#commonResponseParameters).
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|DeleteAutoSnapshotPolicy|The operation that you want to perform. Set the value to DeleteAutoSnapshotPolicy. |
+|autoSnapshotPolicyId|String|Yes|sp-bp14yziiuvu3s6jn\*\*\*\*|The ID of the automatic snapshot policy. You can call the [DescribeAutoSnapshotPolicyEx](~~25530~~) operation to query the available automatic snapshot policies. |
+|regionId|String|Yes|cn-hangzhou|The region ID of the automatic snapshot policy. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
 
-## Example { .section}
+## Response parameters
 
-**Request example** 
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
+
+## Examples
+
+Sample requests
 
 ```
 https://ecs.aliyuncs.com/?Action=DeleteAutoSnapshotPolicy
-&RegionId=cn-hangzhou
-&AutoSnapshotPolicyId=p-233e6ylv0
+&autoSnapshotPolicyId=sp-bp14yziiuvu3s6jn****
+&regionId=cn-hangzhou
 &<Common request parameters>
 ```
 
-**Response sample** 
+Sample success responses
 
-**XML format**
+`XML` format
 
 ```
 <DeleteAutoSnapshotPolicyResponse>
-    <RequestId>F3CD6886-D8D0-4FEE-B93E-1B73239673DE</RequestId> 
+      <RequestId>F3CD6886-D8D0-4FEE-B93E-1B73239673DE</RequestId> 
 </DeleteAutoSnapshotPolicyResponse>
 ```
 
- **JSON format** 
+`JSON` format
 
 ```
 {
@@ -43,12 +49,12 @@ https://ecs.aliyuncs.com/?Action=DeleteAutoSnapshotPolicy
 }
 ```
 
-## Error codes {#ErrorCode .section}
+## Error codes
 
-Error codes specific to this interface are as follows. For more error codes, see [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs). 
+|HttpCode|Error code|Error message|Description|
+|--------|----------|-------------|-----------|
+|404|ParameterInvalid|The specified automatic snapshot policy does not exist.|The error message returned because the specified autoSnapshotPolicyId parameter does not exist. Check whether the policy ID is correct.|
+|404|ParameterInvalid|The specified automatic snapshot policy does not exist in the region.|The error message returned because the specified automatic snapshot policy does not exist in this region. Check whether the policy ID is correct.|
 
-|Error code|Error message|HTTP status code|Meaning|
-|:---------|:------------|:---------------|:------|
-|ParameterInvalid|The specified automatic snapshot policy does not exist.|404|The specified `AutoSnapshotPolicyId` does not exist.|
-|ParameterInvalid|The specified automatic snapshot policy does not exist in the region.| 404|The specified `AutoSnapshotPolicyId` does not exist in the specified region.|
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
