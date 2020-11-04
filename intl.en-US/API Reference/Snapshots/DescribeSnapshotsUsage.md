@@ -1,73 +1,65 @@
-# DescribeSnapshotsUsage {#doc_api_999637 .reference}
+# DescribeSnapshotsUsage
 
-Queries the number of snapshots stored in a region as well as their total size. If you want to view the snapshot usage information for each disk in a region, we recommend that you call the DescribeSnapshotLinks operation to query snapshot chain information.
+You can call this operation to query the number of snapshots stored in a region and the total size of the snapshots.
 
-## Debugging {#apiExplorer .section}
+If you want to view the snapshot usage information about each disk in the current region, we recommend that you call the [DescribeSnapshotLinks](~~55837~~) operation to query snapshot chain information.
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=DescribeSnapshotsUsage) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+## Debugging
 
-## Request parameters {#parameters .section}
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DescribeSnapshotsUsage&type=RPC&version=2014-05-26)
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|RegionId|String|Yes|cn-hangzhou| The ID of the region to which the snapshot belongs. You can call [DescribeRegions](~~25609~~) to view the latest regions of Alibaba Cloud.
+## Request parameters
 
- |
-|Action|String|No|DescribeSnapshotsUsage| The operation that you want to perform. Set the value to DescribeSnapshotsUsage.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|DescribeSnapshotsUsage|The operation that you want to perform. Set the value to DescribeSnapshotsUsage. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the snapshot. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
 
- |
+## Response parameters
 
-## Response parameters {#resultMapping .section}
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
+|SnapshotCount|Integer|5|The number of snapshots stored in the current region. |
+|SnapshotSize|Long|122|The total size of snapshots stored in the current region. Unit: byte. |
 
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request.
-
- |
-|SnapshotCount|Integer|5| The number of snapshots stored in the current region.
-
- |
-|SnapshotSize|Long|122| The total size of snapshots stored in the current region. Unit: Byte.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=DescribeSnapshotsUsage
 &RegionId=cn-hangzhou
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DescribeSnapshotsUsageResponse>
-  <SnapshotCount>5</SnapshotCount>
-  <SnapshotSize>122</SnapshotSize>
-  <RequestId>ED5CF6DD-71CA-462C-9C94-A61A78A01479</RequestId>
+      <SnapshotCount>5</SnapshotCount>
+      <SnapshotSize>122</SnapshotSize>    
+      <RequestId>ED5CF6DD-71CA-462C-9C94-A61A78A01479</RequestId>
 </DescribeSnapshotsUsageResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"SnapshotSize":"122",
-	"RequestId":"ACD9BBB0-A9D1-46D7-9630-B7A69889E110",
-	"SnapshotCount":"5"
+    "SnapshotCount": "5",
+    "SnapshotSize": "122",
+    "RequestId": "ACD9BBB0-A9D1-46D7-9630-B7A69889E110"
 }
 ```
 
-## Error codes {#section_fsi_pre_b14 .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|403|InvalidParam. RegionId|The specified region does not exist.|The error message returned when the specified region does not exist.|
+|403|InvalidParam.RegionId|The specified region is not exist.|The error message returned because the specified RegionId parameter does not exist.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
