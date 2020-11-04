@@ -1,17 +1,16 @@
-# ExportImage {#doc_api_1061139 .reference}
+# ExportImage
 
-Exports a custom image to an OSS bucket in the same region as the custom image.
+You can call this operation to export a custom image to an OSS bucket in the same region.
 
-## Description {#description .section}
+## Description
 
--   This operation cannot export custom images that were created from the system disk snapshots of images available in Marketplace.
--   A custom disk cannot be exported if it contains more than four data disk snapshots or if any of the data disks exceed 500 GB in size.
--   You must [submit a ticket](https://workorder-intl.console.aliyun.com/#/ticket/createIndex) to activate the image export feature.
--   You must use RAM to authorize a RAM role for ECS to write data to OSS. Refer to the following section to create and authorize the RAM role:
+-   If system disk snapshots have been taken for instances created from Alibaba Cloud Marketplace images, you cannot call this operation to export the custom images created from these system disk snapshots.
+-   A custom image cannot be exported if it contains more than four data disk snapshots or if one of the data disk snapshots exceeds 500 GiB in size.
+-   Before you export a custom image, you must use Resource Access Management \(RAM\) to create a RAM role for ECS and authorize ECS to write data to OSS.
 
-    1. Create a role named `AliyunECSImageExportDefaultRole`. Any other role names are invalid. Refer to the following code to configure the policy for the role:
+    1. Create a role named `AliyunECSImageExportDefaultRole`. Configure the following trust policy for the role:
 
-    ``` {#codeblock_4uj_sc3_0nk}
+    ```
     
              {
                "Statement": [
@@ -30,9 +29,9 @@ Exports a custom image to an OSS bucket in the same region as the custom image.
             
     ```
 
-    2. In the role `AliyunECSImageExportDefaultRole`, add the following default system permission policy: `AliyunECSImageExportRolePolicy`. This policy is the default policy for ECS to export images. For more information, see [RAM](https://ram.console.aliyun.com/?spm=5176.2020520101.0.0.64c64df5dfpmdY#/role/authorize?request=%7B%22Requests%22:%20%7B%22request1%22:%20%7B%22RoleName%22:%20%22AliyunECSImageImportDefaultRole%22,%20%22TemplateId%22:%20%22ECSImportRole%22%7D,%20%22request2%22:%20%7B%22RoleName%22:%20%22AliyunECSImageExportDefaultRole%22,%20%22TemplateId%22:%20%22ECSExportRole%22%7D%7D,%20%22ReturnUrl%22:%20%22https:%2F%2Fecs.console.aliyun.com%2F%22,%20%22Service%22:%20%22ECS%22%7D). You can also create your custom policies with the following permissions:
+    2. Attach the `AliyunECSImageExportRolePolicy` system policy to the `AliyunECSImageExportDefaultRole` role. This policy is the default policy used for ECS to export images. For more information, go to the [Cloud Resource Access Authorization](https://ram.console.aliyun.com/?spm=5176.2020520101.0.0.64c64df5dfpmdY#/role/authorize?request=%7B%22Requests%22:%20%7B%22request1%22:%20%7B%22RoleName%22:%20%22AliyunECSImageImportDefaultRole%22,%20%22TemplateId%22:%20%22ECSImportRole%22%7D,%20%22request2%22:%20%7B%22RoleName%22:%20%22AliyunECSImageExportDefaultRole%22,%20%22TemplateId%22:%20%22ECSExportRole%22%7D%7D,%20%22ReturnUrl%22:%20%22https:%2F%2Fecs.console.aliyun.com%2F%22,%20%22Service%22:%20%22ECS%22%7D) page. Alternatively, you can create a custom policy that contains the following content and attach the policy to the role:
 
-    ``` {#codeblock_kap_5xg_mzc}
+    ```
     
              {
                "Version": "1",
@@ -57,95 +56,100 @@ Exports a custom image to an OSS bucket in the same region as the custom image.
     ```
 
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=ExportImage) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates a sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=ExportImage&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|ImageId|String|Yes|m-imageid1| The ID of the custom image.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|ExportImage|The operation that you want to perform. Set the value to ExportImage. |
+|ImageId|String|Yes|m-bp67acfmxazb4p\*\*\*\*|The ID of the image to be exported. |
+|OSSBucket|String|Yes|testexportImage|The OSS bucket to which to export the custom image. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the custom image. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|OSSPrefix|String|No|EcsExport|The prefix of the OSS object. It must be 1 to 30 characters in length and can contain digits and letters. |
+|ImageFormat|String|No|raw|The format in which to export the custom image. Default value: raw. Valid values:
 
- |
-|OSSBucket|String|Yes|testexportImage| The OSS bucket to which the image is to be exported.
+-   raw
+-   vhd
+-   qcow2
+-   vmdk
+-   vdi
 
- |
-|RegionId|String|Yes|cn-hangzhou| The ID of the region to which the custom image belongs. You can call [DescribeRegions](~~25609~~) to view the latest regions of Alibaba Cloud.
+raw |
+|RoleName|String|No|EcsServiceRole-EcsDocGuideTest|The name of the RAM role used to export the custom image. |
 
- |
-|Action|String|No|ExportImage| The operation that you want to perform. Set the value to ExportImage.
+## Response parameters
 
- |
-|OSSPrefix|String|No|EcsExport| The prefix of your OSS object. It must be 1 to 30 characters in length and can contain digits and letters.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RegionId|String|cn-hangzhou|The ID of the region. |
+|RequestId|String|C8B26B44-0189-443E-9816-D951F59623A9|The ID of the request. |
+|TaskId|String|tsk-bp67acfmxazb4p\*\*\*\*|The ID of the image export task. |
 
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|RegionId|String|cn-hangzhou| The ID of the region.
-
- |
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request.
-
- |
-|TaskId|String|tsk-231234567| The ID of the image export task.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=ExportImage
-&ImageId=m-imageid1
+&ImageId=m-bp67acfmxazb4p****
 &OSSBucket=testexportImage
-&RegionId=cn-hangzhou 
+&RegionId=cn-hangzhou
 &OSSPrefix=EcsExport
+&ImageFormat=raw
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <ExportImageResponse>
-  <RequestId>C8B26B44-0189-443E-9816-D951F59623A9</RequestId>
-  <ExportTaskId>tsk-231234567</ExportTaskId>
-  <RegionId>cn-hangzhou</RegionId> 
+      <RequestId>C8B26B44-0189-443E-9816-D951F59623A9</RequestId>
+      <ExportTaskId>tsk-bp67acfmxazb4p****</ExportTaskId>
+      <RegionId>cn-hangzhou</RegionId>
 </ExportImageResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RegionId":"cn-hangzhou",
-	"RequestId":"C8B26B44-0189-443E-9816-D951F59623A9",
-	"ExportTaskId":"tsk-231234567"
+    "RequestId": "C8B26B44-0189-443E-9816-D951F59623A9",
+    "ExportTaskId": "tsk-bp67acfmxazb4p****",
+    "RegionId": "cn-hangzhou"
 }
 ```
 
-## Error codes {#section_6s2_5uv_fq3 .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|400|MissingParameter|An input parameter "RegionId" that is mandatory for processing the request is not supplied.|The error message returned when the required RegionId parameter is not specified.|
-|400|MissingParameter|An input parameter ImageId that is mandatory for processing the request is not supplied.|The error message returned when the required ImageId parameter is not specified.|
-|400|InvalidRegionId.NotFound|The specified RegionId does not exist.|The error message returned when the specified Region ID does not exist. Check whether the service is available in this region.|
-|400|InvalidRegion.NotSupport|The specified region does not support image import or export.|The error message returned when the specified region does not support this operation.|
-|404|InvalidImageId.NotFound|The specified ImageId does not exist.|The error message returned when the specified image does not exist under this account. Check whether the image ID is correct.|
-|400|IncorrectImageStatus|The specified Image is not available.|The error message returned when the specified source image is in a state that does not support the current operation.|
-|403|ImageNotSupported|The specified image from the image market, do not support export image.|The error message returned when you are trying to export images from Marketplace.|
-|400|InvalidImageFormat.Malformed|The specified Image Format is wrongly formed.|The error message returned when the format of the AssociateInstanceType parameter is incorrect.|
-|403|ExportImageFailed|Exporting image is failed, Please contact the administrator.|The error message returned when the image failed to be exported. Contact a system administrator.|
-|400|InvalidImage.DiskAmountOrSize|The diskSize or diskAmount of the image exceeds the limitation.|The error message returned when the disk size or number of disks has reached the upper limit for image export.|
-|400|ImageNotSupported|The specified Image contains encrypted snapshots, do not support export.|The error message returned when the specified image contains encrypted snapshots and cannot be exported.|
-|400|ImageNotSupported|Image from image market does not support exporting.|The error message returned when you are trying to export images from Marketplace.|
+|400|MissingParameter|An input parameter "RegionId" that is mandatory for processing the request is not supplied.|The error message returned because the required RegionId parameter is not specified.|
+|400|MissingParameter|An input parameter "ImageId" that is mandatory for processing the request is not supplied.|The error message returned because the required ImageId parameter is not specified.|
+|400|MissingParameter|An input parameter "OSSBucket" that is mandatory for processing the request is not supplied.|The error message returned because the required OSSBucket parameter is not specified.|
+|400|InvalidImageName.Malformed|The specified Image name is wrongly formed.|The error message returned because the specified image name is invalid. The name must be 2 to 128 characters in length and can contain letters, digits, periods \(.\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with http:// or https://.|
+|400|InvalidOSSPrefix.Malformed|The specified OSSPrefix format is wrongly formed.|The error message returned because the specified OSSPrefix parameter is invalid.|
+|400|InvalidRegionId.NotFound|The specified RegionId does not exist.|The error message returned because the specified RegionId parameter does not exist.|
+|400|InvalidRegion.NotSupport|The specified region does not support image import or export.|The error message returned because the specified region does not support this operation.|
+|404|InvalidImageId.NotFound|The specified ImageId does not exist.|The error message returned because the specified image does not exist in this account.|
+|400|IncorrectImageStatus|The specified Image is not available.|The error message returned because the status of the specified image is invalid.|
+|403|ImageNotSupported|The specified image from the image market, do not support export image.|The error message returned because the specified image is an Alibaba Cloud Marketplace image and cannot be exported.|
+|400|InvalidImageFormat.Malformed|The specified Image Format is wrongly formed.|The error message returned because the specified ImageFormat parameter is invalid.|
+|403|ImageIsExporting|The specified Image is exporting.|The error message returned because the specified image is being exported.|
+|403|ExportImageFailed|Exporting image is failed, Please contact the administrator.|The error message returned because the image failed to be exported. Contact a system administrator.|
+|403|UserNotInTheWhiteList|The user is not in the white list of exporting image.|The error message returned because you are not authorized to export images.|
+|403|NoSetRoletoECSServiceAcount|ECS service account Have no right to access your OSS.please attach a role of access your oss to ECS service account.|The error message returned because ECS is not authorized to access the specified OSS bucket and object.|
+|400|InvalidOSSBucket.NotFound|The specified OSS bucket does not exist in this region.|The error message returned because the specified OSS bucket does not exist.|
+|400|OperationDenied|The specified image contains the snapshot of the data disk,does not support this operation.|The error message returned because the operation is not supported while the image contains data disk snapshots.|
+|400|InvalidImage.DiskAmountOrSize|%s|The error message returned because the image contains more than four data disk snapshots or the size of one of the data disk snapshot exceeds 500 GiB.|
+|400|ImageNotSupported|The specified Image contains encrypted snapshots, do not support export.|The error message returned because the specified image contains encrypted snapshots and cannot be exported.|
+|400|ImageNotSupported|Image from image market does not support exporting.|The error message returned because the specified image is an Alibaba Cloud Marketplace image and cannot be exported.|
+|403|ConcurrentQuotaExceed.ExportImage|%s|The error message returned because the maximum number of concurrent ongoing tasks has been reached. Try again later.|
+|403|WeeklyQuotaExceed.ExportImage|%s|The error message returned because the weekly quota for exported images of this week has been used up. Retry when the quota becomes available again.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
