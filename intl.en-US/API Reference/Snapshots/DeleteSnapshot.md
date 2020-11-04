@@ -1,79 +1,72 @@
-# DeleteSnapshot {#doc_api_999641 .reference}
+# DeleteSnapshot
 
-Deletes a snapshot. Snapshots that are currently being created can also be deleted by calling this operation.
+You can call this operation to delete a snapshot. If you call this operation to delete a snapshot that is being created, the snapshot creation task is canceled.
 
-## Description {#description .section}
+## Description
 
-When you call this operation, note that:
+When you call this operation, take note of the following items:
 
--   If the specified snapshot does not exist, the request will be ignored.
--   A snapshot that has already been used to create custom images cannot be deleted. A snapshot can be deleted only after the created custom images have been deleted \([DeleteImage](~~25537~~)\).
+-   If the specified snapshot ID does not exist, the request is ignored.
+-   A snapshot that has been used to create custom images cannot be deleted. The snapshot can be deleted only after the created custom images are deleted \([DeleteImage](~~25537~~)\).
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=DeleteSnapshot) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DeleteSnapshot&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|SnapshotId|String|Yes|s-snapshotid1| The ID of the snapshot.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|DeleteSnapshot|The operation that you want to perform. Set the value to DeleteSnapshot. |
+|SnapshotId|String|Yes|s-bp1c0doj0taqyzzl\*\*\*\*|The ID of the snapshot to be deleted. |
+|Force|Boolean|No|false|Specifies whether to forcibly delete the snapshot that has been used to create disks.
 
- |
-|Action|String|No|DeleteSnapshot| The operation that you want to perform. Set the value to DeleteSnapshot.
+**Note:** After an snapshot is deleted, the disks created from this snapshot cannot be re-initialized. |
 
- |
-|Force|Boolean|No|false| Indicates whether to force delete snapshots associated with the disk.
+## Response parameters
 
- **Note:** A disk cannot be reinitialized after its associated snapshots are deleted.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
 
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The ID of the request.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=DeleteSnapshot
-&SnapshotId=s-snapshotid1
+&SnapshotId=s-bp1c0doj0taqyzzl****
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DeleteSnapshotResponse>
-  <RequestId>CEF72CEB-54B6-4AE8-B225-F876FF7BA984</RequestId>
+       <RequestId>CEF72CEB-54B6-4AE8-B225-F876FF7BA984</RequestId>
 </DeleteSnapshotResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RequestId":" CEF72CEB-54B6-4AE8-B225-F876FF7BA984"
+    "RequestId": "CEF72CEB-54B6-4AE8-B225-F876FF7BA984"
 }
 ```
 
-## Error codes {#section_pcc_pli_wzn .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|403|SnapshotCreatedImage|The snapshot has been used to create user defined image\(s\).|The error message returned when the specified snapshot has been used to create custom images. You must delete the associated images before deleting the snapshot. If you force delete the snapshot, the images associated with the snapshot will become unavailable.|
-|403|SnapshotCreatedDisk|The snapshot has been used to create disk\(s\).|The error message returned when the specified snapshot has been used to create disks.|
-|400|MissingParameter|The input parameter SnapshotId that is mandatory for processing this request is not supplied.|The error message returned when the required SnapshotId parameter is not specified.|
-|404|InvalidSnapshotId.NotFound|The specified snapshot is not found|The error message returned when the specified snapshot does not exist.|
-|403|Operation.Conflict|The operation may conflicts with others, please retry later.|The error message returned when the current operation conflicts with other operations.|
+|403|SnapshotCreatedImage|The snapshot has been used to create user defined image\(s\).|The error message returned because the specified snapshot has been used to create custom images. You must delete the created custom images before you can delete the snapshot. If you forcibly delete the snapshot, the images created from the snapshot become unavailable.|
+|403|SnapshotCreatedDisk|The snapshot has been used to create disk\(s\).|The error message returned because the specified snapshot has been used to create disks.|
+|400|MissingParameter|The input parameter SnapshotId that is mandatory for processing this request is not supplied.|The error message returned because the required SnapshotId parameter is not specified.|
+|500|InternalError|The request processing has failed due to some unknown error.|The error message returned because an internal error has occurred. Try again later. If the problem persists, submit a ticket.|
+|404|InvalidSnapshotId.NotFound|The specified snapshot is not found|The error message returned because the specified SnapshotId parameter does not exist.|
+|403|Operation.Conflict|The operation may conflicts with others, please retry later.|The error message returned because the operation conflicts with other operations. Try again later.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
