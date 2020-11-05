@@ -1,115 +1,93 @@
-# ModifyAutoProvisioningGroup {#doc_api_Ecs_ModifyAutoProvisioningGroup .reference}
+# ModifyAutoProvisioningGroup
 
 You can call this operation to modify the configurations of an auto provisioning group.
 
-Before you call this operation, take note of the following points:
+## Description
 
--   If you modify the capacity or capacity-related settings of an auto provisioning group, the group will execute scheduling tasks once after modification.
+Before you call this operation, take note of the following items:
+
+-   If you modify the capacity or capacity-related settings of an auto provisioning group, the group executes scheduling tasks once after it is modified.
 -   You cannot modify an auto provisioning group when the group is being deleted.
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-Alibaba Cloud provides [OpenAPI Explorer](https://api.aliyun.com/#product=Ecs&api=ModifyAutoProvisioningGroup) to simplify API usage. You can use OpenAPI Explorer to search for APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=ModifyAutoProvisioningGroup&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
 |Parameter|Type|Required|Example|Description|
 |---------|----|--------|-------|-----------|
-|RegionId|String|Yes|cn-hangzhou| The region ID of the auto provisioning group to be modified.
+|Action|String|Yes|ModifyAutoProvisioningGroup|The operation that you want to perform. Set the value to ModifyAutoProvisioningGroup. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the auto provisioning group to be modified. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|AutoProvisioningGroupId|String|No|apg-bp67acfmxazb4ph\*\*\*\*|The ID of the auto provisioning group. |
+|ExcessCapacityTerminationPolicy|String|No|no-termination|Specifies whether to stop excess preemptible instances when the target capacity of the specified auto provisioning group is exceeded. Valid values:
 
- |
-|Action|String|No|ModifyAutoProvisioningGroup| The operation that you want to perform. Set this parameter to **ModifyAutoProvisioningGroup**.
+-   no-termination: The system continues to run excess preemptible instances.
+-   termination: stops excess preemptible instances. The action to be performed on these stopped instances is specified by the SpotInstanceInterruptionBehavior parameter.
 
- |
-|AutoProvisioningGroupId|String|No|apg-uf6jel2bbl62wh13\*\*\*\*| The ID of the auto provisioning group to be modified.
+**Note:** The SpotInstanceInterruptionBehavior parameter is set when the auto provisioning group is created, and cannot be modified. |
+|DefaultTargetCapacityType|String|No|Spot|Specifies the billing method of the capacity difference when the sum of the values of the PayAsYouGoTargetCapacity and SpotTargetCapacity parameters is less than the value of the TotalTargetCapacity parameter. Valid values:
 
- |
-|DefaultTargetCapacityType|String|No|PayAsYouGo| The type of supplemental instances. When the total value of **PayAsYouGoTargetCapacity** and **SpotTargetCapacity** is smaller than the value of **TotalTargetCapacity**, the auto provisioning group will create instances of the specified type to meet the capacity requirements. Valid values:
+-   PayAsYouGo: pay-as-you-go
+-   Spot: preemptible instance |
+|TerminateInstancesWithExpiration|Boolean|No|false|Specifies whether the preemptible instances are stopped when the auto provisioning group expires. Valid values:
 
- -   **PayAsYouGo:** Pay-as-you-go instances.
--   **Spot:** Preemptible instances.
+-   true: The preemptible instances are stopped. The action to be performed on these stopped instances is specified by the SpotInstanceInterruptionBehavior parameter.
+-   false: The preemptible instances continue to run.
 
- |
-|ExcessCapacityTerminationPolicy|String|No|no-termination| The shutdown policy of the auto provisioning group for excess preemptible instances when the target capacity has been exceeded. Valid values:
+**Note:** The SpotInstanceInterruptionBehavior parameter is set when the auto provisioning group is created, and cannot be modified. |
+|MaxSpotPrice|Float|No|0.5|The maximum price of preemptible instances in the auto provisioning group.
 
- -   **no-termination:** Excess preemptible instances are not shut down.
--   **termination:** Excess preemptible instances are to be shut down. The action to be performed on these shutdown instances is specified by the **SpotInstanceInterruptionBehavior** parameter.
+**Note:** If both the MaxSpotPrice and LaunchTemplateConfig.N.MaxPrice parameters are specified, the maximum price is the lower value of the two parameters. The LaunchTemplateConfig.N.MaxPrice parameter is set when the auto provisioning group is created, and cannot be modified. |
+|TotalTargetCapacity|String|No|70|The target capacity of the auto provisioning group. The parameter value is a positive integer.
 
- **Note:** The **SpotInstanceInterruptionBehavior** parameter is set during the auto provisioning group creation process and cannot be modified. For more information, see [CreateAutoProvisioningGroup](~~122738~~).
+The target capacity of the auto provisioning group must be at least the sum of the capacity of pay-as-you-go instances specified by the PayAsYouGoTargetCapacity parameter and the capacity of preemptible instances specified by the SpotTargetCapacity parameter. |
+|PayAsYouGoTargetCapacity|String|No|30|The target capacity of pay-as-you-go instances in the auto provisioning group. Valid values: Set this parameter to a value smaller than that of the TotalTargetCapacity parameter. |
+|SpotTargetCapacity|String|No|30|The target capacity of preemptible instances in the auto provisioning group. Valid values: Set this parameter to a value smaller than that of the TotalTargetCapacity parameter. |
+|AutoProvisioningGroupName|String|No|apg-test|The name of the auto provisioning group. The name must be 2 to 128 characters in length and can contain letters, digits, colons \(:\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with http:// or https://. |
 
- |
-|MaxSpotPrice|Float|No|8| The global maximum price for preemptible instances in the auto provisioning group. If both the **MaxSpotPrice** and **LaunchTemplateConfig.N.MaxPrice** parameters are specified, the maximum price is the lower value of the two.
-
- **Note:** The **LaunchTemplateConfig.N.MaxPrice** parameter is set during the auto provisioning group creation process and cannot be modified. For more information, see [CreateAutoProvisioningGroup](~~122738~~).
-
- |
-|PayAsYouGoTargetCapacity|String|No|5| The target capacity of pay-as-you-go instances in the auto provisioning group.
-
- |
-|SpotTargetCapacity|String|No|5| The target capacity of preemptible instances in the auto provisioning group.
-
- |
-|TerminateInstancesWithExpiration|Boolean|No|false| The shutdown policy for preemptible instances when the auto provisioning group expires. Valid values:
-
- -   **true:** shuts down preemptible instances. The action to be performed on these shutdown instances is specified by the **SpotInstanceInterruptionBehavior** parameter.
--   **false:** does not shut down preemptible instances.
-
- **Note:** The **SpotInstanceInterruptionBehavior** parameter is set during the auto provisioning group creation process and cannot be modified. For more information, see [CreateAutoProvisioningGroup](~~122738~~).
-
- |
-|TotalTargetCapacity|String|No|10| The total capacity of the auto provisioning group. The capacity consists of the following three parts:
-
- -   The target capacity of pay-as-you-go instances specified by the **PayAsYouGoTargetCapacity** parameter
--   The target capacity of preemptible instances specified by the **SpotTargetCapacity** parameter
--   The supplemental capacity besides **PayAsYouGoTargetCapacity** and **SpotTargetCapacity**
-
- |
-
-## Response parameters {#resultMapping .section}
+## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|RequestId|String|B48A12CD-1295-4A38-A8F0-0E92C937\*\*\*\*| The ID of the request.
+|RequestId|String|B48A12CD-1295-4A38-A8F0-0E92C937\*\*\*\*|The ID of the request. |
 
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
-
-http(s)://ecs.aliyuncs.com/? Action=ModifyAutoProvisioningGroup
+```
+http(s)://ecs.aliyuncs.com/?Action=ModifyAutoProvisioningGroup
 &RegionId=cn-hangzhou
-&AutoProvisioningGroupId=apg-uf6jel2bbl62wh13****
+&AutoProvisioningGroupId=apg-bp67acfmxazb4ph****
+&TotalTargetCapacity=70
+&MaxSpotPrice=0.5
 &<Common request parameters>
-
 ```
 
 Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <ModifyAutoProvisioningGroupResponse>
-  <RequestId>928E2273-5715-46B9-A730-238DC996****</RequestId>
+    <RequestId>928E2273-5715-46B9-A730-238DC996****</RequestId>
 </ModifyAutoProvisioningGroupResponse>
-
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RequestId":"B48A12CD-1295-4A38-A8F0-0E92C937****"
+    "RequestId": "B48A12CD-1295-4A38-A8F0-0E92C937****"
 }
 ```
 
-## Error codes {#section_mfz_o40_575 .section}
+## Error codes
 
-|HTTP status code|Error code|Description|Error message|
-|----------------|----------|-----------|-------------|
-|403|Forbidden.RAM|User not authorized to operate on the specified resource, or this API doesn't support RAM.|The error message returned because the RAM user is not authorized.|
+|HTTP status code|Error code|Error message|Description|
+|----------------|----------|-------------|-----------|
+|403|Forbidden.RAM|User not authorized to operate on the specified resource, or this API doesn't support RAM.|The error message returned because you are not authorized to manage this resource, or this API operation does not support RAM roles.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
