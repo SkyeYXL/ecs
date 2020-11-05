@@ -138,7 +138,7 @@ https://ecs.aliyuncs.com/?Action=ModifyInstanceSpec
 |400|InvalidInstanceStatus.NotStopped|The specified Instance status is not stopped.|指定实例的状态不是已停止。|
 |403|InstanceType.Offline|The specified InstanceType has been offline|您指定的实例规格已下线，请选择其它规格的实例。|
 |400|InvalidAction|Specified action is not valid.|该操作无效。|
-|400|IdempotenceParamNotMatch|There is a idempotence signature mismatch between this and last request.|此请求与上一个请求之间的幂等签名不匹配。|
+|400|IdempotenceParamNotMatch|There is a idempotence signature mismatch between this and last request.|该请求与上一个请求的ClientToken参数一致，但其它请求参数不一致。|
 |400|InvalidClientToken.ValueNotSupported|The ClientToken provided is invalid.|指定的ClientToken不合法。|
 |400|Price.PricePlanResultNotFound|The internetMaxBandwidthIn or internetMaxBandwidthOut provided is invalid.|提供的internetMaxBandwidthIn或internetMaxBandwidthOut无效。|
 |403|InvalidParameter.NotMatch|%s|您输入的参数无效，请检查参数之间是否冲突。|
