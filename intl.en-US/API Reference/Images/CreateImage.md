@@ -1,217 +1,191 @@
-# CreateImage {#doc_api_Ecs_CreateImage .reference}
+# CreateImage
 
-Creates a custom image. You can then use a custom image to create ECS instances \(RunInstances\) or change the system disk for an existing instance \(ReplaceSystemDisk\).
+You can call this operation to create a custom image. The created custom image can be used to create ECS instances \(RunInstances\) and replace system disks \(ReplaceSystemDisk\).
 
-## Description {#description .section}
+## Description
 
-When you call this interface, note the following:
+When you call this operation, take note of the following items:
 
--   You can use a custom image only when its status is `Available`.
--   If the specified ECS instance is [locked](~~25695~~), the `OperationLocks` of the ECS instance cannot indicate "LockReason": "security".
+-   The created custom image can be used only when it is in the Available \(Available\) state.
+-   If the response message contains `{"OperationLocks": {"LockReason" : "security"}}` when you query information of an instance, the instance is locked for security reasons and all operations are prohibited on it.
 
-You can create a custom image using one of three methods according to your requirements. When you create a custom image, the priority of request parameters is InstanceId, then DiskDeviceMapping, then SnapshotId. If your request contains more than one of the preceding parameters, the parameter with a higher priority is used for creating the custom image by default.
+You can call the CreateImage operation to create a custom image by using one of the following methods. The following request parameters are sorted by priority: `InstanceId` \> `DiskDeviceMapping` \> `SnapshotId`. If your request contains two or more parameters, the custom image is created based on the parameter with a higher priority by default.
 
--   **Method 1**: If you want to create a template from an ECS instance, you can specify the instance ID \(InstanceId\) to create a custom image. You must make sure that the status of the specified instance is Running or Stopped. After a successful invocation, each disk of the specified instance has a new snapshot created.
--   **Method 2**: If you want to create a custom image based on the system disk of your ECS instance, you can specify one of the system disk snapshots \(SnapshotId\) to create a custom image. However, the specified snapshot cannot be created on or before July 15, 2013.
--   **Method 3**: If you want to combine snapshots of multiple disks into an image template, you can specify DiskDeviceMapping to create a custom image.
+-   **Method 1**: Create a custom image from an instance. You only need to specify the instance ID \(`InstanceId`\). The instance must be in the Running \(`Running`\) or Stopped \(`Stopped`\) state. After the CreateImage operation is called, a new snapshot is created for each disk of the instance.
+-   **Method 2**: Create a custom image from the system disk snapshot of an instance. You only need to specify the ID of the system disk snapshot \(`SnapshotId`\). The specified snapshot cannot be created on or before July 15, 2013.
+-   **Method 3**: Create a custom image from multiple disk snapshots. You must specify the data mapping between the disks corresponding to the snapshots \(`DiskDeviceMapping`\).
 
-If you use method 3 \(specify DiskDeviceMapping\) you must note the following:
+When you use Method 3 to create a custom image, take note of the following items:
 
--   You can only specify one system disk snapshot. The device name of the system disk must be /dev/xvda.
--   You can specify multiple data disk snapshots. The device names of the data disks are allocated sequentially from /dev/xvdb to /dev/xvdz, without duplicates.
--   SnapshotId is not required. If you do not specify the SnapshotId, an empty disk of the specified size is created. However, if you specify SnapshotId, the corresponding snapshot cannot have been created on or before July 15, 2013.
+-   You can specify only one system disk snapshot. The device name of the system disk must be /dev/xvda.
+-   You can specify multiple data disk snapshots. The device names of the data disks are unique and ascend from /dev/xvdb to /dev/xvdz.
+-   `SnapshotId` may not be specified. In this case, an empty data disk with a specific size is created.
+-   The specified snapshot cannot be created on or before July 15, 2013.
 
-## Debug {#apiExplorer .section}
+## Debugging
 
-Use [API Explorer](https://api.aliyun.com/#product=Ecs&api=CreateImage) to perform debug operations and generate SDK code examples.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=CreateImage&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required?|Example value|Description|
-|----|----|---------|-------------|-----------|
-|Action|String|No|CreateImage| The name of this action. Value: CreateImage.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|CreateImage|The operation that you want to perform. Set the value to CreateImage. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region in which to create the custom image. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|DiskDeviceMapping.N.SnapshotId|String|No|s-bp17441ohwkdca0\*\*\*\*|The ID of snapshot N that is used to create disk N specified by DiskDeviceMapping.N.Size in the custom image. |
+|DiskDeviceMapping.N.Size|Integer|No|2000|The size of disk N in the custom image. Unit: GiB. The valid values and default value of DiskDeviceMapping.N.Size depend on DiskDeviceMapping.N.SnapshotId.
 
- |
-|RegionId|String|Yes|cn-hangzhou| The ID of the region to which the image belongs. For more information, call [DescribeRegions](~~25609~~) to obtain the latest region list.
+-   If no corresponding snapshot IDs are specified in the DiskDeviceMapping.N.SnapshotId value, the following valid values and default value are available for DiskDeviceMapping.N.Size:
+    -   For basic disks, the valid values are 5 to 2000, and the default value is 5.
+    -   For other disk categories, the valid values are 20 to 32768, and the default value is 20.
+-   If a corresponding snapshot ID is specified in the DiskDeviceMapping.N.SnapshotId value, the value of DiskDeviceMapping.N.Size must be greater than or equal to the size of the specified snapshot. The default value of DiskDeviceMapping.N.Size is the size of the specified snapshot. |
+|DiskDeviceMapping.N.Device|String|No|/dev/vdb|The device name of disk N in the custom image. Valid values:
 
- |
-|Architecture|String|No|x86\_64| Specifies the architecture of the system disk after you specify a data disk snapshot as the data source of the system disk for creating an image. Valid values:
+-   For disk categories other than basic disks, such as standard SSDs, ultra disks, and enhanced SSDs: /dev/vda to /dev/vdz
+-   For basic disks: /dev/xvda to /dev/xvdz |
+|DiskDeviceMapping.N.DiskType|String|No|system|The type of disk N in the custom image. You can set this parameter to create the system disk of the custom image from a data disk snapshot. If you do not set this parameter, the disk type is determined by the corresponding snapshot. Valid values:
 
- -   i386
--   x86\_64 \(default value\)
+-   system: system disk
+-   data: data disk |
+|SnapshotId|String|No|s-bp17441ohwkdca0\*\*\*\*|The ID of the snapshot that is used to create the custom image. |
+|InstanceId|String|No|i-bp1g6zv0ce8oghu7\*\*\*\*|The ID of the instance. |
+|ImageName|String|No|TestCentOS|The name of the image. The name must be 2 to 128 characters in length and can contain letters, digits, colons \(:\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with http:// or https://.
 
- |
-|ClientToken|String|No|123e4567-e89b-12d3-a456-426655440000| Guarantees the idempotence of the request. The value is generated by your client and must be globally unique. Only ASCII characters are allowed. It can contain a maximum of 64 ASCII characters. For more information, see [How to ensure idempotence](~~25693~~).
+This parameter is empty by default. |
+|Description|String|No|ImageTestDescription|The description of the image. The description must be 2 to 256 characters in length and cannot start with http:// or https://.
 
- |
-|Description|String|No|FinanceDeptjoshua| The description of the image. It must be 2 to 256 characters in length and must not start with http:// or https://. Default value: null.
+This parameter is empty by default. |
+|Platform|String|No|CentOS|The distribution of the operating system for the system disk in the custom image. If you specify a data disk snapshot to create the system disk of the custom image, you must use the Platform parameter to determine the distribution of the operating system for the system disk. Default value: Others Linux. Valid values:
 
- |
-|DiskDeviceMapping.N.Device|String|No|/dev/xvda| Specifies the name of a disk in the combined custom image. Value range: /dev/xvda to /dev/xvdz.
-
- |
-|DiskDeviceMapping.N.DiskType|String|No|system| Specifies the type of a disk in the combined custom image. If you specify this parameter, you can use a data disk snapshot as the data source of a system disk for creating an image. If it is not specified, the disk type is determined by the corresponding snapshot. Valid values:
-
- -   system
--   data
-
- |
-|DiskDeviceMapping.N.Size|Integer|No|2000| Specifies the size of a disk in the combined custom image, in GiB. Value range: 5 to 2000.
-
- -   If the disk size is not specified, it is equal to the snapshot size \(DiskDeviceMapping.N.SnapshotId\) by default.
--   If the snapshot \(DiskDeviceMapping.N.SnapshotId\) is not specified, the disk size is 5 GiB by default.
--   If the disk size is specified, it must be at least the size of the corresponding snapshot \(DiskDeviceMapping.N.SnapshotId\).
-
- |
-|DiskDeviceMapping.N.SnapshotId|String|No|s-snapshotid1| Specifies a snapshot that is used to create a combined custom image.
-
- |
-|ImageName|String|No|FinanceDeptJoshuaCentOS| The image name. It must be 2 to 128 characters in length, and must begin with a letter or Chinese character \(beginning with http:// or https:// is not allowed\). It can contain digits, colons \(:\), underscores \(\_\), or hyphens \(-\). Default value: null.
-
- |
-|InstanceId|String|No|i-instanceid| The instance ID.
-
- |
-|Platform|String|No|CentOS| Specifies the operating system platform of the system disk after you specify a data disk snapshot as the data source of the system disk for creating an image. Valid values:
-
- -   CentOS
+-   CentOS
 -   Ubuntu
 -   SUSE
 -   OpenSUSE
 -   RedHat
 -   Debian
 -   CoreOS
--   Aliyun Linux
--   Windows Server 2003
--   Windows Server 2008
+-   Aliyun
 -   Windows Server 2012
 -   Windows 7
--   Others Linux \(default value\)
 -   Customized Linux
+-   Others Linux |
+|Architecture|String|No|x86\_64|The system architecture of the system disk. If you specify a data disk snapshot to create the system disk of the custom image, you must use the Architecture parameter to determine the system architecture of the system disk. Default value: x86\_64. Valid values:
 
- |
-|ResourceGroupId|String|No|rg-resourcegroupid1| The ID of the enterprise resource group to which a custom image belongs
+-   i386
+-   x86\_64 |
+|ClientToken|String|No|123e4567-e89b-12d3-a456-426655440000|The client token that is used to ensure the idempotence of the request. You can use the client to generate the value, but you must ensure that it is unique among different requests. The **ClientToken** value can only contain ASCII characters and cannot exceed 64 characters in length. For more information, see [How to ensure idempotence](~~25693~~). |
+|Tag.N.value|String|No|null|The value of tag N of the custom image.
 
- |
-|SnapshotId|String|No|s-snapshotid| Specifies a snapshot that is used to create a custom image.
+**Note:** This parameter will be removed in the future. We recommend that you use the Tag.N.Value parameter to ensure future compatibility. |
+|Tag.N.key|String|No|null|The key of tag N of the custom image.
 
- |
-|Tag.N.Key|String|No|FinanceDept| The tag key of an image. The value of N ranges from 1 to 20. You cannot specify a null string for this parameter. It can contain a maximum of 64 characters, and must not start with aliyun or acs:. It must not contain http:// or https://.
+**Note:** This parameter will be removed in the future. We recommend that you use the Tag.N.Key parameter to ensure future compatibility. |
+|Tag.N.Key|String|No|KeyTest|The key of tag N of the custom image. Valid values of N: 1 to 20. The tag key cannot be an empty string. It can be up to 128 characters in length and cannot contain http:// or https://. It cannot start with acs: or aliyun. |
+|Tag.N.Value|String|No|ValueTest|The value of tag N of the custom image. Valid values of N: 1 to 20. The tag value can be an empty string. It can be up to 128 characters in length. It cannot start with acs: or contain http:// or https://. |
+|ResourceGroupId|String|No|rg-bp67acfmxazb4p\*\*\*\*|The ID of the resource group to which to assign the custom image. |
+|ImageFamily|String|No|hangzhou-daily-update|The name of the image family of the custom image. The name must be 2 to 128 characters in length and can contain letters, digits, colons \(:\), underscores \(\_\), and hyphens \(-\). It cannot contain http:// or https://. It must start with a letter and cannot start with acs: or aliyun.
 
- |
-|Tag.N.Value|String|No|FinanceDeptJoshua| The tag value of an image. The value of N ranges from 1 to 20. You cannot specify a null string for this parameter. It can contain a maximum of 128 characters, and must not start with aliyun or acs:. It must not contain http:// or https://.
+This parameter is empty by default. |
 
- |
-|Tag.N.key|String|No|FinanceDept| The tag key of an image.
+## Response parameters
 
- **Note:** This parameter will be obsolete soon. We recommend that you use Tag.N.Key for better compatibility.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|ImageId|String|m-bp146shijn7hujku\*\*\*\*|The ID of the image. |
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
 
- |
-|Tag.N.value|String|No|FinanceDeptJoshua| The tag value of an image.
+## Examples
 
- **Note:** This parameter will be obsolete soon. We recommend that you use Tag.N.Value for better compatibility.
+Sample requests
 
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example value|Description|
-|----|----|-------------|-----------|
-|ImageId|String|m-63DFD5FB2| The image ID.
-
- |
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The request ID.
-
- |
-
-## Examples {#demo .section}
-
-Request example
-
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=CreateImage
 &RegionId=cn-hangzhou
 &DiskDeviceMapping.1.Size=2000
-&DiskDeviceMapping.1.SnapshotId=s-snapshotid1
+&DiskDeviceMapping.1.SnapshotId=s-bp17441ohwkdca0****
 &DiskDeviceMapping.1.DiskType=system
-&SnapshotId=s-snapshotid
-&InstanceId=i-instanceid
-&ImageName=FinanceDeptJoshuaCentOS
+&SnapshotId=s-bp17441ohwkdca0****
+&InstanceId=i-bp1g6zv0ce8oghu7****
+&ImageName=TestCentOS
 &ImageVersion=2017011017
-&Description=FinanceDeptjoshua
+&Description=ImageTestDescription
 &Platform=CentOS
 &Architecture=x86_64
 &ClientToken=123e4567-e89b-12d3-a456-426655440000
-&Tag.1.value=FinanceDeptJoshua
-&Tag.1.key=FinanceDept
-&Tag.1.Key=FinanceDept
-&Tag.1.Value=FinanceDeptJoshua
-&<Common Request Parameters>
-			
+&Tag.1.Key=KeyTest
+&Tag.1.Value=ValueTest
+&<Common request parameters>
 ```
 
-Response example
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <CreateImageResponse>
-  <RequestId>C8B26B44-0189-443E-9816-D951F59623A9</RequestId>
-  <ImageId>m-63DFD5FB2</ImageId>
+      <RequestId>C8B26B44-0189-443E-9816-D951F59623A9</RequestId>
+      <ImageId>m-bp146shijn7hujku****</ImageId>
 </CreateImageResponse>
-			
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-    "ImageId":"m-63DFD5FB2",
-    "RequestId":"C8B26B44-0189-443E-9816-D951F59623A9"
+    "RequestId": "C8B26B44-0189-443E-9816-D951F59623A9",
+    "ImageId": "m-bp146shijn7hujku****"
 }
 ```
 
-## Error codes { .section}
+## Error codes
 
-|HTTP status code|Error code|Message|Description|
-|----------------|----------|-------|-----------|
-|404|InvalidSnapshotId.NotFound|The specified SnapshotId does not exist.|The specified snapshot does not exist.|
-|400|InvalidImageName.Malformed|The specified Image name is wrongly formed.|The specified image name is invalid. It should be 2 to 128 characters in length, and start with a letter or Chinese character. It can contain digits, periods \(.\), underscores \(\_\), or hyphens \(-\). It must not start with http:// or https://.|
-|400|InvalidImageName.Duplicated|The specified Image name has already been used.|The specified image name already exists.|
-|400|InvalidDescription.Malformed|The specified description is wrongly formed.|The specified description is invalid. It should be 2 to 256 characters in length. It must not start with http:// or https://.|
-|400|InvalidImageVersion.Malformed|The specified ImageVersion is wrongly formed.|The specified image version is invalid, or you are not permitted to use this snapshot.|
-|403|InvalidSnapshotId.NotReady|The current status of the DiskDeviceMapping.n.SnapshotId or SnapshotId does not support this operation.|The current status of the specified snapshot does not support this operation.|
-|403|InvalidSnapshot.TooOld|This operation is denied because the specified snapshot by DiskDeviceMapping.n.SnapshotId or SnapshotId is created before 2013-07-15.|This operation is denied because the snapshot specified by DiskDeviceMapping.n.SnapshotId or SnapshotId was created before 2013-07-15.|
-|403|OperationDenied|The specified snapshot is not allowed to create image.|The specified snapshot cannot be used for creating an image.|
-|403|QuotaExceed.Image|The Image Quota exceeds.|The quota of custom images is exceeded.|
-|403|OperationDenied|The specified snapshot is not from system disk.|The specified snapshot is not a system disk snapshot.|
-|403|InvalidParamter.Conflict|The specified same token is trying to make requests with different parameters.|The specified token is requesting the handling of two different parameters.|
-|404|InvalidInstanceId.NotFound|The specified InstanceId does not exist.|The specified instance does not exist. Please check your instance ID.|
-|400|IncorrectInstanceStatus|The current status of the instance does not support this operation.|The current status of the specified instance does not support this operation.|
-|400|InstanceLockedForSecurity|The specified operation is denied as your instance is locked for security reasons.|The specified operation is denied because your instance is locked for security reasons.|
-|400|InvalidDevice.Malformed|The specified parameter DiskDeviceMapping.n.Device is not valid.|The specified value of the parameter DiskDeviceMapping.n.Device is invalid.|
-|400|MissingParameter|The input parameter SnapshotId or InstanceId or DiskDeviceMapping that is mandatory for processing this request is not supplied.|The specified values of the parameters SnapshotId, InstanceId, and DiskDeviceMapping cannot be null.|
-|400|InvalidSize.ValueNotSupported|The specified parameter DiskDeviceMapping.n.Size beyond the permitted range.|The specified value of the parameter DiskDeviceMapping.n.Size is outside the valid range.|
-|400|InvalidDevice.InUse|The specified parameter DiskDeviceMapping.n.Device has been occupied.|The specified parameter DiskDeviceMapping.n.Device is already being used.|
-|400|OperationDenied|The specified parameter DiskDeviceMapping.n.SnapshotId does not contain system disk snapshot.|The specified value of the parameter DiskDeviceMapping.n.SnapshotId does not contain a system disk snapshot.|
-|400|OperationDenied|The specified parameter DiskDeviceMapping.n.SnapshotId contains two or more system disk snapshots.|The specified value of the parameter DiskDeviceMapping.n.SnapshotId already contains a system disk snapshot.|
-|400|InvalidDiskCategory.CreateImage|The specified diskCategory is not allowed to create image.|The specified disk category is not allowed for creating an image.|
-|403|InvalidAccountStatus.NotEnoughBalance|Your account does not have enough balance.|Your account balance is insufficient for the operation.|
-|403|InvalidAccountStatus.SnapshotServiceUnavailable|Snapshot service has not been opened yet.|The operation is denied because the snapshot service is not enabled.|
-|403|UserNotInTheWhiteList|The user is not in the white list of create image by data disk snapshot.|You do not have the permission to create an image from data disk snapshots.|
-|400|InvalidArchitecture.Malformed|The specified Architecture is wrongly formed.|The specified value of the parameter Architecture is invalid.|
-|400|InvalidPlatform.Malformed|The specified Platform is wrongly formed.|The specified operating system platform is invalid.|
-|400|OperationDenied|Not support creating system image from an encrypted snapshot/disk.|An encrypted snapshot or disk cannot be used for creating a custom image.|
-|400|InvalidParameter.AllEmpty|%s|The required parameter is missing.|
-|403|IncorrectDiskStatus.Invalid|Device status is invalid, please restart instance and try again.|The device status is invalid. Please restart your instance and try again.|
-|403|OperationDenied.InvalidSnapshotCategory|%s|The snapshot type is invalid.|
-|403|QuotaExceed.Snapshot|The snapshot quota exceeds.|The snapshot quota is exceeded. Please delete old snapshots as needed before you store new ones.|
-|403|IncorrectDiskStatus.Transferring|The specified device is transferring, you can retry after the process is finished.|The specified disk is being migrated. Please try again after the process is finished.|
-|403|IncorrectDiskStatus|The current disk status does not support this operation.|The current status of the specified disk does not support this operation. Please make sure the disk is in a normal status and whether you have overdue payments.|
-|403|InvalidSystemSnapshot.Missing|%s|The source snapshot for creating this system disk has been deleted.|
-|403|IncorrectDiskStatus.CreatingSnapshot|A previous snapshot creation is in process.|A snapshot is being created for the current disk. Please try again after the creation is finished.|
-|404|InvalidResourceGroup.NotFound|The ResourceGroup provided does not exist in our records.|The specified resource group does not exist.|
-|500|InternalError|The process of creating snapshot has failed due to some unknown error.|Unknown errors occurred.|
+|HTTP status code|Error code|Error message|Description|
+|----------------|----------|-------------|-----------|
+|404|InvalidSnapshotId.NotFound|The specified SnapshotId does not exist.|The error message returned because the specified SnapshotId parameter does not exist. Check whether the snapshot ID is correct.|
+|400|InvalidImageName.Malformed|The specified Image name is wrongly formed.|The error message returned because the specified ImageName parameter is invalid. The name must be 2 to 128 characters in length and can contain letters, digits, periods \(.\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with http:// or https://.|
+|400|InvalidImageName.Duplicated|The specified Image name has already bean used.|The error message returned because the specified image name already exists.|
+|400|InvalidDescription.Malformed|The specified description is wrongly formed.|The error message returned because the specified Description parameter is invalid. The description must be 2 to 256 characters in length and cannot start with http:// or https://.|
+|400|InvalidImageVersion.Malformed|The specified ImageVersion is wrongly formed.|The error message returned because the specified image version is invalid or you are not authorized to use the snapshot.|
+|403|InvalidSnapshotId.NotReady|The current status of the DiskDeviceMapping.n.SnapshotId or SnapshotId does not support this operation.|The error message returned because the operation is not supported while the specified snapshot is in the current state.|
+|403|InvalidSnapshot.TooOld|This operation is denied because the specified snapshot by DiskDeviceMapping.n.SnapshotId or SnapshotId is created before 2013-07-15.|The error message returned because the operation is not supported while the snapshot specified by the DiskDeviceMapping.N.SnapshotId or SnapshotId parameter was created before July 15, 2013.|
+|403|OperationDenied|The specified snapshot is not allowed to create image.|The error message returned because the specified snapshot cannot be used to create images.|
+|403|QuotaExceed.Image|The Image Quota exceeds.|The error message returned because the maximum number of custom images has been reached.|
+|403|OperationDenied|The specified snapshot is not from system disk.|The error message returned because the specified snapshot was not created from a system disk.|
+|403|InvalidParamter.Conflict|The specified same token is trying to make requests with different parameters.|The error message returned because the same token is used to make requests that have different parameters.|
+|404|InvalidInstanceId.NotFound|The specified InstanceId does not exist.|The error message returned because the specified InstanceId parameter does not exist.|
+|400|IncorrectInstanceStatus|The current status of the instance does not support this operation.|The error message returned because the operation is not supported while the instance is in the current state.|
+|400|InstanceLockedForSecurity|The specified operation is denied as your instance is locked for security reasons.|The error message returned because the operation is not supported while the instance is locked for security reasons.|
+|400|InvalidDevice.Malformed|The specified parameter DiskDeviceMapping.n.Device is not valid.|The error message returned because the specified DiskDeviceMapping.N.Device parameter is invalid.|
+|400|MissingParameter|The input parameter SnapshotId or InstanceId or DiskDeviceMapping that is mandatory for processing this request is not supplied.|The error message returned because none of SnapshotId, InstanceId, and parameters that start with DiskDeviceMapping is specified.|
+|400|InvalidSize.ValueNotSupported|The specified parameter DiskDeviceMapping.n.Size beyond the permitted range.|The error message returned because the specified DiskDeviceMapping.N.Size parameter is not within the permitted range.|
+|400|InvalidDevice.InUse|The specified parameter DiskDeviceMapping.n.Device has been occupied.|The error message returned because device names specified in the DiskDeviceMapping.N.Device value already exist.|
+|400|OperationDenied|The specified parameter DiskDeviceMapping.n.SnapshotId does not contain system disk snapshot.|The error message returned because the specified DiskDeviceMapping.N.SnapshotID parameter does not contain a system disk snapshot ID.|
+|400|OperationDenied|The specified parameter DiskDeviceMapping.n.SnapshotId contains two or more system disk snapshots.|The error message returned because the specified DiskDeviceMapping.N.SnapshotID parameter already contains a system disk snapshot ID.|
+|400|InvalidDiskCategory.CreateImage|The specified diskCategory is not allowed to create image.|The error message returned because the operation is not supported by the specified disk category.|
+|403|InvalidAccountStatus.NotEnoughBalance|Your account does not have enough balance.|The error message returned because your account balance is insufficient. Add funds to your account and try again.|
+|403|InvalidAccountStatus.SnapshotServiceUnavailable|Snapshot service has not been opened yet.|The error message returned because the operation is not supported while the snapshot service is not activated.|
+|403|UserNotInTheWhiteList|The user is not in the white list of create image by data disk snapshot.|The error message returned because you are not authorized to create an image from data disk snapshots. Try again when you are authorized to do so.|
+|400|InvalidArchitecture.Malformed|The specified Architecture is wrongly formed.|The error message returned because the specified Architecture parameter is invalid.|
+|400|InvalidPlatform.Malformed|The specified Platform is wrongly formed.|The error message returned because the specified Platform parameter is invalid.|
+|400|OperationDenied|Not support creating system image from an encrypted snapshot/disk.|The error message returned because an encrypted disk or snapshot cannot be used to create custom images.|
+|400|InvalidParameter.AllEmpty|%s|The error message returned because no parameters are specified. Specify required parameters.|
+|403|IncorrectDiskStatus.Invalid|Device status is invalid, please restart instance and try again.|The error message returned because the device status is invalid. Restart the instance and try again.|
+|403|OperationDenied.InvalidSnapshotCategory|%s|The error message returned because the operation is not supported by the snapshot type.|
+|403|QuotaExceed.Snapshot|The snapshot quota exceeds.|The error message returned because the maximum number of snapshots has been reached. To store new snapshots, delete snapshots that are no longer needed.|
+|403|IncorrectDiskStatus.Transferring|The specified device is transferring, you can retry after the process is finished.|The error message returned because the specified disk is being migrated. Wait until the disk is migrated and try again.|
+|403|IncorrectDiskStatus|The current disk status does not support this operation.|The error message returned because the operation is not supported while the disk is in the current state. Make sure that the disk is available and your account has no overdue payment for it.|
+|403|InvalidSystemSnapshot.Missing|? s|The error message returned because the specified SnapshotId parameter is invalid. Check whether the snapshot exists.|
+|403|IncorrectDiskStatus.CreatingSnapshot|A previous snapshot creation is in process.|The error message returned because another snapshot is being created. Wait until the snapshot is created and try again.|
+|404|InvalidResourceGroup.NotFound|The ResourceGroup provided does not exist in our records.|The error message returned because the specified ResourceGroupId parameter does not exist.|
+|500|InternalError|The process of creating snapshot has failed due to some unknown error.|The error message returned because the snapshot has failed to be created.|
+|403|InvalidParameter.KMSKeyId.KMSUnauthorized|ECS service have no right to access your KMS.|The error message returned because ECS is not authorized to access your KMS resources.|
+|500|InternalError|The request processing has failed due to some unknown error, exception or failure.|The error message returned because an internal error has occurred. Try again later. If the problem persists, submit a ticket.|
+|400|Duplicate.TagKey|The Tag.N.Key contain duplicate key.|The error message returned because the specified tag key already exists. Tag keys must be unique.|
+|400|InvalidTagKey.Malformed|The specified Tag.n.Key is not valid.|The error message returned because the specified Tag.N.Key parameter is invalid.|
+|400|InvalidTagValue.Malformed|The specified Tag.n.Value is not valid.|The error message returned because the specified Tag.N.Value parameter is invalid.|
+|403|QuotaExceed.Tags|%s|The error message returned because the number of specified tags exceeds the upper limit.|
+|400|InvalidDiskType.ValueNotSupported|The specified disk type is not supported.|The error message returned because the specified disk type is not supported.|
+|400|IdempotenceParamNotMatch|Request uses a client token in a previous request but is not identical to that request.|The error message returned because this request and the previous request contain the same client token but different parameters.|
 
-For a list of error codes, visit the [API Error Center](https://error-center.aliyun.com/status/product/Ecs).
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
