@@ -85,7 +85,7 @@ https://ecs.aliyuncs.com/?Action=CopyImage
 |400|InvalidDescription.Malformed|The specified destination description is wrongly formed.|指定的资源描述格式不合法。长度为2-256个字符，不能以http://和https://开头。|
 |400|InvalidDescription.Malformed|The specified description is wrongly formed.|指定的资源描述格式不合法。长度为2-256个字符，不能以http://和https://开头。|
 |400|SourceRegion.NotFound|The source region not found|指定的源镜像的地域不存在。|
-|400|DestinationRegion.NotFound|The destination region not found|指定的源镜像的地域不存在。|
+|400|DestinationRegion.NotFound|The destination region not found|指定的目标地域不存在。|
 |404|InvalidImageId.NotFound|The specified ImageId does not exist.|指定的镜像在该用户账号下不存在，请您检查镜像ID是否正确。|
 |400|IncorrectImageStatus|The image not available.|指定的镜像不可用。|
 |400|InvalidSnapshotId.NotFound|The specified SnapshotId does not exist.|指定的快照不存在，请您检查快照是否正确。|
