@@ -131,7 +131,7 @@ keyword: [多私网IP, 弹性网卡, 绑定弹性网卡, ecs, 阿里云]
 
 3.  根据实例操作系统，选择配置辅助私网IP地址的方式。
 
-    -   RHEL系列：CentOS 6/7、Red Hat 6/7、Aliyun Linux 2
+    -   RHEL系列：CentOS 6/7、Red Hat 6/7、Alibaba Cloud Linux 2
         1.  打开网络配置文件。
             -   单IP地址运行`vi /etc/sysconfig/network-scripts/ifcfg-eth0:0`命令，添加如下配置项。
 
