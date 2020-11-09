@@ -6,8 +6,7 @@ You can call this operation to query available images.
 
 -   You can query your custom images, public images provided by Alibaba Cloud, Alibaba Cloud Marketplace images, and shared images from other Alibaba Cloud accounts.
 -   This operation supports paged query. The response contains the total number of available images and the images on the returned page. By default, ten entries are displayed on each page.
-
-When you call an API operation by using Alibaba Cloud Command Line Interface \(CLI\), you must specify request parameter values of different data types in required formats. For more information, see [CLI parameter format](~~110340~~).
+-   When you call an API operation by using Alibaba Cloud Command Line Interface \(CLI\), you must specify request parameter values of different data types in required formats. For more information, see [CLI parameter format](~~110340~~).
 
 ## Debugging
 
@@ -35,7 +34,7 @@ Separate multiple parameter values with commas \(,\). |
 **Note:** This parameter will be removed in the future. We recommend that you use other parameters to ensure future compatibility. |
 |SnapshotId|String|No|s-bp17ot2q7x72ggtw\*\*\*\*|The ID of the snapshot used to create the custom image. |
 |ImageName|String|No|testImageName|The name of the image. |
-|ImageFamily|String|No|hangzhou-daily-update|The name of the image family. You can specify this parameter to query images of the specified image family.
+|ImageFamily|String|No|hangzhou-daily-update|The name of the image family. You can set this parameter to query images of the specified image family.
 
 This parameter is empty by default. |
 |ImageOwnerAlias|String|No|self|The source of the image. Valid values:
@@ -73,7 +72,9 @@ Default value: 10. |
 |Tag.N.key|String|No|null|The key of tag N of the image.
 
 **Note:** This parameter will be removed in the future. We recommend that you use the Tag.N.Key parameter to ensure future compatibility. |
-|Tag.N.Key|String|No|TestKey|The key of tag N of the image. Valid values of N: 1 to 20. |
+|Tag.N.Key|String|No|TestKey|The key of tag N of the image. Valid values of N: 1 to 20.
+
+If you query resources by using a single tag, up to 1,000 resources with the tag can be returned. If you query resources by using multiple tags, up to 1,000 resources that have the tags attached can be returned. If you want to query information of more than 1,000 resources, use the [ListTagResources](~~110425~~) operation. |
 |Tag.N.Value|String|No|TestValue|The value of tag N of the image. Valid values of N: 1 to 20. |
 |DryRun|Boolean|No|false|Specifies whether to check the validity of the request without actually making the request.
 
@@ -87,7 +88,7 @@ Default value: false. |
 -   ChangeOS: replacement of the system disk or operating system |
 |Filter.N.Key|String|No|CreationStartTime|The key of filter N. |
 |Filter.N.Value|String|No|2017-12-05T22:40:00Z|The value of filter N. |
-|ResourceGroupId|String|No|rg-bp67acfmxazb4p\*\*\*\*|The ID of the resource group to which the custom image belongs. |
+|ResourceGroupId|String|No|rg-bp67acfmxazb4p\*\*\*\*|The ID of the resource group to which the custom image belongs. Up to 1,000 resources can be returned by a query based on this parameter. |
 
 ## Response parameters
 
@@ -125,7 +126,7 @@ Default value: false. |
 -   marketplace: Alibaba Cloud Marketplace images |
 |ImageVersion|String|2|The version of the image. |
 |IsCopied|Boolean|false|Indicates whether the image is a copy of another image. |
-|IsSelfShared|String|true|Indicates whether the image was shared to other Alibaba Cloud accounts. |
+|IsSelfShared|String|true|Indicates whether the image has been shared to other Alibaba Cloud accounts. |
 |IsSubscribed|Boolean|false|Indicates whether you have subscribed to the image that corresponds to the specified product code. |
 |IsSupportCloudinit|Boolean|true|Indicates whether the image supports cloud-init. |
 |IsSupportIoOptimized|Boolean|true|Indicates whether the image can be used on I/O optimized instances. |
@@ -251,7 +252,7 @@ Sample success responses
                 "ResourceGroupId": "",
                 "OSType": "windows",
                 "Architecture": "x86_64",
-                "OSName":"Windows Server 2016 Datacenter Edition 64-bit (Chinese)",
+                "OSName": "Windows Server 2016 Datacenter Edition 64-bit (Chinese)",
                 "DiskDeviceMappings": {
                     "DiskDeviceMapping": [
                         {
