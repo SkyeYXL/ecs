@@ -1,107 +1,168 @@
-# DescribeInstanceTypeFamilies {#doc_api_1161577 .reference}
+# DescribeInstanceTypeFamilies
 
-You can call this operation to query the instance type family list provided by ECS.
+You can call this operation to query the instance families provided by ECS.
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=DescribeInstanceTypeFamilies) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DescribeInstanceTypeFamilies&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|RegionId|String|Yes|cn-hangzhou| The region ID of the instance. You can call the [DescribeRegions](~~25609~~) operation to view the latest region list.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|DescribeInstanceTypeFamilies|The operation that you want to perform. Set the value to DescribeInstanceTypeFamilies. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|Generation|String|No|ecs-5|The generation of the instance family. For more information, see [Instance families](~~25378~~). Valid values:
 
- |
-|Action|String|No|DescribeInstanceTypeFamilies| The operation that you want to perform. Set the value to **DescribeInstanceTypeFamilies**.
+ -   ecs-1: Generation I, which consists of the earliest and cost-effective instance types
+-   ecs-2: Generation II, which features upgraded software and hardware and higher performance than Generation I
+-   ecs-3: Generation III, which consists of high-performance instance families and is suitable for different business scenarios
+-   ecs-4: Generation IV, which consists of enterprise-level instance families \(such as g5, c5, and r5\), Bare Metal Instance families \(such as ebmc5s, ebmg5s, and ebmr5s\), and burstable instance families \(such as t5\) that can meet a wide variety of business requirements with lower latency
+-   ecs-5: Generation V, which consists of enterprise-level instance families \(such as g6, c6, and r6\), Bare Metal Instance families \(such as ebmg6, ebmg6e, and ebmc6\), and storage enhanced instance families \(such as g6e\) and delivers quick response and higher performance
+-   ecs-6: Generation VI, which consists of enterprise-level instance families \(such as hfc7, hfg7, and hfr7\) and is in invitational preview |
 
- |
-|Generation|String|No|ecs-3| The generation of the instance type family. For more information, see [Instance type families](~~25378~~). Valid values:
+## Response parameters
 
- -   ecs-1: Generation I, which consists of the earliest and cost-effective instance types.
--   ecs-2: Generation II, which is available later than the first generation of instance type families.
--   ecs-3: Generation III, which consists of the quick-response and high-performance instance types.
--   ecs-4: Generation IV, which consists of the latest, low-latency, and wide-application instance types.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|InstanceTypeFamilies|Array| |Details about instance families. |
+|InstanceTypeFamily| | | |
+|Generation|String|ecs-5|The generation of the instance family. |
+|InstanceTypeFamilyId|String|ecs.g6|The ID of the instance family. |
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
 
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|InstanceTypeFamilies| | | The returned instance type family information. It is an array that consists of **InstanceTypeFamilyItemType** data.
-
- |
-|└Generation|String|ecs-1| The generation of the instance type family.
-
- |
-|└InstanceTypeFamilyId|String|ecs.g5| The ID of the instance type family.
-
- |
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The request ID.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=DescribeInstanceTypeFamilies
-&RegionId=cn-hangzhou 
-&Generation=ecs-3
+&RegionId=cn-hangzhou
+&Generation=ecs-5
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DescribeInstanceTypeFamiliesResponse>
-  <InstanceTypeFamilies>
-    <InstanceTypeFamily>
-      <InstanceTypeFamilyId>ecs.t1</InstanceTypeFamilyId>
-      <Generation>ecs-1</Generation>
-    </InstanceTypeFamily>
-    <InstanceTypeFamily>
-      <InstanceTypeFamilyId>ecs.s2</InstanceTypeFamilyId>
-      <Generation>ecs-1</Generation>
-    </InstanceTypeFamily>
-    <InstanceTypeFamily>
-      <InstanceTypeFamilyId>ecs.s3</InstanceTypeFamilyId>
-      <Generation>ecs-1</Generation>
-    </InstanceTypeFamily>
-  </InstanceTypeFamilies>
-  <RequestId>6B187E0A-C075-4D08-8B6F-6213950E8733</RequestId>
+      <InstanceTypeFamilies>
+            <InstanceTypeFamily>
+                  <InstanceTypeFamilyId>ecs.g6</InstanceTypeFamilyId>
+                  <Generation>ecs-5</Generation>
+            </InstanceTypeFamily>
+            <InstanceTypeFamily>
+                  <InstanceTypeFamilyId>ecs.ebmg6</InstanceTypeFamilyId>
+                  <Generation>ecs-5</Generation>
+            </InstanceTypeFamily>
+            <InstanceTypeFamily>
+                  <InstanceTypeFamilyId>ecs.ebmg6e</InstanceTypeFamilyId>
+                  <Generation>ecs-5</Generation>
+            </InstanceTypeFamily>
+            <InstanceTypeFamily>
+                  <InstanceTypeFamilyId>ecs.g6e</InstanceTypeFamilyId>
+                  <Generation>ecs-5</Generation>
+            </InstanceTypeFamily>
+            <InstanceTypeFamily>
+                  <InstanceTypeFamilyId>ecs.c6</InstanceTypeFamilyId>
+                  <Generation>ecs-5</Generation>
+            </InstanceTypeFamily>
+            <InstanceTypeFamily>
+                  <InstanceTypeFamilyId>ecs.r6</InstanceTypeFamilyId>
+                  <Generation>ecs-5</Generation>
+            </InstanceTypeFamily>
+            <InstanceTypeFamily>
+                  <InstanceTypeFamilyId>ecs.t6</InstanceTypeFamilyId>
+                  <Generation>ecs-5</Generation>
+            </InstanceTypeFamily>
+            <InstanceTypeFamily>
+                  <InstanceTypeFamilyId>ecs.hfc6</InstanceTypeFamilyId>
+                  <Generation>ecs-5</Generation>
+            </InstanceTypeFamily>
+            <InstanceTypeFamily>
+                  <InstanceTypeFamilyId>ecs.hfg6</InstanceTypeFamilyId>
+                  <Generation>ecs-5</Generation>
+            </InstanceTypeFamily>
+            <InstanceTypeFamily>
+                  <InstanceTypeFamilyId>ecs.hfr6</InstanceTypeFamilyId>
+                  <Generation>ecs-5</Generation>
+            </InstanceTypeFamily>
+            <InstanceTypeFamily>
+                  <InstanceTypeFamilyId>ecs.ebmc6</InstanceTypeFamilyId>
+                  <Generation>ecs-5</Generation>
+            </InstanceTypeFamily>
+            <InstanceTypeFamily>
+                  <InstanceTypeFamilyId>ecs.ebmr6</InstanceTypeFamilyId>
+                  <Generation>ecs-5</Generation>
+            </InstanceTypeFamily>
+      </InstanceTypeFamilies>
+      <RequestId>A66D039A-EC35-4130-B0D1-E9873C0742D2</RequestId>
 </DescribeInstanceTypeFamiliesResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"InstanceTypeFamilies":{
-		"InstanceTypeFamily":[
+	"InstanceTypeFamilies": {
+		"InstanceTypeFamily": [
 			{
-				"InstanceTypeFamilyId":"ecs.t1",
-				"Generation":"ecs-1"
+				"InstanceTypeFamilyId": "ecs.g6",
+				"Generation": "ecs-5"
 			},
 			{
-				"InstanceTypeFamilyId":"ecs.s2",
-				"Generation":"ecs-1"
+				"InstanceTypeFamilyId": "ecs.ebmg6",
+				"Generation": "ecs-5"
 			},
 			{
-				"InstanceTypeFamilyId":"ecs.s3",
-				"Generation":"ecs-1"
+				"InstanceTypeFamilyId": "ecs.ebmg6e",
+				"Generation": "ecs-5"
+			},
+			{
+				"InstanceTypeFamilyId": "ecs.g6e",
+				"Generation": "ecs-5"
+			},
+			{
+				"InstanceTypeFamilyId": "ecs.c6",
+				"Generation": "ecs-5"
+			},
+			{
+				"InstanceTypeFamilyId": "ecs.r6",
+				"Generation": "ecs-5"
+			},
+			{
+				"InstanceTypeFamilyId": "ecs.t6",
+				"Generation": "ecs-5"
+			},
+			{
+				"InstanceTypeFamilyId": "ecs.hfc6",
+				"Generation": "ecs-5"
+			},
+			{
+				"InstanceTypeFamilyId": "ecs.hfg6",
+				"Generation": "ecs-5"
+			},
+			{
+				"InstanceTypeFamilyId": "ecs.hfr6",
+				"Generation": "ecs-5"
+			},
+			{
+				"InstanceTypeFamilyId": "ecs.ebmc6",
+				"Generation": "ecs-5"
+			},
+			{
+				"InstanceTypeFamilyId": "ecs.ebmr6",
+				"Generation": "ecs-5"
 			}
 		]
 	},
-	"RequestId":"6B187E0A-C075-4D08-8B6F-6213950E8733"
+	"RequestId": "A66D039A-EC35-4130-B0D1-E9873C0742D2"
 }
 ```
 
-## Error codes { .section}
+## Error codes
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
