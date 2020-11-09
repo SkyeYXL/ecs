@@ -6,20 +6,20 @@ keyword: [multi-NIC driver, identify multiple NICs, automatically visible ENIs, 
 
 You may need to manually configure elastic network interfaces \(ENIs\) for some images used by your instances so that the bound ENIs can be identified by the operating systems. This topic describes how to configure ENIs.
 
-The ENIs are bound to ECS instances. For more information about how to bind an ENI to an ECS instance, see [Bind an ENI](/intl.en-US/Network/Elastic Network Interfaces/Bind an ENI.md).
+ENIs are bound to ECS instances. For more information about how to bind an ENI to an ECS instance, see [Bind an ENI](/intl.en-US/Network/Elastic Network Interfaces/Bind an ENI.md).
 
-You do not need to configure ENIs for the following versions of images used by your instances:
+If your instances are running images of the following versions, you do not need to configure ENIs:
 
 -   CentOS 7.3 64-bit
 -   CentOS 6.8 64-bit
 -   Windows Server 2008 R2 and later
 
-If your instances are running images that are not included in the preceding list, you must manually configure ENIs for the images.
+If your instances are running images whose versions are not included in the preceding list, you must manually configure ENIs for the images.
 
 ## Procedure
 
-1.  View and record information of the ENIs. For more information, see [Preparations](#section_n3y_n0g_l1c).
-2.  Choose one of the following methods to configure the ENIs based on your instance operating systems:
+1.  View and record information of ENIs. For more information, see [Preparations](#section_n3y_n0g_l1c).
+2.  Use one of the following methods to configure ENIs based on the operating systems of your instances:
     -   Alibaba Cloud Linux 2: [Configure ENIs for instances that run Alibaba Cloud Linux 2](#section_s2z_h1l_4wh)
     -   CentOS or Red Hat: [Configure ENIs for instances that run CentOS or Red Hat](#section_zx6_9u0_9b0)
     -   Ubuntu or Debian: [Configure ENIs for instances that run Ubuntu or Debian](#section_jiu_ahz_l3t)
@@ -65,7 +65,7 @@ You must query the attributes of each ENI, including the primary private IP addr
 
 eth1 is used in the following example. If you want to configure another ENI, modify the ENI ID.
 
-1.  Open the configuration file of the ENI.
+1.  Open the configuration file of an ENI.
 
     ```
     vi /etc/systemd/network/60-eth1.network
@@ -73,9 +73,9 @@ eth1 is used in the following example. If you want to configure another ENI, mod
 
 2.  Press the I key to enter the edit mode and add the configuration information to the ENI configuration file.
 
-    Choose one of the following configuration information sets based on your actual needs.
+    Choose one of the following configuration information sets based on your needs.
 
-    -   Scenario 1: Allocate a dynamic IP address for the ENI over DHCP.
+    -   Scenario 1: Assign a dynamic IP address for the ENI over DHCP.
 
         Example:
 
@@ -90,7 +90,7 @@ eth1 is used in the following example. If you want to configure another ENI, mod
         UseDNS=yes
         ```
 
-    -   Scenario 2: Allocate a static IP address for the ENI.
+    -   Scenario 2: Assign a static IP address for the ENI.
 
         Example:
 
@@ -99,7 +99,7 @@ eth1 is used in the following example. If you want to configure another ENI, mod
         Name=eth1 # Specify the ENI to be configured.
         
         [Network]
-        Address=192.168. **. **/24 # Specify the static IP address and subnet mask to be allocated.
+        Address=192.168. **. **/24 # Specify the static IP address and subnet mask to be assigned.
         ```
 
     Press the Esc key, enter `:wq`, and then press the Enter key to save the file and exit the edit mode.
@@ -146,9 +146,9 @@ Method 1: Use the multi-nic-util tool.
     ```
 
 
-Method 2: Manually configure the ENI.
+Method 2: Manually configure an ENI.
 
-1.  Open the configuration file of the ENI.
+1.  Open the configuration file of an ENI.
 
     ```
     vi /etc/sysconfig/network-scripts/ifcfg-eth1
@@ -243,25 +243,25 @@ You can perform the following operations on instances that run Ubuntu 18.04:
 
     Press the Esc key, enter `:wq`, and then press the Enter key to save the file and exit the edit mode.
 
-    **Note:** Take note of the following items when you edit the configuration file:
+    **Note:** When you edit the configuration file, take note of the following items:
 
     -   The configuration file is in the `YAML` format. Therefore, you must follow the `YAML` syntax rules when you configure the file.
     -   You cannot use tabs for indentation in `YAML` files. Use the space instead.
-    -   We recommend that you copy content in the default /etc/netplan/99-netcfg.yaml configuration file to avoid format issues.
+    -   We recommend that you copy information in the default /etc/netplan/99-netcfg.yaml configuration file to avoid format issues.
 3.  Check the ENI configuration file and confirm the modification.
 
     ```
     cat /etc/netplan/eth1-netcfg.yaml
     ```
 
-4.  Run the `netplan apply` command to validate the configuration.
+4.  Run the `netplan apply` command to make the configuration take effect.
 
 
 ## Configure ENIs for instances that run SUSE or openSUSE
 
 eth1 is used in the following example. If you want to configure another ENI, modify the ENI ID.
 
-1.  Open the configuration file of the ENI.
+1.  Open the configuration file of an ENI.
 
     ```
     vi /etc/sysconfig/network/ifcfg-eth1
@@ -372,7 +372,7 @@ eth1 is used in the following example. If you want to configure another ENI, mod
         default via 10.0.0.253 dev eth2
         ```
 
-4.  Configure policy-based routes.
+4.  Configure policy-based routing.
 
     1.  Create policy-based routes.
 
@@ -395,9 +395,9 @@ eth1 is used in the following example. If you want to configure another ENI, mod
 
 After the ENIs are configured, you can perform the following operations:
 
--   [Assign secondary private IP addresses](/intl.en-US/Network/Elastic Network Interfaces/Assign a secondary private IP address.md)
+-   [Assign secondary private IP addresses](/intl.en-US/Network/Elastic Network Interfaces/Assign secondary private IP addresses.md)
 -   [Modify an ENI](/intl.en-US/Network/Elastic Network Interfaces/Modify an ENI.md)
--   [Detach an ENI from an instance](/intl.en-US/Network/Elastic Network Interfaces/Detach an ENI from an instance.md)
+-   [Unbind an ENI](/intl.en-US/Network/Elastic Network Interfaces/Unbind an ENI.md)
 -   [Delete an ENI](/intl.en-US/Network/Elastic Network Interfaces/Delete an ENI.md)
 
 **Related topics**  
