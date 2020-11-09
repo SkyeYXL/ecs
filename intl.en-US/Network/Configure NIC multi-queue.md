@@ -4,13 +4,17 @@ keyword: [multi-queue, network bandwidth bottleneck, NIC queue, pps, bandwidth p
 
 # Configure NIC multi-queue
 
-NIC multi-queue enables an ECS instance to use more than one NIC queues to increase the packet forwarding rate. If performance bottlenecks occur when vCPUs of a single instance are used to process network interrupts, you can use NIC multi-queue to distribute the network interrupts to different vCPUs to enhance network performance.
+Network interface controller \(NIC\) multi-queue enables an ECS instance to use more than one NIC queues to increase the packet forwarding rate. When vCPUs of a single instance are used to process network interruptions, performance bottlenecks may occur. You can use NIC multi-queue to distribute the network interruptions to different vCPUs to enhance network performance.
+
+Before you configure NIC multi-queue, make sure that the following requirements are met:
 
 -   The instance type of your instance supports the NIC multi-queue feature. For more information about instance types that support NIC multi-queue, see [Instance families](/intl.en-US/Instance/Instance families.md). If the number of NIC queues is greater than 1, the NIC multi-queue feature is supported.
--   Your instance uses one of the following images. The following public images provided by Alibaba Cloud support the NIC multi-queue feature. Whether images support this feature is irrelevant to the bit sizes of the operating systems.
+-   Your image supports the NIC multi-queue feature and has the feature disabled by default. Your instance uses one of the following images. The following public images provided by Alibaba Cloud support the NIC multi-queue feature. Whether images support this feature is irrelevant to the bit sizes of the operating systems.
 
-    **Note:** Even if your operating system is included in the list, public images of earlier versions may not support the NIC multi-queue feature. We recommend that you use the latest public images. If your image has the NIC multi-queue feature enabled by default, skip this topic.
+    **Note:**
 
+    -   Even if your operating system is included in the list, public images of earlier versions may not support the NIC multi-queue feature. We recommend that you use the latest public images. If your image has the NIC multi-queue feature enabled by default, skip this topic.
+    -   The following procedure applies only to Linux instances. You do not need to configure the NIC multi-queue feature for ECS instances that run Windows 2012 or later because this feature is automatically configured.
     |Public image|NIC multi-queue supported|NIC multi-queue enabled|
     |:-----------|:------------------------|:----------------------|
     |CentOS 6.8/6.9/7.2/7.3/7.4|Yes|Yes|
@@ -21,14 +25,10 @@ NIC multi-queue enables an ECS instance to use more than one NIC queues to incre
     |Red Hat Enterprise Linux 6.9/7.4/7.5|Yes|No|
     |OpenSUSE 42.3|Yes|No|
     |Alibaba Cloud Linux 2.1903|Yes|Yes|
-    |Aliyun Linux 17.1|Yes|No|
-    |Windows 2012 R2|Yes|Yes|
-    |Windows 2016|Yes|Yes|
+    |Windows 2012 or later|Yes|Yes|
 
 
-NIC multi-queue is a technology that can fix the Quality of Service \(QoS\) issue of I/O bandwidth. The NIC multi-queue driver binds NIC queues to different cores through interrupts. This solves processing bottlenecks of single-core CPUs when network I/O bandwidth increases, and improves the packet forwarding rate and bandwidth performance. Under identical packet forwarding rate and network bandwidth conditions, the performance of two queues can be 50% to 100% higher than that of a single queue, and the performance of four queues can be even higher.
-
-The following procedure applies only to Linux instances.
+NIC multi-queue is a technology that can fix Quality of Service \(QoS\) issues of I/O bandwidth. The NIC multi-queue driver binds NIC queues to different cores by using interruptions. This solves processing bottlenecks of single-core CPUs when network I/O bandwidth increases, and improves the packet forwarding rate and bandwidth performance. Under identical packet forwarding rate and network bandwidth conditions, the performance of two queues can be 50% to 100% higher than that of a single queue, and the performance of four queues can be even higher.
 
 ## Automatic configuration
 
@@ -40,7 +40,7 @@ The following procedure applies only to Linux instances.
     wget https://image-offline.oss-cn-hangzhou.aliyuncs.com/doc/ecs_mq_20200428-1352.tgz
     ```
 
-3.  Extract the script.
+3.  Decompress the script package.
 
     ```
     tar -xzf ecs_mq_20200428-1352.tgz
@@ -52,18 +52,18 @@ The following procedure applies only to Linux instances.
     cd ecs_mq/
     ```
 
-5.  Start the service.
+5.  Run the extracted script file.
 
-    ```
-    systemctl start ecs_mq
-    ```
-
-6.  Run the script.
-
-    The script format varies with the image versions. For example, `bash install.sh centos 7` is suitable for CentOS 7.6 images.
+    The script format varies with image versions. For example, `bash install.sh centos 7` is suitable for CentOS 7.6 images.
 
     ```
     bash install.sh <System name> <Major version number of the system>
+    ```
+
+6.  Start the service.
+
+    ```
+    systemctl start ecs_mq
     ```
 
 
