@@ -1,121 +1,106 @@
-# DescribeInstanceRamRole {#doc_api_1161572 .reference}
+# DescribeInstanceRamRole
 
-You can call this operation to query RAM roles attached to one or more ECS instances.
+You can call this operation to query the instance RAM roles assigned to one or more ECS instances.
 
-## Debugging {#apiExplorer .section}
+## Description
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=DescribeInstanceRamRole) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+When you call an API operation by using Alibaba Cloud CLI, you must specify request parameter values of different data types in required formats. For more information, see [CLI parameter format](~~110340~~).
 
-## Request parameters {#parameters .section}
+## Debugging
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|RegionId|String|Yes|cn-hangzhou| The region ID of the RAM role. You can call the [DescribeRegions](~~25609~~) operation to view the latest region list.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DescribeInstanceRamRole&type=RPC&version=2014-05-26)
 
- |
-|Action|String|No|DescribeInstanceRamRole| The operation that you want to perform. Set the value to **DescribeInstanceRamRole**.
+## Request parameters
 
- |
-|InstanceIds|String|No|\["instanceId1", "instanceId2", "instanceId3"…\]| The instance ID set. A maximum of 100 instances can be entered at a time.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|DescribeInstanceRamRole|The operation that you want to perform. Set the value to DescribeInstanceRamRole. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the instance RAM role. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|PageNumber|Integer|No|1|The number of the page to return.
 
- |
-|PageNumber|Integer|No|1| The page number.
+Pages start from page 1.
 
- This value starts from 1.
+Default value: 1. |
+|PageSize|Integer|No|10|The number of entries to return on each page.
 
- Default value: 1.
+Valid values: 1 to 50.
 
- |
-|PageSize|Integer|No|10| The number of rows per page.
+Default value: 10. |
+|InstanceIds|String|No|\["i-bp67acfmxazb1p\*\*\*\*", "i-bp67acfmxazb2p\*\*\*\*", "bp67acfmxazb3p\*\*\*\*"…\]|The IDs of instances. A maximum of 100 instance IDs can be entered at a time. You must specify at least one of the `InstanceIds` and `RamRoleName` parameters. |
+|RamRoleName|String|No|EcsServiceRole-EcsDocGuideTest|The name of the instance RAM role. This parameter can be used to query all the ECS instances to which the instance RAM role is assigned. You can call the [ListRoles](~~28713~~) operation provided by RAM to query the instance RAM roles that you have created. You must specify at least one of the `InstanceIds` and `RamRoleName` parameters. |
 
- Maximum value: 50.
+## Response parameters
 
- Default value: 10.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|InstanceRamRoleSets|Array of InstanceRamRoleSet| |Details about the instance RAM roles. |
+|InstanceRamRoleSet| | | |
+|InstanceId|String|i-bp67acfmxazb4p\*\*\*\*|The ID of the instance. |
+|RamRoleName|String|EcsServiceRole-EcsDocGuideTest|The name of the instance RAM role. |
+|RegionId|String|cn-hangzhou|The region ID of the instance RAM role. |
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
+|TotalCount|Integer|1|The total number of returned instance RAM roles. |
 
- |
-|RamRoleName|String|No|FinanceDeptOnly| All ECS instances to which the specified RAM role is attached. You can call the [ListRoles](~~28713~~) operation to view RAM roles for the specified instance.
-
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|InstanceRamRoleSets| | | The returned RAM role information. It is an array that consists of **InstanceRamRoleSetType** data.
-
- |
-|└InstanceId|String|i-instance1| The ID of the instance.
-
- |
-|└RamRoleName|String|FinanceDeptOnly| The list of RAM role names.
-
- |
-|RegionId|String|cn-hangzhou| The region ID of the RAM role. You can call the [DescribeRegions](~~25609~~) operation to view the latest region list.
-
- |
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The request ID.
-
- |
-|TotalCount|Integer|1| The total number of RAM roles.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
-
+```
 https://ecs.aliyuncs.com/?Action=DescribeInstanceRamRole
-&RegionId=cn-hangzhou 
-&InstanceIds=["i-instance1"] 
-&PageNumber=1 
-&PageSize=10 
-&RamRoleName=FinanceDeptOnly
+&RegionId=cn-hangzhou
+&InstanceIds=["i-bp67acfmxazb1p****", "i-bp67acfmxazb2p****", "bp67acfmxazb3p****"]
+&PageNumber=1
+&PageSize=1
 &<Common request parameters>
-
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DescribeInstanceRamRoleResponse>
-  <RequestId>8F4CAE3F-7892-4662-83A5-2C2FFD639553</RequestId>
-  <InstanceRamRoleSets>
-    <InstanceRamRoleSet>
-      <InstanceId>i-instance1</InstanceId>
-      <RamRoleName>RamRoleTest</RamRoleName>
-    </InstanceRamRoleSet>
-  </InstanceRamRoleSets>
-  <TotalCount>1</TotalCount> 
+      <RequestId>8F4CAE3F-7892-4662-83A5-2C2FFD639553</RequestId>
+      <InstanceRamRoleSets>
+            <InstanceRamRoleSet>
+                  <InstanceId>i-bp67acfmxazb4p****</InstanceId>
+                  <RamRoleName>EcsServiceRole-EcsDocGuideTest</RamRoleName>
+            </InstanceRamRoleSet>
+      </InstanceRamRoleSets>
+      <TotalCount>1</TotalCount>
+      <PageNumber>1</PageNumber>
+      <PageSize>1</PageSize>
 </DescribeInstanceRamRoleResponse>
-
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"TotalCount":1,
-	"RequestId":"8F4CAE3F-7892-4662-83A5-2C2FFD639553",
-	"InstanceRamRoleSets":{
-		"InstanceRamRoleSet":[
-			{
-				"InstanceId":"i-instance1",
-				"RamRoleName":"RamRoleTest"
-			}
-		]
-	}
+    "RequestId": "8F4CAE3F-7892-4662-83A5-2C2FFD639553",
+    "InstanceRamRoleSets": {
+        "InstanceRamRoleSet": [
+            {
+                "InstanceId": "i-bp67acfmxazb4p****",
+                "RamRoleName": "EcsServiceRole-EcsDocGuideTest"
+            }
+        ]
+    },
+    "TotalCount": 1,
+    "PageNumber": 1,
+    "PageSize": 1
 }
 ```
 
-## Error codes {#section_gk8_cnm_4a9 .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|403|InvalidParameter.AllEmpty|%s|The error message returned when a required parameter is not specified.|
+|400|InvalidInstanceIds.Malformed|The specified instanceIds are not valid.|The error message returned because the specified InstanceIds parameter is invalid.|
+|404|InvalidInstanceId.NotFound|The specified instanceId does not exist|The error message returned because a specified instance does not exist.|
+|403|InvalidNetworkType.MismatchRamRole|Ram role cannot be applied to instances of Classic network type.|The error message returned because an instance RAM role can be used only for instances in VPCs, not for instances in the classic network.|
+|403|InvalidParameter.AllEmpty|%s|The error message returned because no parameters are specified. Specify required parameters.|
+|500|InternalError|The request processing has failed due to some unknown error.|The error message returned because an internal error has occurred. Try again later. If the problem persists, submit a ticket.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
