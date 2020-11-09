@@ -1,83 +1,73 @@
-# DescribeUserData {#doc_api_1161579 .reference}
+# DescribeUserData
 
-Queries the user data of an ECS instance.
+You can call this operation to query the user data of an ECS instance.
 
-## Description {#description .section}
+## Description
 
 -   The returned user data is encoded in Base64.
--   If user data does not exist, a null value is returned.
+-   If the instance does not have any user data, an empty string is returned.
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=DescribeUserData) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DescribeUserData&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|InstanceId|String|Yes|i-instanceid1| The ID of the instance.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|DescribeUserData|The operation that you want to perform. Set the value to DescribeUserdata. |
+|InstanceId|String|Yes|i-bp14bnftyqhxg9ij\*\*\*\*|The ID of the instance. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the instance. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
 
- |
-|RegionId|String|Yes|cn-hangzhou| The region ID of the instance. You can call the [DescribeRegions](~~25609~~) operation to view the latest region list.
+## Response parameters
 
- |
-|Action|String|No|DescribeUserData| The operation that you want to perform. Set the value to DescribeUserdata.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|InstanceId|String|i-bp14bnftyqhxg9ij\*\*\*\*|The ID of the instance. |
+|RegionId|String|cn-hangzhou|The region ID of the instance. |
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
+|UserData|String|ZWNobyBoZWxsbyBlY321ABC|The user data of the instance. |
 
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|InstanceId|String|i-instanceid1| The ID of the instance.
-
- |
-|RegionId|String|cn-hangzhou| The region ID of the instance.
-
- |
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The request ID.
-
- |
-|UserData|String|ZWNobyBoZWxsbyBlY3Mh| The user data of the instance. It is encoded in Base64.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action= DescribeUserdata
 &RegionId=cn-shenzhen
-&InstanceId=i-instance1 
+&InstanceId=i-bp14bnftyqhxg9ij****
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DescribeUserdataResponse>
-  <RequestId>473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E</RequestId> 
-  <UserData>userdata1</UserData>
-  <InstanceId> i-instance1</InstanceId>
-  <RegionId> cn-shenzhen </RegionId>
+      <RequestId>473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E</RequestId>
+      <UserData>ZWNobyBoZWxsbyBlY321ABC</UserData>
+      <InstanceId>i-bp14bnftyqhxg9ij****</InstanceId>
+      <RegionId>cn-shenzhen</RegionId>
 </DescribeUserdataResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	" UserData ":" userdata1",
-	"RequestId":"473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E",
-	" InstanceId ":" i-instance1",
-	" RegionId":"cn-shenzhen"
+    "RequestId": "473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E",
+    " UserData ": "ZWNobyBoZWxsbyBlY321ABC",
+    " InstanceId ": "i-bp14bnftyqhxg9ij****",
+    " RegionId": "cn-shenzhen"
 }
 ```
 
-## Error codes { .section}
+## Error codes
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+|HTTP status code|Error code|Error message|Description|
+|----------------|----------|-------------|-----------|
+|404|InvalidInstanceId.NotFound|The specified InstanceId does not exist.|The error message returned because the specified InstanceId parameter does not exist.|
+
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
