@@ -11,16 +11,16 @@ You can assign one or more secondary private IP addresses to a primary or second
 
 Secondary private IP addresses are suitable for the following scenarios:
 
--   Optimization of application usage
+-   Multiple application usage
 
     If your ECS instance hosts multiple applications, you can assign multiple secondary private IP addresses to the corresponding ENIs. This way, each application uses a separate IP address for services, which optimizes the usage of the ECS instance.
 
--   Optimization of failover
+-   Failover
 
     If an instance fails, you can unbind ENIs from the instance and bind the ENIs to another instance to divert traffic to that instance. This can ensure service continuity.
 
 
-Take note of the following limits when you assign secondary private IP addresses:
+When you assign secondary private IP addresses, take note of the following limits:
 
 -   Each security group of the VPC type can contain a maximum of 2,000 private IP addresses. This quota is shared among all primary and secondary ENIs in the security group.
 -   You can assign a maximum of 20 private IP addresses to an ENI. The actual number depends on the instance type of the instance to which the ENI is bound.
@@ -142,7 +142,7 @@ In the following example, the eth0 primary ENI is used. If you are using a secon
                 ONBOOT=yes
                 IPADDR=<IPv4 address 1>
                 NETMASK=<IPv4 mask>
-                GATEWAY = <IPv4 gateway>
+                GATEWAY=<IPv4 gateway>
                 ```
 
             -   If you configure multiple IP addresses, run the `vi /etc/sysconfig/network-scripts/ifcfg-eth0:1` command to add the following configuration items:
@@ -152,9 +152,9 @@ In the following example, the eth0 primary ENI is used. If you are using a secon
                 TYPE=Ethernet
                 BOOTPROTO=static
                 ONBOOT=yes
-                IPADDR = <IPv4 address 2>
+                IPADDR=<IPv4 address 2>
                 NETMASK=<IPv4 mask>
-                GATEWAY = <IPv4 gateway>
+                GATEWAY=<IPv4 gateway>
                 ```
 
         2.  Run the `service network restart` or `systemctl restart network` command to restart the network service.
@@ -180,8 +180,8 @@ In the following example, the eth0 primary ENI is used. If you are using a secon
         1.  Run the `vi /etc/sysconfig/network/ifcfg-eth0` command to open the network configuration file and add the following configuration items:
 
             ```
-            IPADDR_0 = <IPv4 address 1>
-            NETMASK_0 = <Subnet prefix length>
+            IPADDR_0=<IPv4 address 1>
+            NETMASK_0=<Subnet prefix length>
             LABEL_0='0'
             
             IPADDR_1 = <IPv4 address 2>
