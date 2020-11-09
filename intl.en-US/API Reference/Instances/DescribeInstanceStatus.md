@@ -1,129 +1,99 @@
-# DescribeInstanceStatus {#doc_api_1161574 .reference}
+# DescribeInstanceStatus
 
-Obtains the states of multiple instances.
+You can call this operation to query the status information of multiple instances.
 
-## Description {#description .section}
+## Description
 
--   The states of all instances are returned. For more information, see [Instance states](~~25687~~)。
--   You can also call this operation to obtain the instance list.
+-   For information about the lifecycle of an ECS instance, see [Instance states](~~25687~~).
+-   You can also call this operation to query the list of instances.
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=DescribeInstanceStatus) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=DescribeInstanceStatus&type=RPC&version=2014-05-26)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|RegionId|String|Yes|cn-hangzhou| The region ID of the instance. You can call the [DescribeRegions](~~25609~~) operation to view the latest region list.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|DescribeInstanceStatus|The operation that you want to perform. Set the value to DescribeInstanceStatus. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the instance. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|InstanceId.N|RepeatList|No|i-bp1j4i2jdf3owlhe\*\*\*\*|The ID of instance N. Valid values of N: 1 to 100. Specify multiple values in the repeated list format. |
+|ZoneId|String|No|cn-hangzhou-d|The zone ID of the instance. |
+|ClusterId|String|No|cls-bp67acfmxazb4p\*\*\*\*|The cluster ID of the instance. |
+|PageNumber|Integer|No|1|The number of the page to return.
 
- |
-|Action|String|No|DescribeInstanceStatus| The operation that you want to perform. Set the value to DescribeInstanceStatus.
+ Pages start from page 1.
 
- |
-|ClusterId|String|No|cls-clusterid1| The ID of the cluster to which the instance belongs.
+ Default value: 1. |
+|PageSize|Integer|No|10|The number of entries to return on each page. Valid values: 1 to 50.
 
- **Note:** This parameter will be removed in the future. We recommend that you use other parameters to ensure compatibility.
+ Default value: 10. |
 
- |
-|PageNumber|Integer|No|1| The page number. This value starts from 1.
+## Response parameters
 
- Default value: 1.
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|InstanceStatuses|Array| |The status information of instances. |
+|InstanceStatus| | | |
+|InstanceId|String|i-bp1j4i2jdf3owlhe\*\*\*\*|The ID of the instance. |
+|Status|String|Running|The status of the instance. |
+|PageNumber|Integer|1|The page number of the returned page. |
+|PageSize|Integer|1|The number of entries returned per page. |
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
+|TotalCount|Integer|58|The total number of instances. |
 
- |
-|PageSize|Integer|No|10| The number of rows per page. Valid values: 1 to 50.
+## Examples
 
- Default value: 10
+Sample requests
 
- |
-|ZoneId|String|No|cn-hangzhou-d| The zone ID of the instance.
-
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|InstanceStatuses| | | The returned instance state information. It is an array that consists of InstanceStatusSetType data.
-
- |
-|└InstanceId|String|i-instance1| The ID of the instance.
-
- |
-|└Status|String|Running| The state of the instance.
-
- |
-|PageNumber|Integer|1| The page number.
-
- |
-|PageSize|Integer|10| The number of rows per page.
-
- |
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The request ID.
-
- |
-|TotalCount|Integer|2| The total number of instances.
-
- |
-
-## Examples {#demo .section}
-
-Sample request
-
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=DescribeInstanceStatus
-&RegionId=cn-hangzhou 
-&ZoneId=cn-hangzhou-d
+&RegionId=cn-hangzhou
+&PageSize=1
+&PageNumber=1
+&InstanceId.1=i-bp1j4i2jdf3owlhe****
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <DescribeInstanceStatusResponse>
-  <RequestId>6EF60BEC-0242-43AF-BB20-270359FB54A7</RequestId> 
-  <TotalCount>2</TotalCount> 
-  <PageNumber>1</PageNumber> 
-  <PageSize>10</PageSize> 
-  <InstanceStatuses>
-    <InstanceStatus>
-      <InstanceId>i-instance1</InstanceId>
-      <Status>Running</Status>
-    </InstanceStatus>
-    <InstanceStatus>
-      <InstanceId>i-ae4r89pp</InstanceId>
-      <Status>Stopped</Status>
-    </InstanceStatus>
-  </InstanceStatuses>
+      <PageNumber>1</PageNumber>
+      <InstanceStatuses>
+            <InstanceStatus>
+                  <Status>Running</Status>
+                  <InstanceId>i-bp1j4i2jdf3owlhe****</InstanceId>
+            </InstanceStatus>
+      </InstanceStatuses>
+      <TotalCount>58</TotalCount>
+      <PageSize>1</PageSize>
+      <RequestId>746C3444-9A24-4D7D-B8A8-DCBF7AC8BD66</RequestId>
 </DescribeInstanceStatusResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"PageNumber":1,
-	"InstanceStatuses":{
-		"InstanceStatus":[
+	"PageNumber": 1,
+	"InstanceStatuses": {
+		"InstanceStatus": [
 			{
-				"Status":"Running",
-				"InstanceId":"i-instance1"
-			},
-			{
-				"Status":"Stopped",
-				"InstanceId":"i-ae4r89pp"
+				"Status": "Running",
+				"InstanceId": "i-bp1j4i2jdf3owlhe****"
 			}
 		]
 	},
-	"TotalCount":2,
-	"PageSize":10,
-	"RequestId":"6EF60BEC-0242-43AF-BB20-270359FB54A7"
+	"TotalCount": 58,
+	"PageSize": 1,
+	"RequestId": "746C3444-9A24-4D7D-B8A8-DCBF7AC8BD66"
 }
 ```
 
-## Error codes { .section}
+## Error codes
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
