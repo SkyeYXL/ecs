@@ -1,101 +1,96 @@
-# ModifyInstanceAutoRenewAttribute {#doc_api_1161584 .reference}
+# ModifyInstanceAutoRenewAttribute
 
-Sets one or more subscription instances to the automatic renewal status. To reduce the maintenance workload when an instance expires, you can set automatic renewal for subscription ECS instances.
+You can call this operation to configure auto-renewal for one or more subscription instances. To reduce the maintenance workload when an instance expires, you can configure auto-renewal for subscription ECS instances.
 
-## Description {#description .section}
+## Description
 
--   The payment for automatic renewal is first made at 08:00:00 \(UTC+8\) nine days before the instance expires.
--   If payment fails for the first time, this process repeats itself each day until the payment is made or the instance is locked after the nine-day period ends. You must confirm that your payment account has sufficient balance or credit.
+Before you call this operation, make sure that you have fully understood the billing methods and pricing schedule of [ECS](https://www.alibabacloud.com/product/ecs#pricing).
 
-## Debugging {#apiExplorer .section}
+-   The payment for auto-renewal is first made at 08:00:00 \(UTC+8\) nine days before the instance expires.
+-   If the payment fails for the first time, this process repeats itself each day until the payment is made or the instance is locked after the nine-day period ends. You must confirm that your payment account has sufficient balance or credit.
 
-You can use [API Explorer](https://api.aliyun.com/#product=Ecs&api=ModifyInstanceAutoRenewAttribute) to perform debugging. API Explorer allows you to perform various operations to simplify API usage. For example, you can retrieve APIs, call APIs, and dynamically generate SDK example code.
+## Debugging
 
-## Request parameters {#parameters .section}
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=Ecs&api=ModifyInstanceAutoRenewAttribute&type=RPC&version=2014-05-26)
 
-|Name|Type|Required|Example|Description|
-|----|----|--------|-------|-----------|
-|InstanceId|String|Yes|i-instance1,i-instance2| The ID of the instance. A maximum of 100 instance IDs can be entered at a time. Separate multiple instance IDs with commas \(,\).
+## Request parameters
 
- |
-|RegionId|String|Yes|cn-hangzhou| The region ID of the instance. You can call the [DescribeRegions](~~25609~~) operation to view the latest region list.
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
+|Action|String|Yes|ModifyInstanceAutoRenewAttribute|The operation that you want to perform. Set the value to ModifyInstanceAutoRenewAttribute. |
+|InstanceId|String|Yes|i-bp67acfmxazb4ph\*\*\*\*,i-bp67acfmxazb4pi\*\*\*\*|The ID of the instance. A maximum of 100 instance IDs can be specified at a time. Separate multiple instance IDs with commas \(,\). |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the instance. You can call the [DescribeRegions](~~25609~~) operation to query the most recent region list. |
+|Duration|Integer|No|1|The auto-renewal period.
 
- |
-|Action|String|No|ModifyInstanceAutoRenewAttribute| The operation that you want to perform. Set the value to **ModifyInstanceAutoRenewAttribute**.
+-   When `PeriodUnit` is set to `year`, valid values of `Duration` are 1, 2, and 3.
+-   When `PeriodUnit` is set to `month`, valid values of `Duration` are 1, 2, 3, 6, and 12. |
+|AutoRenew|Boolean|No|true|Specifies whether to enable auto-renewal.
 
- |
-|AutoRenew|Boolean|No|true| Indicates whether to enable automatic renewal. Default value: false.
+Default value: false. |
+|RenewalStatus|String|No|AutoRenewal|The auto-renewal status of the instance. Valid values:
 
- |
-|Duration|Integer|No|2| The automatic renewal period.
+-   AutoRenewal: Auto-renewal is enabled for the instance.
+-   Normal: Auto-renewal is disabled for the instance.
+-   NotRenewal: The instance will not be renewed upon expiration. The system no longer sends an expiration reminder, but sends only a non-renewal reminder three days before the expiration date. You can change the value of this parameter from NotRenewal to `Normal` for an instance, and then manually renew the instance. Alternatively, you can set the RenewalStatus parameter to AutoRenewal.
 
- -   `PeriodUnit`If it is set to `Year`, `Duration` can be \{"1", "2", "3 "\}.
--   `PeriodUnit`If it is set to `Month`, `Duration` can be \{"1", "2", "3", "6", "12 "\}.
+**Note:** `RenewalStatus` takes precedence over `AutoRenew`. If you do not specify `RenewalStatus`, the `AutoRenew` parameter is used by default. |
+|PeriodUnit|String|No|month|The unit of the renewal duration \(`Period`\). Default value: month. Valid values:
 
- |
-|PeriodUnit|String|No|Week| The unit of `Period`. Default value: month. Valid values:
+-   month
+-   year |
 
- -   Month.
--   Year.
+## Response parameters
 
- |
-|RenewalStatus|String|No|AutoRenewal| Indicates whether to renew the instance. `RenewalStatus` has a higher priority than `AutoRenew`. If `RenewalStatus` is not specified, the value of `AutoRenew` is used by default. Valid values:
+|Parameter|Type|Example|Description|
+|---------|----|-------|-----------|
+|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|The ID of the request. |
 
- -   AutoRenewal: enables automatic renewal.
--   Normal: disables automatic renewal.
--   NotRenewal: No renewal is used. The system no longer sends an expiration reminder, but sends only a non-renewal reminder three days before the expiration date. For an instance for which no renewal is used, you can change its automatic renewal status to `Normal`. Then you can manually renew it or set it to automatic renewal.
-
- |
-
-## Response parameters {#resultMapping .section}
-
-|Name|Type|Example|Description|
-|----|----|-------|-----------|
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E| The request ID.
-
- |
-
-## Examples {#demo .section}
+## Examples
 
 Sample requests
 
-``` {#request_demo}
+```
 https://ecs.aliyuncs.com/?Action=ModifyInstanceAutoRenewAttribute
-&RegionId=cn-hangzhou 
-&InstanceId=i-instance1,i-instance2 
-&Duration=2 
-&AutoRenew=True 
+&RegionId=cn-hangzhou
+&InstanceId=i-bp67acfmxazb4ph****,i-bp67acfmxazb4pi****
+&Duration=1
+&PeriodUnit=month
+&AutoRenew=true
 &<Common request parameters>
 ```
 
-Successful response examples
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <ModifyInstanceAutoRenewAttributeResponse>
-  <RequestId>04F0F334-1335-436C-A1D7-6C044FE73368</RequestId> 
+      <RequestId>04F0F334-1335-436C-A1D7-6C044FE73368</RequestId>
 </ModifyInstanceAutoRenewAttributeResponse>
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RequestId":"04F0F334-1335-436C-A1D7-6C044FE73368"
+    "RequestId": "04F0F334-1335-436C-A1D7-6C044FE73368"
 }
 ```
 
-## Error codes { .section}
+## Error codes
 
 |HTTP status code|Error code|Error message|Description|
 |----------------|----------|-------------|-----------|
-|403|MissingParameter.InstanceId|InstanceId should not be null.|The error message returned when InstanceId is not specified.|
-|403|InvalidParameter.InvalidInstanceId|%s|The error message returned when the specified InstanceId is invalid.|
-|403|IncorrectInstanceStatus|The current status of the resource does not support this operation.|The error message returned when the operation is not supported while the resource is in the current state.|
-|403|InvalidParameter.Duration|%s|The error message returned when the Duration parameter is invalid.|
-|403|InvalidParameter.RenewalStatus|%s|The error message returned when the RenewalStatus parameter is invalid.|
-|403|InvalidPeriodUnit.ValueNotSupported|The specified parameter “Period” is not valid.|The error message returned when the specified PeriodUnit is invalid.|
+|403|MissingParameter.InstanceId|InstanceId should not be null.|The error message returned because the InstanceId parameter is not specified.|
+|403|InvalidParameter.ToManyInstanceIds|InstanceId should be less than 100.|The error message returned because the total number of instances has exceeded 100.|
+|403|InvalidParameter.InvalidInstanceId|%s|The error message returned because the specified InstanceId parameter is invalid.|
+|403|IncorrectInstanceStatus|The current status of the resource does not support this operation.|The error message returned because the operation is not supported while the resource is in the current state.|
+|403|ChargeTypeViolation|Pay-As-You-Go instances do not support this operation.|The error message returned because the pay-as-you-go billing method does not support this operation.|
+|403|InvalidParameter.Duration|%s|The error message returned because the specified Duration parameter is invalid.|
+|403|InvalidParameter.RenewalStatus|%s|The error message returned because the specified RenewalStatus parameter is invalid.|
+|403|InvalidPeriodUnit.ValueNotSupported|The specified parameter PeriodUnit is not valid.|The error message returned because the specified PeriodUnit parameter is invalid.|
+|500|InternalError|The request processing has failed due to some unknown error.|The error message returned because an internal error has occurred. Try again later. If the problem persists, submit a ticket.|
+|403|InvalidPeriod.StarterPackage|This instance was created by using a Starter Package plan and can only be renewed monthly, not yearly.|The error message returned because the instance was created by using a Starter Package plan and can only be automatically renewed on a monthly basis.|
 
-[View error codes](https://error-center.aliyun.com/status/product/Ecs)
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/Ecs).
 
