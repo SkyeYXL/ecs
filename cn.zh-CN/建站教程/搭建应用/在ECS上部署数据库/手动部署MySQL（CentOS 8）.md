@@ -112,7 +112,7 @@ MySQL是一个关系型数据库管理系统，常用于LAMP和LNMP等建站场�
 
         `()` ~!@#$%^&*-+=|{}[]:;‘<>,.?/`
 
-2.  使用`dms`账号远程登陆MySQL。
+2.  使用`dms`账号远程登录MySQL。
 
     -   （推荐）您可以通过阿里云提供的数据管理服务DMS（Data Management Service）来远程访问MySQL数据库。详细信息，请参见[云数据库录入]()。
     -   您可以通过本地主机的远程连接工具进行测试。例如：MySQL Workbench、Navicat。
